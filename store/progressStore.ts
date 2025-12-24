@@ -24,6 +24,7 @@ interface ProgressState {
   addStudyTime: (minutes: number) => void
   getLessonProgress: (courseId: string) => CourseProgress
   isLessonCompleted: (lessonId: string) => boolean
+  isLessonUnlocked: (lessonId: string, courseId: string) => boolean
   resetWeeklyTime: () => void
 }
 
@@ -132,6 +133,23 @@ export const useProgressStore = create<ProgressState>()(
       isLessonCompleted: (lessonId: string) => {
         const { completedLessons } = get()
         return completedLessons.includes(lessonId)
+      },
+
+      isLessonUnlocked: (lessonId: string, courseId: string) => {
+        const { completedLessons } = get()
+        const course = courses.find(c => c.id === courseId)
+        
+        if (!course) return false
+        
+        // Find the lesson index
+        const lessonIndex = course.lessons.findIndex(l => l.id === lessonId)
+        
+        // First lesson is always unlocked
+        if (lessonIndex === 0) return true
+        
+        // Check if previous lesson is completed
+        const previousLesson = course.lessons[lessonIndex - 1]
+        return completedLessons.includes(previousLesson.id)
       },
     }),
     {

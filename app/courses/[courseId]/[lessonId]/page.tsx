@@ -19,16 +19,23 @@ export default function LessonPage({
   const course = courses.find(c => c.id === params.courseId)
   const lesson = course?.lessons.find(l => l.id === params.lessonId)
   
-  const { completeLesson, isLessonCompleted } = useProgressStore()
+  const { completeLesson, isLessonCompleted, isLessonUnlocked } = useProgressStore()
   const [showHints, setShowHints] = useState(false)
   const [completed, setCompleted] = useState(false)
+  const [isUnlocked, setIsUnlocked] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
     if (lesson) {
       setCompleted(isLessonCompleted(lesson.id))
+      setIsUnlocked(isLessonUnlocked(lesson.id, params.courseId))
+      
+      // Redirect if lesson is locked
+      if (!isLessonUnlocked(lesson.id, params.courseId)) {
+        router.push(`/courses/${params.courseId}`)
+      }
     }
-  }, [lesson, isLessonCompleted])
+  }, [lesson, isLessonCompleted, isLessonUnlocked, params.courseId, router])
 
   if (!course || !lesson) {
     notFound()
@@ -155,6 +162,7 @@ export default function LessonPage({
                   language={lesson.language}
                   initialCode={lesson.initialCode}
                   expectedOutput={lesson.expectedOutput}
+                  testCases={lesson.testCases}
                   onSuccess={handleSuccess}
                 />
               </div>
@@ -191,16 +199,26 @@ export default function LessonPage({
 
             <div>
               {nextLesson ? (
-                <Link
-                  href={`/courses/${params.courseId}/${nextLesson.id}`}
-                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
-                >
-                  <div className="text-right">
-                    <div className="text-xs text-gray-500">Next</div>
-                    <div className="font-semibold">{nextLesson.title}</div>
+                completed ? (
+                  <Link
+                    href={`/courses/${params.courseId}/${nextLesson.id}`}
+                    className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
+                  >
+                    <div className="text-right">
+                      <div className="text-xs text-gray-500">Next</div>
+                      <div className="font-semibold">{nextLesson.title}</div>
+                    </div>
+                    <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                ) : (
+                  <div className="flex items-center gap-2 text-gray-600 cursor-not-allowed">
+                    <div className="text-right">
+                      <div className="text-xs text-gray-600">Next (Complete this lesson first)</div>
+                      <div className="font-semibold">{nextLesson.title}</div>
+                    </div>
+                    <ArrowRight className="h-5 w-5" />
                   </div>
-                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                )
               ) : (
                 <div className="text-green-400 font-semibold">
                   ✓ Course Complete!

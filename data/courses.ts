@@ -5,6 +5,12 @@ import { pythonLessons } from './lessons/pythonLessons'
 import { typescriptLessons } from './lessons/typescriptLessons'
 import { integrationProjects } from './lessons/integrationProjects'
 
+export interface TestCase {
+  name: string
+  test: (code: string, output: string) => boolean
+  errorMessage: string
+}
+
 export interface Lesson {
   id: string
   title: string
@@ -19,6 +25,7 @@ export interface Lesson {
   hints?: string[]
   isProject?: boolean
   projectDescription?: string
+  testCases?: TestCase[] // Automated test cases
 }
 
 export interface Course {

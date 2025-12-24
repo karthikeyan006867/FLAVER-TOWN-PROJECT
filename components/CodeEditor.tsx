@@ -2,12 +2,14 @@
 
 import { Editor } from '@monaco-editor/react'
 import { useState } from 'react'
-import { Play, RotateCcw, Check, X } from 'lucide-react'
+import { Play, RotateCcw, Check, X, AlertCircle } from 'lucide-react'
+import { TestCase } from '@/data/courses'
 
 interface CodeEditorProps {
   language: string
   initialCode?: string
   expectedOutput?: string
+  testCases?: TestCase[]
   onSuccess?: () => void
 }
 
@@ -15,12 +17,15 @@ export default function CodeEditor({
   language, 
   initialCode = '', 
   expectedOutput,
+  testCases,
   onSuccess 
 }: CodeEditorProps) {
   const [code, setCode] = useState(initialCode)
   const [output, setOutput] = useState('')
   const [isRunning, setIsRunning] = useState(false)
   const [testPassed, setTestPassed] = useState<boolean | null>(null)
+  const [testResults, setTestResults] = useState<{ name: string; passed: boolean; error?: string }[]>([])
+  const [allTestsPassed, setAllTestsPassed] = useState(false)
 
   const getLanguageMode = () => {
     switch (language.toLowerCase()) {
@@ -42,15 +47,19 @@ export default function CodeEditor({
     setIsRunning(true)
     setOutput('')
     setTestPassed(null)
+    setTestResults([])
+    setAllTestsPassed(false)
 
     setTimeout(() => {
       try {
+        let result = ''
+        
         if (language.toLowerCase() === 'html') {
+          result = code
           setOutput(`<!-- HTML Preview -->\n${code}`)
-          checkOutput(code)
         } else if (language.toLowerCase() === 'css') {
+          result = code
           setOutput(`/* CSS Applied */\n${code}`)
-          checkOutput(code)
         } else if (language.toLowerCase() === 'javascript' || language.toLowerCase() === 'js') {
           // Simulate JavaScript execution
           try {
@@ -64,18 +73,26 @@ export default function CodeEditor({
               })(customConsole)
             `
             eval(wrappedCode.replace('customConsole', JSON.stringify(customConsole)))
-            const result = logs.join('\n') || 'Code executed successfully (no output)'
+            result = logs.join('\n') || 'Code executed successfully (no output)'
             setOutput(result)
-            checkOutput(result)
           } catch (error: any) {
             setOutput(`Error: ${error.message}`)
             setTestPassed(false)
+            setIsRunning(false)
+            return
           }
         } else if (language.toLowerCase() === 'python') {
           // Simulate Python execution (in real app, you'd use a backend service)
-          const mockOutput = `# Python Simulation\n# Your code would execute on a Python backend\n# Output: Hello from Python!`
-          setOutput(mockOutput)
-          checkOutput(mockOutput)
+          result = `# Python Simulation\n# Your code would execute on a Python backend\n# Output: Hello from Python!`
+          setOutput(result)
+        }
+        
+        // Run test cases if provided
+        if (testCases && testCases.length > 0) {
+          runTestCases(code, result)
+        } else {
+          // Fallback to simple expectedOutput check
+          checkOutput(result)
         }
       } catch (error: any) {
         setOutput(`Error: ${error.message}`)
@@ -84,6 +101,36 @@ export default function CodeEditor({
         setIsRunning(false)
       }
     }, 500)
+  }
+
+  const runTestCases = (userCode: string, executionOutput: string) => {
+    if (!testCases) return
+
+    const results = testCases.map(testCase => {
+      try {
+        const passed = testCase.test(userCode, executionOutput)
+        return {
+          name: testCase.name,
+          passed,
+          error: passed ? undefined : testCase.errorMessage
+        }
+      } catch (error) {
+        return {
+          name: testCase.name,
+          passed: false,
+          error: testCase.errorMessage
+        }
+      }
+    })
+
+    setTestResults(results)
+    const allPassed = results.every(r => r.passed)
+    setAllTestsPassed(allPassed)
+    setTestPassed(allPassed)
+
+    if (allPassed && onSuccess) {
+      setTimeout(() => onSuccess(), 1000)
+    }
   }
 
   const checkOutput = (result: string) => {
@@ -100,6 +147,8 @@ export default function CodeEditor({
     setCode(initialCode)
     setOutput('')
     setTestPassed(null)
+    setTestResults([])
+    setAllTestsPassed(false)
   }
 
   return (
@@ -162,12 +211,12 @@ export default function CodeEditor({
                 {testPassed ? (
                   <>
                     <Check className="h-4 w-4" />
-                    <span>Test Passed!</span>
+                    <span>All Tests Passed!</span>
                   </>
                 ) : (
                   <>
                     <X className="h-4 w-4" />
-                    <span>Test Failed</span>
+                    <span>Tests Failed</span>
                   </>
                 )}
               </div>
@@ -185,8 +234,41 @@ export default function CodeEditor({
         </div>
       )}
 
+      {/* Test Results */}
+      {testResults.length > 0 && (
+        <div className="border border-gray-700 rounded-lg overflow-hidden">
+          <div className="bg-gray-800 px-4 py-2 border-b border-gray-700">
+            <span className="text-sm text-gray-400">Test Results</span>
+          </div>
+          <div className="bg-gray-900 p-4 space-y-2">
+            {testResults.map((result, index) => (
+              <div 
+                key={index} 
+                className={`flex items-start gap-2 p-3 rounded-lg ${
+                  result.passed ? 'bg-green-500/10 border border-green-500/30' : 'bg-red-500/10 border border-red-500/30'
+                }`}
+              >
+                {result.passed ? (
+                  <Check className="h-5 w-5 text-green-400 flex-shrink-0 mt-0.5" />
+                ) : (
+                  <X className="h-5 w-5 text-red-400 flex-shrink-0 mt-0.5" />
+                )}
+                <div className="flex-1">
+                  <div className={`font-medium ${result.passed ? 'text-green-400' : 'text-red-400'}`}>
+                    {result.name}
+                  </div>
+                  {!result.passed && result.error && (
+                    <div className="text-sm text-gray-400 mt-1">{result.error}</div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Expected Output */}
-      {expectedOutput && (
+      {expectedOutput && !testCases && (
         <div className="text-sm text-gray-400 bg-gray-800/50 p-3 rounded-lg border border-gray-700">
           <strong>Expected Output:</strong> {expectedOutput}
         </div>

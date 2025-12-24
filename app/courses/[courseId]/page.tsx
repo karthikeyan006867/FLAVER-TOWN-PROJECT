@@ -1,12 +1,16 @@
+'use client'
+
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { courses } from '@/data/courses'
+import { useProgressStore } from '@/store/progressStore'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import { CheckCircle2, Clock, ArrowRight, BookOpen } from 'lucide-react'
+import { CheckCircle2, Clock, ArrowRight, BookOpen, Lock } from 'lucide-react'
 
 export default function CoursePage({ params }: { params: { courseId: string } }) {
   const course = courses.find(c => c.id === params.courseId)
+  const { isLessonCompleted, isLessonUnlocked } = useProgressStore()
 
   if (!course) {
     notFound()
@@ -50,45 +54,101 @@ export default function CoursePage({ params }: { params: { courseId: string } })
           {/* Lessons List */}
           <div className="space-y-4">
             <h2 className="text-2xl font-bold mb-6">Course Lessons</h2>
-            {course.lessons.map((lesson, index) => (
-              <Link
-                key={lesson.id}
-                href={`/courses/${course.id}/${lesson.id}`}
-                className="block card-gradient p-6 rounded-xl border border-gray-700 hover:border-gray-600 transition-all hover:scale-[1.01] hover:glow group"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500/20 to-accent-500/20 border border-primary-500/30 flex items-center justify-center font-bold text-primary-400">
-                      {index + 1}
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="text-xl font-semibold group-hover:text-primary-400 transition-colors">
-                        {lesson.title}
-                      </h3>
-                      <div className="flex items-center gap-2 text-sm text-gray-400">
-                        <Clock className="h-4 w-4" />
-                        <span>{lesson.estimatedTime} min</span>
+            {course.lessons.map((lesson, index) => {
+              const completed = isLessonCompleted(lesson.id)
+              const unlocked = isLessonUnlocked(lesson.id, course.id)
+              
+              return unlocked ? (
+                <Link
+                  key={lesson.id}
+                  href={`/courses/${course.id}/${lesson.id}`}
+                  className={`block card-gradient p-6 rounded-xl border transition-all hover:scale-[1.01] group ${
+                    completed 
+                      ? 'border-green-500/50 bg-green-500/5 hover:border-green-500/70 hover:glow-green' 
+                      : 'border-gray-700 hover:border-gray-600 hover:glow'
+                  }`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center font-bold ${
+                        completed
+                          ? 'bg-gradient-to-br from-green-500/30 to-emerald-500/30 border border-green-500/50 text-green-400'
+                          : 'bg-gradient-to-br from-primary-500/20 to-accent-500/20 border border-primary-500/30 text-primary-400'
+                      }`}>
+                        {completed ? <CheckCircle2 className="h-6 w-6" /> : index + 1}
                       </div>
                     </div>
-                    <p className="text-gray-400 mb-3">{lesson.description}</p>
-                    <div className="flex items-center justify-between">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        lesson.difficulty === 'Beginner' 
-                          ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                          : lesson.difficulty === 'Intermediate'
-                          ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
-                          : 'bg-red-500/20 text-red-400 border border-red-500/30'
-                      }`}>
-                        {lesson.difficulty}
-                      </span>
-                      <ArrowRight className="h-5 w-5 text-primary-400 group-hover:translate-x-2 transition-transform" />
+                    <div className="flex-1">
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <h3 className={`text-xl font-semibold transition-colors ${
+                            completed ? 'text-green-400' : 'group-hover:text-primary-400'
+                          }`}>
+                            {lesson.title}
+                          </h3>
+                          {completed && (
+                            <CheckCircle2 className="h-5 w-5 text-green-400" />
+                          )}
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-400">
+                          <Clock className="h-4 w-4" />
+                          <span>{lesson.estimatedTime} min</span>
+                        </div>
+                      </div>
+                      <p className="text-gray-400 mb-3">{lesson.description}</p>
+                      <div className="flex items-center justify-between">
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          lesson.difficulty === 'Beginner' 
+                            ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                            : lesson.difficulty === 'Intermediate'
+                            ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
+                            : 'bg-red-500/20 text-red-400 border border-red-500/30'
+                        }`}>
+                          {lesson.difficulty}
+                        </span>
+                        <ArrowRight className={`h-5 w-5 group-hover:translate-x-2 transition-transform ${
+                          completed ? 'text-green-400' : 'text-primary-400'
+                        }`} />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ) : (
+                <div
+                  key={lesson.id}
+                  className="block card-gradient p-6 rounded-xl border border-gray-800 bg-gray-900/50 opacity-60 cursor-not-allowed"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-lg bg-gray-800 border border-gray-700 flex items-center justify-center">
+                        <Lock className="h-6 w-6 text-gray-600" />
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-xl font-semibold text-gray-600">
+                            {lesson.title}
+                          </h3>
+                          <Lock className="h-5 w-5 text-gray-600" />
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                          <Clock className="h-4 w-4" />
+                          <span>{lesson.estimatedTime} min</span>
+                        </div>
+                      </div>
+                      <p className="text-gray-600 mb-3">{lesson.description}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-600 border border-gray-700">
+                          {lesson.difficulty}
+                        </span>
+                        <span className="text-sm text-gray-600">Complete previous lesson to unlock</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </Link>
-            ))}
+              )
+            })}
           </div>
         </div>
       </main>

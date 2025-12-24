@@ -1,4 +1,4 @@
-import { Lesson } from '../courses'
+import { Lesson, TestCase } from '../courses'
 
 export const htmlLessons: Lesson[] = [
   // SECTION 1: BASICS (Lessons 1-5)
@@ -48,7 +48,34 @@ Every page you visit—Google, Facebook, YouTube—uses this exact structure!
     initialCode: `<!DOCTYPE html>\n<html>\n  <head>\n    <!-- Add title here -->\n  </head>\n  <body>\n    <!-- Add h1 here -->\n  </body>\n</html>`,
     solution: `<!DOCTYPE html>\n<html>\n  <head>\n    <title>My First Page</title>\n  </head>\n  <body>\n    <h1>Welcome to CodeMaster!</h1>\n  </body>\n</html>`,
     expectedOutput: 'Welcome to CodeMaster!',
-    hints: ['Title goes in head', 'h1 is the largest heading', 'Close all tags']
+    hints: ['Title goes in head', 'h1 is the largest heading', 'Close all tags'],
+    testCases: [
+      {
+        name: 'Has DOCTYPE declaration',
+        test: (code) => code.toLowerCase().includes('<!doctype html>'),
+        errorMessage: 'Your HTML must start with <!DOCTYPE html>'
+      },
+      {
+        name: 'Has title tag in head',
+        test: (code) => /<head>[\s\S]*<title>[\s\S]*<\/title>[\s\S]*<\/head>/i.test(code),
+        errorMessage: 'Add a <title> tag inside the <head> section'
+      },
+      {
+        name: 'Title contains "My First Page"',
+        test: (code) => /<title>My First Page<\/title>/i.test(code),
+        errorMessage: 'Title should say "My First Page"'
+      },
+      {
+        name: 'Has h1 tag in body',
+        test: (code) => /<body>[\s\S]*<h1>[\s\S]*<\/h1>[\s\S]*<\/body>/i.test(code),
+        errorMessage: 'Add an <h1> tag inside the <body> section'
+      },
+      {
+        name: 'H1 contains "Welcome to CodeMaster!"',
+        test: (code) => /<h1>Welcome to CodeMaster!<\/h1>/i.test(code),
+        errorMessage: 'H1 should say "Welcome to CodeMaster!"'
+      }
+    ]
   },
   {
     id: 'html-2',
@@ -68,7 +95,34 @@ Every page you visit—Google, Facebook, YouTube—uses this exact structure!
     estimatedTime: 8,
     initialCode: `<!DOCTYPE html>\n<html>\n<body>\n  <!-- Add headings and paragraph -->\n</body>\n</html>`,
     solution: `<!DOCTYPE html>\n<html>\n<body>\n  <h1>Learning HTML</h1>\n  <h2>Why It Matters</h2>\n  <p>HTML is the foundation of web development.</p>\n</body>\n</html>`,
-    hints: ['Use h1, then h2, then p', 'Write any text in paragraph']
+    hints: ['Use h1, then h2, then p', 'Write any text in paragraph'],
+    testCases: [
+      {
+        name: 'Has h1 tag',
+        test: (code) => /<h1>[\s\S]*<\/h1>/i.test(code),
+        errorMessage: 'Add an <h1> heading tag'
+      },
+      {
+        name: 'H1 contains "Learning HTML"',
+        test: (code) => /<h1>Learning HTML<\/h1>/i.test(code),
+        errorMessage: 'H1 should say "Learning HTML"'
+      },
+      {
+        name: 'Has h2 tag',
+        test: (code) => /<h2>[\s\S]*<\/h2>/i.test(code),
+        errorMessage: 'Add an <h2> heading tag'
+      },
+      {
+        name: 'H2 contains "Why It Matters"',
+        test: (code) => /<h2>Why It Matters<\/h2>/i.test(code),
+        errorMessage: 'H2 should say "Why It Matters"'
+      },
+      {
+        name: 'Has paragraph tag',
+        test: (code) => /<p>[\s\S]+<\/p>/i.test(code),
+        errorMessage: 'Add a <p> paragraph tag with some text'
+      }
+    ]
   },
   {
     id: 'html-3',
@@ -88,7 +142,34 @@ Every page you visit—Google, Facebook, YouTube—uses this exact structure!
     estimatedTime: 10,
     initialCode: `<p>\n  <!-- Format your text here -->\n</p>`,
     solution: `<p>\n  My name is <strong>Alex</strong> and I love <em>JavaScript</em>. <mark>Start today!</mark>\n</p>`,
-    hints: ['strong = bold', 'em = italic', 'mark = highlight']
+    hints: ['strong = bold', 'em = italic', 'mark = highlight'],
+    testCases: [
+      {
+        name: 'Has paragraph tag',
+        test: (code) => /<p>[\s\S]*<\/p>/i.test(code),
+        errorMessage: 'Wrap your content in <p> tags'
+      },
+      {
+        name: 'Has strong tag for bold text',
+        test: (code) => /<strong>[\s\S]+<\/strong>/i.test(code),
+        errorMessage: 'Use <strong> tag to make text bold'
+      },
+      {
+        name: 'Has em tag for italic text',
+        test: (code) => /<em>[\s\S]+<\/em>/i.test(code),
+        errorMessage: 'Use <em> tag to make text italic'
+      },
+      {
+        name: 'Has mark tag for highlighted text',
+        test: (code) => /<mark>[\s\S]+<\/mark>/i.test(code),
+        errorMessage: 'Use <mark> tag to highlight text'
+      },
+      {
+        name: 'Mark tag contains "start today" or "Start today"',
+        test: (code) => /<mark>Start today!?<\/mark>/i.test(code),
+        errorMessage: 'Highlight "Start today!" using the <mark> tag'
+      }
+    ]
   },
   {
     id: 'html-4',
@@ -114,7 +195,39 @@ Every page you visit—Google, Facebook, YouTube—uses this exact structure!
     estimatedTime: 12,
     initialCode: `<h2>Languages</h2>\n<!-- unordered list -->\n\n<h2>Steps</h2>\n<!-- ordered list -->`,
     solution: `<h2>Languages</h2>\n<ul>\n  <li>HTML</li>\n  <li>CSS</li>\n  <li>JavaScript</li>\n</ul>\n\n<h2>Steps</h2>\n<ol>\n  <li>Learn basics</li>\n  <li>Build projects</li>\n  <li>Practice daily</li>\n</ol>`,
-    hints: ['ul for bullets', 'ol for numbers', 'li for each item']
+    hints: ['ul for bullets', 'ol for numbers', 'li for each item'],
+    testCases: [
+      {
+        name: 'Has unordered list (ul)',
+        test: (code) => /<ul>[\s\S]*<\/ul>/i.test(code),
+        errorMessage: 'Create an unordered list using <ul> tags'
+      },
+      {
+        name: 'Has ordered list (ol)',
+        test: (code) => /<ol>[\s\S]*<\/ol>/i.test(code),
+        errorMessage: 'Create an ordered list using <ol> tags'
+      },
+      {
+        name: 'Unordered list has at least 3 items',
+        test: (code) => {
+          const ulMatch = code.match(/<ul>([\s\S]*?)<\/ul>/i)
+          if (!ulMatch) return false
+          const liCount = (ulMatch[1].match(/<li>/gi) || []).length
+          return liCount >= 3
+        },
+        errorMessage: 'Add at least 3 <li> items in the unordered list'
+      },
+      {
+        name: 'Ordered list has at least 3 items',
+        test: (code) => {
+          const olMatch = code.match(/<ol>([\s\S]*?)<\/ol>/i)
+          if (!olMatch) return false
+          const liCount = (olMatch[1].match(/<li>/gi) || []).length
+          return liCount >= 3
+        },
+        errorMessage: 'Add at least 3 <li> items in the ordered list'
+      }
+    ]
   },
   {
     id: 'html-5',
@@ -168,7 +281,33 @@ Every navigation menu on websites like YouTube, Amazon, Netflix uses anchor tags
     initialCode: `<nav>\n  <!-- Add 3 links here -->\n</nav>`,
     solution: `<nav>\n  <a href="https://google.com" target="_blank">Google</a>\n  <a href="about.html">About</a>\n  <a href="mailto:contact@codemaster.com">Contact</a>\n</nav>`,
     expectedOutput: 'Google',
-    hints: ['href for URL', 'target="_blank" for new tab', 'mailto: for email']
+    hints: ['href for URL', 'target="_blank" for new tab', 'mailto: for email'],
+    testCases: [
+      {
+        name: 'Has nav tag',
+        test: (code) => /<nav>[\s\S]*<\/nav>/i.test(code),
+        errorMessage: 'Wrap your links in a <nav> tag'
+      },
+      {
+        name: 'Has at least 3 anchor tags',
+        test: (code) => (code.match(/<a /gi) || []).length >= 3,
+        errorMessage: 'Add at least 3 <a> anchor tags'
+      },
+      {
+        name: 'Has external link with target="_blank"',
+        test: (code) => /<a\s+[^>]*target="_blank"[^>]*>/i.test(code) || /<a\s+[^>]*target='_blank'[^>]*>/i.test(code),
+        errorMessage: 'Add target="_blank" to make a link open in a new tab'
+      },
+      {
+        name: 'All anchor tags have href attribute',
+        test: (code) => {
+          const aTagCount = (code.match(/<a /gi) || []).length
+          const hrefCount = (code.match(/<a\s+[^>]*href=/gi) || []).length
+          return aTagCount === hrefCount
+        },
+        errorMessage: 'All <a> tags must have an href attribute'
+      }
+    ]
   },
 
   // SECTION 2: INTERMEDIATE (Lessons 6-15)
