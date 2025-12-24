@@ -174,7 +174,7 @@ export default function HomePage() {
             Ready to Start Your Journey?
           </h2>
           <p className="text-gray-400 mb-8 text-lg">
-            Join thousands of developers learning to code. It's completely free!
+            Join thousands of developers learning to code. It&apos;s completely free!
           </p>
           <Link
             href="/sign-up"

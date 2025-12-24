@@ -90,15 +90,6 @@ export default function CoursePage({ params }: { params: { courseId: string } })
               </Link>
             ))}
           </div>
-
-          {/* More Lessons Coming */}
-          {course.totalLessons > course.lessons.length && (
-            <div className="mt-6 card-gradient p-6 rounded-xl border border-gray-700 border-dashed text-center">
-              <p className="text-gray-400">
-                📚 {course.totalLessons - course.lessons.length} more lessons coming soon!
-              </p>
-            </div>
-          )}
         </div>
       </main>
     </div>

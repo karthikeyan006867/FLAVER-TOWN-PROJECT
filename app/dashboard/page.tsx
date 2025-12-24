@@ -38,7 +38,7 @@ export default function DashboardPage() {
             <h1 className="text-4xl font-bold mb-2">
               Welcome back, <span className="text-gradient">{user?.firstName || 'Learner'}!</span>
             </h1>
-            <p className="text-gray-400 text-lg">Keep up the great work! Here's your progress</p>
+            <p className="text-gray-400 text-lg">Keep up the great work! Here&apos;s your progress</p>
           </div>
 
           {/* Stats Grid */}

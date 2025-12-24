@@ -135,7 +135,7 @@ export default function LessonPage({
                   <Lightbulb className="h-5 w-5" />
                   <span>Hints {showHints ? '▼' : '▶'}</span>
                 </button>
-                {showHints && (
+                {showHints && lesson.hints && (
                   <ul className="space-y-2">
                     {lesson.hints.map((hint, index) => (
                       <li key={index} className="flex items-start gap-2 text-gray-400">
