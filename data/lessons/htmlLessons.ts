@@ -161,7 +161,9 @@ Every navigation menu on websites like YouTube, Amazon, Netflix uses anchor tags
 1. Remove \`target="_blank"\`—what changes?
 2. Change the link text but keep the same href
 3. Create an email link
-4. Make a link with \`href="#"\`—useful for JavaScript later!`,
+4. Make a link with \`href="#"\`—useful for JavaScript later!
+
+\`\`\`html
 <a href="https://google.com" target="_blank">Google</a>
 <a href="about.html">About</a>
 <a href="mailto:hello@example.com">Email</a>

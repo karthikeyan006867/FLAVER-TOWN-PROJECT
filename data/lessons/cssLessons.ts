@@ -63,7 +63,7 @@ h1 {              /* selector: which element to style */
 \`\`\`
 
 ## Common Selectors:
-\`\`\`css`,
+\`\`\`css
 h1 { color: blue; }        /* Element */
 .class { color: red; }     /* Class */
 #id { color: green; }      /* ID */
