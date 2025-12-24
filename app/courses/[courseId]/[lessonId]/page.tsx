@@ -149,13 +149,15 @@ export default function LessonPage({
             </div>
 
             {/* Code Editor */}
-            <div className="lg:sticky lg:top-24 h-fit">
-              <CodeEditor
-                language={lesson.language}
-                initialCode={lesson.initialCode}
-                expectedOutput={lesson.expectedOutput}
-                onSuccess={handleSuccess}
-              />
+            <div className="lg:sticky lg:top-24 self-start">
+              <div className="card-gradient p-4 rounded-xl border border-gray-700">
+                <CodeEditor
+                  language={lesson.language}
+                  initialCode={lesson.initialCode}
+                  expectedOutput={lesson.expectedOutput}
+                  onSuccess={handleSuccess}
+                />
+              </div>
             </div>
           </div>
 

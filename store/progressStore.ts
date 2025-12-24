@@ -15,6 +15,8 @@ interface ProgressState {
   totalPoints: number
   lastStudyDate: string
   timeSpent: number // in minutes
+  weeklyTime: number // time spent this week
+  weekStartDate: string // start of current week
   
   completeLesson: (lessonId: string, courseId: string) => void
   updateCourseProgress: (courseId: string) => void
@@ -22,6 +24,7 @@ interface ProgressState {
   addStudyTime: (minutes: number) => void
   getLessonProgress: (courseId: string) => CourseProgress
   isLessonCompleted: (lessonId: string) => boolean
+  resetWeeklyTime: () => void
 }
 
 export const useProgressStore = create<ProgressState>()(
@@ -33,6 +36,8 @@ export const useProgressStore = create<ProgressState>()(
       totalPoints: 0,
       lastStudyDate: new Date().toISOString().split('T')[0],
       timeSpent: 0,
+      weeklyTime: 0,
+      weekStartDate: getStartOfWeek(),
 
       completeLesson: (lessonId: string, courseId: string) => {
         const { completedLessons, totalPoints } = get()
@@ -48,6 +53,9 @@ export const useProgressStore = create<ProgressState>()(
           
           // Update streak
           get().updateStreak()
+          
+          // Add study time (estimate 10 mins per lesson)
+          get().addStudyTime(10)
         }
       },
 
@@ -85,8 +93,26 @@ export const useProgressStore = create<ProgressState>()(
       },
 
       addStudyTime: (minutes: number) => {
-        const { timeSpent } = get()
-        set({ timeSpent: timeSpent + minutes })
+        const { timeSpent, weeklyTime, weekStartDate } = get()
+        const currentWeekStart = getStartOfWeek()
+        
+        // Reset weekly time if we're in a new week
+        if (weekStartDate !== currentWeekStart) {
+          set({ 
+            timeSpent: timeSpent + minutes,
+            weeklyTime: minutes,
+            weekStartDate: currentWeekStart
+          })
+        } else {
+          set({ 
+            timeSpent: timeSpent + minutes,
+            weeklyTime: weeklyTime + minutes
+          })
+        }
+      },
+
+      resetWeeklyTime: () => {
+        set({ weeklyTime: 0, weekStartDate: getStartOfWeek() })
       },
 
       getLessonProgress: (courseId: string): CourseProgress => {
@@ -98,6 +124,21 @@ export const useProgressStore = create<ProgressState>()(
         const { completedLessons } = get()
         return completedLessons.includes(lessonId)
       },
+    }),
+    {
+      name: 'progress-storage',
+    }
+  )
+)
+
+// Helper function to get start of week (Monday)
+function getStartOfWeek(): string {
+  const now = new Date()
+  const day = now.getDay()
+  const diff = now.getDate() - day + (day === 0 ? -6 : 1) // Adjust when day is Sunday
+  const monday = new Date(now.setDate(diff))
+  return monday.toISOString().split('T')[0]
+}
     }),
     {
       name: 'codemaster-progress',

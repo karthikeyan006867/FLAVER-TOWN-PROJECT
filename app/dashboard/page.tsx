@@ -10,14 +10,14 @@ import { useProgressStore } from '@/store/progressStore'
 
 export default function DashboardPage() {
   const { user } = useUser()
-  const { completedLessons, streak, totalPoints, timeSpent, courseProgress } = useProgressStore()
+  const { completedLessons, streak, totalPoints, weeklyTime, courseProgress } = useProgressStore()
 
   // Calculate stats from actual progress
   const stats = {
     lessonsCompleted: completedLessons.length,
     currentStreak: streak,
     totalPoints: totalPoints,
-    timeSpent: timeSpent, // minutes
+    weeklyTime: weeklyTime, // minutes this week
   }
 
   const recentActivity = [
@@ -81,7 +81,7 @@ export default function DashboardPage() {
                   <Clock className="h-6 w-6 text-green-400" />
                 </div>
               </div>
-              <div className="text-3xl font-bold mb-1">{stats.timeSpent}m</div>
+              <div className="text-3xl font-bold mb-1">{stats.weeklyTime}m</div>
               <div className="text-sm text-gray-400">Time This Week</div>
             </div>
           </div>
