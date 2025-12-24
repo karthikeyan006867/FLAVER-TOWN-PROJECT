@@ -27,6 +27,15 @@ interface ProgressState {
   resetWeeklyTime: () => void
 }
 
+// Helper function to get start of week (Monday)
+function getStartOfWeek(): string {
+  const now = new Date()
+  const day = now.getDay()
+  const diff = now.getDate() - day + (day === 0 ? -6 : 1) // Adjust when day is Sunday
+  const monday = new Date(now.setDate(diff))
+  return monday.toISOString().split('T')[0]
+}
+
 export const useProgressStore = create<ProgressState>()(
   persist(
     (set, get) => ({
@@ -127,21 +136,6 @@ export const useProgressStore = create<ProgressState>()(
     }),
     {
       name: 'progress-storage',
-    }
-  )
-)
-
-// Helper function to get start of week (Monday)
-function getStartOfWeek(): string {
-  const now = new Date()
-  const day = now.getDay()
-  const diff = now.getDate() - day + (day === 0 ? -6 : 1) // Adjust when day is Sunday
-  const monday = new Date(now.setDate(diff))
-  return monday.toISOString().split('T')[0]
-}
-    }),
-    {
-      name: 'codemaster-progress',
     }
   )
 )

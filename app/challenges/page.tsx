@@ -156,7 +156,7 @@ const challenges: Challenge[] = [
     timeLimit: 35,
     category: 'Dynamic Programming',
     language: 'python',
-    description: 'Find the contiguous subarray with the largest sum (Kadane\\'s algorithm).',
+    description: 'Find the contiguous subarray with the largest sum (Kadane\'s algorithm).',
     initialCode: `def max_subarray_sum(nums):\n    # Implement Kadane's algorithm\n    pass\n\nprint(max_subarray_sum([-2, 1, -3, 4, -1, 2, 1, -5, 4]))`,
     expectedOutput: '6',
     locked: true,
