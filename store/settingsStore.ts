@@ -7,6 +7,7 @@ export interface AppSettings {
   colorScheme: 'default' | 'blue' | 'purple' | 'green' | 'orange'
   fontSize: 'small' | 'medium' | 'large' | 'x-large'
   reducedMotion: boolean
+  highContrast: boolean
   
   // Code Editor
   editorTheme: 'vs-dark' | 'light' | 'hc-black'
@@ -18,6 +19,10 @@ export interface AppSettings {
   editorMinimap: boolean
   editorLineNumbers: boolean
   editorAutoSave: boolean
+  autoSave: boolean
+  vimMode: boolean
+  autoComplete: boolean
+  tabSize: 2 | 4 | 8
   
   // Learning
   autoPlayNextLesson: boolean
@@ -25,6 +30,8 @@ export interface AppSettings {
   enableKeyboardShortcuts: boolean
   difficulty: 'beginner' | 'intermediate' | 'advanced'
   dailyGoalMinutes: number
+  dailyGoal: 15 | 30 | 60 | 120
+  dailyGoalReminders: boolean
   
   // Notifications
   emailDigest: boolean
@@ -33,18 +40,25 @@ export interface AppSettings {
   achievements: boolean
   dailyReminders: boolean
   weeklyReports: boolean
+  achievementNotifications: boolean
+  soundEffects: boolean
+  emailNotifications: boolean
   
   // Privacy
   showProfile: boolean
   showProgress: boolean
   allowAnalytics: boolean
   shareAchievements: boolean
+  publicProfile: boolean
+  shareProgress: boolean
+  analytics: boolean
   
   // Accessibility
-  highContrast: boolean
   screenReaderOptimized: boolean
   keyboardNavigationOnly: boolean
   captions: boolean
+  keyboardNavigation: boolean
+  screenReader: boolean
   
   // Language
   language: 'en' | 'es' | 'fr' | 'de' | 'pt' | 'zh' | 'ja'
@@ -67,6 +81,7 @@ const defaultSettings: AppSettings = {
   colorScheme: 'default',
   fontSize: 'medium',
   reducedMotion: false,
+  highContrast: false,
   
   // Code Editor
   editorTheme: 'vs-dark',
@@ -78,6 +93,10 @@ const defaultSettings: AppSettings = {
   editorMinimap: true,
   editorLineNumbers: true,
   editorAutoSave: true,
+  autoSave: true,
+  vimMode: false,
+  autoComplete: true,
+  tabSize: 2,
   
   // Learning
   autoPlayNextLesson: false,
@@ -85,6 +104,8 @@ const defaultSettings: AppSettings = {
   enableKeyboardShortcuts: true,
   difficulty: 'beginner',
   dailyGoalMinutes: 30,
+  dailyGoal: 30,
+  dailyGoalReminders: false,
   
   // Notifications
   emailDigest: true,
@@ -93,18 +114,25 @@ const defaultSettings: AppSettings = {
   achievements: true,
   dailyReminders: false,
   weeklyReports: true,
+  achievementNotifications: true,
+  soundEffects: true,
+  emailNotifications: false,
   
   // Privacy
   showProfile: true,
   showProgress: true,
   allowAnalytics: true,
   shareAchievements: true,
+  publicProfile: true,
+  shareProgress: true,
+  analytics: true,
   
   // Accessibility
-  highContrast: false,
   screenReaderOptimized: false,
   keyboardNavigationOnly: false,
   captions: false,
+  keyboardNavigation: false,
+  screenReader: false,
   
   // Language
   language: 'en',

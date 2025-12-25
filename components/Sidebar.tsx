@@ -9,7 +9,15 @@ import {
   Trophy, 
   Settings,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Code2,
+  TrendingUp,
+  Calendar,
+  Map,
+  Users,
+  FileCode,
+  BarChart3,
+  MessageSquare
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -17,6 +25,12 @@ const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Courses', href: '/courses', icon: BookOpen },
   { name: 'Challenges', href: '/challenges', icon: Target },
+  { name: 'Daily Challenge', href: '/daily-challenge', icon: Calendar },
+  { name: 'Playground', href: '/playground', icon: Code2 },
+  { name: 'Learning Paths', href: '/learning-paths', icon: Map },
+  { name: 'Snippets', href: '/snippets', icon: FileCode },
+  { name: 'Leaderboard', href: '/leaderboard', icon: TrendingUp },
+  { name: 'Analytics', href: '/analytics', icon: BarChart3 },
   { name: 'Achievements', href: '/achievements', icon: Trophy },
   { name: 'Settings', href: '/settings', icon: Settings },
 ]

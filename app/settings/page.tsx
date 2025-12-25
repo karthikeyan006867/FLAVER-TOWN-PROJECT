@@ -102,7 +102,7 @@ export default function SettingsPage() {
             <div className="flex-1">
               <div className="card-gradient rounded-xl border border-gray-700 p-4 md:p-8">
                 
-                {/* Appearance Settings - Continues in next part */}
+                {/* Appearance Settings */}
                 {activeTab === 'appearance' && (
                   <div className="space-y-8">
                     <div>
@@ -114,7 +114,7 @@ export default function SettingsPage() {
 
                     {/* Theme */}
                     <div className="space-y-3">
-                      <label className="block text-sm font-semibold text-gray-300">Theme</label>
+                      <label className="block text-sm font-semibold text-gray-300">Theme Mode</label>
                       <div className="grid grid-cols-3 gap-3">
                         {[
                           { value: 'dark', label: 'Dark', icon: Moon },
@@ -125,7 +125,10 @@ export default function SettingsPage() {
                           return (
                             <button
                               key={theme.value}
-                              onClick={() => updateSettings({ theme: theme.value as any })}
+                              onClick={() => {
+                                updateSettings({ theme: theme.value as any })
+                                handleSave()
+                              }}
                               className={`flex flex-col items-center gap-2 p-4 rounded-lg border-2 transition-all ${
                                 settings.theme === theme.value
                                   ? 'border-primary-500 bg-primary-500/10'
@@ -137,6 +140,44 @@ export default function SettingsPage() {
                             </button>
                           )
                         })}
+                      </div>
+                    </div>
+
+                    {/* Color Scheme */}
+                    <div className="space-y-3">
+                      <label className="block text-sm font-semibold text-gray-300">Color Scheme</label>
+                      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                        {[
+                          { value: 'default', label: 'Default', colors: ['#3b82f6', '#8b5cf6'] },
+                          { value: 'blue', label: 'Ocean Blue', colors: ['#0ea5e9', '#06b6d4'] },
+                          { value: 'purple', label: 'Royal Purple', colors: ['#8b5cf6', '#a855f7'] },
+                          { value: 'green', label: 'Forest Green', colors: ['#10b981', '#14b8a6'] },
+                          { value: 'orange', label: 'Sunset Orange', colors: ['#f97316', '#fb923c'] }
+                        ].map((scheme) => (
+                          <button
+                            key={scheme.value}
+                            onClick={() => {
+                              updateSettings({ colorScheme: scheme.value as any })
+                              handleSave()
+                            }}
+                            className={`p-4 rounded-lg border-2 transition-all ${
+                              settings.colorScheme === scheme.value
+                                ? 'border-primary-500 bg-primary-500/10'
+                                : 'border-gray-700 hover:border-gray-600'
+                            }`}
+                          >
+                            <div className="flex gap-1 mb-2">
+                              {scheme.colors.map((color, i) => (
+                                <div
+                                  key={i}
+                                  className="w-6 h-6 rounded"
+                                  style={{ background: color }}
+                                />
+                              ))}
+                            </div>
+                            <span className="text-xs font-medium">{scheme.label}</span>
+                          </button>
+                        ))}
                       </div>
                     </div>
 
@@ -152,7 +193,10 @@ export default function SettingsPage() {
                         ].map((size) => (
                           <button
                             key={size.value}
-                            onClick={() => updateSettings({ fontSize: size.value as any })}
+                            onClick={() => {
+                              updateSettings({ fontSize: size.value as any })
+                              handleSave()
+                            }}
                             className={`p-4 rounded-lg border-2 transition-all ${
                               settings.fontSize === size.value
                                 ? 'border-primary-500 bg-primary-500/10'
@@ -164,6 +208,29 @@ export default function SettingsPage() {
                           </button>
                         ))}
                       </div>
+                    </div>
+
+                    {/* High Contrast */}
+                    <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <Eye className="h-5 w-5 text-blue-400" />
+                        <div>
+                          <div className="font-semibold">High Contrast</div>
+                          <div className="text-sm text-gray-400">Increase color contrast</div>
+                        </div>
+                      </div>
+                      <label className="relative inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={settings.highContrast}
+                          onChange={(e) => {
+                            updateSettings({ highContrast: e.target.checked })
+                            handleSave()
+                          }}
+                          className="sr-only peer"
+                        />
+                        <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                      </label>
                     </div>
 
                     {/* Reduced Motion */}
@@ -179,7 +246,10 @@ export default function SettingsPage() {
                         <input
                           type="checkbox"
                           checked={settings.reducedMotion}
-                          onChange={(e) => updateSettings({ reducedMotion: e.target.checked })}
+                          onChange={(e) => {
+                            updateSettings({ reducedMotion: e.target.checked })
+                            handleSave()
+                          }}
                           className="sr-only peer"
                         />
                         <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
@@ -194,8 +264,90 @@ export default function SettingsPage() {
                       <Code className="h-6 w-6 text-primary-400" />
                       Code Editor
                     </h2>
-                    <div className="p-4 bg-gray-800/50 rounded-lg text-sm text-gray-400">
-                      Advanced editor settings for customizing your coding experience
+                    
+                    {/* Editor Settings */}
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <Code className="h-5 w-5 text-green-400" />
+                          <div>
+                            <div className="font-semibold">Auto Save</div>
+                            <div className="text-sm text-gray-400">Automatically save code changes</div>
+                          </div>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={settings.autoSave}
+                            onChange={(e) => {
+                              updateSettings({ autoSave: e.target.checked })
+                              handleSave()
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        </label>
+                      </div>
+
+                      <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <Keyboard className="h-5 w-5 text-purple-400" />
+                          <div>
+                            <div className="font-semibold">Vim Mode</div>
+                            <div className="text-sm text-gray-400">Enable Vim keybindings</div>
+                          </div>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={settings.vimMode}
+                            onChange={(e) => {
+                              updateSettings({ vimMode: e.target.checked })
+                              handleSave()
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        </label>
+                      </div>
+
+                      <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <Zap className="h-5 w-5 text-yellow-400" />
+                          <div>
+                            <div className="font-semibold">Auto Complete</div>
+                            <div className="text-sm text-gray-400">Show code suggestions</div>
+                          </div>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={settings.autoComplete}
+                            onChange={(e) => {
+                              updateSettings({ autoComplete: e.target.checked })
+                              handleSave()
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        </label>
+                      </div>
+
+                      <div className="space-y-3">
+                        <label className="block text-sm font-semibold text-gray-300">Tab Size</label>
+                        <select
+                          value={settings.tabSize}
+                          onChange={(e) => {
+                            updateSettings({ tabSize: parseInt(e.target.value) as any })
+                            handleSave()
+                          }}
+                          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                        >
+                          <option value="2">2 spaces</option>
+                          <option value="4">4 spaces</option>
+                          <option value="8">8 spaces</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -206,8 +358,62 @@ export default function SettingsPage() {
                       <Target className="h-6 w-6 text-primary-400" />
                       Learning
                     </h2>
-                    <div className="p-4 bg-gray-800/50 rounded-lg text-sm text-gray-400">
-                      Customize your learning preferences and goals
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <Bell className="h-5 w-5 text-blue-400" />
+                          <div>
+                            <div className="font-semibold">Daily Reminders</div>
+                            <div className="text-sm text-gray-400">Get daily coding reminders</div>
+                          </div>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={settings.dailyGoalReminders}
+                            onChange={(e) => {
+                              updateSettings({ dailyGoalReminders: e.target.checked })
+                              handleSave()
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        </label>
+                      </div>
+
+                      <div className="space-y-3">
+                        <label className="block text-sm font-semibold text-gray-300">Daily Goal (minutes)</label>
+                        <select
+                          value={settings.dailyGoal}
+                          onChange={(e) => {
+                            updateSettings({ dailyGoal: parseInt(e.target.value) as any })
+                            handleSave()
+                          }}
+                          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                        >
+                          <option value="15">15 minutes</option>
+                          <option value="30">30 minutes</option>
+                          <option value="60">1 hour</option>
+                          <option value="120">2 hours</option>
+                        </select>
+                      </div>
+
+                      <div className="space-y-3">
+                        <label className="block text-sm font-semibold text-gray-300">Difficulty Preference</label>
+                        <select
+                          value={settings.difficulty}
+                          onChange={(e) => {
+                            updateSettings({ difficulty: e.target.value as any })
+                            handleSave()
+                          }}
+                          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                        >
+                          <option value="beginner">Beginner</option>
+                          <option value="intermediate">Intermediate</option>
+                          <option value="advanced">Advanced</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -218,8 +424,73 @@ export default function SettingsPage() {
                       <Bell className="h-6 w-6 text-primary-400" />
                       Notifications
                     </h2>
-                    <div className="p-4 bg-gray-800/50 rounded-lg text-sm text-gray-400">
-                      Manage how you receive notifications
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <Bell className="h-5 w-5 text-green-400" />
+                          <div>
+                            <div className="font-semibold">Achievement Notifications</div>
+                            <div className="text-sm text-gray-400">Get notified when you earn achievements</div>
+                          </div>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={settings.achievementNotifications}
+                            onChange={(e) => {
+                              updateSettings({ achievementNotifications: e.target.checked })
+                              handleSave()
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        </label>
+                      </div>
+
+                      <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <Volume2 className="h-5 w-5 text-blue-400" />
+                          <div>
+                            <div className="font-semibold">Sound Effects</div>
+                            <div className="text-sm text-gray-400">Play sounds for actions</div>
+                          </div>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={settings.soundEffects}
+                            onChange={(e) => {
+                              updateSettings({ soundEffects: e.target.checked })
+                              handleSave()
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        </label>
+                      </div>
+
+                      <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <Bell className="h-5 w-5 text-purple-400" />
+                          <div>
+                            <div className="font-semibold">Email Notifications</div>
+                            <div className="text-sm text-gray-400">Receive updates via email</div>
+                          </div>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={settings.emailNotifications}
+                            onChange={(e) => {
+                              updateSettings({ emailNotifications: e.target.checked })
+                              handleSave()
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        </label>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -230,8 +501,73 @@ export default function SettingsPage() {
                       <Shield className="h-6 w-6 text-primary-400" />
                       Privacy
                     </h2>
-                    <div className="p-4 bg-gray-800/50 rounded-lg text-sm text-gray-400">
-                      Control your privacy and data settings
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <Eye className="h-5 w-5 text-green-400" />
+                          <div>
+                            <div className="font-semibold">Public Profile</div>
+                            <div className="text-sm text-gray-400">Show your profile to other users</div>
+                          </div>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={settings.publicProfile}
+                            onChange={(e) => {
+                              updateSettings({ publicProfile: e.target.checked })
+                              handleSave()
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        </label>
+                      </div>
+
+                      <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <Globe className="h-5 w-5 text-blue-400" />
+                          <div>
+                            <div className="font-semibold">Share Progress</div>
+                            <div className="text-sm text-gray-400">Allow sharing your progress</div>
+                          </div>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={settings.shareProgress}
+                            onChange={(e) => {
+                              updateSettings({ shareProgress: e.target.checked })
+                              handleSave()
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        </label>
+                      </div>
+
+                      <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <Shield className="h-5 w-5 text-yellow-400" />
+                          <div>
+                            <div className="font-semibold">Analytics</div>
+                            <div className="text-sm text-gray-400">Help improve the app</div>
+                          </div>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={settings.analytics}
+                            onChange={(e) => {
+                              updateSettings({ analytics: e.target.checked })
+                              handleSave()
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        </label>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -242,8 +578,51 @@ export default function SettingsPage() {
                       <Eye className="h-6 w-6 text-primary-400" />
                       Accessibility
                     </h2>
-                    <div className="p-4 bg-gray-800/50 rounded-lg text-sm text-gray-400">
-                      Accessibility options for better experience
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <Keyboard className="h-5 w-5 text-green-400" />
+                          <div>
+                            <div className="font-semibold">Keyboard Navigation</div>
+                            <div className="text-sm text-gray-400">Enhanced keyboard shortcuts</div>
+                          </div>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={settings.keyboardNavigation}
+                            onChange={(e) => {
+                              updateSettings({ keyboardNavigation: e.target.checked })
+                              handleSave()
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        </label>
+                      </div>
+
+                      <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <Volume2 className="h-5 w-5 text-blue-400" />
+                          <div>
+                            <div className="font-semibold">Screen Reader</div>
+                            <div className="text-sm text-gray-400">Screen reader optimizations</div>
+                          </div>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={settings.screenReader}
+                            onChange={(e) => {
+                              updateSettings({ screenReader: e.target.checked })
+                              handleSave()
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        </label>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -265,6 +644,18 @@ export default function SettingsPage() {
                             <div className="text-sm text-gray-400">{user?.primaryEmailAddress?.emailAddress}</div>
                           </div>
                         </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <button className="w-full flex items-center justify-between p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors">
+                          <span className="font-semibold">Export Data</span>
+                          <Download className="h-5 w-5 text-gray-400" />
+                        </button>
+                        
+                        <button className="w-full flex items-center justify-between p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800 transition-colors">
+                          <span className="font-semibold">Import Data</span>
+                          <Upload className="h-5 w-5 text-gray-400" />
+                        </button>
                       </div>
                     </div>
                   </div>
