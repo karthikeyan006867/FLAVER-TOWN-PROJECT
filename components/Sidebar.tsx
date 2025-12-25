@@ -98,22 +98,6 @@ export default function Sidebar() {
           )
         })}
       </nav>
-
-      {/* Progress Summary (when not collapsed) */}
-      {!collapsed && (
-        <div className="absolute bottom-4 left-4 right-4 card-gradient p-4 rounded-lg border border-gray-700">
-          <h3 className="text-sm font-semibold text-gray-300 mb-2">Weekly Progress</h3>
-          <div className="space-y-2">
-            <div className="flex justify-between text-xs text-gray-400">
-              <span>Lessons</span>
-              <span>12/20</span>
-            </div>
-            <div className="w-full bg-gray-700 rounded-full h-2">
-              <div className="bg-gradient-to-r from-primary-500 to-accent-500 h-2 rounded-full" style={{ width: '60%' }}></div>
-            </div>
-          </div>
-        </div>
-      )}
       </aside>
     </>
   )
