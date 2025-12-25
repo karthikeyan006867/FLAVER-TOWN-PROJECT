@@ -25,7 +25,7 @@ export interface Lesson {
   title: string
   description: string
   content: string
-  language: 'html' | 'css' | 'javascript' | 'python' | 'typescript'
+  language: 'html' | 'css' | 'javascript' | 'python' | 'typescript' | 'react' | 'nodejs' | 'ruby' | 'php' | 'java' | 'csharp' | 'go' | 'rust' | 'swift'
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced'
   estimatedTime: number // in minutes
   initialCode?: string

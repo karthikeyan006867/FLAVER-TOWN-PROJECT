@@ -10,10 +10,24 @@ import { useProgressStore } from '@/store/progressStore'
 
 export default function ChallengesPage() {
   const [selectedChallenge, setSelectedChallenge] = useState<ChallengeType | null>(null)
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('javascript')
   const [code, setCode] = useState('')
   const [output, setOutput] = useState('')
   const [filter, setFilter] = useState<'all' | 'easy' | 'medium' | 'hard' | 'expert'>('all')
   const { completedChallenges, completeChallenge } = useProgressStore()
+
+  const languages = [
+    { id: 'javascript', name: 'JavaScript', icon: '🟨' },
+    { id: 'python', name: 'Python', icon: '🐍' },
+    { id: 'typescript', name: 'TypeScript', icon: '🔷' },
+    { id: 'java', name: 'Java', icon: '☕' },
+    { id: 'csharp', name: 'C#', icon: '💜' },
+    { id: 'go', name: 'Go', icon: '🔵' },
+    { id: 'rust', name: 'Rust', icon: '🦀' },
+    { id: 'ruby', name: 'Ruby', icon: '💎' },
+    { id: 'php', name: 'PHP', icon: '🐘' },
+    { id: 'swift', name: 'Swift', icon: '🍎' },
+  ]
 
   const filteredChallenges = allChallenges.filter(ch => 
     filter === 'all' || ch.difficulty.toLowerCase() === filter
@@ -194,17 +208,34 @@ export default function ChallengesPage() {
                         <Clock className="h-4 w-4" />
                         <span>{selectedChallenge.timeLimit} minutes</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Code2 className="h-4 w-4" />
-                        <span>{selectedChallenge.language}</span>
-                      </div>
+                    </div>
+                  </div>
+
+                  {/* Language Selector */}
+                  <div>
+                    <h3 className="text-lg font-bold mb-3">Choose Your Language</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                      {languages.map(lang => (
+                        <button
+                          key={lang.id}
+                          onClick={() => setSelectedLanguage(lang.id)}
+                          className={`p-3 rounded-lg border transition-all ${
+                            selectedLanguage === lang.id
+                              ? 'border-primary-500 bg-primary-500/10 text-white'
+                              : 'border-gray-700 hover:border-gray-600 text-gray-400 hover:text-white'
+                          }`}
+                        >
+                          <div className="text-2xl mb-1">{lang.icon}</div>
+                          <div className="text-sm font-semibold">{lang.name}</div>
+                        </button>
+                      ))}
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-bold mb-3">Code Editor</h3>
                     <CodeEditor
-                      language={selectedChallenge.language as any}
+                      language={selectedLanguage}
                       initialCode={code}
                       expectedOutput={selectedChallenge.expectedOutput || ''}
                       onSuccess={() => {

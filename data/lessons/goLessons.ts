@@ -7,7 +7,7 @@ export const goLessons: Lesson[] = Array.from({ length: 40 }, (_, i) => {
   title: `Go ${i < 10 ? 'Basics' : i < 25 ? 'Concurrency' : 'Web Services'} - Lesson ${i + 1}`,
   description: `Master ${i < 10 ? 'Go fundamentals' : i < 25 ? 'goroutines and channels' : 'microservices'}`,
   content: `# Go Lesson ${i + 1}\n\n${i < 10 ? 'Syntax, Types, Functions' : i < 25 ? 'Goroutines, Channels, Select' : 'HTTP Servers, gRPC, Docker'}\n\n\`\`\`go\npackage main\n\nimport "fmt"\n\nfunc main() {\n  fmt.Println("Hello Go")\n}\n\`\`\``,
-  language: 'javascript' as const,
+  language: 'go' as const,
   difficulty,
   estimatedTime: 20 + i,
   initialCode: `package main\n\nimport "fmt"\n\nfunc main() {\n  // Your code\n}`,

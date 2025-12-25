@@ -7,7 +7,7 @@ export const javaLessons: Lesson[] = Array.from({ length: 40 }, (_, i) => {
   title: `Java ${i < 10 ? 'Fundamentals' : i < 25 ? 'OOP' : 'Spring'} - Lesson ${i + 1}`,
   description: `Master ${i < 10 ? 'Java basics' : i < 25 ? 'classes and objects' : 'Spring Boot'}`,
   content: `# Java Lesson ${i + 1}\n\n${i < 10 ? 'Syntax, Data Types, Control Flow' : i < 25 ? 'Classes, Inheritance, Interfaces' : 'Spring Framework, REST APIs'}\n\n\`\`\`java\npublic class Main {\n  public static void main(String[] args) {\n    System.out.println("Hello Java");\n  }\n}\n\`\`\``,
-  language: 'javascript' as const,
+  language: 'java' as const,
   difficulty,
   estimatedTime: 25 + i,
   initialCode: `public class Main {\n  public static void main(String[] args) {\n    // Your code\n  }\n}`,

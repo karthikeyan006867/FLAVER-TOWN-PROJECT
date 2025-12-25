@@ -7,7 +7,7 @@ export const csharpLessons: Lesson[] = Array.from({ length: 40 }, (_, i) => {
   title: `C# ${i < 10 ? 'Basics' : i < 25 ? '.NET' : 'ASP.NET'} - Lesson ${i + 1}`,
   description: `Learn ${i < 10 ? 'C# syntax' : i < 25 ? '.NET Framework' : 'ASP.NET Core'}`,
   content: `# C# Lesson ${i + 1}\n\n${i < 10 ? 'Variables, Methods, Classes' : i < 25 ? 'LINQ, Async/Await, Collections' : 'MVC, Entity Framework, Web APIs'}\n\n\`\`\`csharp\nusing System;\n\nclass Program {\n  static void Main() {\n    Console.WriteLine("Hello C#");\n  }\n}\n\`\`\``,
-  language: 'javascript' as const,
+  language: 'csharp' as const,
   difficulty,
   estimatedTime: 25 + i,
   initialCode: `using System;\n\nclass Program {\n  static void Main() {\n    // Your code\n  }\n}`,

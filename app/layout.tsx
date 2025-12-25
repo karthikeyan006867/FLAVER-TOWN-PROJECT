@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import ThemeProvider from '@/components/ThemeProvider'
+import MobileInstallBanner from '@/components/MobileInstallBanner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -39,6 +40,7 @@ export default function RootLayout({
         </head>
         <body className={inter.className}>
           <ThemeProvider>{children}</ThemeProvider>
+          <MobileInstallBanner />
         </body>
       </html>
     </ClerkProvider>

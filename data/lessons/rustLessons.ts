@@ -7,7 +7,7 @@ export const rustLessons: Lesson[] = Array.from({ length: 40 }, (_, i) => {
   title: `Rust ${i < 10 ? 'Basics' : i < 25 ? 'Ownership' : 'Systems'} - Lesson ${i + 1}`,
   description: `Learn ${i < 10 ? 'Rust syntax' : i < 25 ? 'ownership and borrowing' : 'systems programming'}`,
   content: `# Rust Lesson ${i + 1}\n\n${i < 10 ? 'Variables, Functions, Types' : i < 25 ? 'Ownership, References, Lifetimes' : 'Unsafe Code, FFI, Performance'}\n\n\`\`\`rust\nfn main() {\n  println!("Hello Rust!");\n}\n\`\`\``,
-  language: 'javascript' as const,
+  language: 'rust' as const,
   difficulty,
   estimatedTime: 30 + i,
   initialCode: `fn main() {\n  // Your code\n}`,
