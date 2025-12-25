@@ -4,7 +4,7 @@ import { useUser } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import Link from 'next/link'
-import { Trophy, Flame, Target, Clock, BookOpen, Code, TrendingUp } from 'lucide-react'
+import { Trophy, Flame, Target, Clock, BookOpen, Code, TrendingUp, Calendar } from 'lucide-react'
 import { courses } from '@/data/courses'
 import { useProgressStore } from '@/store/progressStore'
 
@@ -194,20 +194,68 @@ export default function DashboardPage() {
 
             {/* Sidebar */}
             <div className="space-y-6">
+              {/* Weekly Report */}
+              <div className="card-gradient p-6 rounded-xl border border-gray-700">
+                <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                  <Calendar className="h-5 w-5 text-primary-400" />
+                  Weekly Report
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-400">Lessons Completed</span>
+                    <span className="font-semibold text-primary-400">{stats.lessonsCompleted}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-400">Time This Week</span>
+                    <span className="font-semibold text-green-400">{stats.weeklyTime} min</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-400">Points Earned</span>
+                    <span className="font-semibold text-yellow-400">{stats.totalPoints}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-400">Current Streak</span>
+                    <span className="font-semibold text-orange-400">{stats.currentStreak} 🔥</span>
+                  </div>
+                  
+                  <div className="pt-4 border-t border-gray-700">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-gray-400">Weekly Goal</span>
+                      <span className="text-xs font-semibold text-primary-400">
+                        {Math.round((stats.weeklyTime / 300) * 100)}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-800 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-primary-500 to-accent-500 h-2 rounded-full transition-all"
+                        style={{ width: `${Math.min((stats.weeklyTime / 300) * 100, 100)}%` }}
+                      ></div>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">
+                      {stats.weeklyTime >= 300 
+                        ? '🎉 Goal achieved!' 
+                        : `${300 - stats.weeklyTime} min to goal`}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               {/* Daily Goal */}
               <div className="card-gradient p-6 rounded-xl border border-gray-700">
-                <h3 className="text-lg font-bold mb-4">Daily Goal</h3>
+                <h3 className="text-lg font-bold mb-4">Daily Target</h3>
                 <div className="text-center mb-4">
                   <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary-500/20 to-accent-500/20 border-4 border-primary-500/30 mb-2">
-                    <span className="text-3xl font-bold text-gradient">75%</span>
+                    <span className="text-3xl font-bold text-gradient">
+                      {Math.round((stats.lessonsCompleted / 50) * 100)}%
+                    </span>
                   </div>
-                  <p className="text-sm text-gray-400">3 of 4 lessons completed</p>
+                  <p className="text-sm text-gray-400">{stats.lessonsCompleted} lessons completed</p>
                 </div>
                 <Link
                   href="/courses"
                   className="block w-full bg-gradient-to-r from-primary-500 to-accent-500 text-white text-center py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
                 >
-                  Complete Goal
+                  Continue Learning
                 </Link>
               </div>
 

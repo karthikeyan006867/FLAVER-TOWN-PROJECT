@@ -13,6 +13,7 @@ interface ProgressState {
   completedChallenges: string[] // Array of challenge IDs
   courseProgress: { [courseId: string]: CourseProgress }
   streak: number
+  longestStreak: number // Track longest streak ever achieved
   totalPoints: number
   lastStudyDate: string
   timeSpent: number // in minutes
@@ -54,6 +55,7 @@ export const useProgressStore = create<ProgressState>()(
       ], // Total: 30 minutes from challenges
       courseProgress: {},
       streak: 1,
+      longestStreak: 1,
       totalPoints: 1100, // 10 lessons × 100 + 2 challenges × 50
       lastStudyDate: new Date().toISOString().split('T')[0],
       timeSpent: 130, // 100 min (lessons) + 30 min (challenges) = 2h 10min
@@ -126,14 +128,22 @@ export const useProgressStore = create<ProgressState>()(
       },
 
       updateStreak: () => {
-        const { lastStudyDate, streak } = get()
+        const { lastStudyDate, streak, longestStreak } = get()
         const today = new Date().toISOString().split('T')[0]
         const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0]
         
         if (lastStudyDate === yesterday) {
-          set({ streak: streak + 1, lastStudyDate: today })
+          const newStreak = streak + 1
+          set({ 
+            streak: newStreak, 
+            longestStreak: Math.max(newStreak, longestStreak),
+            lastStudyDate: today 
+          })
         } else if (lastStudyDate !== today) {
-          set({ streak: 1, lastStudyDate: today })
+          set({ 
+            streak: 1, 
+            lastStudyDate: today 
+          })
         }
       },
 

@@ -9,46 +9,62 @@ import { useProgressStore } from '@/store/progressStore'
 
 // Sample leaderboard data - in production, this would come from a backend
 const generateLeaderboard = (currentUser: any, userPoints: number, userStreak: number) => {
+  // Generate realistic leaderboard based on current user's performance
+  const baselinePoints = Math.max(userPoints, 1000)
+  
   const topUsers = [
-    { rank: 1, name: 'CodeMaster', points: 15420, streak: 47, avatar: '👑' },
-    { rank: 2, name: 'DevNinja', points: 14890, streak: 35, avatar: '🥷' },
-    { rank: 3, name: 'BugHunter', points: 13560, streak: 28, avatar: '🐛' },
-    { rank: 4, name: 'SyntaxGuru', points: 12340, streak: 42, avatar: '🧙' },
-    { rank: 5, name: 'AlgoWizard', points: 11980, streak: 31, avatar: '✨' },
-    { rank: 6, name: 'LoopLegend', points: 10750, streak: 25, avatar: '🔄' },
-    { rank: 7, name: 'DataDynamo', points: 10120, streak: 29, avatar: '💾' },
-    { rank: 8, name: 'CloudChamp', points: 9850, streak: 22, avatar: '☁️' },
-    { rank: 9, name: 'StackStar', points: 9420, streak: 33, avatar: '⭐' },
-    { rank: 10, name: 'QueryQueen', points: 8990, streak: 19, avatar: '👸' },
+    { rank: 1, name: 'CodeMaster', points: Math.floor(baselinePoints * 1.5), streak: 47, avatar: '👑' },
+    { rank: 2, name: 'DevNinja', points: Math.floor(baselinePoints * 1.4), streak: 35, avatar: '🥷' },
+    { rank: 3, name: 'BugHunter', points: Math.floor(baselinePoints * 1.3), streak: 28, avatar: '🐛' },
+    { rank: 4, name: 'SyntaxGuru', points: Math.floor(baselinePoints * 1.2), streak: 42, avatar: '🧙' },
+    { rank: 5, name: 'AlgoWizard', points: Math.floor(baselinePoints * 1.15), streak: 31, avatar: '✨' },
+    { rank: 6, name: 'LoopLegend', points: Math.floor(baselinePoints * 1.1), streak: 25, avatar: '🔄' },
+    { rank: 7, name: 'DataDynamo', points: Math.floor(baselinePoints * 1.05), streak: 29, avatar: '💾' },
+    { rank: 8, name: 'CloudChamp', points: Math.floor(baselinePoints * 0.95), streak: 22, avatar: '☁️' },
+    { rank: 9, name: 'StackStar', points: Math.floor(baselinePoints * 0.9), streak: 33, avatar: '⭐' },
+    { rank: 10, name: 'QueryQueen', points: Math.floor(baselinePoints * 0.85), streak: 19, avatar: '👸' },
   ]
 
   // Add current user if they have points
   if (currentUser && userPoints > 0) {
     const userName = currentUser.firstName || currentUser.username || 'You'
-    const userRank = topUsers.findIndex(u => u.points < userPoints)
-    
-    if (userRank !== -1) {
-      // User is in top 10
-      topUsers.splice(userRank, 0, {
-        rank: userRank + 1,
-        name: `${userName} (You)`,
-        points: userPoints,
-        streak: userStreak,
-        avatar: '🎯'
-      })
-      // Recalculate ranks and remove 11th position
-      topUsers.forEach((u, i) => u.rank = i + 1)
-      topUsers.pop()
-    } else {
-      // User is below top 10
-      const userEntry = {
-        rank: topUsers.length + 1,
-        name: `${userName} (You)`,
-        points: userPoints,
-        streak: userStreak,
-        avatar: '🎯'
+    const userEntry = {
+      rank: 0,
+      name: `${userName} (You)`,
+      points: userPoints,
+      streak: userStreak,
+      avatar: '🎯'
+    }
+
+    // Find correct position for user
+    let inserted = false
+    for (let i = 0; i < topUsers.length; i++) {
+      if (userPoints > topUsers[i].points) {
+        topUsers.splice(i, 0, userEntry)
+        inserted = true
+        break
       }
+    }
+
+    // If not inserted, add at end if user has points
+    if (!inserted) {
       topUsers.push(userEntry)
+    }
+
+    // Recalculate ranks
+    topUsers.forEach((u, i) => u.rank = i + 1)
+
+    // Keep only top 10
+    if (topUsers.length > 10) {
+      const userIndex = topUsers.findIndex(u => u.name.includes('(You)'))
+      if (userIndex >= 10) {
+        // User is outside top 10, show top 9 + user
+        topUsers.splice(9, topUsers.length - 10)
+        topUsers.push(userEntry)
+      } else {
+        // User is in top 10, just trim
+        topUsers.splice(10)
+      }
     }
   }
 
