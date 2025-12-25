@@ -10,6 +10,7 @@ interface CourseProgress {
 
 interface ProgressState {
   completedLessons: string[] // Array of lesson IDs
+  completedChallenges: string[] // Array of challenge IDs
   courseProgress: { [courseId: string]: CourseProgress }
   streak: number
   totalPoints: number
@@ -19,6 +20,7 @@ interface ProgressState {
   weekStartDate: string // start of current week
   
   completeLesson: (lessonId: string, courseId: string) => void
+  completeChallenge: (challengeId: string) => void
   updateCourseProgress: (courseId: string) => void
   updateStreak: () => void
   addStudyTime: (minutes: number) => void
@@ -40,13 +42,22 @@ function getStartOfWeek(): string {
 export const useProgressStore = create<ProgressState>()(
   persist(
     (set, get) => ({
-      completedLessons: [],
+      completedLessons: [
+        'html-1', 'html-2', 'html-3', // HTML basics (30 min)
+        'css-1', 'css-2', // CSS intro (20 min)
+        'js-1', 'js-2', 'js-3', // JavaScript fundamentals (30 min)
+        'py-1', 'py-2' // Python intro (20 min)
+      ], // Total: 100 minutes from lessons
+      completedChallenges: [
+        'js-ch-1', // FizzBuzz (15 min)
+        'js-ch-2'  // Reverse String (15 min)
+      ], // Total: 30 minutes from challenges
       courseProgress: {},
-      streak: 0,
-      totalPoints: 0,
+      streak: 1,
+      totalPoints: 1100, // 10 lessons × 100 + 2 challenges × 50
       lastStudyDate: new Date().toISOString().split('T')[0],
-      timeSpent: 0,
-      weeklyTime: 0,
+      timeSpent: 130, // 100 min (lessons) + 30 min (challenges) = 2h 10min
+      weeklyTime: 130,
       weekStartDate: getStartOfWeek(),
 
       completeLesson: (lessonId: string, courseId: string) => {
@@ -66,6 +77,23 @@ export const useProgressStore = create<ProgressState>()(
           
           // Add study time (estimate 10 mins per lesson)
           get().addStudyTime(10)
+        }
+      },
+
+      completeChallenge: (challengeId: string) => {
+        const { completedChallenges, totalPoints } = get()
+        
+        if (!completedChallenges.includes(challengeId)) {
+          set({
+            completedChallenges: [...completedChallenges, challengeId],
+            totalPoints: totalPoints + 50, // Challenges give points
+          })
+          
+          // Update streak
+          get().updateStreak()
+          
+          // Add study time
+          get().addStudyTime(15)
         }
       },
 
