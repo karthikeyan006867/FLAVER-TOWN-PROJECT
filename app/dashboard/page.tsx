@@ -10,14 +10,26 @@ import { useProgressStore } from '@/store/progressStore'
 
 export default function DashboardPage() {
   const { user } = useUser()
-  const { completedLessons, streak, totalPoints, weeklyTime, courseProgress, timeSpent } = useProgressStore()
+  const { 
+    completedLessons, 
+    completedChallenges,
+    totalPoints,
+    streak, 
+    longestStreak,
+    timeSpent,
+    weeklyTime,
+    weeklyLessons,
+    weeklyChallenges,
+    weeklyPoints,
+    courseProgress 
+  } = useProgressStore()
 
   // Calculate stats from actual progress
   const stats = {
     lessonsCompleted: completedLessons.length,
+    challengesCompleted: completedChallenges.length,
     currentStreak: streak,
     totalPoints: totalPoints,
-    weeklyTime: weeklyTime, // minutes this week
     totalTime: timeSpent, // total time spent
   }
 
@@ -84,7 +96,7 @@ export default function DashboardPage() {
                   <Clock className="h-6 w-6 text-green-400" />
                 </div>
               </div>
-              <div className="text-3xl font-bold mb-1">{stats.weeklyTime}m</div>
+              <div className="text-3xl font-bold mb-1">{weeklyTime}m</div>
               <div className="text-sm text-gray-400">Time This Week</div>
             </div>
           </div>
@@ -178,12 +190,12 @@ export default function DashboardPage() {
                   <div className="mt-6 pt-6 border-t border-gray-700">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm text-gray-400">This Week</span>
-                      <span className="text-sm font-semibold text-primary-400">{stats.weeklyTime} minutes</span>
+                      <span className="text-sm font-semibold text-primary-400">{weeklyTime} minutes</span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
                       <div 
                         className="bg-gradient-to-r from-primary-500 to-accent-500 h-2 rounded-full"
-                        style={{ width: `${Math.min((stats.weeklyTime / 300) * 100, 100)}%` }}
+                        style={{ width: `${Math.min((weeklyTime / 300) * 100, 100)}%` }}
                       ></div>
                     </div>
                     <p className="text-xs text-gray-500 mt-1">Goal: 300 minutes/week</p>
@@ -202,39 +214,39 @@ export default function DashboardPage() {
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-400">Lessons Completed</span>
-                    <span className="font-semibold text-primary-400">{stats.lessonsCompleted}</span>
+                    <span className="text-sm text-gray-400">Lessons This Week</span>
+                    <span className="font-semibold text-primary-400">{weeklyLessons}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-400">Challenges This Week</span>
+                    <span className="font-semibold text-purple-400">{weeklyChallenges}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-400">Time This Week</span>
-                    <span className="font-semibold text-green-400">{stats.weeklyTime} min</span>
+                    <span className="font-semibold text-green-400">{weeklyTime} min</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-400">Points Earned</span>
-                    <span className="font-semibold text-yellow-400">{stats.totalPoints}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-400">Current Streak</span>
-                    <span className="font-semibold text-orange-400">{stats.currentStreak} 🔥</span>
+                    <span className="text-sm text-gray-400">Points This Week</span>
+                    <span className="font-semibold text-yellow-400">{weeklyPoints}</span>
                   </div>
                   
                   <div className="pt-4 border-t border-gray-700">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm text-gray-400">Weekly Goal</span>
                       <span className="text-xs font-semibold text-primary-400">
-                        {Math.round((stats.weeklyTime / 300) * 100)}%
+                        {Math.round((weeklyTime / 300) * 100)}%
                       </span>
                     </div>
                     <div className="w-full bg-gray-800 rounded-full h-2">
                       <div 
                         className="bg-gradient-to-r from-primary-500 to-accent-500 h-2 rounded-full transition-all"
-                        style={{ width: `${Math.min((stats.weeklyTime / 300) * 100, 100)}%` }}
+                        style={{ width: `${Math.min((weeklyTime / 300) * 100, 100)}%` }}
                       ></div>
                     </div>
                     <p className="text-xs text-gray-500 mt-2">
-                      {stats.weeklyTime >= 300 
-                        ? '🎉 Goal achieved!' 
-                        : `${300 - stats.weeklyTime} min to goal`}
+                      {weeklyTime >= 300 
+                        ? "✅ Weekly goal achieved!" 
+                        : `${300 - weeklyTime} min to goal`}
                     </p>
                   </div>
                 </div>

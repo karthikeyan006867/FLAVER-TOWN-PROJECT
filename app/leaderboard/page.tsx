@@ -9,20 +9,18 @@ import { useProgressStore } from '@/store/progressStore'
 
 // Sample leaderboard data - in production, this would come from a backend
 const generateLeaderboard = (currentUser: any, userPoints: number, userStreak: number) => {
-  // Generate realistic leaderboard based on current user's performance
-  const baselinePoints = Math.max(userPoints, 1000)
-  
+  // Static leaderboard with realistic competitors
   const topUsers = [
-    { rank: 1, name: 'CodeMaster', points: Math.floor(baselinePoints * 1.5), streak: 47, avatar: '👑' },
-    { rank: 2, name: 'DevNinja', points: Math.floor(baselinePoints * 1.4), streak: 35, avatar: '🥷' },
-    { rank: 3, name: 'BugHunter', points: Math.floor(baselinePoints * 1.3), streak: 28, avatar: '🐛' },
-    { rank: 4, name: 'SyntaxGuru', points: Math.floor(baselinePoints * 1.2), streak: 42, avatar: '🧙' },
-    { rank: 5, name: 'AlgoWizard', points: Math.floor(baselinePoints * 1.15), streak: 31, avatar: '✨' },
-    { rank: 6, name: 'LoopLegend', points: Math.floor(baselinePoints * 1.1), streak: 25, avatar: '🔄' },
-    { rank: 7, name: 'DataDynamo', points: Math.floor(baselinePoints * 1.05), streak: 29, avatar: '💾' },
-    { rank: 8, name: 'CloudChamp', points: Math.floor(baselinePoints * 0.95), streak: 22, avatar: '☁️' },
-    { rank: 9, name: 'StackStar', points: Math.floor(baselinePoints * 0.9), streak: 33, avatar: '⭐' },
-    { rank: 10, name: 'QueryQueen', points: Math.floor(baselinePoints * 0.85), streak: 19, avatar: '👸' },
+    { rank: 1, name: 'CodeMaster', points: 15420, streak: 47, avatar: '👑' },
+    { rank: 2, name: 'DevNinja', points: 13850, streak: 35, avatar: '🥷' },
+    { rank: 3, name: 'BugHunter', points: 12300, streak: 28, avatar: '🐛' },
+    { rank: 4, name: 'SyntaxGuru', points: 10900, streak: 42, avatar: '🧙' },
+    { rank: 5, name: 'AlgoWizard', points: 9650, streak: 31, avatar: '✨' },
+    { rank: 6, name: 'LoopLegend', points: 8200, streak: 25, avatar: '🔄' },
+    { rank: 7, name: 'DataDynamo', points: 7100, streak: 29, avatar: '💾' },
+    { rank: 8, name: 'CloudChamp', points: 5850, streak: 22, avatar: '☁️' },
+    { rank: 9, name: 'StackStar', points: 4300, streak: 33, avatar: '⭐' },
+    { rank: 10, name: 'QueryQueen', points: 3500, streak: 19, avatar: '👸' },
   ]
 
   // Add current user if they have points

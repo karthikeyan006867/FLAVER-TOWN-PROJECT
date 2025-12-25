@@ -19,6 +19,9 @@ interface ProgressState {
   timeSpent: number // in minutes
   weeklyTime: number // time spent this week
   weekStartDate: string // start of current week
+  weeklyLessons: number // lessons completed this week
+  weeklyChallenges: number // challenges completed this week
+  weeklyPoints: number // points earned this week
   
   completeLesson: (lessonId: string, courseId: string) => void
   completeChallenge: (challengeId: string) => void
@@ -61,14 +64,25 @@ export const useProgressStore = create<ProgressState>()(
       timeSpent: 130, // 100 min (lessons) + 30 min (challenges) = 2h 10min
       weeklyTime: 130,
       weekStartDate: getStartOfWeek(),
+      weeklyLessons: 10, // lessons completed this week
+      weeklyChallenges: 2, // challenges completed this week
+      weeklyPoints: 1100, // points earned this week
 
       completeLesson: (lessonId: string, courseId: string) => {
-        const { completedLessons, totalPoints } = get()
+        const { completedLessons, totalPoints, weeklyLessons, weeklyPoints, weekStartDate } = get()
+        const currentWeekStart = getStartOfWeek()
         
         if (!completedLessons.includes(lessonId)) {
+          // Check if new week and reset weekly stats
+          const isNewWeek = weekStartDate !== currentWeekStart
+          
           set({
             completedLessons: [...completedLessons, lessonId],
             totalPoints: totalPoints + 100,
+            weeklyLessons: isNewWeek ? 1 : weeklyLessons + 1,
+            weeklyPoints: isNewWeek ? 100 : weeklyPoints + 100,
+            weekStartDate: currentWeekStart,
+            weeklyChallenges: isNewWeek ? 0 : get().weeklyChallenges
           })
           
           // Update course progress
@@ -167,7 +181,13 @@ export const useProgressStore = create<ProgressState>()(
       },
 
       resetWeeklyTime: () => {
-        set({ weeklyTime: 0, weekStartDate: getStartOfWeek() })
+        set({ 
+          weeklyTime: 0, 
+          weeklyLessons: 0,
+          weeklyChallenges: 0,
+          weeklyPoints: 0,
+          weekStartDate: getStartOfWeek() 
+        })
       },
 
       getLessonProgress: (courseId: string): CourseProgress => {
