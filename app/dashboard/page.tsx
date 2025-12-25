@@ -10,7 +10,7 @@ import { useProgressStore } from '@/store/progressStore'
 
 export default function DashboardPage() {
   const { user } = useUser()
-  const { completedLessons, streak, totalPoints, weeklyTime, courseProgress } = useProgressStore()
+  const { completedLessons, streak, totalPoints, weeklyTime, courseProgress, timeSpent } = useProgressStore()
 
   // Calculate stats from actual progress
   const stats = {
@@ -18,13 +18,16 @@ export default function DashboardPage() {
     currentStreak: streak,
     totalPoints: totalPoints,
     weeklyTime: weeklyTime, // minutes this week
+    totalTime: timeSpent, // total time spent
   }
 
-  const recentActivity = [
-    { id: 1, course: 'JavaScript Pro', lesson: 'Functions', completed: true, time: '2 hours ago' },
-    { id: 2, course: 'HTML Fundamentals', lesson: 'Text Formatting', completed: true, time: '1 day ago' },
-    { id: 3, course: 'Python Full Stack', lesson: 'Python Basics', completed: false, time: 'In progress' },
-  ]
+  // Get recently started courses
+  const recentCourses = courses.filter(c => 
+    courseProgress[c.id] && courseProgress[c.id].percentage > 0 && courseProgress[c.id].percentage < 100
+  ).slice(0, 3)
+
+  // If no courses in progress, show first few courses
+  const coursesToShow = recentCourses.length > 0 ? recentCourses : courses.slice(0, 2)
 
   return (
     <div className="min-h-screen">
@@ -93,7 +96,7 @@ export default function DashboardPage() {
               <div>
                 <h2 className="text-2xl font-bold mb-4">Continue Learning</h2>
                 <div className="grid gap-4">
-                  {courses.slice(0, 2).map((course) => (
+                  {coursesToShow.map((course) => (
                     <Link
                       key={course.id}
                       href={`/courses/${course.id}`}
@@ -126,32 +129,65 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* Recent Activity */}
+              {/* Learning Stats */}
               <div>
-                <h2 className="text-2xl font-bold mb-4">Recent Activity</h2>
-                <div className="card-gradient rounded-xl border border-gray-700 divide-y divide-gray-700">
-                  {recentActivity.map((activity) => (
-                    <div key={activity.id} className="p-4 hover:bg-gray-800/50 transition-colors">
-                      <div className="flex items-start justify-between">
-                        <div className="flex items-start gap-3">
-                          {activity.completed ? (
-                            <div className="w-8 h-8 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center flex-shrink-0">
-                              <Code className="h-4 w-4 text-green-400" />
-                            </div>
-                          ) : (
-                            <div className="w-8 h-8 rounded-full bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center flex-shrink-0">
-                              <Target className="h-4 w-4 text-yellow-400" />
-                            </div>
-                          )}
-                          <div>
-                            <div className="font-semibold">{activity.lesson}</div>
-                            <div className="text-sm text-gray-400">{activity.course}</div>
-                          </div>
-                        </div>
-                        <span className="text-xs text-gray-500">{activity.time}</span>
+                <h2 className="text-2xl font-bold mb-4">Learning Stats</h2>
+                <div className="card-gradient rounded-xl border border-gray-700 p-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="flex items-center gap-4">
+                      <div className="bg-primary-500/20 p-4 rounded-xl">
+                        <BookOpen className="h-8 w-8 text-primary-400" />
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold">{stats.lessonsCompleted}</div>
+                        <div className="text-sm text-gray-400">Lessons Completed</div>
                       </div>
                     </div>
-                  ))}
+
+                    <div className="flex items-center gap-4">
+                      <div className="bg-orange-500/20 p-4 rounded-xl">
+                        <Flame className="h-8 w-8 text-orange-400" />
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold">{stats.currentStreak} Days</div>
+                        <div className="text-sm text-gray-400">Current Streak</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      <div className="bg-green-500/20 p-4 rounded-xl">
+                        <Clock className="h-8 w-8 text-green-400" />
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold">{Math.floor(stats.totalTime / 60)}h {stats.totalTime % 60}m</div>
+                        <div className="text-sm text-gray-400">Total Time Spent</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      <div className="bg-accent-500/20 p-4 rounded-xl">
+                        <Trophy className="h-8 w-8 text-accent-400" />
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold">{stats.totalPoints}</div>
+                        <div className="text-sm text-gray-400">Total Points</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 pt-6 border-t border-gray-700">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-gray-400">This Week</span>
+                      <span className="text-sm font-semibold text-primary-400">{stats.weeklyTime} minutes</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-primary-500 to-accent-500 h-2 rounded-full"
+                        style={{ width: `${Math.min((stats.weeklyTime / 300) * 100, 100)}%` }}
+                      ></div>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">Goal: 300 minutes/week</p>
+                  </div>
                 </div>
               </div>
             </div>

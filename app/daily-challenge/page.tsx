@@ -1,46 +1,88 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import CodeEditor from '@/components/CodeEditor'
 import { Calendar, Trophy, Flame, Star, Award, Clock } from 'lucide-react'
+import { useProgressStore } from '@/store/progressStore'
 
 const dailyChallenge = {
+  id: 'daily-sum-challenge',
   title: "Sum of Two Numbers",
   difficulty: "Easy",
   points: 100,
   description: "Write a function that takes two numbers as parameters and returns their sum.",
   testCases: [
-    { input: "sum(5, 3)", output: "8" },
-    { input: "sum(-1, 1)", output: "0" },
-    { input: "sum(100, 200)", output: "300" }
+    { 
+      name: 'Test Case 1: sum(5, 3)', 
+      test: (code: string) => {
+        try {
+          eval(code)
+          // @ts-ignore
+          const result = typeof sum === 'function' ? sum(5, 3) : null
+          return result === 8
+        } catch {
+          return false
+        }
+      },
+      errorMessage: 'Expected sum(5, 3) to return 8'
+    },
+    { 
+      name: 'Test Case 2: sum(-1, 1)', 
+      test: (code: string) => {
+        try {
+          eval(code)
+          // @ts-ignore
+          const result = typeof sum === 'function' ? sum(-1, 1) : null
+          return result === 0
+        } catch {
+          return false
+        }
+      },
+      errorMessage: 'Expected sum(-1, 1) to return 0'
+    },
+    { 
+      name: 'Test Case 3: sum(100, 200)', 
+      test: (code: string) => {
+        try {
+          eval(code)
+          // @ts-ignore
+          const result = typeof sum === 'function' ? sum(100, 200) : null
+          return result === 300
+        } catch {
+          return false
+        }
+      },
+      errorMessage: 'Expected sum(100, 200) to return 300'
+    }
   ],
   starterCode: {
-    javascript: `function sum(a, b) {\n  // Your code here\n}`,
-    python: `def sum(a, b):\n    # Your code here\n    pass`,
-    typescript: `function sum(a: number, b: number): number {\n  // Your code here\n  return 0;\n}`
+    javascript: `function sum(a, b) {\n  // Your code here\n  return a + b;\n}\n\n// Test your function\nconsole.log(sum(5, 3)); // Should output 8\nconsole.log(sum(-1, 1)); // Should output 0\nconsole.log(sum(100, 200)); // Should output 300`,
+    python: `def sum(a, b):\n    # Your code here\n    return a + b\n\n# Test your function\nprint(sum(5, 3))  # Should output 8\nprint(sum(-1, 1))  # Should output 0\nprint(sum(100, 200))  # Should output 300`,
+    typescript: `function sum(a: number, b: number): number {\n  // Your code here\n  return a + b;\n}\n\n// Test your function\nconsole.log(sum(5, 3)); // Should output 8\nconsole.log(sum(-1, 1)); // Should output 0\nconsole.log(sum(100, 200)); // Should output 300`
   }
 }
 
 export default function DailyChallengePage() {
   const [language, setLanguage] = useState<'javascript' | 'python' | 'typescript'>('javascript')
-  const [output, setOutput] = useState('')
-  const [streak, setStreak] = useState(7)
   const [completed, setCompleted] = useState(false)
+  const { streak, totalPoints, completeChallenge, completedChallenges } = useProgressStore()
 
-  const handleRun = (result: { output: string; error?: string }) => {
-    if (result.error) {
-      setOutput(`❌ Error: ${result.error}`)
-    } else {
-      setOutput(result.output)
-      // Check if solution is correct
-      if (result.output.includes('8') && result.output.includes('0') && result.output.includes('300')) {
-        setCompleted(true)
-        setTimeout(() => {
-          alert('🎉 Challenge completed! +100 points')
-        }, 500)
-      }
+  useEffect(() => {
+    // Check if already completed
+    if (completedChallenges.includes(dailyChallenge.id)) {
+      setCompleted(true)
+    }
+  }, [completedChallenges])
+
+  const handleSuccess = () => {
+    if (!completed && !completedChallenges.includes(dailyChallenge.id)) {
+      setCompleted(true)
+      completeChallenge(dailyChallenge.id)
+      setTimeout(() => {
+        alert(`🎉 Challenge completed! +${dailyChallenge.points} points\nTotal Points: ${totalPoints + dailyChallenge.points}`)
+      }, 500)
     }
   }
 
@@ -83,7 +125,7 @@ export default function DailyChallengePage() {
                 </div>
                 <div>
                   <div className="text-sm text-gray-400">Challenges Completed</div>
-                  <div className="text-2xl font-bold">42</div>
+                  <div className="text-2xl font-bold">{completedChallenges.length}</div>
                 </div>
               </div>
             </div>
@@ -95,7 +137,7 @@ export default function DailyChallengePage() {
                 </div>
                 <div>
                   <div className="text-sm text-gray-400">Total Points</div>
-                  <div className="text-2xl font-bold">4,200</div>
+                  <div className="text-2xl font-bold">{totalPoints.toLocaleString()}</div>
                 </div>
               </div>
             </div>
@@ -137,13 +179,11 @@ export default function DailyChallengePage() {
                 <div className="space-y-2">
                   {dailyChallenge.testCases.map((test, i) => (
                     <div key={i} className="bg-gray-800/50 rounded-lg p-3">
-                      <div className="text-sm">
-                        <span className="text-gray-400">Input: </span>
-                        <code className="text-blue-400">{test.input}</code>
+                      <div className="text-sm font-medium text-primary-400 mb-1">
+                        {test.name}
                       </div>
-                      <div className="text-sm">
-                        <span className="text-gray-400">Expected: </span>
-                        <code className="text-green-400">{test.output}</code>
+                      <div className="text-xs text-gray-400">
+                        {test.errorMessage.replace('Expected ', '')}
                       </div>
                     </div>
                   ))}
@@ -175,21 +215,10 @@ export default function DailyChallengePage() {
                 <CodeEditor
                   language={language}
                   initialCode={dailyChallenge.starterCode[language]}
-                  onSuccess={() => {
-                    setCompleted(true)
-                    alert('🎉 Challenge completed! +100 points')
-                  }}
+                  testCases={language === 'javascript' || language === 'typescript' ? dailyChallenge.testCases : undefined}
+                  onSuccess={handleSuccess}
                 />
               </div>
-
-              {output && (
-                <div className="card-gradient border border-gray-700 rounded-xl p-4">
-                  <h3 className="font-semibold mb-2">Output</h3>
-                  <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 text-sm font-mono text-green-400 overflow-auto">
-                    {output}
-                  </pre>
-                </div>
-              )}
             </div>
           </div>
 

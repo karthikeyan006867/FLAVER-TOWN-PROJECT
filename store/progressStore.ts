@@ -84,15 +84,22 @@ export const useProgressStore = create<ProgressState>()(
         const { completedChallenges, totalPoints } = get()
         
         if (!completedChallenges.includes(challengeId)) {
+          // Award points based on challenge type
+          let points = 100 // Default points for challenges
+          if (challengeId.includes('daily')) points = 100
+          else if (challengeId.includes('hard')) points = 150
+          else if (challengeId.includes('medium')) points = 100
+          else if (challengeId.includes('easy')) points = 50
+          
           set({
             completedChallenges: [...completedChallenges, challengeId],
-            totalPoints: totalPoints + 50, // Challenges give points
+            totalPoints: totalPoints + points,
           })
           
           // Update streak
           get().updateStreak()
           
-          // Add study time
+          // Add study time (estimate 15 mins per challenge)
           get().addStudyTime(15)
         }
       },

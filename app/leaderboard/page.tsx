@@ -1,26 +1,67 @@
 'use client'
 
 import { useState } from 'react'
+import { useUser } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import { Trophy, TrendingUp, Users, Globe, Award, Medal, Crown, Star } from 'lucide-react'
+import { useProgressStore } from '@/store/progressStore'
 
-const topUsers = [
-  { rank: 1, name: 'CodeMaster', points: 15420, streak: 47, avatar: '👑' },
-  { rank: 2, name: 'DevNinja', points: 14890, streak: 35, avatar: '🥷' },
-  { rank: 3, name: 'BugHunter', points: 13560, streak: 28, avatar: '🐛' },
-  { rank: 4, name: 'SyntaxGuru', points: 12340, streak: 42, avatar: '🧙' },
-  { rank: 5, name: 'AlgoWizard', points: 11980, streak: 31, avatar: '✨' },
-  { rank: 6, name: 'LoopLegend', points: 10750, streak: 25, avatar: '🔄' },
-  { rank: 7, name: 'DataDynamo', points: 10120, streak: 29, avatar: '💾' },
-  { rank: 8, name: 'CloudChamp', points: 9850, streak: 22, avatar: '☁️' },
-  { rank: 9, name: 'StackStar', points: 9420, streak: 33, avatar: '⭐' },
-  { rank: 10, name: 'QueryQueen', points: 8990, streak: 19, avatar: '👸' },
-]
+// Sample leaderboard data - in production, this would come from a backend
+const generateLeaderboard = (currentUser: any, userPoints: number, userStreak: number) => {
+  const topUsers = [
+    { rank: 1, name: 'CodeMaster', points: 15420, streak: 47, avatar: '👑' },
+    { rank: 2, name: 'DevNinja', points: 14890, streak: 35, avatar: '🥷' },
+    { rank: 3, name: 'BugHunter', points: 13560, streak: 28, avatar: '🐛' },
+    { rank: 4, name: 'SyntaxGuru', points: 12340, streak: 42, avatar: '🧙' },
+    { rank: 5, name: 'AlgoWizard', points: 11980, streak: 31, avatar: '✨' },
+    { rank: 6, name: 'LoopLegend', points: 10750, streak: 25, avatar: '🔄' },
+    { rank: 7, name: 'DataDynamo', points: 10120, streak: 29, avatar: '💾' },
+    { rank: 8, name: 'CloudChamp', points: 9850, streak: 22, avatar: '☁️' },
+    { rank: 9, name: 'StackStar', points: 9420, streak: 33, avatar: '⭐' },
+    { rank: 10, name: 'QueryQueen', points: 8990, streak: 19, avatar: '👸' },
+  ]
+
+  // Add current user if they have points
+  if (currentUser && userPoints > 0) {
+    const userName = currentUser.firstName || currentUser.username || 'You'
+    const userRank = topUsers.findIndex(u => u.points < userPoints)
+    
+    if (userRank !== -1) {
+      // User is in top 10
+      topUsers.splice(userRank, 0, {
+        rank: userRank + 1,
+        name: `${userName} (You)`,
+        points: userPoints,
+        streak: userStreak,
+        avatar: '🎯'
+      })
+      // Recalculate ranks and remove 11th position
+      topUsers.forEach((u, i) => u.rank = i + 1)
+      topUsers.pop()
+    } else {
+      // User is below top 10
+      const userEntry = {
+        rank: topUsers.length + 1,
+        name: `${userName} (You)`,
+        points: userPoints,
+        streak: userStreak,
+        avatar: '🎯'
+      }
+      topUsers.push(userEntry)
+    }
+  }
+
+  return topUsers
+}
 
 export default function LeaderboardPage() {
+  const { user } = useUser()
+  const { totalPoints, streak, completedLessons, completedChallenges } = useProgressStore()
   const [timeframe, setTimeframe] = useState<'daily' | 'weekly' | 'monthly' | 'alltime'>('alltime')
   const [category, setCategory] = useState<'global' | 'friends'>('global')
+
+  const topUsers = generateLeaderboard(user, totalPoints, streak)
 
   const getRankIcon = (rank: number) => {
     switch(rank) {
@@ -30,6 +71,8 @@ export default function LeaderboardPage() {
       default: return <span className="text-gray-500">#{rank}</span>
     }
   }
+
+  const isCurrentUser = (name: string) => name.includes('(You)')
 
   return (
     <div className="min-h-screen bg-gray-950">
@@ -135,15 +178,19 @@ export default function LeaderboardPage() {
             <div className="divide-y divide-gray-800">
               {topUsers.map((user) => (
                 <div
-                  key={user.rank}
-                  className="flex items-center gap-4 p-4 hover:bg-gray-800/30 transition-colors"
+                  key={`${user.rank}-${user.name}`}
+                  className={`flex items-center gap-4 p-4 transition-colors ${
+                    isCurrentUser(user.name) 
+                      ? 'bg-primary-500/10 border-l-4 border-primary-500' 
+                      : 'hover:bg-gray-800/30'
+                  }`}
                 >
                   <div className="flex items-center justify-center w-12">
                     {getRankIcon(user.rank)}
                   </div>
                   <div className="text-3xl">{user.avatar}</div>
                   <div className="flex-1">
-                    <div className="font-semibold">{user.name}</div>
+                    <div className={`font-semibold ${isCurrentUser(user.name) ? 'text-primary-400' : ''}`}>{user.name}</div>
                     <div className="text-sm text-gray-400">{user.streak} day streak 🔥</div>
                   </div>
                   <div className="text-right">
@@ -157,23 +204,41 @@ export default function LeaderboardPage() {
             </div>
           </div>
 
-          {/* Your Rank Card */}
-          <div className="mt-6 card-gradient border-2 border-primary-500/50 rounded-xl p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <Star className="h-8 w-8 text-primary-400" />
+          {/* Your Stats Card */}
+          <div className="mt-6 grid md:grid-cols-3 gap-4">
+            <div className="card-gradient border border-primary-500/30 rounded-xl p-4">
+              <div className="flex items-center gap-3">
+                <div className="bg-primary-500/20 p-3 rounded-lg">
+                  <Trophy className="h-6 w-6 text-primary-400" />
+                </div>
                 <div>
-                  <div className="text-sm text-gray-400">Your Rank</div>
-                  <div className="text-2xl font-bold">#24</div>
+                  <div className="text-sm text-gray-400">Your Points</div>
+                  <div className="text-2xl font-bold text-primary-400">{totalPoints.toLocaleString()}</div>
                 </div>
               </div>
-              <div className="text-right">
-                <div className="text-sm text-gray-400">Points</div>
-                <div className="text-2xl font-bold text-primary-400">7,850</div>
+            </div>
+            
+            <div className="card-gradient border border-orange-500/30 rounded-xl p-4">
+              <div className="flex items-center gap-3">
+                <div className="bg-orange-500/20 p-3 rounded-lg">
+                  <Star className="h-6 w-6 text-orange-400" />
+                </div>
+                <div>
+                  <div className="text-sm text-gray-400">Your Streak</div>
+                  <div className="text-2xl font-bold">{streak} 🔥</div>
+                </div>
               </div>
-              <div className="text-right">
-                <div className="text-sm text-gray-400">Streak</div>
-                <div className="text-2xl font-bold">12 🔥</div>
+            </div>
+
+            <div className="card-gradient border border-green-500/30 rounded-xl p-4">
+              <div className="flex items-center gap-3">
+                <div className="bg-green-500/20 p-3 rounded-lg">
+                  <Award className="h-6 w-6 text-green-400" />
+                </div>
+                <div>
+                  <div className="text-sm text-gray-400">Completed</div>
+                  <div className="text-2xl font-bold">{completedLessons.length + completedChallenges.length}</div>
+                </div>
               </div>
             </div>
           </div>

@@ -6,10 +6,22 @@ import Sidebar from '@/components/Sidebar'
 import CodeEditor from '@/components/CodeEditor'
 import { Play, Save, Share2, Trash2, Download, Upload, Copy } from 'lucide-react'
 
+const languageTemplates = {
+  javascript: `// Welcome to Code Playground!\n// Write and test code in any language\n\nconsole.log('Hello, World!');`,
+  python: `# Welcome to Code Playground!\n# Write and test Python code\n\nprint('Hello, World!')`,
+  typescript: `// TypeScript Playground\n// Enjoy type-safe coding\n\nconst greeting: string = 'Hello, World!';\nconsole.log(greeting);`,
+  java: `// Java Playground\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, World!");\n    }\n}`,
+  csharp: `// C# Playground\nusing System;\n\nclass Program {\n    static void Main() {\n        Console.WriteLine("Hello, World!");\n    }\n}`,
+  go: `// Go Playground\npackage main\n\nimport "fmt"\n\nfunc main() {\n    fmt.Println("Hello, World!")\n}`,
+  rust: `// Rust Playground\nfn main() {\n    println!("Hello, World!");\n}`,
+  ruby: `# Ruby Playground\nputs 'Hello, World!'`,
+  php: `<?php\n// PHP Playground\necho "Hello, World!";\n?>`,
+  swift: `// Swift Playground\nimport Foundation\n\nprint("Hello, World!")`
+}
+
 export default function PlaygroundPage() {
   const [language, setLanguage] = useState<'javascript' | 'python' | 'typescript' | 'java' | 'csharp' | 'go' | 'rust' | 'ruby' | 'php' | 'swift'>('javascript')
-  const [code, setCode] = useState(`// Welcome to Code Playground!\n// Write and test code in any language\n\nconsole.log('Hello, World!');`)
-  const [output, setOutput] = useState('')
+  const [code, setCode] = useState(languageTemplates.javascript)
   const [savedSnippets, setSavedSnippets] = useState<Array<{ id: string; name: string; language: string; code: string }>>([])
 
   const languages = [
@@ -25,21 +37,27 @@ export default function PlaygroundPage() {
     { value: 'swift', label: 'Swift' }
   ]
 
-  const handleRun = (result: { output: string; error?: string }) => {
-    if (result.error) {
-      setOutput(`❌ Error: ${result.error}`)
-    } else {
-      setOutput(result.output)
-    }
+  const handleLanguageChange = (newLang: any) => {
+    setLanguage(newLang)
+    setCode(languageTemplates[newLang as keyof typeof languageTemplates] || languageTemplates.javascript)
   }
 
   const handleSave = () => {
     const name = prompt('Name your code snippet:')
     if (name) {
-      setSavedSnippets([
-        ...savedSnippets,
-        { id: Date.now().toString(), name, language, code }
-      ])
+      const newSnippet = { 
+        id: Date.now().toString(), 
+        name, 
+        language, 
+        code 
+      }
+      setSavedSnippets([...savedSnippets, newSnippet])
+      
+      // Save to localStorage
+      const saved = localStorage.getItem('playground-snippets')
+      const snippets = saved ? JSON.parse(saved) : []
+      localStorage.setItem('playground-snippets', JSON.stringify([...snippets, newSnippet]))
+      
       alert('Snippet saved!')
     }
   }
@@ -51,8 +69,20 @@ export default function PlaygroundPage() {
 
   const handleClear = () => {
     if (confirm('Clear all code?')) {
-      setCode('')
-      setOutput('')
+      setCode(languageTemplates[language])
+    }
+  }
+
+  const loadSnippet = (snippet: typeof savedSnippets[0]) => {
+    setLanguage(snippet.language as any)
+    setCode(snippet.code)
+  }
+
+  const deleteSnippet = (id: string) => {
+    if (confirm('Delete this snippet?')) {
+      const updated = savedSnippets.filter(s => s.id !== id)
+      setSavedSnippets(updated)
+      localStorage.setItem('playground-snippets', JSON.stringify(updated))
     }
   }
 
@@ -77,7 +107,7 @@ export default function PlaygroundPage() {
           <div className="mb-4 flex flex-wrap gap-3">
             <select
               value={language}
-              onChange={(e) => setLanguage(e.target.value as any)}
+              onChange={(e) => handleLanguageChange(e.target.value)}
               className="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               {languages.map(lang => (
@@ -111,24 +141,15 @@ export default function PlaygroundPage() {
           </div>
 
           {/* Editor */}
-          <div className="grid lg:grid-cols-2 gap-4">
-            <div className="card-gradient border border-gray-700 rounded-xl p-4">
-              <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                <Play className="h-5 w-5 text-green-400" />
-                Editor
-              </h3>
-              <CodeEditor
-                language={language}
-                initialCode={code}
-              />
-            </div>
-
-            <div className="card-gradient border border-gray-700 rounded-xl p-4">
-              <h3 className="text-lg font-semibold mb-3">Output</h3>
-              <div className="bg-gray-900 border border-gray-800 rounded-lg p-4 min-h-[400px] font-mono text-sm overflow-auto">
-                <pre className="text-green-400 whitespace-pre-wrap">{output || 'Run your code to see output...'}</pre>
-              </div>
-            </div>
+          <div className="card-gradient border border-gray-700 rounded-xl p-4 mb-6">
+            <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+              <Play className="h-5 w-5 text-green-400" />
+              Code Editor
+            </h3>
+            <CodeEditor
+              language={language}
+              initialCode={code}
+            />
           </div>
 
           {/* Saved Snippets */}
@@ -143,17 +164,22 @@ export default function PlaygroundPage() {
                         <h3 className="font-semibold">{snippet.name}</h3>
                         <p className="text-xs text-gray-400">{snippet.language}</p>
                       </div>
-                      <button
-                        onClick={() => {
-                          setLanguage(snippet.language as any)
-                          setCode(snippet.code)
-                        }}
-                        className="text-primary-400 hover:text-primary-300"
-                      >
-                        Load
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => loadSnippet(snippet)}
+                          className="text-primary-400 hover:text-primary-300 text-sm"
+                        >
+                          Load
+                        </button>
+                        <button
+                          onClick={() => deleteSnippet(snippet.id)}
+                          className="text-red-400 hover:text-red-300"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
                     </div>
-                    <pre className="text-xs text-gray-400 overflow-hidden">{snippet.code.substring(0, 100)}...</pre>
+                    <pre className="text-xs text-gray-400 overflow-hidden line-clamp-3">{snippet.code}</pre>
                   </div>
                 ))}
               </div>

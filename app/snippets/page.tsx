@@ -1,11 +1,22 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import { FileCode, Plus, Search, Tag, Star, Copy, Trash2, Edit } from 'lucide-react'
+import { FileCode, Plus, Search, Tag, Star, Copy, Trash2, Edit, X } from 'lucide-react'
+import { Editor } from '@monaco-editor/react'
 
-const snippets = [
+interface Snippet {
+  id: string
+  title: string
+  language: string
+  code: string
+  tags: string[]
+  starred: boolean
+  createdAt: string
+}
+
+const defaultSnippets: Snippet[] = [
   {
     id: '1',
     title: 'Debounce Function',
@@ -36,9 +47,33 @@ const snippets = [
 ]
 
 export default function SnippetsPage() {
+  const [snippets, setSnippets] = useState<Snippet[]>(defaultSnippets)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedLanguage, setSelectedLanguage] = useState('all')
-  const [selectedSnippet, setSelectedSnippet] = useState(snippets[0])
+  const [selectedSnippet, setSelectedSnippet] = useState<Snippet | null>(defaultSnippets[0])
+  const [isCreating, setIsCreating] = useState(false)
+  const [newSnippet, setNewSnippet] = useState({ title: '', language: 'javascript', code: '', tags: '' })
+
+  // Load snippets from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('code-snippets')
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved)
+        setSnippets(parsed)
+        if (parsed.length > 0) setSelectedSnippet(parsed[0])
+      } catch (e) {
+        console.error('Failed to load snippets:', e)
+      }
+    }
+  }, [])
+
+  // Save to localStorage whenever snippets change
+  useEffect(() => {
+    if (snippets.length > 0) {
+      localStorage.setItem('code-snippets', JSON.stringify(snippets))
+    }
+  }, [snippets])
 
   const filteredSnippets = snippets.filter(snippet => {
     const matchesSearch = snippet.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -50,6 +85,45 @@ export default function SnippetsPage() {
   const handleCopy = (code: string) => {
     navigator.clipboard.writeText(code)
     alert('Code copied to clipboard!')
+  }
+
+  const handleToggleStar = (id: string) => {
+    setSnippets(snippets.map(s => 
+      s.id === id ? { ...s, starred: !s.starred } : s
+    ))
+  }
+
+  const handleDelete = (id: string) => {
+    if (confirm('Delete this snippet?')) {
+      const updated = snippets.filter(s => s.id !== id)
+      setSnippets(updated)
+      if (selectedSnippet?.id === id) {
+        setSelectedSnippet(updated[0] || null)
+      }
+    }
+  }
+
+  const handleCreateSnippet = () => {
+    if (!newSnippet.title || !newSnippet.code) {
+      alert('Please fill in title and code')
+      return
+    }
+
+    const snippet: Snippet = {
+      id: Date.now().toString(),
+      title: newSnippet.title,
+      language: newSnippet.language,
+      code: newSnippet.code,
+      tags: newSnippet.tags.split(',').map(t => t.trim()).filter(Boolean),
+      starred: false,
+      createdAt: new Date().toISOString().split('T')[0]
+    }
+
+    setSnippets([snippet, ...snippets])
+    setSelectedSnippet(snippet)
+    setIsCreating(false)
+    setNewSnippet({ title: '', language: 'javascript', code: '', tags: '' })
+    alert('Snippet created successfully!')
   }
 
   return (
@@ -71,7 +145,10 @@ export default function SnippetsPage() {
               </p>
             </div>
 
-            <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-lg hover:opacity-90 transition-opacity font-semibold">
+            <button 
+              onClick={() => setIsCreating(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-lg hover:opacity-90 transition-opacity font-semibold"
+            >
               <Plus className="h-5 w-5" />
               New Snippet
             </button>
@@ -122,9 +199,14 @@ export default function SnippetsPage() {
                 >
                   <div className="flex items-start justify-between mb-2">
                     <h3 className="font-semibold">{snippet.title}</h3>
-                    {snippet.starred && (
-                      <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-                    )}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleToggleStar(snippet.id)
+                      }}
+                    >
+                      <Star className={`h-4 w-4 ${snippet.starred ? 'text-yellow-400 fill-yellow-400' : 'text-gray-400'}`} />
+                    </button>
                   </div>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="px-2 py-1 bg-primary-500/20 text-primary-400 rounded text-xs">
@@ -143,7 +225,7 @@ export default function SnippetsPage() {
             </div>
 
             {/* Snippet Details */}
-            {selectedSnippet && (
+            {selectedSnippet && !isCreating && (
               <div className="lg:col-span-2 card-gradient border border-gray-700 rounded-xl p-6">
                 <div className="flex items-start justify-between mb-6">
                   <div>
@@ -158,13 +240,16 @@ export default function SnippetsPage() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <button className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
+                    <button 
+                      onClick={() => handleToggleStar(selectedSnippet.id)}
+                      className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
+                    >
                       <Star className={`h-5 w-5 ${selectedSnippet.starred ? 'text-yellow-400 fill-yellow-400' : 'text-gray-400'}`} />
                     </button>
-                    <button className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
-                      <Edit className="h-5 w-5 text-gray-400" />
-                    </button>
-                    <button className="p-2 bg-red-900/30 rounded-lg hover:bg-red-900/50 transition-colors">
+                    <button 
+                      onClick={() => handleDelete(selectedSnippet.id)}
+                      className="p-2 bg-red-900/30 rounded-lg hover:bg-red-900/50 transition-colors"
+                    >
                       <Trash2 className="h-5 w-5 text-red-400" />
                     </button>
                   </div>
@@ -184,14 +269,118 @@ export default function SnippetsPage() {
                 <div className="relative">
                   <button
                     onClick={() => handleCopy(selectedSnippet.code)}
-                    className="absolute top-3 right-3 flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors text-sm"
+                    className="absolute top-3 right-3 z-10 flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors text-sm"
                   >
                     <Copy className="h-4 w-4" />
                     Copy
                   </button>
-                  <pre className="bg-gray-900 border border-gray-800 rounded-xl p-4 overflow-auto">
-                    <code className="text-sm text-gray-300">{selectedSnippet.code}</code>
-                  </pre>
+                  <Editor
+                    height="500px"
+                    language={selectedSnippet.language}
+                    value={selectedSnippet.code}
+                    theme="vs-dark"
+                    options={{
+                      readOnly: true,
+                      minimap: { enabled: false },
+                      fontSize: 14,
+                      lineNumbers: 'on',
+                      scrollBeyondLastLine: false,
+                      automaticLayout: true,
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Create New Snippet Form */}
+            {isCreating && (
+              <div className="lg:col-span-2 card-gradient border border-gray-700 rounded-xl p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold">Create New Snippet</h2>
+                  <button 
+                    onClick={() => setIsCreating(false)}
+                    className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Title</label>
+                    <input
+                      type="text"
+                      value={newSnippet.title}
+                      onChange={(e) => setNewSnippet({ ...newSnippet, title: e.target.value })}
+                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                      placeholder="e.g., Array Map Function"
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Language</label>
+                      <select
+                        value={newSnippet.language}
+                        onChange={(e) => setNewSnippet({ ...newSnippet, language: e.target.value })}
+                        className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                      >
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="typescript">TypeScript</option>
+                        <option value="java">Java</option>
+                        <option value="csharp">C#</option>
+                        <option value="go">Go</option>
+                        <option value="rust">Rust</option>
+                        <option value="ruby">Ruby</option>
+                        <option value="php">PHP</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Tags (comma-separated)</label>
+                      <input
+                        type="text"
+                        value={newSnippet.tags}
+                        onChange={(e) => setNewSnippet({ ...newSnippet, tags: e.target.value })}
+                        className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                        placeholder="e.g., array, utility, functional"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Code</label>
+                    <Editor
+                      height="400px"
+                      language={newSnippet.language}
+                      value={newSnippet.code}
+                      onChange={(value) => setNewSnippet({ ...newSnippet, code: value || '' })}
+                      theme="vs-dark"
+                      options={{
+                        minimap: { enabled: false },
+                        fontSize: 14,
+                        lineNumbers: 'on',
+                        scrollBeyondLastLine: false,
+                        automaticLayout: true,
+                      }}
+                    />
+                  </div>
+
+                  <div className="flex gap-3">
+                    <button
+                      onClick={handleCreateSnippet}
+                      className="flex-1 bg-gradient-to-r from-primary-500 to-accent-500 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                    >
+                      Create Snippet
+                    </button>
+                    <button
+                      onClick={() => setIsCreating(false)}
+                      className="px-6 bg-gray-800 text-white py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </div>
               </div>
             )}

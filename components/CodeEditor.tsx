@@ -90,19 +90,40 @@ export default function CodeEditor({
           result = code
           setOutput(`/* CSS Applied */\n${code}`)
         } else if (language.toLowerCase() === 'javascript' || language.toLowerCase() === 'js' || language.toLowerCase() === 'react' || language.toLowerCase() === 'nodejs' || language.toLowerCase() === 'node') {
-          // Simulate JavaScript/React/Node execution
+          // Execute JavaScript/React/Node code
           try {
             const logs: string[] = []
+            
+            // Create custom console for capturing output
             const customConsole = {
-              log: (...args: any[]) => logs.push(args.join(' '))
+              log: (...args: any[]) => {
+                const formatted = args.map(arg => {
+                  if (typeof arg === 'object' && arg !== null) {
+                    try {
+                      return JSON.stringify(arg, null, 2)
+                    } catch {
+                      return String(arg)
+                    }
+                  }
+                  return String(arg)
+                }).join(' ')
+                logs.push(formatted)
+              },
+              error: (...args: any[]) => {
+                logs.push('ERROR: ' + args.join(' '))
+              },
+              warn: (...args: any[]) => {
+                logs.push('WARNING: ' + args.join(' '))
+              }
             }
-            const wrappedCode = `
-              (function(console) {
-                ${code}
-              })(customConsole)
-            `
-            eval(wrappedCode.replace('customConsole', JSON.stringify(customConsole)))
-            result = logs.join('\n') || 'Code executed successfully (no output)'
+
+            // Create safe execution environment
+            const executeCode = new Function('console', code)
+            executeCode(customConsole)
+            
+            result = logs.length > 0 
+              ? logs.join('\\n') 
+              : '✓ Code executed successfully (no console output)'
             setOutput(result)
           } catch (error: any) {
             setOutput(`Error: ${error.message}`)
