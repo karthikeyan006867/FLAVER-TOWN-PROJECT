@@ -86,8 +86,8 @@ var nullableName: String? = null  // Nullable
     val isStudent: Boolean = true
     val name: String? = null
     
-    println("Age: $age, Height: $height")
-    println("Nullable: ${name ?: "No name"}")
+    println("Age: $\{age}, Height: $\{height}")
+    println("Nullable: $\{name ?: "No name"}")
 }`,
     hints: ['Use ? for nullable types', 'Elvis operator ?: provides default values', 'Type annotation uses :']
   },

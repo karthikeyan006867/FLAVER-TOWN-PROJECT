@@ -42,7 +42,7 @@ const api = 'v1';   // Compile-time constant
   print(greeting);
   
   final numbers = [1, 2, 3, 4, 5];
-  print('Sum: ${numbers.reduce((a, b) => a + b)}');
+  print('Sum: $\{numbers.reduce((a, b) => a + b)}');
 }`,
     hints: ['Use print() for output', 'var for type inference', 'String interpolation with ${}']
   },

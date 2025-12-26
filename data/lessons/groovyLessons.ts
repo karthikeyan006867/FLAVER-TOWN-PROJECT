@@ -46,8 +46,8 @@ println greeting
 
 // Lists
 def numbers = [1, 2, 3, 4, 5]
-println "Sum: ${numbers.sum()}"
-println "Max: ${numbers.max()}"
+println "Sum: $\{numbers.sum()}"
+println "Max: $\{numbers.max()}"
 
 // Maps
 def person = [
@@ -55,11 +55,11 @@ def person = [
   age: 30,
   city: "NYC"
 ]
-println "Name: ${person.name}"
+println "Name: $\{person.name}"
 
 // Closures
 def square = { x -> x * x }
-println "Square of 5: ${square(5)}"`,
+println "Square of 5: $\{square(5)}"`,
     hints: ['def for dynamic typing', 'println without parentheses', 'GString interpolation with ${}']
   }
 ]
