@@ -13,6 +13,26 @@ import { goLessons } from './lessons/goLessons'
 import { rustLessons } from './lessons/rustLessons'
 import { swiftLessons } from './lessons/swiftLessons'
 import { integrationProjects } from './lessons/integrationProjects'
+import { kotlinLessons } from './lessons/kotlinLessons'
+import { scalaLessons } from './lessons/scalaLessons'
+import { dartLessons } from './lessons/dartLessons'
+import { rLessons } from './lessons/rLessons'
+import { sqlLessons } from './lessons/sqlLessons'
+import { bashLessons } from './lessons/bashLessons'
+import { elixirLessons } from './lessons/elixirLessons'
+import { haskellLessons } from './lessons/haskellLessons'
+import { luaLessons } from './lessons/luaLessons'
+import { perlLessons } from './lessons/perlLessons'
+import { juliaLessons } from './lessons/juliaLessons'
+import { powershellLessons } from './lessons/powershellLessons'
+import { groovyLessons } from './lessons/groovyLessons'
+import { clojureLessons } from './lessons/clojureLessons'
+import { erlangLessons } from './lessons/erlangLessons'
+import { fsharpLessons } from './lessons/fsharpLessons'
+import { ocamlLessons } from './lessons/ocamlLessons'
+import { matlabLessons } from './lessons/matlabLessons'
+import { objectivecLessons } from './lessons/objectivecLessons'
+import { crystalLessons } from './lessons/crystalLessons'
 
 export interface TestCase {
   name: string
@@ -25,7 +45,7 @@ export interface Lesson {
   title: string
   description: string
   content: string
-  language: 'html' | 'css' | 'javascript' | 'python' | 'typescript' | 'react' | 'nodejs' | 'ruby' | 'php' | 'java' | 'csharp' | 'go' | 'rust' | 'swift'
+  language: 'html' | 'css' | 'javascript' | 'python' | 'typescript' | 'react' | 'nodejs' | 'ruby' | 'php' | 'java' | 'csharp' | 'go' | 'rust' | 'swift' | 'kotlin' | 'scala' | 'dart' | 'r' | 'sql' | 'bash' | 'elixir' | 'haskell' | 'lua' | 'perl' | 'julia' | 'powershell' | 'groovy' | 'clojure' | 'erlang' | 'fsharp' | 'ocaml' | 'matlab' | 'objectivec' | 'crystal'
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced'
   estimatedTime: number // in minutes
   initialCode?: string
@@ -198,5 +218,205 @@ export const courses: Course[] = [
     difficulty: 'Intermediate',
     duration: '6 weeks',
     lessons: integrationProjects
+  },
+  {
+    id: 'kotlin',
+    title: 'Kotlin Programming',
+    description: 'Modern JVM language - Android development, null safety, and coroutines',
+    icon: '🎨',
+    color: 'from-purple-500 to-pink-600',
+    difficulty: 'Intermediate',
+    duration: '8 weeks',
+    lessons: kotlinLessons
+  },
+  {
+    id: 'scala',
+    title: 'Scala Programming',
+    description: 'Functional and object-oriented programming on the JVM',
+    icon: '🔴',
+    color: 'from-red-600 to-orange-600',
+    difficulty: 'Advanced',
+    duration: '10 weeks',
+    lessons: scalaLessons
+  },
+  {
+    id: 'dart',
+    title: 'Dart & Flutter',
+    description: 'Build beautiful cross-platform apps with Dart and Flutter framework',
+    icon: '🎯',
+    color: 'from-blue-500 to-cyan-500',
+    difficulty: 'Intermediate',
+    duration: '9 weeks',
+    lessons: dartLessons
+  },
+  {
+    id: 'r',
+    title: 'R Programming',
+    description: 'Statistical computing and data visualization - from basics to advanced analytics',
+    icon: '📊',
+    color: 'from-blue-700 to-indigo-600',
+    difficulty: 'Intermediate',
+    duration: '8 weeks',
+    lessons: rLessons
+  },
+  {
+    id: 'sql',
+    title: 'SQL & Databases',
+    description: 'Master database management - queries, joins, optimization, and database design',
+    icon: '🗄️',
+    color: 'from-gray-600 to-slate-700',
+    difficulty: 'Beginner',
+    duration: '6 weeks',
+    lessons: sqlLessons
+  },
+  {
+    id: 'bash',
+    title: 'Bash Scripting',
+    description: 'Linux/Unix shell scripting - automation, system administration, and DevOps',
+    icon: '💻',
+    color: 'from-green-700 to-emerald-800',
+    difficulty: 'Intermediate',
+    duration: '5 weeks',
+    lessons: bashLessons
+  },
+  {
+    id: 'elixir',
+    title: 'Elixir Programming',
+    description: 'Functional programming for scalable applications - Phoenix framework and OTP',
+    icon: '💧',
+    color: 'from-purple-600 to-violet-700',
+    difficulty: 'Advanced',
+    duration: '10 weeks',
+    lessons: elixirLessons
+  },
+  {
+    id: 'haskell',
+    title: 'Haskell Programming',
+    description: 'Pure functional programming - type systems, monads, and lazy evaluation',
+    icon: '🔷',
+    color: 'from-purple-700 to-pink-700',
+    difficulty: 'Advanced',
+    duration: '12 weeks',
+    lessons: haskellLessons
+  },
+  {
+    id: 'lua',
+    title: 'Lua Programming',
+    description: 'Lightweight scripting - game development, embedded systems, and scripting',
+    icon: '🌙',
+    color: 'from-blue-600 to-indigo-700',
+    difficulty: 'Beginner',
+    duration: '4 weeks',
+    lessons: luaLessons
+  },
+  {
+    id: 'perl',
+    title: 'Perl Programming',
+    description: 'Text processing and system administration - regex, CGI, and automation',
+    icon: '🐪',
+    color: 'from-blue-800 to-purple-800',
+    difficulty: 'Intermediate',
+    duration: '6 weeks',
+    lessons: perlLessons
+  },
+  {
+    id: 'julia',
+    title: 'Julia Programming',
+    description: 'High-performance scientific computing - numerical analysis and data science',
+    icon: '🔬',
+    color: 'from-purple-600 to-red-600',
+    difficulty: 'Intermediate',
+    duration: '8 weeks',
+    lessons: juliaLessons
+  },
+  {
+    id: 'powershell',
+    title: 'PowerShell Scripting',
+    description: 'Windows automation and administration - cmdlets, pipelines, and remote management',
+    icon: '⚡',
+    color: 'from-blue-700 to-cyan-700',
+    difficulty: 'Intermediate',
+    duration: '6 weeks',
+    lessons: powershellLessons
+  },
+  {
+    id: 'groovy',
+    title: 'Groovy Programming',
+    description: 'Dynamic JVM language - Gradle, testing, and enterprise automation',
+    icon: '🎸',
+    color: 'from-teal-600 to-green-700',
+    difficulty: 'Intermediate',
+    duration: '6 weeks',
+    lessons: groovyLessons
+  },
+  {
+    id: 'clojure',
+    title: 'Clojure Programming',
+    description: 'Modern Lisp for the JVM - functional programming and concurrent systems',
+    icon: '⚙️',
+    color: 'from-green-600 to-blue-700',
+    difficulty: 'Advanced',
+    duration: '10 weeks',
+    lessons: clojureLessons
+  },
+  {
+    id: 'erlang',
+    title: 'Erlang Programming',
+    description: 'Concurrent and distributed systems - fault tolerance and telecommunications',
+    icon: '📡',
+    color: 'from-red-700 to-pink-700',
+    difficulty: 'Advanced',
+    duration: '12 weeks',
+    lessons: erlangLessons
+  },
+  {
+    id: 'fsharp',
+    title: 'F# Programming',
+    description: 'Functional-first .NET language - type providers and data science',
+    icon: '🔷',
+    color: 'from-blue-600 to-purple-700',
+    difficulty: 'Intermediate',
+    duration: '8 weeks',
+    lessons: fsharpLessons
+  },
+  {
+    id: 'ocaml',
+    title: 'OCaml Programming',
+    description: 'Industrial-strength functional programming - type inference and modules',
+    icon: '🐫',
+    color: 'from-orange-600 to-red-700',
+    difficulty: 'Advanced',
+    duration: '10 weeks',
+    lessons: ocamlLessons
+  },
+  {
+    id: 'matlab',
+    title: 'MATLAB Programming',
+    description: 'Numerical computing and engineering - matrix operations and visualization',
+    icon: '📐',
+    color: 'from-orange-500 to-yellow-600',
+    difficulty: 'Intermediate',
+    duration: '8 weeks',
+    lessons: matlabLessons
+  },
+  {
+    id: 'objectivec',
+    title: 'Objective-C',
+    description: 'Apple platform development - macOS and iOS legacy applications',
+    icon: '🍏',
+    color: 'from-gray-600 to-blue-700',
+    difficulty: 'Intermediate',
+    duration: '8 weeks',
+    lessons: objectivecLessons
+  },
+  {
+    id: 'crystal',
+    title: 'Crystal Programming',
+    description: 'Fast as C, slick as Ruby - type-safe compiled language with Ruby syntax',
+    icon: '💎',
+    color: 'from-cyan-500 to-blue-600',
+    difficulty: 'Intermediate',
+    duration: '7 weeks',
+    lessons: crystalLessons
   }
 ]

@@ -5,7 +5,7 @@ export interface Challenge {
   title: string
   description: string
   difficulty: 'Easy' | 'Medium' | 'Hard' | 'Expert'
-  language: 'html' | 'css' | 'javascript' | 'python' | 'typescript' | 'react' | 'nodejs' | 'ruby' | 'php' | 'java' | 'csharp' | 'go' | 'rust' | 'swift'
+  language: 'html' | 'css' | 'javascript' | 'python' | 'typescript' | 'react' | 'nodejs' | 'ruby' | 'php' | 'java' | 'csharp' | 'go' | 'rust' | 'swift' | 'kotlin' | 'scala' | 'dart' | 'r' | 'sql' | 'bash' | 'elixir' | 'haskell' | 'lua' | 'perl' | 'julia' | 'powershell' | 'groovy' | 'clojure' | 'erlang' | 'fsharp' | 'ocaml' | 'matlab' | 'objectivec' | 'crystal'
   category: 'Algorithm' | 'Data Structure' | 'Web' | 'Logic' | 'Math' | 'String' | 'Array'
   points: number
   timeLimit: number // in minutes
@@ -299,5 +299,617 @@ console.log(binarySearch([1, 3, 5, 7, 9, 11], 7));`,
       { input: [[1, 3, 5, 7, 9, 11], 7], expectedOutput: 3, description: 'Find 7 at index 3' }
     ],
     hints: ['Divide array in half', 'Compare middle element', 'O(log n) complexity']
+  },
+  // Python Challenges
+  {
+    id: 'py-ch-1',
+    title: 'List Comprehension',
+    description: 'Master Python list comprehensions',
+    difficulty: 'Medium',
+    language: 'python',
+    category: 'Array',
+    points: 80,
+    timeLimit: 20,
+    prompt: 'Create a list of squares of even numbers from 1 to 20',
+    initialCode: `# Use list comprehension
+squares = 
+
+print(squares)`,
+    solution: `squares = [x**2 for x in range(1, 21) if x % 2 == 0]
+print(squares)`,
+    testCases: [
+      { input: null, expectedOutput: [4, 16, 36, 64, 100, 144, 196, 256, 324, 400], description: 'Squares of even numbers' }
+    ],
+    hints: ['Use list comprehension [x for x in ...]', 'Filter with if condition', 'Square with ** operator']
+  },
+  {
+    id: 'py-ch-2',
+    title: 'Dictionary Operations',
+    description: 'Work with Python dictionaries',
+    difficulty: 'Easy',
+    language: 'python',
+    category: 'Data Structure',
+    points: 60,
+    timeLimit: 15,
+    prompt: 'Count frequency of each character in a string',
+    initialCode: `def char_frequency(text):
+    # Your code here
+    pass
+
+print(char_frequency("hello"))`,
+    solution: `def char_frequency(text):
+    freq = {}
+    for char in text:
+        freq[char] = freq.get(char, 0) + 1
+    return freq
+
+print(char_frequency("hello"))`,
+    testCases: [
+      { input: 'hello', expectedOutput: {'h': 1, 'e': 1, 'l': 2, 'o': 1}, description: 'Character frequency' }
+    ],
+    hints: ['Use dictionary', '.get() method with default', 'Loop through characters']
+  },
+  {
+    id: 'kotlin-ch-1',
+    title: 'Kotlin Collections',
+    description: 'Filter and map Kotlin collections',
+    difficulty: 'Medium',
+    language: 'kotlin',
+    category: 'Array',
+    points: 90,
+    timeLimit: 20,
+    prompt: 'Filter numbers > 5, then double them',
+    initialCode: `fun main() {
+    val numbers = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    // Your code here
+}`,
+    solution: `fun main() {
+    val numbers = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    val result = numbers.filter { it > 5 }.map { it * 2 }
+    println(result)
+}`,
+    testCases: [
+      { input: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], expectedOutput: [12, 14, 16, 18, 20], description: 'Filter and double' }
+    ],
+    hints: ['Use .filter{}', 'Use .map{}', 'Chain operations']
+  },
+  {
+    id: 'sql-ch-1',
+    title: 'SQL Join Query',
+    description: 'Write a complex JOIN query',
+    difficulty: 'Hard',
+    language: 'sql',
+    category: 'Data Structure',
+    points: 120,
+    timeLimit: 30,
+    prompt: 'Get all users and their order count',
+    initialCode: `-- Write your SQL query
+SELECT 
+FROM 
+`,
+    solution: `SELECT users.name, COUNT(orders.id) as order_count
+FROM users
+LEFT JOIN orders ON users.id = orders.user_id
+GROUP BY users.id, users.name
+ORDER BY order_count DESC;`,
+    testCases: [
+      { input: null, expectedOutput: 'JOIN', description: 'Uses JOIN' }
+    ],
+    hints: ['Use LEFT JOIN', 'GROUP BY user', 'COUNT for aggregation']
+  },
+  {
+    id: 'dart-ch-1',
+    title: 'Dart Async/Await',
+    description: 'Handle asynchronous operations',
+    difficulty: 'Medium',
+    language: 'dart',
+    category: 'Logic',
+    points: 100,
+    timeLimit: 25,
+    prompt: 'Fetch data asynchronously and process it',
+    initialCode: `Future<List<int>> fetchData() async {
+  // Simulate API call
+  await Future.delayed(Duration(seconds: 1));
+  return [1, 2, 3, 4, 5];
+}
+
+void main() async {
+  // Your code here
+}`,
+    solution: `Future<List<int>> fetchData() async {
+  await Future.delayed(Duration(seconds: 1));
+  return [1, 2, 3, 4, 5];
+}
+
+void main() async {
+  final data = await fetchData();
+  final sum = data.reduce((a, b) => a + b);
+  print('Sum: $sum');
+}`,
+    testCases: [
+      { input: null, expectedOutput: 15, description: 'Sum of fetched data' }
+    ],
+    hints: ['Use await', 'async keyword', '.reduce() for sum']
+  },
+  {
+    id: 'r-ch-1',
+    title: 'R Data Analysis',
+    description: 'Analyze statistical data',
+    difficulty: 'Medium',
+    language: 'r',
+    category: 'Math',
+    points: 95,
+    timeLimit: 25,
+    prompt: 'Calculate mean, median, and standard deviation',
+    initialCode: `# Data
+data <- c(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+
+# Your code here
+`,
+    solution: `data <- c(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+
+mean_val <- mean(data)
+median_val <- median(data)
+sd_val <- sd(data)
+
+print(paste("Mean:", mean_val))
+print(paste("Median:", median_val))
+print(paste("SD:", sd_val))`,
+    testCases: [
+      { input: [10, 20, 30, 40, 50], expectedOutput: 30, description: 'Calculate mean' }
+    ],
+    hints: ['mean() function', 'median() function', 'sd() for standard deviation']
+  },
+  {
+    id: 'bash-ch-1',
+    title: 'Bash File Processing',
+    description: 'Process files with bash',
+    difficulty: 'Medium',
+    language: 'bash',
+    category: 'String',
+    points: 85,
+    timeLimit: 20,
+    prompt: 'Count lines, words, and characters in a file',
+    initialCode: `#!/bin/bash
+# Your script here
+`,
+    solution: `#!/bin/bash
+file="$1"
+lines=$(wc -l < "$file")
+words=$(wc -w < "$file")
+chars=$(wc -c < "$file")
+
+echo "Lines: $lines"
+echo "Words: $words"
+echo "Characters: $chars"`,
+    testCases: [
+      { input: 'file.txt', expectedOutput: 'Lines:', description: 'Count statistics' }
+    ],
+    hints: ['wc command', '-l for lines', '-w for words']
+  },
+  {
+    id: 'go-ch-1',
+    title: 'Go Concurrency',
+    description: 'Use goroutines and channels',
+    difficulty: 'Hard',
+    language: 'go',
+    category: 'Algorithm',
+    points: 130,
+    timeLimit: 35,
+    prompt: 'Calculate sum of array using concurrent goroutines',
+    initialCode: `package main
+
+import "fmt"
+
+func main() {
+    numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+    // Your code here
+}`,
+    solution: `package main
+
+import "fmt"
+
+func sum(nums []int, ch chan int) {
+    total := 0
+    for _, v := range nums {
+        total += v
+    }
+    ch <- total
+}
+
+func main() {
+    numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+    ch := make(chan int)
+    mid := len(numbers) / 2
+    
+    go sum(numbers[:mid], ch)
+    go sum(numbers[mid:], ch)
+    
+    x, y := <-ch, <-ch
+    fmt.Println("Sum:", x+y)
+}`,
+    testCases: [
+      { input: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], expectedOutput: 55, description: 'Concurrent sum' }
+    ],
+    hints: ['Create channel with make', 'Use go keyword', 'Receive from channel with <-']
+  },
+  {
+    id: 'rust-ch-1',
+    title: 'Rust Ownership',
+    description: 'Work with Rust ownership system',
+    difficulty: 'Hard',
+    language: 'rust',
+    category: 'Logic',
+    points: 140,
+    timeLimit: 40,
+    prompt: 'Implement a function that takes ownership and returns string length',
+    initialCode: `fn string_length(s: String) -> usize {
+    // Your code here
+}
+
+fn main() {
+    let text = String::from("Hello, Rust!");
+    // Your code here
+}`,
+    solution: `fn string_length(s: String) -> usize {
+    s.len()
+}
+
+fn main() {
+    let text = String::from("Hello, Rust!");
+    let length = string_length(text);
+    println!("Length: {}", length);
+}`,
+    testCases: [
+      { input: 'Hello, Rust!', expectedOutput: 12, description: 'String length' }
+    ],
+    hints: ['String::from creates owned string', '.len() method', 'Ownership moves']
+  },
+  {
+    id: 'scala-ch-1',
+    title: 'Scala Pattern Matching',
+    description: 'Use pattern matching effectively',
+    difficulty: 'Medium',
+    language: 'scala',
+    category: 'Logic',
+    points: 100,
+    timeLimit: 25,
+    prompt: 'Classify numbers as positive, negative, or zero',
+    initialCode: `object Main {
+  def classify(n: Int): String = {
+    // Your code here
+  }
+  
+  def main(args: Array[String]): Unit = {
+    println(classify(5))
+  }
+}`,
+    solution: `object Main {
+  def classify(n: Int): String = n match {
+    case 0 => "zero"
+    case x if x > 0 => "positive"
+    case _ => "negative"
+  }
+  
+  def main(args: Array[String]): Unit = {
+    println(classify(5))
+    println(classify(-3))
+    println(classify(0))
+  }
+}`,
+    testCases: [
+      { input: 5, expectedOutput: 'positive', description: 'Positive number' }
+    ],
+    hints: ['Use match expression', 'case with guards', '_ for default']
+  },
+  {
+    id: 'julia-ch-1',
+    title: 'Julia Matrix Operations',
+    description: 'Perform matrix calculations',
+    difficulty: 'Medium',
+    language: 'julia',
+    category: 'Math',
+    points: 95,
+    timeLimit: 25,
+    prompt: 'Calculate matrix multiplication and transpose',
+    initialCode: `# Define matrices
+A = [1 2; 3 4]
+B = [5 6; 7 8]
+
+# Your code here
+`,
+    solution: `A = [1 2; 3 4]
+B = [5 6; 7 8]
+
+C = A * B
+println("Product:")
+println(C)
+
+D = transpose(A)
+println("Transpose:")
+println(D)`,
+    testCases: [
+      { input: [[1, 2], [3, 4]], expectedOutput: [[19, 22], [43, 50]], description: 'Matrix multiplication' }
+    ],
+    hints: ['* for matrix multiplication', 'transpose() function', 'println() for output']
+  },
+  {
+    id: 'powershell-ch-1',
+    title: 'PowerShell Pipeline',
+    description: 'Use PowerShell pipelines effectively',
+    difficulty: 'Medium',
+    language: 'powershell',
+    category: 'Logic',
+    points: 90,
+    timeLimit: 20,
+    prompt: 'Get top 5 processes by CPU usage',
+    initialCode: `# Your PowerShell command
+`,
+    solution: `Get-Process | Sort-Object CPU -Descending | Select-Object -First 5 Name, CPU | Format-Table`,
+    testCases: [
+      { input: null, expectedOutput: 'Get-Process', description: 'Uses pipeline' }
+    ],
+    hints: ['Get-Process cmdlet', 'Sort-Object', 'Select-Object -First']
+  },
+  {
+    id: 'elixir-ch-1',
+    title: 'Elixir Recursion',
+    description: 'Implement recursive functions',
+    difficulty: 'Hard',
+    language: 'elixir',
+    category: 'Algorithm',
+    points: 120,
+    timeLimit: 30,
+    prompt: 'Calculate Fibonacci sequence recursively',
+    initialCode: `defmodule Fibonacci do
+  def fib(n) do
+    # Your code here
+  end
+end
+
+IO.puts(Fibonacci.fib(10))`,
+    solution: `defmodule Fibonacci do
+  def fib(0), do: 0
+  def fib(1), do: 1
+  def fib(n) when n > 1 do
+    fib(n - 1) + fib(n - 2)
+  end
+end
+
+IO.puts(Fibonacci.fib(10))`,
+    testCases: [
+      { input: 10, expectedOutput: 55, description: '10th Fibonacci number' }
+    ],
+    hints: ['Pattern matching in function heads', 'Guards with when', 'Recursive calls']
+  },
+  {
+    id: 'haskell-ch-1',
+    title: 'Haskell Higher-Order Functions',
+    description: 'Use map, filter, and fold',
+    difficulty: 'Hard',
+    language: 'haskell',
+    category: 'Algorithm',
+    points: 130,
+    timeLimit: 35,
+    prompt: 'Filter odd numbers, square them, then sum',
+    initialCode: `-- Your Haskell code
+numbers = [1..10]
+
+main = do
+  -- Your code here
+`,
+    solution: `numbers = [1..10]
+
+result = sum $ map (^2) $ filter odd numbers
+
+main = do
+  print result`,
+    testCases: [
+      { input: [1, 2, 3, 4, 5], expectedOutput: 35, description: 'Sum of squared odds' }
+    ],
+    hints: ['filter with predicate', 'map for transformation', 'sum for total']
+  },
+  {
+    id: 'lua-ch-1',
+    title: 'Lua Table Manipulation',
+    description: 'Work with Lua tables',
+    difficulty: 'Easy',
+    language: 'lua',
+    category: 'Data Structure',
+    points: 70,
+    timeLimit: 15,
+    prompt: 'Create and iterate over a table',
+    initialCode: `-- Your Lua code
+`,
+    solution: `local fruits = {"apple", "banana", "orange", "grape"}
+
+for i, fruit in ipairs(fruits) do
+  print(i .. ": " .. fruit)
+end
+
+-- Table as map
+local scores = {
+  Alice = 95,
+  Bob = 87,
+  Charlie = 92
+}
+
+for name, score in pairs(scores) do
+  print(name .. " scored " .. score)
+end`,
+    testCases: [
+      { input: ['apple', 'banana'], expectedOutput: '1: apple', description: 'Table iteration' }
+    ],
+    hints: ['ipairs for arrays', 'pairs for maps', '.. for concatenation']
+  },
+  {
+    id: 'perl-ch-1',
+    title: 'Perl Regular Expressions',
+    description: 'Master Perl regex',
+    difficulty: 'Medium',
+    language: 'perl',
+    category: 'String',
+    points: 100,
+    timeLimit: 25,
+    prompt: 'Extract email addresses from text',
+    initialCode: `#!/usr/bin/perl
+use strict;
+use warnings;
+
+my $text = "Contact us at info@example.com or support@test.org";
+
+# Your code here
+`,
+    solution: `#!/usr/bin/perl
+use strict;
+use warnings;
+
+my $text = "Contact us at info@example.com or support@test.org";
+
+while ($text =~ /([\\w.-]+@[\\w.-]+\\.\\w+)/g) {
+  print "Found: $1\\n";
+}`,
+    testCases: [
+      { input: 'test@example.com', expectedOutput: 'test@example.com', description: 'Extract email' }
+    ],
+    hints: ['=~ for regex match', '/pattern/g for global', '[\\w.-]+ for word characters']
+  },
+  {
+    id: 'clojure-ch-1',
+    title: 'Clojure Map/Reduce',
+    description: 'Functional data transformation',
+    difficulty: 'Medium',
+    language: 'clojure',
+    category: 'Algorithm',
+    points: 105,
+    timeLimit: 25,
+    prompt: 'Transform and aggregate data functionally',
+    initialCode: `;; Your Clojure code
+(def numbers [1 2 3 4 5])
+`,
+    solution: `(def numbers [1 2 3 4 5])
+
+(def doubled (map #(* 2 %) numbers))
+(def sum (reduce + doubled))
+
+(println "Doubled:" doubled)
+(println "Sum:" sum)`,
+    testCases: [
+      { input: [1, 2, 3, 4, 5], expectedOutput: 30, description: 'Double and sum' }
+    ],
+    hints: ['map for transformation', 'reduce for aggregation', '#() for anonymous functions']
+  },
+  {
+    id: 'fsharp-ch-1',
+    title: 'F# Pipeline Operator',
+    description: 'Use F# pipeline for clean code',
+    difficulty: 'Medium',
+    language: 'fsharp',
+    category: 'Algorithm',
+    points: 95,
+    timeLimit: 20,
+    prompt: 'Chain operations using pipeline operator',
+    initialCode: `// Your F# code
+let numbers = [1; 2; 3; 4; 5; 6; 7; 8; 9; 10]
+`,
+    solution: `let numbers = [1; 2; 3; 4; 5; 6; 7; 8; 9; 10]
+
+let result =
+  numbers
+  |> List.filter (fun x -> x % 2 = 0)
+  |> List.map (fun x -> x * x)
+  |> List.sum
+
+printfn "Result: %d" result`,
+    testCases: [
+      { input: [1, 2, 3, 4, 5], expectedOutput: 220, description: 'Filter, square, sum evens' }
+    ],
+    hints: ['|> pipeline operator', 'List.filter', 'List.map and List.sum']
+  },
+  {
+    id: 'matlab-ch-1',
+    title: 'MATLAB Vector Operations',
+    description: 'Vectorized computations in MATLAB',
+    difficulty: 'Medium',
+    language: 'matlab',
+    category: 'Math',
+    points: 90,
+    timeLimit: 20,
+    prompt: 'Perform element-wise operations on vectors',
+    initialCode: `% Your MATLAB code
+x = [1, 2, 3, 4, 5];
+`,
+    solution: `x = [1, 2, 3, 4, 5];
+y = [2, 4, 6, 8, 10];
+
+% Element-wise operations
+sum_vec = x + y;
+product_vec = x .* y;
+squared = x.^2;
+
+fprintf('Sum: ');
+disp(sum_vec);
+fprintf('Product: ');
+disp(product_vec);
+fprintf('Squared: ');
+disp(squared);`,
+    testCases: [
+      { input: [[1, 2, 3], [2, 4, 6]], expectedOutput: [3, 6, 9], description: 'Vector addition' }
+    ],
+    hints: ['.* for element-wise multiplication', '.^ for element-wise power', 'disp() for output']
+  },
+  {
+    id: 'crystal-ch-1',
+    title: 'Crystal Type System',
+    description: 'Work with Crystal\'s static types',
+    difficulty: 'Medium',
+    language: 'crystal',
+    category: 'Logic',
+    points: 95,
+    timeLimit: 20,
+    prompt: 'Create a generic function with type constraints',
+    initialCode: `# Your Crystal code
+`,
+    solution: `def sum(values : Array(T)) : T forall T
+  total = values[0]
+  values[1..].each do |v|
+    total += v
+  end
+  total
+end
+
+puts sum([1, 2, 3, 4, 5])
+puts sum([1.5, 2.5, 3.5])`,
+    testCases: [
+      { input: [1, 2, 3, 4, 5], expectedOutput: 15, description: 'Generic sum' }
+    ],
+    hints: ['forall T for generic types', 'Type annotations with :', 'Array(T) for generic array']
+  },
+  {
+    id: 'groovy-ch-1',
+    title: 'Groovy Closures',
+    description: 'Master Groovy closures',
+    difficulty: 'Medium',
+    language: 'groovy',
+    category: 'Algorithm',
+    points: 85,
+    timeLimit: 20,
+    prompt: 'Use closures for data transformation',
+    initialCode: `// Your Groovy code
+def numbers = [1, 2, 3, 4, 5]
+`,
+    solution: `def numbers = [1, 2, 3, 4, 5]
+
+def doubled = numbers.collect { it * 2 }
+def evens = numbers.findAll { it % 2 == 0 }
+def sum = numbers.inject(0) { acc, val -> acc + val }
+
+println "Doubled: $doubled"
+println "Evens: $evens"
+println "Sum: $sum"`,
+    testCases: [
+      { input: [1, 2, 3, 4, 5], expectedOutput: [2, 4, 6, 8, 10], description: 'Double numbers' }
+    ],
+    hints: ['.collect for map', '.findAll for filter', '.inject for reduce']
   }
 ]
