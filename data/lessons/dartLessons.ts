@@ -30,7 +30,7 @@ int age = 25;       // Explicit type
 final pi = 3.14;    // Runtime constant
 const api = 'v1';   // Compile-time constant
 \`\`\``,
-    language: 'javascript',
+    language: 'dart',
     difficulty: 'Beginner',
     estimatedTime: 30,
     initialCode: `void main() {
@@ -79,7 +79,7 @@ void printInfo({required String name, int age = 0}) {
   print('$name is $age years old');
 }
 \`\`\``,
-    language: 'javascript',
+    language: 'dart',
     difficulty: 'Beginner',
     estimatedTime: 35,
     initialCode: `// Create functions here

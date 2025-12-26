@@ -34,7 +34,7 @@ listOfNumbers = [1, 2, 3, 4, 5]
 double x = x * 2
 add x y = x + y
 \`\`\``,
-    language: 'javascript',
+    language: 'haskell',
     difficulty: 'Advanced',
     estimatedTime: 40,
     initialCode: `-- Your Haskell code

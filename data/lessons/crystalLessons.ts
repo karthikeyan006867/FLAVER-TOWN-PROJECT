@@ -37,7 +37,7 @@ person = {
   "age" => 30
 }
 \`\`\``,
-    language: 'javascript',
+    language: 'crystal',
     difficulty: 'Intermediate',
     estimatedTime: 35,
     initialCode: `# Your Crystal code
@@ -99,7 +99,7 @@ class Person
   end
 end
 \`\`\``,
-    language: 'javascript',
+    language: 'crystal',
     difficulty: 'Intermediate',
     estimatedTime: 40,
     initialCode: `# Define functions

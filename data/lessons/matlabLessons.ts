@@ -35,7 +35,7 @@ A = [1 2; 3 4];
 B = [5 6; 7 8];
 C = A * B;  % Matrix multiplication
 \`\`\``,
-    language: 'javascript',
+    language: 'matlab',
     difficulty: 'Intermediate',
     estimatedTime: 35,
     initialCode: `% Your MATLAB code
@@ -88,7 +88,7 @@ end
 square = @(x) x.^2;
 add = @(x, y) x + y;
 \`\`\``,
-    language: 'javascript',
+    language: 'matlab',
     difficulty: 'Intermediate',
     estimatedTime: 40,
     initialCode: `% Define functions

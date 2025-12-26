@@ -31,7 +31,7 @@ fun main() {
 val name = "Kotlin"  // Type inference
 var count: Int = 0   // Explicit type
 \`\`\``,
-    language: 'javascript',
+    language: 'kotlin',
     difficulty: 'Beginner',
     estimatedTime: 30,
     initialCode: `fun main() {
@@ -72,7 +72,7 @@ Kotlin's null safety prevents NullPointerExceptions:
 var name: String = "Kotlin"   // Non-nullable
 var nullableName: String? = null  // Nullable
 \`\`\``,
-    language: 'javascript',
+    language: 'kotlin',
     difficulty: 'Beginner',
     estimatedTime: 35,
     initialCode: `fun main() {
@@ -121,7 +121,7 @@ fun greet(name: String = "Guest") {
 // Named arguments
 greet(name = "Kotlin")
 \`\`\``,
-    language: 'javascript',
+    language: 'kotlin',
     difficulty: 'Beginner',
     estimatedTime: 40,
     initialCode: `// Create a function that calculates area of rectangle

@@ -35,7 +35,7 @@ atom = :ok
 {status, result} = {:ok, "Success"}
 [head | tail] = [1, 2, 3, 4]
 \`\`\``,
-    language: 'javascript',
+    language: 'elixir',
     difficulty: 'Intermediate',
     estimatedTime: 35,
     initialCode: `# Your Elixir code
@@ -92,7 +92,7 @@ defmodule Factorial do
   end
 end
 \`\`\``,
-    language: 'javascript',
+    language: 'elixir',
     difficulty: 'Intermediate',
     estimatedTime: 40,
     initialCode: `defmodule MyModule do

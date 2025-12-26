@@ -30,7 +30,7 @@ object HelloWorld {
 val immutable = 10  // Cannot be reassigned
 var mutable = 20    // Can be reassigned
 \`\`\``,
-    language: 'javascript',
+    language: 'scala',
     difficulty: 'Intermediate',
     estimatedTime: 35,
     initialCode: `object Main {
@@ -76,7 +76,7 @@ def operate(x: Int, f: Int => Int): Int = {
   f(x)
 }
 \`\`\``,
-    language: 'javascript',
+    language: 'scala',
     difficulty: 'Intermediate',
     estimatedTime: 40,
     initialCode: `object Main {

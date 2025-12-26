@@ -36,7 +36,7 @@ person = {
 }
 print(person.name)
 \`\`\``,
-    language: 'javascript',
+    language: 'lua',
     difficulty: 'Beginner',
     estimatedTime: 30,
     initialCode: `-- Your Lua code
@@ -96,7 +96,7 @@ function getMinMax(a, b)
   end
 end
 \`\`\``,
-    language: 'javascript',
+    language: 'lua',
     difficulty: 'Beginner',
     estimatedTime: 35,
     initialCode: `-- Define your functions

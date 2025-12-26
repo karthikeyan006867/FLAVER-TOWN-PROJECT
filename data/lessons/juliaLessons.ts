@@ -34,7 +34,7 @@ is_fast = true
 numbers = [1, 2, 3, 4, 5]
 matrix = [1 2 3; 4 5 6]
 \`\`\``,
-    language: 'javascript',
+    language: 'julia',
     difficulty: 'Intermediate',
     estimatedTime: 35,
     initialCode: `# Your Julia code
@@ -86,7 +86,7 @@ function area(length::Float64, width::Float64)
   return length * width
 end
 \`\`\``,
-    language: 'javascript',
+    language: 'julia',
     difficulty: 'Intermediate',
     estimatedTime: 40,
     initialCode: `# Define functions

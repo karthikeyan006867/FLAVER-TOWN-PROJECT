@@ -33,7 +33,7 @@ Clojure is a dynamic, functional programming language that runs on the JVM, desi
 (defn square [x]
   (* x x))
 \`\`\``,
-    language: 'javascript',
+    language: 'clojure',
     difficulty: 'Advanced',
     estimatedTime: 40,
     initialCode: `;; Your Clojure code

@@ -34,7 +34,7 @@ NSString *name = @"Objective-C";
 NSNumber *age = @40;
 NSArray *numbers = @[@1, @2, @3];
 \`\`\``,
-    language: 'javascript',
+    language: 'objectivec',
     difficulty: 'Intermediate',
     estimatedTime: 40,
     initialCode: `#import <Foundation/Foundation.h>

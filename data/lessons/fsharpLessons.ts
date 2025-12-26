@@ -34,7 +34,7 @@ let numbers = [1; 2; 3; 4; 5]
 let square x = x * x
 let add x y = x + y
 \`\`\``,
-    language: 'javascript',
+    language: 'fsharp',
     difficulty: 'Intermediate',
     estimatedTime: 35,
     initialCode: `// Your F# code

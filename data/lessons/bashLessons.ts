@@ -33,7 +33,7 @@ echo "Learning \${name} scripting"
 read -p "Enter your name: " username
 echo "Hello, $username!"
 \`\`\``,
-    language: 'javascript',
+    language: 'bash',
     difficulty: 'Beginner',
     estimatedTime: 30,
     initialCode: `#!/bin/bash
@@ -91,7 +91,7 @@ while [ $count -le 5 ]; do
   ((count++))
 done
 \`\`\``,
-    language: 'javascript',
+    language: 'bash',
     difficulty: 'Beginner',
     estimatedTime: 40,
     initialCode: `#!/bin/bash

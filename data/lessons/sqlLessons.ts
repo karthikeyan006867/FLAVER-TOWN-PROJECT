@@ -38,7 +38,7 @@ CREATE TABLE users (
   age INT
 );
 \`\`\``,
-    language: 'javascript',
+    language: 'sql',
     difficulty: 'Beginner',
     estimatedTime: 35,
     initialCode: `-- Write your SQL query
@@ -94,7 +94,7 @@ SELECT AVG(age) FROM users;
 SELECT MAX(price) FROM products;
 SELECT SUM(amount) FROM orders;
 \`\`\``,
-    language: 'javascript',
+    language: 'sql',
     difficulty: 'Intermediate',
     estimatedTime: 45,
     initialCode: `-- Write join queries

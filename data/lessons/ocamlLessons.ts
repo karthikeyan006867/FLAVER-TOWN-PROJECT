@@ -33,7 +33,7 @@ let pi = 3.14159;;
 let square x = x * x;;
 let add x y = x + y;;
 \`\`\``,
-    language: 'javascript',
+    language: 'ocaml',
     difficulty: 'Advanced',
     estimatedTime: 40,
     initialCode: `(* Your OCaml code *)

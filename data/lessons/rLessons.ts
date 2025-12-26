@@ -33,7 +33,7 @@ is_fun <- TRUE
 numbers <- c(1, 2, 3, 4, 5)
 names <- c("Alice", "Bob", "Charlie")
 \`\`\``,
-    language: 'javascript',
+    language: 'r',
     difficulty: 'Beginner',
     estimatedTime: 35,
     initialCode: `# Your R code here
@@ -93,7 +93,7 @@ greet <- function(name = "Guest") {
 - Lists: list(a=1, b=2)
 - Matrices: matrix(1:9, nrow=3)
 - Data Frames: data.frame(col1, col2)`,
-    language: 'javascript',
+    language: 'r',
     difficulty: 'Beginner',
     estimatedTime: 40,
     initialCode: `# Create functions

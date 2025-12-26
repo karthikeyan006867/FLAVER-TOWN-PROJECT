@@ -34,7 +34,7 @@ String typed = "Explicit type"
 def list = [1, 2, 3, 4, 5]
 def map = [name: "Alice", age: 30]
 \`\`\``,
-    language: 'javascript',
+    language: 'groovy',
     difficulty: 'Intermediate',
     estimatedTime: 35,
     initialCode: `// Your Groovy code

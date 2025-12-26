@@ -36,7 +36,7 @@ $person = @{
   Age = 30
 }
 \`\`\``,
-    language: 'javascript',
+    language: 'powershell',
     difficulty: 'Beginner',
     estimatedTime: 35,
     initialCode: `# Your PowerShell code
@@ -96,7 +96,7 @@ function Get-Square {
 - Select-Object
 - Where-Object
 \`\`\``,
-    language: 'javascript',
+    language: 'powershell',
     difficulty: 'Beginner',
     estimatedTime: 40,
     initialCode: `# Define functions

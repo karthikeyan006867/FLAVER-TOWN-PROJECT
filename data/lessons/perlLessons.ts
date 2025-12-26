@@ -30,7 +30,7 @@ my %hash = (             # Hash (key-value pairs)
   age => 37
 );
 \`\`\``,
-    language: 'javascript',
+    language: 'perl',
     difficulty: 'Intermediate',
     estimatedTime: 35,
     initialCode: `#!/usr/bin/perl

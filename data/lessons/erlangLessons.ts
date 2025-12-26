@@ -31,7 +31,7 @@ Name = "Erlang".
 Age = 38.
 Status = ok.  % atom
 \`\`\``,
-    language: 'javascript',
+    language: 'erlang',
     difficulty: 'Advanced',
     estimatedTime: 40,
     initialCode: `-module(example).
