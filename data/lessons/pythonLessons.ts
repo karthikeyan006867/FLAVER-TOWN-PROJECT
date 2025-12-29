@@ -1677,5 +1677,1256 @@ Build a complete working system!`,
         errorMessage: 'Make sure your code follows the lesson requirements'
       }
     ]
+  },
+  {
+    id: 'py-38',
+    title: 'Advanced List Comprehensions',
+    description: 'Master complex list comprehensions with conditions',
+    content: `# Advanced List Comprehensions
+
+## Nested List Comprehensions
+\`\`\`python
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+flattened = [num for row in matrix for num in row]
+# [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Multiple conditions
+[x for x in range(100) if x % 2 == 0 if x % 5 == 0]
+# [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 20,
+    initialCode: `# Flatten a 2D matrix\nmatrix = [[1, 2], [3, 4], [5, 6]]\n\n# Create list of even numbers squared from 1-20`,
+    solution: `matrix = [[1, 2], [3, 4], [5, 6]]\nflat = [num for row in matrix for num in row]\nevens_squared = [x**2 for x in range(1, 21) if x % 2 == 0]`,
+    hints: ['Nested loops go left to right', 'Multiple if conditions', 'Use ** for powers'],
+    testCases: [
+      { name: 'Has list comprehension', test: (code) => code.includes('[') && code.includes('for'), errorMessage: 'Use list comprehension' }
+    ]
+  },
+  {
+    id: 'py-39',
+    title: 'Generators and Iterators',
+    description: 'Create memory-efficient generators',
+    content: `# Generators - Lazy Evaluation
+
+## What Are Generators?
+Functions that yield values one at a time instead of returning all at once.
+
+\`\`\`python
+def countdown(n):
+    while n > 0:
+        yield n
+        n -= 1
+
+for num in countdown(5):
+    print(num)  # 5, 4, 3, 2, 1
+\`\`\`
+
+## Generator Expressions
+\`\`\`python
+squares = (x**2 for x in range(1000000))  # Memory efficient
+sum_squares = sum(squares)
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 25,
+    initialCode: `# Create a generator that yields fibonacci numbers\ndef fibonacci():\n    # Your code here\n    pass`,
+    solution: `def fibonacci():\n    a, b = 0, 1\n    while True:\n        yield a\n        a, b = b, a + b`,
+    hints: ['Use yield not return', 'Infinite loop with while True', 'Update a, b each iteration'],
+    testCases: [
+      { name: 'Uses yield', test: (code) => code.includes('yield'), errorMessage: 'Use yield keyword' }
+    ]
+  },
+  {
+    id: 'py-40',
+    title: 'Decorators Basics',
+    description: 'Understand and create function decorators',
+    content: `# Decorators - Modify Function Behavior
+
+## What Are Decorators?
+Functions that wrap other functions to extend their behavior.
+
+\`\`\`python
+def timer(func):
+    def wrapper(*args, **kwargs):
+        import time
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(f"Time: {end - start}s")
+        return result
+    return wrapper
+
+@timer
+def slow_function():
+    time.sleep(1)
+    return "Done!"
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 30,
+    initialCode: `# Create a decorator that prints before/after\ndef logger(func):\n    # Your code here\n    pass`,
+    solution: `def logger(func):\n    def wrapper(*args, **kwargs):\n        print(f"Calling {func.__name__}")\n        result = func(*args, **kwargs)\n        print(f"Finished {func.__name__}")\n        return result\n    return wrapper`,
+    hints: ['Return inner function', 'Use *args, **kwargs', 'Call original func inside'],
+    testCases: [
+      { name: 'Has wrapper function', test: (code) => code.includes('def') && code.includes('wrapper'), errorMessage: 'Create wrapper function' }
+    ]
+  },
+  {
+    id: 'py-41',
+    title: 'Context Managers',
+    description: 'Use with statements and create custom context managers',
+    content: `# Context Managers - Resource Management
+
+## The with Statement
+\`\`\`python
+with open('file.txt', 'r') as f:
+    data = f.read()
+# File automatically closed
+\`\`\`
+
+## Custom Context Manager
+\`\`\`python
+class Timer:
+    def __enter__(self):
+        self.start = time.time()
+        return self
+    
+    def __exit__(self, *args):
+        self.end = time.time()
+        print(f"Elapsed: {self.end - self.start}s")
+
+with Timer():
+    # Code to time
+    pass
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 25,
+    initialCode: `# Create a context manager for database connection\nclass Database:\n    # Implement __enter__ and __exit__\n    pass`,
+    solution: `class Database:\n    def __enter__(self):\n        print("Connecting...")\n        self.conn = "connected"\n        return self\n    \n    def __exit__(self, *args):\n        print("Closing connection")\n        self.conn = None`,
+    hints: ['__enter__ returns self', '__exit__ for cleanup', 'Use with statement'],
+    testCases: [
+      { name: 'Has __enter__', test: (code) => code.includes('__enter__'), errorMessage: 'Implement __enter__' },
+      { name: 'Has __exit__', test: (code) => code.includes('__exit__'), errorMessage: 'Implement __exit__' }
+    ]
+  },
+  {
+    id: 'py-42',
+    title: 'Regular Expressions',
+    description: 'Pattern matching with regex',
+    content: `# Regular Expressions - Text Pattern Matching
+
+\`\`\`python
+import re
+
+# Find all emails
+text = "Contact: john@email.com or jane@test.com"
+emails = re.findall(r'\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b', text)
+
+# Validate phone
+phone = "(123) 456-7890"
+if re.match(r'\\(\\d{3}\\) \\d{3}-\\d{4}', phone):
+    print("Valid phone")
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 30,
+    initialCode: `import re\n\n# Extract all URLs from text\ntext = "Visit https://example.com or http://test.org"\n# Your code here`,
+    solution: `import re\ntext = "Visit https://example.com or http://test.org"\nurls = re.findall(r'https?://[^\\s]+', text)\nprint(urls)`,
+    hints: ['Use re.findall()', 'Pattern: https?://', '[^\\s]+ for non-whitespace'],
+    testCases: [
+      { name: 'Imports re', test: (code) => code.includes('import re'), errorMessage: 'Import re module' },
+      { name: 'Uses findall', test: (code) => code.includes('findall'), errorMessage: 'Use re.findall()' }
+    ]
+  },
+  {
+    id: 'py-43',
+    title: 'Multithreading Basics',
+    description: 'Run concurrent operations with threads',
+    content: `# Multithreading - Concurrent Execution
+
+\`\`\`python
+import threading
+import time
+
+def worker(name):
+    print(f"{name} starting")
+    time.sleep(2)
+    print(f"{name} done")
+
+# Create threads
+t1 = threading.Thread(target=worker, args=("Thread-1",))
+t2 = threading.Thread(target=worker, args=("Thread-2",))
+
+t1.start()
+t2.start()
+
+t1.join()  # Wait for completion
+t2.join()
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 30,
+    initialCode: `import threading\n\n# Create 3 threads that print numbers\ndef print_numbers(n):\n    # Your code here\n    pass`,
+    solution: `import threading\n\ndef print_numbers(n):\n    for i in range(n):\n        print(i)\n\nthreads = []\nfor i in range(3):\n    t = threading.Thread(target=print_numbers, args=(5,))\n    threads.append(t)\n    t.start()\n\nfor t in threads:\n    t.join()`,
+    hints: ['Create Thread objects', 'Call .start()', 'Use .join() to wait'],
+    testCases: [
+      { name: 'Imports threading', test: (code) => code.includes('threading'), errorMessage: 'Import threading module' }
+    ]
+  },
+  {
+    id: 'py-44',
+    title: 'Async/Await - Asynchronous Programming',
+    description: 'Modern Python async with asyncio',
+    content: `# Async/Await - Non-Blocking Code
+
+\`\`\`python
+import asyncio
+
+async def fetch_data(id):
+    print(f"Fetching {id}...")
+    await asyncio.sleep(2)  # Simulate I/O
+    return f"Data {id}"
+
+async def main():
+    tasks = [fetch_data(i) for i in range(3)]
+    results = await asyncio.gather(*tasks)
+    print(results)
+
+asyncio.run(main())
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 35,
+    initialCode: `import asyncio\n\n# Create async function that processes items\nasync def process(item):\n    # Your code here\n    pass`,
+    solution: `import asyncio\n\nasync def process(item):\n    await asyncio.sleep(1)\n    return item * 2\n\nasync def main():\n    tasks = [process(i) for i in range(5)]\n    results = await asyncio.gather(*tasks)\n    print(results)`,
+    hints: ['Use async def', 'await for async operations', 'asyncio.gather() for multiple tasks'],
+    testCases: [
+      { name: 'Uses async def', test: (code) => code.includes('async def'), errorMessage: 'Use async def' },
+      { name: 'Uses await', test: (code) => code.includes('await'), errorMessage: 'Use await keyword' }
+    ]
+  },
+  {
+    id: 'py-45',
+    title: 'Data Classes',
+    description: 'Simplify class creation with dataclasses',
+    content: `# Data Classes - Cleaner Class Definitions
+
+\`\`\`python
+from dataclasses import dataclass
+
+@dataclass
+class Person:
+    name: str
+    age: int
+    email: str = "no-email"
+    
+    def greet(self):
+        return f"Hi, I'm {self.name}"
+
+p = Person("Alice", 30)
+print(p.name)  # Alice
+print(p)  # Person(name='Alice', age=30, email='no-email')
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 20,
+    initialCode: `from dataclasses import dataclass\n\n# Create a Product dataclass\n@dataclass\nclass Product:\n    # Your code here\n    pass`,
+    solution: `from dataclasses import dataclass\n\n@dataclass\nclass Product:\n    name: str\n    price: float\n    quantity: int = 0\n    \n    def total_value(self):\n        return self.price * self.quantity`,
+    hints: ['Use type hints', 'Default values after required fields', '@dataclass decorator'],
+    testCases: [
+      { name: 'Imports dataclass', test: (code) => code.includes('dataclass'), errorMessage: 'Import dataclass' },
+      { name: 'Has type hints', test: (code) => code.includes(':'), errorMessage: 'Use type hints' }
+    ]
+  },
+  {
+    id: 'py-46',
+    title: 'Type Hints and MyPy',
+    description: 'Static type checking in Python',
+    content: `# Type Hints - Better Code Quality
+
+\`\`\`python
+from typing import List, Dict, Optional, Union
+
+def process_names(names: List[str]) -> Dict[str, int]:
+    return {name: len(name) for name in names}
+
+def find_user(id: int) -> Optional[str]:
+    users = {1: "Alice", 2: "Bob"}
+    return users.get(id)  # Returns str or None
+
+def add(x: Union[int, float], y: Union[int, float]) -> float:
+    return float(x + y)
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 25,
+    initialCode: `from typing import List, Dict\n\n# Add type hints to this function\ndef count_words(text):\n    words = text.split()\n    return {word: words.count(word) for word in set(words)}`,
+    solution: `from typing import List, Dict\n\ndef count_words(text: str) -> Dict[str, int]:\n    words = text.split()\n    return {word: words.count(word) for word in set(words)}`,
+    hints: ['Parameter: text: str', 'Return: -> Dict[str, int]', 'from typing import Dict'],
+    testCases: [
+      { name: 'Has type hints', test: (code) => code.includes(':') && code.includes('->'), errorMessage: 'Add type hints' }
+    ]
+  },
+  {
+    id: 'py-47',
+    title: 'Testing with unittest',
+    description: 'Write unit tests for your code',
+    content: `# Unit Testing - Ensure Code Quality
+
+\`\`\`python
+import unittest
+
+def add(a, b):
+    return a + b
+
+class TestMath(unittest.TestCase):
+    def test_add_positive(self):
+        self.assertEqual(add(2, 3), 5)
+    
+    def test_add_negative(self):
+        self.assertEqual(add(-1, -1), -2)
+    
+    def test_add_mixed(self):
+        self.assertEqual(add(-5, 10), 5)
+
+if __name__ == '__main__':
+    unittest.main()
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 30,
+    initialCode: `import unittest\n\ndef multiply(a, b):\n    return a * b\n\n# Write test cases\nclass TestMultiply(unittest.TestCase):\n    # Your code here\n    pass`,
+    solution: `import unittest\n\ndef multiply(a, b):\n    return a * b\n\nclass TestMultiply(unittest.TestCase):\n    def test_positive(self):\n        self.assertEqual(multiply(3, 4), 12)\n    \n    def test_zero(self):\n        self.assertEqual(multiply(5, 0), 0)\n    \n    def test_negative(self):\n        self.assertEqual(multiply(-2, 3), -6)`,
+    hints: ['Inherit from unittest.TestCase', 'Methods start with test_', 'Use self.assertEqual()'],
+    testCases: [
+      { name: 'Imports unittest', test: (code) => code.includes('unittest'), errorMessage: 'Import unittest' },
+      { name: 'Has test methods', test: (code) => code.includes('def test_'), errorMessage: 'Create test methods' }
+    ]
+  },
+  {
+    id: 'py-48',
+    title: 'Virtual Environments',
+    description: 'Manage project dependencies',
+    content: `# Virtual Environments - Isolated Dependencies
+
+## Why Virtual Environments?
+- Separate dependencies per project
+- Avoid conflicts between package versions
+- Easy to recreate environment
+
+## Commands
+\`\`\`bash
+# Create
+python -m venv myenv
+
+# Activate (Windows)
+myenv\\Scripts\\activate
+
+# Activate (Mac/Linux)
+source myenv/bin/activate
+
+# Install packages
+pip install requests pandas
+
+# Save dependencies
+pip freeze > requirements.txt
+
+# Install from requirements
+pip install -r requirements.txt
+
+# Deactivate
+deactivate
+\`\`\``,
+    language: 'python',
+    difficulty: 'Intermediate',
+    estimatedTime: 20,
+    initialCode: `# Create a requirements.txt for a web project\n# List these packages: flask, requests, pytest`,
+    solution: `flask==2.3.0\nrequests==2.31.0\npytest==7.4.0`,
+    hints: ['One package per line', 'Use == for versions', 'Check PyPI for latest versions'],
+    testCases: [
+      { name: 'Has flask', test: (code) => code.includes('flask'), errorMessage: 'Include flask' },
+      { name: 'Has requests', test: (code) => code.includes('requests'), errorMessage: 'Include requests' }
+    ]
+  },
+  {
+    id: 'py-49',
+    title: 'Working with JSON',
+    description: 'Parse and generate JSON data',
+    content: `# JSON - Data Exchange Format
+
+\`\`\`python
+import json
+
+# Parse JSON string
+json_str = '{"name": "Alice", "age": 30}'
+data = json.loads(json_str)
+print(data['name'])  # Alice
+
+# Convert to JSON
+person = {"name": "Bob", "age": 25, "city": "NYC"}
+json_str = json.dumps(person, indent=2)
+
+# Read from file
+with open('data.json', 'r') as f:
+    data = json.load(f)
+
+# Write to file
+with open('output.json', 'w') as f:
+    json.dump(data, f, indent=2)
+\`\`\``,
+    language: 'python',
+    difficulty: 'Intermediate',
+    estimatedTime: 25,
+    initialCode: `import json\n\n# Convert this dict to JSON and back\nuser = {"username": "john", "email": "john@test.com", "age": 28}`,
+    solution: `import json\n\nuser = {"username": "john", "email": "john@test.com", "age": 28}\njson_str = json.dumps(user, indent=2)\nprint(json_str)\nuser_back = json.loads(json_str)\nprint(user_back)`,
+    hints: ['json.dumps() for dict -> string', 'json.loads() for string -> dict', 'indent=2 for pretty printing'],
+    testCases: [
+      { name: 'Imports json', test: (code) => code.includes('import json'), errorMessage: 'Import json module' },
+      { name: 'Uses dumps or loads', test: (code) => code.includes('dumps') || code.includes('loads'), errorMessage: 'Use json.dumps() or json.loads()' }
+    ]
+  },
+  {
+    id: 'py-50',
+    title: 'Working with CSV Files',
+    description: 'Read and write CSV data',
+    content: `# CSV - Comma-Separated Values
+
+\`\`\`python
+import csv
+
+# Read CSV
+with open('data.csv', 'r') as f:
+    reader = csv.reader(f)
+    headers = next(reader)
+    for row in reader:
+        print(row)
+
+# Write CSV
+data = [
+    ['Name', 'Age', 'City'],
+    ['Alice', '30', 'NYC'],
+    ['Bob', '25', 'LA']
+]
+
+with open('output.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerows(data)
+
+# DictReader/DictWriter
+with open('data.csv', 'r') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(row['Name'], row['Age'])
+\`\`\``,
+    language: 'python',
+    difficulty: 'Intermediate',
+    estimatedTime: 25,
+    initialCode: `import csv\n\n# Create a CSV with student data\nstudents = [\n    ['Name', 'Grade', 'Score'],\n    ['Alice', 'A', '95'],\n    ['Bob', 'B', '85']\n]\n\n# Write to CSV`,
+    solution: `import csv\n\nstudents = [\n    ['Name', 'Grade', 'Score'],\n    ['Alice', 'A', '95'],\n    ['Bob', 'B', '85']\n]\n\nwith open('students.csv', 'w', newline='') as f:\n    writer = csv.writer(f)\n    writer.writerows(students)`,
+    hints: ['Use csv.writer()', 'writerows() for multiple rows', 'newline="" parameter'],
+    testCases: [
+      { name: 'Imports csv', test: (code) => code.includes('import csv'), errorMessage: 'Import csv module' }
+    ]
+  },
+  {
+    id: 'py-51',
+    title: 'Web Scraping with BeautifulSoup',
+    description: 'Extract data from HTML',
+    content: `# Web Scraping - Extract Web Data
+
+\`\`\`python
+from bs4 import BeautifulSoup
+import requests
+
+# Fetch webpage
+response = requests.get('https://example.com')
+soup = BeautifulSoup(response.text, 'html.parser')
+
+# Find elements
+title = soup.find('h1').text
+links = soup.find_all('a')
+
+for link in links:
+    print(link.get('href'))
+
+# CSS selectors
+articles = soup.select('.article-title')
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 30,
+    initialCode: `from bs4 import BeautifulSoup\n\nhtml = '<div><h1>Title</h1><p class="text">Content</p></div>'\nsoup = BeautifulSoup(html, 'html.parser')\n\n# Extract title and text`,
+    solution: `from bs4 import BeautifulSoup\n\nhtml = '<div><h1>Title</h1><p class="text">Content</p></div>'\nsoup = BeautifulSoup(html, 'html.parser')\n\ntitle = soup.find('h1').text\ntext = soup.find('p', class_='text').text\n\nprint(title)\nprint(text)`,
+    hints: ['soup.find() for single element', '.text to get content', 'class_ for class attribute'],
+    testCases: [
+      { name: 'Imports BeautifulSoup', test: (code) => code.includes('BeautifulSoup'), errorMessage: 'Import BeautifulSoup' }
+    ]
+  },
+  {
+    id: 'py-52',
+    title: 'Flask Web Framework Basics',
+    description: 'Build web applications with Flask',
+    content: `# Flask - Python Web Framework
+
+\`\`\`python
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return '<h1>Welcome!</h1>'
+
+@app.route('/user/<name>')
+def user(name):
+    return f'<h1>Hello, {name}!</h1>'
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    data = request.form['data']
+    return f'Received: {data}'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 35,
+    initialCode: `from flask import Flask\n\napp = Flask(__name__)\n\n# Create routes for home and about pages\n# Home: "Welcome"\n# About: "About Us"`,
+    solution: `from flask import Flask\n\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return '<h1>Welcome</h1>'\n\n@app.route('/about')\ndef about():\n    return '<h1>About Us</h1>'\n\nif __name__ == '__main__':\n    app.run(debug=True)`,
+    hints: ['Use @app.route() decorator', 'Return HTML strings', 'app.run() to start server'],
+    testCases: [
+      { name: 'Imports Flask', test: (code) => code.includes('Flask'), errorMessage: 'Import Flask' },
+      { name: 'Has routes', test: (code) => code.includes('@app.route'), errorMessage: 'Create routes with @app.route()' }
+    ]
+  },
+  {
+    id: 'py-53',
+    title: 'Database with SQLite',
+    description: 'Store data in SQLite database',
+    content: `# SQLite - Lightweight Database
+
+\`\`\`python
+import sqlite3
+
+# Connect
+conn = sqlite3.connect('database.db')
+cursor = conn.cursor()
+
+# Create table
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        email TEXT
+    )
+''')
+
+# Insert
+cursor.execute('INSERT INTO users (name, email) VALUES (?, ?)', 
+               ('Alice', 'alice@email.com'))
+
+# Query
+cursor.execute('SELECT * FROM users')
+rows = cursor.fetchall()
+
+# Commit and close
+conn.commit()
+conn.close()
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 35,
+    initialCode: `import sqlite3\n\n# Create products table with: id, name, price\n# Insert 2 products\n# Query all products`,
+    solution: `import sqlite3\n\nconn = sqlite3.connect('shop.db')\ncursor = conn.cursor()\n\ncursor.execute('''\n    CREATE TABLE IF NOT EXISTS products (\n        id INTEGER PRIMARY KEY,\n        name TEXT,\n        price REAL\n    )\n''')\n\ncursor.execute('INSERT INTO products (name, price) VALUES (?, ?)', ('Laptop', 999.99))\ncursor.execute('INSERT INTO products (name, price) VALUES (?, ?)', ('Mouse', 29.99))\n\ncursor.execute('SELECT * FROM products')\nproducts = cursor.fetchall()\nfor p in products:\n    print(p)\n\nconn.commit()\nconn.close()`,
+    hints: ['CREATE TABLE IF NOT EXISTS', 'Use ? for parameters', 'fetchall() to get results'],
+    testCases: [
+      { name: 'Imports sqlite3', test: (code) => code.includes('sqlite3'), errorMessage: 'Import sqlite3' },
+      { name: 'Creates table', test: (code) => code.includes('CREATE TABLE'), errorMessage: 'Create a table' }
+    ]
+  },
+  {
+    id: 'py-54',
+    title: 'NumPy Arrays',
+    description: 'Scientific computing with NumPy',
+    content: `# NumPy - Numerical Python
+
+\`\`\`python
+import numpy as np
+
+# Create arrays
+arr = np.array([1, 2, 3, 4, 5])
+matrix = np.array([[1, 2], [3, 4]])
+zeros = np.zeros((3, 3))
+ones = np.ones((2, 4))
+range_arr = np.arange(0, 10, 2)  # [0, 2, 4, 6, 8]
+
+# Operations
+arr * 2  # [2, 4, 6, 8, 10]
+arr + arr  # [2, 4, 6, 8, 10]
+arr ** 2  # [1, 4, 9, 16, 25]
+
+# Statistics
+arr.mean()
+arr.std()
+arr.max()
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 30,
+    initialCode: `import numpy as np\n\n# Create array from 1-20\n# Calculate mean, max, min`,
+    solution: `import numpy as np\n\narr = np.arange(1, 21)\nmean = arr.mean()\nmax_val = arr.max()\nmin_val = arr.min()\n\nprint(f"Mean: {mean}")\nprint(f"Max: {max_val}")\nprint(f"Min: {min_val}")`,
+    hints: ['np.arange(1, 21)', 'arr.mean(), arr.max(), arr.min()', 'import numpy as np'],
+    testCases: [
+      { name: 'Imports numpy', test: (code) => code.includes('numpy') || code.includes('np'), errorMessage: 'Import numpy' }
+    ]
+  },
+  {
+    id: 'py-55',
+    title: 'Pandas DataFrames',
+    description: 'Data analysis with Pandas',
+    content: `# Pandas - Data Analysis
+
+\`\`\`python
+import pandas as pd
+
+# Create DataFrame
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie'],
+    'Age': [25, 30, 35],
+    'City': ['NYC', 'LA', 'Chicago']
+}
+df = pd.DataFrame(data)
+
+# Read CSV
+df = pd.read_csv('data.csv')
+
+# Basic operations
+df.head()  # First 5 rows
+df.info()  # Info
+df.describe()  # Statistics
+
+# Filter
+young = df[df['Age'] < 30]
+
+# Group by
+df.groupby('City')['Age'].mean()
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 35,
+    initialCode: `import pandas as pd\n\n# Create DataFrame with students: Name, Grade, Score\n# Filter students with Score > 80`,
+    solution: `import pandas as pd\n\ndata = {\n    'Name': ['Alice', 'Bob', 'Charlie', 'David'],\n    'Grade': ['A', 'B', 'A', 'C'],\n    'Score': [95, 78, 88, 72]\n}\n\ndf = pd.DataFrame(data)\nhigh_scores = df[df['Score'] > 80]\nprint(high_scores)`,
+    hints: ['Create dict with lists', 'pd.DataFrame(data)', 'df[df[\'Score\'] > 80]'],
+    testCases: [
+      { name: 'Imports pandas', test: (code) => code.includes('pandas') || code.includes('pd'), errorMessage: 'Import pandas' }
+    ]
+  },
+  {
+    id: 'py-56',
+    title: 'Matplotlib Visualization',
+    description: 'Create plots and charts',
+    content: `# Matplotlib - Data Visualization
+
+\`\`\`python
+import matplotlib.pyplot as plt
+
+# Line plot
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
+plt.plot(x, y)
+plt.xlabel('X axis')
+plt.ylabel('Y axis')
+plt.title('My Plot')
+plt.show()
+
+# Bar chart
+categories = ['A', 'B', 'C']
+values = [10, 20, 15]
+plt.bar(categories, values)
+plt.show()
+
+# Scatter plot
+plt.scatter(x, y)
+plt.show()
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 30,
+    initialCode: `import matplotlib.pyplot as plt\n\n# Create bar chart of test scores\nstudents = ['Alice', 'Bob', 'Charlie']\nscores = [95, 78, 88]`,
+    solution: `import matplotlib.pyplot as plt\n\nstudents = ['Alice', 'Bob', 'Charlie']\nscores = [95, 78, 88]\n\nplt.bar(students, scores)\nplt.xlabel('Students')\nplt.ylabel('Scores')\nplt.title('Test Scores')\nplt.show()`,
+    hints: ['plt.bar(x, y)', 'plt.xlabel() and plt.ylabel()', 'plt.show() to display'],
+    testCases: [
+      { name: 'Imports matplotlib', test: (code) => code.includes('matplotlib') || code.includes('plt'), errorMessage: 'Import matplotlib.pyplot' }
+    ]
+  },
+  {
+    id: 'py-57',
+    title: 'Machine Learning with scikit-learn',
+    description: 'Build your first ML model',
+    content: `# Scikit-Learn - Machine Learning
+
+\`\`\`python
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+# Data
+X = [[1], [2], [3], [4], [5]]
+y = [2, 4, 6, 8, 10]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2
+)
+
+# Train model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Predict
+predictions = model.predict(X_test)
+
+# Score
+score = model.score(X_test, y_test)
+\`\`\``,
+    language: 'python',
+    difficulty: 'Expert',
+    estimatedTime: 40,
+    initialCode: `from sklearn.linear_model import LinearRegression\n\n# Create and train a simple linear regression model\nX = [[1], [2], [3], [4]]\ny = [3, 5, 7, 9]`,
+    solution: `from sklearn.linear_model import LinearRegression\n\nX = [[1], [2], [3], [4]]\ny = [3, 5, 7, 9]\n\nmodel = LinearRegression()\nmodel.fit(X, y)\n\nprediction = model.predict([[5]])\nprint(f"Prediction for 5: {prediction[0]}")`,
+    hints: ['model = LinearRegression()', 'model.fit(X, y)', 'model.predict() for predictions'],
+    testCases: [
+      { name: 'Imports sklearn', test: (code) => code.includes('sklearn'), errorMessage: 'Import from sklearn' }
+    ]
+  },
+  {
+    id: 'py-58',
+    title: 'Web APIs with Requests',
+    description: 'Interact with REST APIs',
+    content: `# HTTP Requests - API Integration
+
+\`\`\`python
+import requests
+
+# GET request
+response = requests.get('https://api.example.com/users')
+data = response.json()
+
+# POST request
+payload = {'name': 'Alice', 'email': 'alice@test.com'}
+response = requests.post('https://api.example.com/users', json=payload)
+
+# Headers
+headers = {'Authorization': 'Bearer TOKEN'}
+response = requests.get('https://api.example.com/protected', headers=headers)
+
+# Error handling
+if response.status_code == 200:
+    print('Success!')
+else:
+    print(f'Error: {response.status_code}')
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 30,
+    initialCode: `import requests\n\n# Fetch data from JSONPlaceholder API\n# Get first user (id=1)`,
+    solution: `import requests\n\nresponse = requests.get('https://jsonplaceholder.typicode.com/users/1')\nuser = response.json()\n\nprint(f"Name: {user['name']}")\nprint(f"Email: {user['email']}")`,
+    hints: ['requests.get(url)', 'response.json() to parse', 'Check response.status_code'],
+    testCases: [
+      { name: 'Imports requests', test: (code) => code.includes('requests'), errorMessage: 'Import requests module' }
+    ]
+  },
+  {
+    id: 'py-59',
+    title: 'Logging Best Practices',
+    description: 'Implement proper logging',
+    content: `# Logging - Track Application Events
+
+\`\`\`python
+import logging
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    filename='app.log'
+)
+
+logger = logging.getLogger(__name__)
+
+# Log levels
+logger.debug('Debug info')
+logger.info('Info message')
+logger.warning('Warning!')
+logger.error('Error occurred')
+logger.critical('Critical issue!')
+
+# Exception logging
+try:
+    1 / 0
+except Exception as e:
+    logger.exception('Exception caught')
+\`\`\``,
+    language: 'python',
+    difficulty: 'Intermediate',
+    estimatedTime: 25,
+    initialCode: `import logging\n\n# Set up logging\n# Log an info message`,
+    solution: `import logging\n\nlogging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')\nlogger = logging.getLogger(__name__)\n\nlogger.info('Application started')\nlogger.warning('This is a warning')\nlogger.error('An error occurred')`,
+    hints: ['logging.basicConfig()', 'logger.info(), logger.warning()', 'getLogger(__name__)'],
+    testCases: [
+      { name: 'Imports logging', test: (code) => code.includes('import logging'), errorMessage: 'Import logging module' }
+    ]
+  },
+  {
+    id: 'py-60',
+    title: 'Environment Variables',
+    description: 'Manage configuration with environment variables',
+    content: `# Environment Variables - Configuration Management
+
+\`\`\`python
+import os
+from dotenv import load_dotenv
+
+# Load from .env file
+load_dotenv()
+
+# Get environment variable
+api_key = os.getenv('API_KEY')
+database_url = os.getenv('DATABASE_URL', 'default_value')
+
+# Set environment variable
+os.environ['MY_VAR'] = 'value'
+
+# Check if exists
+if 'API_KEY' in os.environ:
+    print('API key found')
+\`\`\`
+
+.env file:
+\`\`\`
+API_KEY=your_secret_key
+DATABASE_URL=postgresql://localhost/mydb
+DEBUG=True
+\`\`\``,
+    language: 'python',
+    difficulty: 'Intermediate',
+    estimatedTime: 20,
+    initialCode: `import os\n\n# Get environment variable or use default\napp_name = # Your code here\nprint(f"App: {app_name}")`,
+    solution: `import os\n\napp_name = os.getenv('APP_NAME', 'MyApp')\nprint(f"App: {app_name}")\n\nport = os.getenv('PORT', '8000')\nprint(f"Port: {port}")`,
+    hints: ['os.getenv(\'KEY\', \'default\')', 'Import os module', 'Second argument is default'],
+    testCases: [
+      { name: 'Imports os', test: (code) => code.includes('import os'), errorMessage: 'Import os module' },
+      { name: 'Uses getenv', test: (code) => code.includes('getenv'), errorMessage: 'Use os.getenv()' }
+    ]
+  },
+  {
+    id: 'py-61',
+    title: 'Command Line Arguments',
+    description: 'Parse command line arguments',
+    content: `# Command Line Arguments - argparse
+
+\`\`\`python
+import argparse
+
+parser = argparse.ArgumentParser(description='My CLI tool')
+
+# Positional argument
+parser.add_argument('filename', help='File to process')
+
+# Optional argument
+parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output')
+parser.add_argument('-o', '--output', help='Output file')
+
+# Parse arguments
+args = parser.parse_args()
+
+print(f"Processing: {args.filename}")
+if args.verbose:
+    print("Verbose mode on")
+\`\`\``,
+    language: 'python',
+    difficulty: 'Intermediate',
+    estimatedTime: 25,
+    initialCode: `import argparse\n\n# Create parser for a calculator\n# Arguments: num1, num2, operation (--op)`,
+    solution: `import argparse\n\nparser = argparse.ArgumentParser(description='Simple calculator')\nparser.add_argument('num1', type=float, help='First number')\nparser.add_argument('num2', type=float, help='Second number')\nparser.add_argument('--op', choices=['add', 'sub', 'mul', 'div'], required=True)\n\nargs = parser.parse_args()`,
+    hints: ['argparse.ArgumentParser()', 'add_argument() for each arg', 'type=float for numbers'],
+    testCases: [
+      { name: 'Imports argparse', test: (code) => code.includes('argparse'), errorMessage: 'Import argparse module' }
+    ]
+  },
+  {
+    id: 'py-62',
+    title: 'Working with Dates and Times',
+    description: 'datetime module for time operations',
+    content: `# DateTime - Work with Dates and Times
+
+\`\`\`python
+from datetime import datetime, timedelta, date
+
+# Current date/time
+now = datetime.now()
+today = date.today()
+
+# Create specific date
+birthday = datetime(1990, 5, 15, 14, 30)
+
+# Format
+formatted = now.strftime('%Y-%m-%d %H:%M:%S')
+parsed = datetime.strptime('2024-01-15', '%Y-%m-%d')
+
+# Arithmetic
+tomorrow = today + timedelta(days=1)
+next_week = now + timedelta(weeks=1)
+two_hours_ago = now - timedelta(hours=2)
+
+# Compare
+if birthday < now:
+    print('Birthday has passed')
+\`\`\``,
+    language: 'python',
+    difficulty: 'Intermediate',
+    estimatedTime: 25,
+    initialCode: `from datetime import datetime, timedelta\n\n# Calculate date 30 days from now\n# Format as YYYY-MM-DD`,
+    solution: `from datetime import datetime, timedelta\n\nnow = datetime.now()\nfuture = now + timedelta(days=30)\nformatted = future.strftime('%Y-%m-%d')\nprint(formatted)`,
+    hints: ['datetime.now()', 'timedelta(days=30)', 'strftime(\'%Y-%m-%d\')'],
+    testCases: [
+      { name: 'Imports datetime', test: (code) => code.includes('datetime'), errorMessage: 'Import datetime' }
+    ]
+  },
+  {
+    id: 'py-63',
+    title: 'Path Operations with pathlib',
+    description: 'Modern file path handling',
+    content: `# pathlib - Object-Oriented File Paths
+
+\`\`\`python
+from pathlib import Path
+
+# Create path
+p = Path('data/files/doc.txt')
+
+# Properties
+p.name  # 'doc.txt'
+p.stem  # 'doc'
+p.suffix  # '.txt'
+p.parent  # Path('data/files')
+
+# Join paths
+base = Path('data')
+file_path = base / 'files' / 'doc.txt'
+
+# Check existence
+p.exists()
+p.is_file()
+p.is_dir()
+
+# Create directory
+Path('new_folder').mkdir(parents=True, exist_ok=True)
+
+# List files
+for file in Path('.').glob('*.py'):
+    print(file)
+\`\`\``,
+    language: 'python',
+    difficulty: 'Intermediate',
+    estimatedTime: 20,
+    initialCode: `from pathlib import Path\n\n# Create path to 'documents/reports/2024.pdf'\n# Print name and parent directory`,
+    solution: `from pathlib import Path\n\np = Path('documents/reports/2024.pdf')\nprint(f"Name: {p.name}")\nprint(f"Parent: {p.parent}")\nprint(f"Suffix: {p.suffix}")`,
+    hints: ['Path(\'path/to/file\')', '.name, .parent, .suffix', 'Use / to join paths'],
+    testCases: [
+      { name: 'Imports Path', test: (code) => code.includes('Path'), errorMessage: 'Import Path from pathlib' }
+    ]
+  },
+  {
+    id: 'py-64',
+    title: 'Collections Module',
+    description: 'Specialized container datatypes',
+    content: `# Collections - Specialized Containers
+
+\`\`\`python
+from collections import Counter, defaultdict, namedtuple, deque
+
+# Counter - count items
+words = ['apple', 'banana', 'apple', 'cherry', 'banana', 'apple']
+counter = Counter(words)
+counter['apple']  # 3
+counter.most_common(2)  # [('apple', 3), ('banana', 2)]
+
+# defaultdict - default values
+d = defaultdict(list)
+d['fruits'].append('apple')
+
+# namedtuple - readable tuples
+Point = namedtuple('Point', ['x', 'y'])
+p = Point(10, 20)
+p.x  # 10
+
+# deque - efficient queue
+queue = deque([1, 2, 3])
+queue.append(4)
+queue.appendleft(0)
+queue.pop()
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 30,
+    initialCode: `from collections import Counter\n\n# Count letter frequency in a word\nword = "programming"`,
+    solution: `from collections import Counter\n\nword = "programming"\nfreq = Counter(word)\nprint(freq)\nprint(f"Most common: {freq.most_common(3)}")`,
+    hints: ['Counter(word)', 'freq.most_common(n)', 'Counter is a dict subclass'],
+    testCases: [
+      { name: 'Imports Counter', test: (code) => code.includes('Counter'), errorMessage: 'Import Counter from collections' }
+    ]
+  },
+  {
+    id: 'py-65',
+    title: 'itertools - Iterator Functions',
+    description: 'Efficient looping with itertools',
+    content: `# itertools - Iterator Tools
+
+\`\`\`python
+from itertools import count, cycle, chain, combinations, permutations
+
+# Infinite iterators
+counter = count(start=10, step=2)  # 10, 12, 14, ...
+cycler = cycle([1, 2, 3])  # 1, 2, 3, 1, 2, 3, ...
+
+# Combinatorics
+list(combinations([1, 2, 3], 2))  # [(1,2), (1,3), (2,3)]
+list(permutations([1, 2, 3], 2))  # [(1,2), (1,3), (2,1), ...]
+
+# Chain - combine iterables
+list(chain([1, 2], [3, 4]))  # [1, 2, 3, 4]
+
+# Product - cartesian product
+from itertools import product
+list(product([1, 2], ['a', 'b']))  # [(1,'a'), (1,'b'), (2,'a'), (2,'b')]
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 25,
+    initialCode: `from itertools import combinations\n\n# Find all 2-number combinations from [1,2,3,4,5]`,
+    solution: `from itertools import combinations\n\nnumbers = [1, 2, 3, 4, 5]\ncombos = list(combinations(numbers, 2))\nprint(combos)\nprint(f"Total combinations: {len(combos)}")`,
+    hints: ['combinations(list, r)', 'Convert to list with list()', 'r is combination size'],
+    testCases: [
+      { name: 'Imports itertools', test: (code) => code.includes('itertools') || code.includes('combinations'), errorMessage: 'Import from itertools' }
+    ]
+  },
+  {
+    id: 'py-66',
+    title: 'Functools - Higher Order Functions',
+    description: 'Function manipulation tools',
+    content: `# functools - Functional Programming Tools
+
+\`\`\`python
+from functools import reduce, lru_cache, partial
+
+# reduce - accumulate
+from functools import reduce
+numbers = [1, 2, 3, 4, 5]
+total = reduce(lambda x, y: x + y, numbers)  # 15
+
+# lru_cache - memoization
+@lru_cache(maxsize=None)
+def fibonacci(n):
+    if n < 2:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# partial - pre-fill arguments
+def power(base, exponent):
+    return base ** exponent
+
+square = partial(power, exponent=2)
+cube = partial(power, exponent=3)
+square(5)  # 25
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 30,
+    initialCode: `from functools import reduce\n\n# Use reduce to find product of [1,2,3,4,5]`,
+    solution: `from functools import reduce\n\nnumbers = [1, 2, 3, 4, 5]\nproduct = reduce(lambda x, y: x * y, numbers)\nprint(f"Product: {product}")`,
+    hints: ['reduce(lambda x, y: x * y, list)', 'Lambda for multiplication', 'Result is accumulated value'],
+    testCases: [
+      { name: 'Imports reduce', test: (code) => code.includes('reduce'), errorMessage: 'Import reduce from functools' }
+    ]
+  },
+  {
+    id: 'py-67',
+    title: 'Email Sending with smtplib',
+    description: 'Send emails programmatically',
+    content: `# SMTP - Send Emails
+
+\`\`\`python
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+# Create message
+msg = MIMEMultipart()
+msg['From'] = 'sender@example.com'
+msg['To'] = 'recipient@example.com'
+msg['Subject'] = 'Test Email'
+
+body = 'This is a test email'
+msg.attach(MIMEText(body, 'plain'))
+
+# Send email
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.starttls()
+server.login('your_email@gmail.com', 'your_password')
+server.send_message(msg)
+server.quit()
+\`\`\``,
+    language: 'python',
+    difficulty: 'Advanced',
+    estimatedTime: 25,
+    initialCode: `from email.mime.text import MIMEText\nfrom email.mime.multipart import MIMEMultipart\n\n# Create email message structure`,
+    solution: `from email.mime.text import MIMEText\nfrom email.mime.multipart import MIMEMultipart\n\nmsg = MIMEMultipart()\nmsg['From'] = 'sender@example.com'\nmsg['To'] = 'recipient@example.com'\nmsg['Subject'] = 'Hello!'\n\nbody = 'This is the email body'\nmsg.attach(MIMEText(body, 'plain'))\n\nprint(msg.as_string())`,
+    hints: ['MIMEMultipart()', 'msg[\'From\'], msg[\'To\']', 'msg.attach(MIMEText(body))'],
+    testCases: [
+      { name: 'Imports MIME', test: (code) => code.includes('MIMEText') || code.includes('MIMEMultipart'), errorMessage: 'Import from email.mime' }
+    ]
+  },
+  {
+    id: 'py-68',
+    title: 'ZIP File Operations',
+    description: 'Create and extract ZIP archives',
+    content: `# zipfile - Archive Operations
+
+\`\`\`python
+import zipfile
+import os
+
+# Create ZIP
+with zipfile.ZipFile('archive.zip', 'w') as zf:
+    zf.write('file1.txt')
+    zf.write('file2.txt')
+
+# Extract ZIP
+with zipfile.ZipFile('archive.zip', 'r') as zf:
+    zf.extractall('extracted_folder')
+
+# List contents
+with zipfile.ZipFile('archive.zip', 'r') as zf:
+    print(zf.namelist())
+
+# Add to existing
+with zipfile.ZipFile('archive.zip', 'a') as zf:
+    zf.write('file3.txt')
+\`\`\``,
+    language: 'python',
+    difficulty: 'Intermediate',
+    estimatedTime: 20,
+    initialCode: `import zipfile\n\n# List files in a ZIP archive\nwith zipfile.ZipFile('data.zip', 'r') as zf:\n    # Your code here\n    pass`,
+    solution: `import zipfile\n\nwith zipfile.ZipFile('data.zip', 'r') as zf:\n    files = zf.namelist()\n    print("Files in archive:")\n    for file in files:\n        print(f"  - {file}")\n    \n    # Get file info\n    for info in zf.infolist():\n        print(f"{info.filename}: {info.file_size} bytes")`,
+    hints: ['zf.namelist() for file list', 'zf.infolist() for details', 'Loop through results'],
+    testCases: [
+      { name: 'Imports zipfile', test: (code) => code.includes('zipfile'), errorMessage: 'Import zipfile module' }
+    ]
+  },
+  {
+    id: 'py-69',
+    title: 'Command Pattern & Design Patterns',
+    description: 'Implement common design patterns',
+    content: `# Design Patterns - Reusable Solutions
+
+## Singleton Pattern
+\`\`\`python
+class Singleton:
+    _instance = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+\`\`\`
+
+## Factory Pattern
+\`\`\`python
+class AnimalFactory:
+    @staticmethod
+    def create_animal(animal_type):
+        if animal_type == 'dog':
+            return Dog()
+        elif animal_type == 'cat':
+            return Cat()
+\`\`\`
+
+## Observer Pattern
+\`\`\`python
+class Subject:
+    def __init__(self):
+        self.observers = []
+    
+    def attach(self, observer):
+        self.observers.append(observer)
+    
+    def notify(self):
+        for observer in self.observers:
+            observer.update()
+\`\`\``,
+    language: 'python',
+    difficulty: 'Expert',
+    estimatedTime: 40,
+    initialCode: `# Implement a simple Singleton class\nclass DatabaseConnection:\n    # Your code here\n    pass`,
+    solution: `class DatabaseConnection:\n    _instance = None\n    \n    def __new__(cls):\n        if cls._instance is None:\n            cls._instance = super().__new__(cls)\n            cls._instance.connection = "Connected"\n        return cls._instance\n\n# Test\ndb1 = DatabaseConnection()\ndb2 = DatabaseConnection()\nprint(db1 is db2)  # True`,
+    hints: ['Use __new__ method', '_instance class variable', 'Return existing instance'],
+    testCases: [
+      { name: 'Has __new__', test: (code) => code.includes('__new__'), errorMessage: 'Implement __new__ method' }
+    ]
+  },
+  {
+    id: 'py-70',
+    title: 'Full Stack Python Project',
+    description: 'Build a complete web application',
+    content: `# Capstone: Full Stack Web App
+
+Build a complete task management application:
+
+## Features
+- User authentication
+- CRUD operations for tasks
+- SQLite database
+- RESTful API
+- Web interface
+
+## Technologies
+- Flask (backend)
+- SQLite (database)
+- HTML/CSS (frontend)
+- JavaScript (interactivity)
+
+## Structure
+\`\`\`
+project/
+  app.py          # Flask app
+  models.py       # Database models
+  templates/      # HTML
+  static/         # CSS/JS
+  database.db     # SQLite
+\`\`\`
+
+Implement the full stack!`,
+    language: 'python',
+    difficulty: 'Expert',
+    estimatedTime: 120,
+    isProject: true,
+    projectDescription: 'Build complete task manager web app',
+    initialCode: `# app.py - Flask application\nfrom flask import Flask, render_template, request, jsonify\nimport sqlite3\n\napp = Flask(__name__)\n\n# Your code here`,
+    solution: `from flask import Flask, render_template, request, jsonify\nimport sqlite3\nfrom datetime import datetime\n\napp = Flask(__name__)\n\ndef init_db():\n    conn = sqlite3.connect('tasks.db')\n    c = conn.cursor()\n    c.execute('''\n        CREATE TABLE IF NOT EXISTS tasks (\n            id INTEGER PRIMARY KEY,\n            title TEXT NOT NULL,\n            description TEXT,\n            completed BOOLEAN DEFAULT 0,\n            created_at TIMESTAMP\n        )\n    ''')\n    conn.commit()\n    conn.close()\n\n@app.route('/')\ndef index():\n    return render_template('index.html')\n\n@app.route('/api/tasks', methods=['GET', 'POST'])\ndef tasks():\n    conn = sqlite3.connect('tasks.db')\n    c = conn.cursor()\n    \n    if request.method == 'POST':\n        data = request.json\n        c.execute('INSERT INTO tasks (title, description, created_at) VALUES (?, ?, ?)',\n                 (data['title'], data.get('description', ''), datetime.now()))\n        conn.commit()\n        return jsonify({'success': True})\n    \n    c.execute('SELECT * FROM tasks')\n    tasks = c.fetchall()\n    conn.close()\n    return jsonify([{'id': t[0], 'title': t[1], 'description': t[2], 'completed': t[3]} for t in tasks])\n\nif __name__ == '__main__':\n    init_db()\n    app.run(debug=True)`,
+    hints: [
+      'Initialize database with init_db()',
+      'Create routes for index and API',
+      'Use jsonify for API responses',
+      'Handle GET and POST methods'
+    ],
+    testCases: [
+      { name: 'Imports Flask', test: (code) => code.includes('Flask'), errorMessage: 'Import Flask' },
+      { name: 'Creates app', test: (code) => code.includes('app = Flask'), errorMessage: 'Create Flask app' },
+      { name: 'Has routes', test: (code) => code.includes('@app.route'), errorMessage: 'Define routes' }
+    ]
   }
 ];

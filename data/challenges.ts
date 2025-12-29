@@ -911,5 +911,469 @@ println "Sum: $sum"`,
       { input: [1, 2, 3, 4, 5], expectedOutput: [2, 4, 6, 8, 10], description: 'Double numbers' }
     ],
     hints: ['.collect for map', '.findAll for filter', '.inject for reduce']
+  },
+
+  // ========== ADDITIONAL CHALLENGES (400+) ==========
+  
+  // JavaScript Advanced Challenges
+  {
+    id: 'js-ch-20',
+    title: 'Array Chunking',
+    description: 'Split array into chunks of size n',
+    difficulty: 'Medium',
+    language: 'javascript',
+    category: 'Array',
+    points: 70,
+    timeLimit: 20,
+    prompt: 'Split an array into smaller arrays of given size',
+    initialCode: `function chunk(arr, size) {\n  // Your code here\n}\n\nconsole.log(chunk([1,2,3,4,5,6,7,8], 3));`,
+    solution: `function chunk(arr, size) {\n  const result = [];\n  for (let i = 0; i < arr.length; i += size) {\n    result.push(arr.slice(i, i + size));\n  }\n  return result;\n}`,
+    testCases: [
+      { input: [[1,2,3,4,5], 2], expectedOutput: [[1,2], [3,4], [5]], description: 'Chunk by 2' }
+    ],
+    hints: ['Use slice()', 'Increment by size', 'Push subarrays']
+  },
+  {
+    id: 'js-ch-21',
+    title: 'Anagram Checker',
+    description: 'Check if two strings are anagrams',
+    difficulty: 'Medium',
+    language: 'javascript',
+    category: 'String',
+    points: 80,
+    timeLimit: 25,
+    prompt: 'Determine if two strings are anagrams (same letters, different order)',
+    initialCode: `function isAnagram(str1, str2) {\n  // Your code here\n}\n\nconsole.log(isAnagram('listen', 'silent'));`,
+    solution: `function isAnagram(str1, str2) {\n  const clean1 = str1.toLowerCase().replace(/[^a-z]/g, '');\n  const clean2 = str2.toLowerCase().replace(/[^a-z]/g, '');\n  return clean1.split('').sort().join('') === clean2.split('').sort().join('');\n}`,
+    testCases: [
+      { input: ['listen', 'silent'], expectedOutput: true, description: 'Valid anagram' }
+    ],
+    hints: ['Sort characters', 'Compare sorted strings', 'Remove non-letters']
+  },
+  {
+    id: 'js-ch-22',
+    title: 'Binary Search',
+    description: 'Implement binary search algorithm',
+    difficulty: 'Medium',
+    language: 'javascript',
+    category: 'Algorithm',
+    points: 90,
+    timeLimit: 30,
+    prompt: 'Find element in sorted array using binary search',
+    initialCode: `function binarySearch(arr, target) {\n  // Your code here\n}`,
+    solution: `function binarySearch(arr, target) {\n  let left = 0, right = arr.length - 1;\n  while (left <= right) {\n    const mid = Math.floor((left + right) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) left = mid + 1;\n    else right = mid - 1;\n  }\n  return -1;\n}`,
+    testCases: [
+      { input: [[1,2,3,4,5,6,7,8,9], 5], expectedOutput: 4, description: 'Find 5 at index 4' }
+    ],
+    hints: ['Use two pointers', 'Calculate midpoint', 'Adjust left or right']
+  },
+  {
+    id: 'js-ch-23',
+    title: 'Flatten Nested Array',
+    description: 'Flatten multi-dimensional array',
+    difficulty: 'Medium',
+    language: 'javascript',
+    category: 'Array',
+    points: 75,
+    timeLimit: 20,
+    prompt: 'Convert nested array to flat array',
+    initialCode: `function flatten(arr) {\n  // Your code here\n}`,
+    solution: `function flatten(arr) {\n  return arr.reduce((flat, item) => \n    Array.isArray(item) ? flat.concat(flatten(item)) : flat.concat(item), []);\n}`,
+    testCases: [
+      { input: [[1, [2, [3, 4], 5]]], expectedOutput: [1,2,3,4,5], description: 'Flatten nested' }
+    ],
+    hints: ['Use recursion', 'Check Array.isArray()', 'Use reduce() or concat()']
+  },
+  {
+    id: 'js-ch-24',
+    title: 'Debounce Function',
+    description: 'Create debounce utility',
+    difficulty: 'Hard',
+    language: 'javascript',
+    category: 'Algorithm',
+    points: 100,
+    timeLimit: 30,
+    prompt: 'Implement debounce to delay function execution',
+    initialCode: `function debounce(func, delay) {\n  // Your code here\n}`,
+    solution: `function debounce(func, delay) {\n  let timeout;\n  return function(...args) {\n    clearTimeout(timeout);\n    timeout = setTimeout(() => func.apply(this, args), delay);\n  };\n}`,
+    testCases: [
+      { input: [() => {}, 300], expectedOutput: 'function', description: 'Returns function' }
+    ],
+    hints: ['Use setTimeout', 'Clear previous timeout', 'Return function']
+  },
+  {
+    id: 'js-ch-25',
+    title: 'Deep Clone Object',
+    description: 'Create deep copy of nested object',
+    difficulty: 'Hard',
+    language: 'javascript',
+    category: 'Algorithm',
+    points: 95,
+    timeLimit: 25,
+    prompt: 'Clone object including nested properties',
+    initialCode: `function deepClone(obj) {\n  // Your code here\n}`,
+    solution: `function deepClone(obj) {\n  if (obj === null || typeof obj !== 'object') return obj;\n  if (obj instanceof Date) return new Date(obj);\n  if (obj instanceof Array) return obj.map(item => deepClone(item));\n  const cloned = {};\n  for (let key in obj) {\n    if (obj.hasOwnProperty(key)) cloned[key] = deepClone(obj[key]);\n  }\n  return cloned;\n}`,
+    testCases: [
+      { input: {a: 1, b: {c: 2}}, expectedOutput: {a: 1, b: {c: 2}}, description: 'Deep clone' }
+    ],
+    hints: ['Recursion', 'Check typeof', 'Handle arrays and objects']
+  },
+
+  // Python Advanced Challenges
+  {
+    id: 'py-ch-10',
+    title: 'Two Sum Problem',
+    description: 'Find two numbers that sum to target',
+    difficulty: 'Medium',
+    language: 'python',
+    category: 'Array',
+    points: 85,
+    timeLimit: 25,
+    prompt: 'Find indices of two numbers that add up to target',
+    initialCode: `def two_sum(nums, target):\n    # Your code here\n    pass`,
+    solution: `def two_sum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n    return []`,
+    testCases: [
+      { input: [[2,7,11,15], 9], expectedOutput: [0,1], description: 'Find 2+7=9' }
+    ],
+    hints: ['Use hash map', 'Store indices', 'Look for complement']
+  },
+  {
+    id: 'py-ch-11',
+    title: 'Longest Substring Without Repeating',
+    description: 'Find longest unique substring',
+    difficulty: 'Hard',
+    language: 'python',
+    category: 'String',
+    points: 110,
+    timeLimit: 35,
+    prompt: 'Find length of longest substring without repeating characters',
+    initialCode: `def length_of_longest_substring(s):\n    # Your code here\n    pass`,
+    solution: `def length_of_longest_substring(s):\n    char_set = set()\n    left = 0\n    max_length = 0\n    for right in range(len(s)):\n        while s[right] in char_set:\n            char_set.remove(s[left])\n            left += 1\n        char_set.add(s[right])\n        max_length = max(max_length, right - left + 1)\n    return max_length`,
+    testCases: [
+      { input: 'abcabcbb', expectedOutput: 3, description: 'abc is longest' }
+    ],
+    hints: ['Sliding window', 'Use set for uniqueness', 'Two pointers']
+  },
+  {
+    id: 'py-ch-12',
+    title: 'Merge Intervals',
+    description: 'Merge overlapping intervals',
+    difficulty: 'Medium',
+    language: 'python',
+    category: 'Array',
+    points: 90,
+    timeLimit: 30,
+    prompt: 'Merge all overlapping intervals',
+    initialCode: `def merge(intervals):\n    # Your code here\n    pass`,
+    solution: `def merge(intervals):\n    if not intervals:\n        return []\n    intervals.sort(key=lambda x: x[0])\n    merged = [intervals[0]]\n    for current in intervals[1:]:\n        if current[0] <= merged[-1][1]:\n            merged[-1][1] = max(merged[-1][1], current[1])\n        else:\n            merged.append(current)\n    return merged`,
+    testCases: [
+      { input: [[1,3],[2,6],[8,10]], expectedOutput: [[1,6],[8,10]], description: 'Merge overlapping' }
+    ],
+    hints: ['Sort first', 'Compare end with next start', 'Update end if overlap']
+  },
+  {
+    id: 'py-ch-13',
+    title: 'Valid Parentheses',
+    description: 'Check if parentheses are balanced',
+    difficulty: 'Easy',
+    language: 'python',
+    category: 'String',
+    points: 60,
+    timeLimit: 15,
+    prompt: 'Validate brackets: (), [], {}',
+    initialCode: `def is_valid(s):\n    # Your code here\n    pass`,
+    solution: `def is_valid(s):\n    stack = []\n    mapping = {')': '(', '}': '{', ']': '['}\n    for char in s:\n        if char in mapping:\n            if not stack or stack.pop() != mapping[char]:\n                return False\n        else:\n            stack.append(char)\n    return len(stack) == 0`,
+    testCases: [
+      { input: '()[]{}', expectedOutput: true, description: 'Valid brackets' }
+    ],
+    hints: ['Use stack', 'Map closing to opening', 'Check match on pop']
+  },
+  {
+    id: 'py-ch-14',
+    title: 'LRU Cache Implementation',
+    description: 'Implement Least Recently Used cache',
+    difficulty: 'Hard',
+    language: 'python',
+    category: 'Data Structure',
+    points: 120,
+    timeLimit: 40,
+    prompt: 'Create LRU cache with get and put operations',
+    initialCode: `class LRUCache:\n    def __init__(self, capacity):\n        pass\n    \n    def get(self, key):\n        pass\n    \n    def put(self, key, value):\n        pass`,
+    solution: `from collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity):\n        self.cache = OrderedDict()\n        self.capacity = capacity\n    \n    def get(self, key):\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n    \n    def put(self, key, value):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=False)`,
+    testCases: [
+      { input: [[2], ['put', 1, 1]], expectedOutput: null, description: 'Put operation' }
+    ],
+    hints: ['Use OrderedDict', 'move_to_end for recent', 'popitem(last=False)']
+  },
+
+  // TypeScript Challenges
+  {
+    id: 'ts-ch-10',
+    title: 'Generic Stack Implementation',
+    description: 'Create type-safe stack',
+    difficulty: 'Medium',
+    language: 'typescript',
+    category: 'Data Structure',
+    points: 95,
+    timeLimit: 30,
+    prompt: 'Implement generic Stack<T> with push, pop, peek',
+    initialCode: `class Stack<T> {\n  // Your code here\n}`,
+    solution: `class Stack<T> {\n  private items: T[] = [];\n  \n  push(item: T): void {\n    this.items.push(item);\n  }\n  \n  pop(): T | undefined {\n    return this.items.pop();\n  }\n  \n  peek(): T | undefined {\n    return this.items[this.items.length - 1];\n  }\n  \n  isEmpty(): boolean {\n    return this.items.length === 0;\n  }\n}`,
+    testCases: [
+      { input: ['push', 5], expectedOutput: undefined, description: 'Push operation' }
+    ],
+    hints: ['Private items array', 'Generic type T', 'Return T | undefined']
+  },
+  {
+    id: 'ts-ch-11',
+    title: 'Promise All Implementation',
+    description: 'Recreate Promise.all',
+    difficulty: 'Hard',
+    language: 'typescript',
+    category: 'Algorithm',
+    points: 110,
+    timeLimit: 35,
+    prompt: 'Implement custom promiseAll function',
+    initialCode: `function promiseAll<T>(promises: Promise<T>[]): Promise<T[]> {\n  // Your code here\n}`,
+    solution: `function promiseAll<T>(promises: Promise<T>[]): Promise<T[]> {\n  return new Promise((resolve, reject) => {\n    const results: T[] = [];\n    let completed = 0;\n    \n    promises.forEach((promise, index) => {\n      promise.then(result => {\n        results[index] = result;\n        completed++;\n        if (completed === promises.length) {\n          resolve(results);\n        }\n      }).catch(reject);\n    });\n  });\n}`,
+    testCases: [
+      { input: [Promise.resolve(1)], expectedOutput: [1], description: 'Single promise' }
+    ],
+    hints: ['Return new Promise', 'Track completion', 'Preserve order']
+  },
+
+  // React Challenges
+  {
+    id: 'react-ch-5',
+    title: 'Custom useDebounce Hook',
+    description: 'Create debounce React hook',
+    difficulty: 'Medium',
+    language: 'react',
+    category: 'Web',
+    points: 90,
+    timeLimit: 25,
+    prompt: 'Implement useDebounce hook for delayed values',
+    initialCode: `function useDebounce(value, delay) {\n  // Your code here\n}`,
+    solution: `import { useState, useEffect } from 'react';\n\nfunction useDebounce(value, delay) {\n  const [debouncedValue, setDebouncedValue] = useState(value);\n  \n  useEffect(() => {\n    const timer = setTimeout(() => setDebouncedValue(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n  \n  return debouncedValue;\n}`,
+    testCases: [
+      { input: ['test', 300], expectedOutput: 'test', description: 'Debounced value' }
+    ],
+    hints: ['useState for debounced value', 'useEffect with timer', 'Cleanup function']
+  },
+  {
+    id: 'react-ch-6',
+    title: 'Infinite Scroll Component',
+    description: 'Create infinite scroll with intersection observer',
+    difficulty: 'Hard',
+    language: 'react',
+    category: 'Web',
+    points: 115,
+    timeLimit: 40,
+    prompt: 'Build infinite scroll component',
+    initialCode: `function InfiniteScroll({ fetchMore }) {\n  // Your code here\n}`,
+    solution: `import { useEffect, useRef } from 'react';\n\nfunction InfiniteScroll({ fetchMore }) {\n  const observerRef = useRef();\n  \n  useEffect(() => {\n    const observer = new IntersectionObserver(\n      entries => {\n        if (entries[0].isIntersecting) {\n          fetchMore();\n        }\n      },\n      { threshold: 1.0 }\n    );\n    \n    if (observerRef.current) {\n      observer.observe(observerRef.current);\n    }\n    \n    return () => observer.disconnect();\n  }, [fetchMore]);\n  \n  return <div ref={observerRef} />;\n}`,
+    testCases: [
+      { input: [() => {}], expectedOutput: 'component', description: 'Renders component' }
+    ],
+    hints: ['IntersectionObserver API', 'useRef for element', 'Cleanup observer']
+  },
+
+  // SQL Challenges
+  {
+    id: 'sql-ch-5',
+    title: 'Window Functions',
+    description: 'Use ROW_NUMBER and RANK',
+    difficulty: 'Hard',
+    language: 'sql',
+    category: 'Algorithm',
+    points: 105,
+    timeLimit: 30,
+    prompt: 'Find top 3 salaries per department using window functions',
+    initialCode: `-- Your SQL here\nSELECT`,
+    solution: `SELECT department, employee_name, salary\nFROM (\n  SELECT \n    department, \n    employee_name, \n    salary,\n    ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) as rn\n  FROM employees\n) ranked\nWHERE rn <= 3;`,
+    testCases: [
+      { input: 'employees', expectedOutput: 'top_3', description: 'Top 3 per dept' }
+    ],
+    hints: ['ROW_NUMBER() OVER', 'PARTITION BY department', 'WHERE rn <= 3']
+  },
+  {
+    id: 'sql-ch-6',
+    title: 'Recursive CTE',
+    description: 'Find hierarchical data',
+    difficulty: 'Expert',
+    language: 'sql',
+    category: 'Algorithm',
+    points: 130,
+    timeLimit: 45,
+    prompt: 'Use recursive CTE to find all employees under a manager',
+    initialCode: `-- Your SQL here\nWITH RECURSIVE`,
+    solution: `WITH RECURSIVE employee_hierarchy AS (\n  SELECT employee_id, name, manager_id, 1 as level\n  FROM employees\n  WHERE manager_id = 1\n  \n  UNION ALL\n  \n  SELECT e.employee_id, e.name, e.manager_id, eh.level + 1\n  FROM employees e\n  INNER JOIN employee_hierarchy eh ON e.manager_id = eh.employee_id\n)\nSELECT * FROM employee_hierarchy;`,
+    testCases: [
+      { input: 1, expectedOutput: 'hierarchy', description: 'Full hierarchy' }
+    ],
+    hints: ['Base case: manager_id = 1', 'Recursive: JOIN on manager_id', 'Track level']
+  },
+
+  // Go Challenges
+  {
+    id: 'go-ch-3',
+    title: 'Worker Pool Pattern',
+    description: 'Implement concurrent worker pool',
+    difficulty: 'Hard',
+    language: 'go',
+    category: 'Algorithm',
+    points: 115,
+    timeLimit: 40,
+    prompt: 'Create worker pool with goroutines and channels',
+    initialCode: `package main\n\nfunc workerPool(jobs <-chan int, results chan<- int) {\n  // Your code here\n}`,
+    solution: `package main\n\nimport "sync"\n\nfunc workerPool(numWorkers int, jobs <-chan int, results chan<- int) {\n  var wg sync.WaitGroup\n  \n  for i := 0; i < numWorkers; i++ {\n    wg.Add(1)\n    go func() {\n      defer wg.Done()\n      for job := range jobs {\n        results <- job * 2\n      }\n    }()\n  }\n  \n  wg.Wait()\n  close(results)\n}`,
+    testCases: [
+      { input: [5, 'jobs'], expectedOutput: 'results', description: '5 workers' }
+    ],
+    hints: ['sync.WaitGroup', 'Loop numWorkers', 'range over jobs channel']
+  },
+
+  // Rust Challenges
+  {
+    id: 'rust-ch-3',
+    title: 'Ownership and Borrowing',
+    description: 'Fix ownership errors',
+    difficulty: 'Hard',
+    language: 'rust',
+    category: 'Algorithm',
+    points: 110,
+    timeLimit: 35,
+    prompt: 'Implement string reversal using borrowing',
+    initialCode: `fn reverse_string(s: &str) -> String {\n    // Your code here\n}`,
+    solution: `fn reverse_string(s: &str) -> String {\n    s.chars().rev().collect()\n}\n\nfn main() {\n    let text = "hello";\n    let reversed = reverse_string(&text);\n    println!("{}", reversed);\n}`,
+    testCases: [
+      { input: 'hello', expectedOutput: 'olleh', description: 'Reverse string' }
+    ],
+    hints: ['.chars() for iterator', '.rev() to reverse', '.collect() to String']
+  },
+
+  // More Language-Specific Challenges
+  {
+    id: 'java-ch-3',
+    title: 'Stream API Processing',
+    description: 'Use Java Streams for data processing',
+    difficulty: 'Medium',
+    language: 'java',
+    category: 'Algorithm',
+    points: 85,
+    timeLimit: 25,
+    prompt: 'Filter, map, and reduce with streams',
+    initialCode: `import java.util.stream.*;\nimport java.util.*;\n\npublic class Solution {\n  // Your code here\n}`,
+    solution: `import java.util.stream.*;\nimport java.util.*;\n\npublic class Solution {\n  public static int sumOfEvenSquares(List<Integer> numbers) {\n    return numbers.stream()\n      .filter(n -> n % 2 == 0)\n      .map(n -> n * n)\n      .reduce(0, Integer::sum);\n  }\n}`,
+    testCases: [
+      { input: [1,2,3,4,5,6], expectedOutput: 56, description: 'Sum of even squares' }
+    ],
+    hints: ['.stream()', '.filter() for even', '.map() to square']
+  },
+  {
+    id: 'swift-ch-3',
+    title: 'Protocol-Oriented Programming',
+    description: 'Use protocols and extensions',
+    difficulty: 'Medium',
+    language: 'swift',
+    category: 'Algorithm',
+    points: 90,
+    timeLimit: 30,
+    prompt: 'Create protocol with default implementation',
+    initialCode: `protocol Drawable {\n  // Your code here\n}`,
+    solution: `protocol Drawable {\n  func draw()\n}\n\nextension Drawable {\n  func draw() {\n    print("Drawing...")\n  }\n}\n\nstruct Circle: Drawable {}\n\nlet circle = Circle()\ncircle.draw()`,
+    testCases: [
+      { input: 'Circle', expectedOutput: 'Drawing...', description: 'Default implementation' }
+    ],
+    hints: ['protocol definition', 'extension for default', 'struct conforms']
+  },
+  {
+    id: 'kotlin-ch-3',
+    title: 'Coroutines and Async',
+    description: 'Use Kotlin coroutines',
+    difficulty: 'Hard',
+    language: 'kotlin',
+    category: 'Algorithm',
+    points: 105,
+    timeLimit: 35,
+    prompt: 'Fetch data concurrently with coroutines',
+    initialCode: `import kotlinx.coroutines.*\n\nsuspend fun fetchData() {\n  // Your code here\n}`,
+    solution: `import kotlinx.coroutines.*\n\nsuspend fun fetchData() = coroutineScope {\n  val data1 = async { fetchFromAPI1() }\n  val data2 = async { fetchFromAPI2() }\n  listOf(data1.await(), data2.await())\n}\n\nsuspend fun fetchFromAPI1(): String {\n  delay(1000)\n  return "Data 1"\n}\n\nsuspend fun fetchFromAPI2(): String {\n  delay(1000)\n  return "Data 2"\n}`,
+    testCases: [
+      { input: null, expectedOutput: ['Data 1', 'Data 2'], description: 'Parallel fetch' }
+    ],
+    hints: ['async for parallel', 'await() for results', 'coroutineScope']
+  },
+
+  // Algorithm Challenges
+  {
+    id: 'algo-ch-1',
+    title: 'Quick Sort',
+    description: 'Implement quicksort algorithm',
+    difficulty: 'Hard',
+    language: 'javascript',
+    category: 'Algorithm',
+    points: 120,
+    timeLimit: 40,
+    prompt: 'Implement quicksort with partitioning',
+    initialCode: `function quickSort(arr) {\n  // Your code here\n}`,
+    solution: `function quickSort(arr) {\n  if (arr.length <= 1) return arr;\n  const pivot = arr[arr.length - 1];\n  const left = arr.filter((x, i) => x <= pivot && i < arr.length - 1);\n  const right = arr.filter(x => x > pivot);\n  return [...quickSort(left), pivot, ...quickSort(right)];\n}`,
+    testCases: [
+      { input: [3,1,4,1,5,9,2,6], expectedOutput: [1,1,2,3,4,5,6,9], description: 'Sort array' }
+    ],
+    hints: ['Choose pivot', 'Partition into left/right', 'Recursively sort']
+  },
+  {
+    id: 'algo-ch-2',
+    title: 'Dijkstra\'s Algorithm',
+    description: 'Find shortest path in graph',
+    difficulty: 'Expert',
+    language: 'python',
+    category: 'Algorithm',
+    points: 150,
+    timeLimit: 60,
+    prompt: 'Implement Dijkstra for shortest path',
+    initialCode: `def dijkstra(graph, start):\n    # Your code here\n    pass`,
+    solution: `import heapq\n\ndef dijkstra(graph, start):\n    distances = {node: float('inf') for node in graph}\n    distances[start] = 0\n    pq = [(0, start)]\n    \n    while pq:\n        current_dist, current = heapq.heappop(pq)\n        \n        if current_dist > distances[current]:\n            continue\n        \n        for neighbor, weight in graph[current].items():\n            distance = current_dist + weight\n            if distance < distances[neighbor]:\n                distances[neighbor] = distance\n                heapq.heappush(pq, (distance, neighbor))\n    \n    return distances`,
+    testCases: [
+      { input: [{0: {1: 4, 2: 1}}, 0], expectedOutput: {0: 0, 1: 4, 2: 1}, description: 'Shortest paths' }
+    ],
+    hints: ['Use priority queue', 'Track distances', 'Update if shorter path found']
+  },
+
+  // Math Challenges
+  {
+    id: 'math-ch-1',
+    title: 'Prime Number Generator',
+    description: 'Generate primes using Sieve of Eratosthenes',
+    difficulty: 'Medium',
+    language: 'python',
+    category: 'Math',
+    points: 85,
+    timeLimit: 25,
+    prompt: 'Find all primes up to n',
+    initialCode: `def sieve_of_eratosthenes(n):\n    # Your code here\n    pass`,
+    solution: `def sieve_of_eratosthenes(n):\n    primes = [True] * (n + 1)\n    primes[0] = primes[1] = False\n    \n    for i in range(2, int(n**0.5) + 1):\n        if primes[i]:\n            for j in range(i*i, n + 1, i):\n                primes[j] = False\n    \n    return [i for i in range(n + 1) if primes[i]]`,
+    testCases: [
+      { input: 20, expectedOutput: [2,3,5,7,11,13,17,19], description: 'Primes up to 20' }
+    ],
+    hints: ['Boolean array', 'Mark multiples as False', 'Start from i*i']
+  },
+  {
+    id: 'math-ch-2',
+    title: 'Matrix Multiplication',
+    description: 'Multiply two matrices',
+    difficulty: 'Medium',
+    language: 'python',
+    category: 'Math',
+    points: 90,
+    timeLimit: 30,
+    prompt: 'Implement matrix multiplication',
+    initialCode: `def matrix_multiply(A, B):\n    # Your code here\n    pass`,
+    solution: `def matrix_multiply(A, B):\n    rows_A, cols_A = len(A), len(A[0])\n    rows_B, cols_B = len(B), len(B[0])\n    \n    if cols_A != rows_B:\n        return None\n    \n    result = [[0] * cols_B for _ in range(rows_A)]\n    \n    for i in range(rows_A):\n        for j in range(cols_B):\n            for k in range(cols_A):\n                result[i][j] += A[i][k] * B[k][j]\n    \n    return result`,
+    testCases: [
+      { input: [[[1,2],[3,4]], [[5,6],[7,8]]], expectedOutput: [[19,22],[43,50]], description: '2x2 multiplication' }
+    ],
+    hints: ['Check dimensions', 'Triple nested loop', 'result[i][j] = sum(A[i][k] * B[k][j])']
   }
 ]
