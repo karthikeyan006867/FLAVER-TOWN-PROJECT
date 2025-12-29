@@ -94,16 +94,16 @@ export default function HomePage() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
             <div className="text-center">
-              <div className="text-4xl font-bold text-gradient mb-2">170+</div>
-              <div className="text-gray-400">Lessons</div>
+              <div className="text-4xl font-bold text-gradient mb-2">34</div>
+              <div className="text-gray-400">Languages</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-gradient mb-2">50+</div>
+              <div className="text-4xl font-bold text-gradient mb-2">56</div>
               <div className="text-gray-400">Challenges</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-gradient mb-2">24/7</div>
-              <div className="text-gray-400">Support</div>
+              <div className="text-4xl font-bold text-gradient mb-2">100+</div>
+              <div className="text-gray-400">Achievements</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-gradient mb-2">100%</div>
