@@ -41,7 +41,19 @@ const greeting = <h1>Hello, {name}!</h1>
     initialCode: `function Greeting() {\n  // Return a heading that says "Welcome to React!"\n  \n}\n\n// Don't change this\nexport default Greeting`,
     solution: `function Greeting() {\n  return <h1>Welcome to React!</h1>\n}\n\nexport default Greeting`,
     expectedOutput: 'Welcome',
-    hints: ['Use <h1> tags', 'Return JSX from the function', 'JSX looks like HTML']
+    hints: ['Use <h1> tags', 'Return JSX from the function', 'JSX looks like HTML']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'react-2',
@@ -91,7 +103,19 @@ function Greeting({ isLoggedIn }) {
     initialCode: `function UserCard() {\n  const userName = "John Doe"\n  const userAge = 30\n  const isActive = true\n  \n  return (\n    <div>\n      {/* Display name, age, and status */}\n    </div>\n  )\n}\n\nexport default UserCard`,
     solution: `function UserCard() {\n  const userName = "John Doe"\n  const userAge = 30\n  const isActive = true\n  \n  return (\n    <div>\n      <h2>{userName}</h2>\n      <p>Age: {userAge}</p>\n      <p>Status: {isActive ? "Active" : "Inactive"}</p>\n    </div>\n  )\n}\n\nexport default UserCard`,
     expectedOutput: 'John',
-    hints: ['Use {} to embed variables', 'Ternary operator for conditions', 'Wrap JSX in ( )']
+    hints: ['Use {} to embed variables', 'Ternary operator for conditions', 'Wrap JSX in ( )']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'react-3',
@@ -141,7 +165,19 @@ Never modify props inside a component!
     initialCode: 'function Product({ name, price, inStock }) {\n  return (\n    <div>\n      {/* Display product information */}\n    </div>\n  )\n}\n\n// Test it\nconst app = <Product name="Laptop" price={999} inStock={true} />\nexport default Product',
     solution: 'function Product({ name, price, inStock }) {\n  return (\n    <div>\n      <h3>{name}</h3>\n      <p>Price: {price}</p>\n      <p>{inStock ? "In Stock ✓" : "Out of Stock ✗"}</p>\n    </div>\n  )\n}\n\nexport default Product',
     expectedOutput: 'Laptop',
-    hints: ['Destructure props in parameters', 'Use JSX curly braces for price display', 'Conditional for stock status']
+    hints: ['Destructure props in parameters', 'Use JSX curly braces for price display', 'Conditional for stock status']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   // Add 37 more comprehensive React lessons
   ...Array.from({ length: 37 }, (_, i) => {

@@ -44,7 +44,19 @@ const api = 'v1';   // Compile-time constant
   final numbers = [1, 2, 3, 4, 5];
   print('Sum: $\{numbers.reduce((a, b) => a + b)}');
 }`,
-    hints: ['Use print() for output', 'var for type inference', 'String interpolation with ${}']
+    hints: ['Use print() for output', 'var for type inference', 'String interpolation with ${}']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'dart-2',
@@ -97,6 +109,18 @@ void main() {
   print(square(5));
   print(generateRange(1, 5));
 }`,
-    hints: ['=> for single expression functions', 'Use List.generate for ranges', 'Type parameters in <>']
+    hints: ['=> for single expression functions', 'Use List.generate for ranges', 'Type parameters in <>']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   }
 ]

@@ -52,6 +52,18 @@ start() ->
 factorial(0) -> 1;
 factorial(N) when N > 0 ->
   N * factorial(N - 1).`,
-    hints: ['-module and -export directives', 'Variables start with uppercase', 'Atoms are lowercase']
+    hints: ['-module and -export directives', 'Variables start with uppercase', 'Atoms are lowercase'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets minimum length',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write more code to match the lesson requirements'
+      }
+    ]
   }
 ]

@@ -67,6 +67,18 @@ int main() {
   }
   return 0;
 }`,
-    hints: ['@ prefix for Objective-C literals', 'NSLog for output', 'Square brackets for methods']
+    hints: ['@ prefix for Objective-C literals', 'NSLog for output', 'Square brackets for methods'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets minimum length',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write more code to match the lesson requirements'
+      }
+    ]
   }
 ]

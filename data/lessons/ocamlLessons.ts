@@ -56,6 +56,18 @@ let square x = x * x;;
 (* Output *)
 Printf.printf "Factorial: %d\\n" (factorial 5);;
 Printf.printf "Square: %d\\n" (square 7);;`,
-    hints: ['let for bindings', ';;  terminates top-level statements', 'rec for recursive functions']
+    hints: ['let for bindings', ';;  terminates top-level statements', 'rec for recursive functions'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets minimum length',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write more code to match the lesson requirements'
+      }
+    ]
   }
 ]

@@ -58,6 +58,18 @@ let square x = x * x
 
 printfn "Factorial: %d" (factorial 5)
 printfn "Square: %d" (square 7)`,
-    hints: ['let for bindings', 'printfn for formatted output', 'rec keyword for recursion']
+    hints: ['let for bindings', 'printfn for formatted output', 'rec keyword for recursion'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets minimum length',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write more code to match the lesson requirements'
+      }
+    ]
   }
 ]

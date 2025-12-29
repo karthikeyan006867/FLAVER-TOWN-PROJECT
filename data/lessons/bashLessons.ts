@@ -53,7 +53,19 @@ echo "Course: $course, Duration: $duration weeks"
 # User input
 read -p "Enter your favorite language: " lang
 echo "Great! $lang is awesome!"`,
-    hints: ['Use echo for output', 'Variables: name="value"', 'Access with $variable']
+    hints: ['Use echo for output', 'Variables: name="value"', 'Access with $variable'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets minimum length',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write more code to match the lesson requirements'
+      }
+    ]
   },
   {
     id: 'bash-2',
@@ -119,5 +131,18 @@ while [ $counter -le 3 ]; do
   ((counter++))
 done`,
     hints: ['[ ] for conditions', '-eq, -lt, -gt for comparisons', 'do...done for loops']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   }
 ]

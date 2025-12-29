@@ -43,7 +43,19 @@ var count: Int = 0   // Explicit type
     val language = "Kotlin"
     println("Learning $language")
 }`,
-    hints: ['Use println() to print', 'Use val for immutable variables', 'String interpolation uses $variable']
+    hints: ['Use println() to print', 'Use val for immutable variables', 'String interpolation uses $variable']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'kotlin-2',
@@ -90,6 +102,19 @@ var nullableName: String? = null  // Nullable
     println("Nullable: $\{name ?: "No name"}")
 }`,
     hints: ['Use ? for nullable types', 'Elvis operator ?: provides default values', 'Type annotation uses :']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'kotlin-3',

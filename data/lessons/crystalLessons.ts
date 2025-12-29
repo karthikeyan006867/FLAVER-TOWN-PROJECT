@@ -63,7 +63,19 @@ puts "Name: #{person["name"]}"
 # Type annotations
 name : String = "Crystal"
 age : Int32 = 13`,
-    hints: ['puts for output', '#{} for interpolation', 'Type annotations with :']
+    hints: ['puts for output', '#{} for interpolation', 'Type annotations with :']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'crystal-2',
@@ -129,5 +141,18 @@ puts factorial(5)
 calc = Calculator.new
 puts calc.add(3, 4)`,
     hints: ['def for functions', 'Type annotations required', 'property for attributes']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   }
 ]

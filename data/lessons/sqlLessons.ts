@@ -62,6 +62,19 @@ FROM students
 WHERE grade >= 90 
 ORDER BY grade DESC;`,
     hints: ['SELECT retrieves data', 'WHERE filters results', 'INSERT adds new records']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'sql-2',
@@ -112,5 +125,18 @@ INNER JOIN categories ON products.category_id = categories.id
 WHERE products.price > 100
 ORDER BY products.price DESC;`,
     hints: ['JOIN combines tables', 'GROUP BY aggregates data', 'COUNT, SUM, AVG are aggregate functions']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   }
 ]

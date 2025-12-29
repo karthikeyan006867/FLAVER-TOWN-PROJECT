@@ -36,7 +36,19 @@ greet(123); // Compile error - type mismatch!
     estimatedTime: 10,
     initialCode: `// Welcome to TypeScript!\n// Type annotations help catch errors\n\nfunction welcome(name: string) {\n  return "Hello, " + name;\n}\n\nconsole.log(welcome("World"));`,
     solution: `function welcome(name: string) {\n  return "Hello, " + name;\n}\n\nconsole.log(welcome("World"));`,
-    hints: ['TypeScript adds type annotations', 'Helps catch errors early', 'All JS is valid TS']
+    hints: ['TypeScript adds type annotations', 'Helps catch errors early', 'All JS is valid TS']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-2',
@@ -72,6 +84,19 @@ anything = 123; // No error, but loses type safety
     initialCode: `// Declare typed variables\nlet name: ;\nlet age: ;\nlet isActive: ;\n\nconsole.log(name, age, isActive);`,
     solution: `let name: string = "John";\nlet age: number = 30;\nlet isActive: boolean = true;\n\nconsole.log(name, age, isActive);`,
     hints: ['string, number, boolean are primitive types', 'Type comes after colon', 'Initialize with appropriate value']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-3',
@@ -105,6 +130,19 @@ let doubled = nums.map(n => n * 2); // still number[]
     initialCode: `// Create array of fruits\nlet fruits: \n\n// Create tuple for person [name, age]\nlet person: \n\nconsole.log(fruits, person);`,
     solution: `let fruits: string[] = ["apple", "banana", "orange"];\n\nlet person: [string, number] = ["John", 30];\n\nconsole.log(fruits, person);`,
     hints: ['Array syntax: type[]', 'Tuple syntax: [type1, type2]', 'Order matters in tuples']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-4',
@@ -147,7 +185,19 @@ interface Config {
     estimatedTime: 15,
     initialCode: `// Define User interface\ninterface User {\n  // Add properties\n}\n\n// Create user object\nlet user: User = {\n  \n};\n\nconsole.log(user);`,
     solution: `interface User {\n  name: string;\n  age: number;\n  email: string;\n}\n\nlet user: User = {\n  name: "Alice",\n  age: 25,\n  email: "alice@example.com"\n};\n\nconsole.log(user);`,
-    hints: ['interface keyword defines shape', 'Properties with type annotations', '? makes property optional']
+    hints: ['interface keyword defines shape', 'Properties with type annotations', '? makes property optional']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-5',
@@ -185,7 +235,19 @@ function log(message: string, level: string = "info"): void {
     estimatedTime: 15,
     initialCode: `// Create typed function\nfunction calculate(a: , b: ):  {\n  \n}\n\nconsole.log(calculate(5, 3));`,
     solution: `function calculate(a: number, b: number): number {\n  return a + b;\n}\n\nconsole.log(calculate(5, 3));`,
-    hints: ['Parameters: name: type', 'Return type after closing paren', 'void for no return']
+    hints: ['Parameters: name: type', 'Return type after closing paren', 'void for no return']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-6',
@@ -229,7 +291,19 @@ function process(input: string | number) {
     estimatedTime: 18,
     initialCode: `function format(input: string | number): string {\n  // Add type guard and formatting\n  \n}\n\nconsole.log(format("hello"));\nconsole.log(format(42));`,
     solution: `function format(input: string | number): string {\n  if (typeof input === "string") {\n    return input.toUpperCase();\n  }\n  return input.toFixed(2);\n}\n\nconsole.log(format("hello"));\nconsole.log(format(42));`,
-    hints: ['Use | for union types', 'typeof for type guards', 'Handle each type separately']
+    hints: ['Use | for union types', 'typeof for type guards', 'Handle each type separately']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-7',
@@ -266,6 +340,19 @@ type User = {
     initialCode: `// Define Point type\ntype Point = \n\n// Function to calculate distance\nfunction distance(p1: Point, p2: Point): number {\n  \n}\n\nconsole.log(distance({x: 0, y: 0}, {x: 3, y: 4}));`,
     solution: `type Point = { x: number; y: number };\n\nfunction distance(p1: Point, p2: Point): number {\n  const dx = p2.x - p1.x;\n  const dy = p2.y - p1.y;\n  return Math.sqrt(dx * dx + dy * dy);\n}\n\nconsole.log(distance({x: 0, y: 0}, {x: 3, y: 4}));`,
     hints: ['type keyword creates alias', 'Use in function parameters', 'Calculate Pythagorean theorem']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-8',
@@ -314,7 +401,19 @@ function handleStatus(status: Status) {
     estimatedTime: 15,
     initialCode: `// Define Status enum\nenum Status {\n  \n}\n\n// Function using enum\nfunction checkStatus(s: Status): string {\n  \n}\n\nconsole.log(checkStatus(Status.Success));`,
     solution: `enum Status {\n  Pending = "PENDING",\n  Success = "SUCCESS",\n  Error = "ERROR"\n}\n\nfunction checkStatus(s: Status): string {\n  switch (s) {\n    case Status.Pending:\n      return "In progress";\n    case Status.Success:\n      return "Completed";\n    case Status.Error:\n      return "Failed";\n    default:\n      return "Unknown";\n  }\n}\n\nconsole.log(checkStatus(Status.Success));`,
-    hints: ['enum keyword', 'String enums need values', 'Use in switch statements']
+    hints: ['enum keyword', 'String enums need values', 'Use in switch statements']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-9',
@@ -329,6 +428,19 @@ Create functions that work with any type while maintaining type safety.
 \`\`\`typescript
 function identity<T>(value: T): T {
   return value;
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
 }
 
 let num = identity<number>(42);
@@ -402,7 +514,19 @@ let pair: Pair<string, number> = {
     estimatedTime: 20,
     initialCode: `// Define generic Result interface\ninterface Result<T> {\n  \n}\n\n// Create instances\nlet success: Result<number> = {\n  \n};\n\nlet error: Result<string> = {\n  \n};`,
     solution: `interface Result<T> {\n  success: boolean;\n  data?: T;\n  error?: string;\n}\n\nlet success: Result<number> = {\n  success: true,\n  data: 42\n};\n\nlet error: Result<string> = {\n  success: false,\n  error: "Failed to load"\n};`,
-    hints: ['Generic type in angle brackets', 'Optional properties with ?', 'Success/error pattern']
+    hints: ['Generic type in angle brackets', 'Optional properties with ?', 'Success/error pattern']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-11',
@@ -456,7 +580,19 @@ class User {
     estimatedTime: 20,
     initialCode: `class User {\n  // Add properties\n  \n  // Constructor\n  \n  // Methods\n  \n}\n\nconst user = new User("Alice", "alice@example.com");\nconsole.log(user.greet());`,
     solution: `class User {\n  name: string;\n  email: string;\n\n  constructor(name: string, email: string) {\n    this.name = name;\n    this.email = email;\n  }\n\n  greet(): string {\n    return \`Hello, I'm \${this.name}\`;\n  }\n}\n\nconst user = new User("Alice", "alice@example.com");\nconsole.log(user.greet());`,
-    hints: ['Declare property types', 'Constructor parameters typed', 'Methods have return types']
+    hints: ['Declare property types', 'Constructor parameters typed', 'Methods have return types']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-12',
@@ -503,7 +639,19 @@ abstract class Shape {
     estimatedTime: 20,
     initialCode: `class Person {\n  constructor(public name: string) {}\n}\n\n// Extend Person\nclass Employee extends Person {\n  \n}\n\nconst emp = new Employee("John", "Developer");\nconsole.log(emp.name, emp.jobTitle);`,
     solution: `class Person {\n  constructor(public name: string) {}\n}\n\nclass Employee extends Person {\n  constructor(name: string, public jobTitle: string) {\n    super(name);\n  }\n  \n  getInfo(): string {\n    return \`\${this.name} - \${this.jobTitle}\`;\n  }\n}\n\nconst emp = new Employee("John", "Developer");\nconsole.log(emp.getInfo());`,
-    hints: ['extends keyword', 'super() calls parent constructor', 'Add new properties']
+    hints: ['extends keyword', 'super() calls parent constructor', 'Add new properties']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-13',
@@ -544,7 +692,19 @@ class Data implements Printable, Serializable {
     estimatedTime: 20,
     initialCode: `// Define Storable interface\ninterface Storable {\n  \n}\n\n// Implement interface\nclass Product implements Storable {\n  \n}\n\nconst product = new Product("Laptop", 999);\nconsole.log(product.save());`,
     solution: `interface Storable {\n  save(): string;\n  load(data: string): void;\n}\n\nclass Product implements Storable {\n  constructor(public name: string, public price: number) {}\n  \n  save(): string {\n    return JSON.stringify(this);\n  }\n  \n  load(data: string): void {\n    const obj = JSON.parse(data);\n    this.name = obj.name;\n    this.price = obj.price;\n  }\n}\n\nconst product = new Product("Laptop", 999);\nconsole.log(product.save());`,
-    hints: ['implements keyword', 'Must define all interface methods', 'Can implement multiple']
+    hints: ['implements keyword', 'Must define all interface methods', 'Can implement multiple']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-14',
@@ -585,7 +745,19 @@ let value = getValue("key")!; // Assert non-null
     estimatedTime: 15,
     initialCode: `// Type assert DOM element\nconst button = document.getElementById("btn");\n\n// Add event listener\n`,
     solution: `const button = document.getElementById("btn") as HTMLButtonElement;\n\nbutton.addEventListener("click", () => {\n  console.log("Clicked!");\n});`,
-    hints: ['as HTMLElementType', 'Common: HTMLInputElement, HTMLButtonElement', 'Use when you know the type']
+    hints: ['as HTMLElementType', 'Common: HTMLInputElement, HTMLButtonElement', 'Use when you know the type']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-15',
@@ -631,7 +803,19 @@ let config: Required<Config> = {
     estimatedTime: 18,
     initialCode: `interface Product {\n  id: number;\n  name: string;\n  price: number;\n}\n\n// Create update function\nfunction updateProduct(product: Product, updates: ) {\n  \n}\n\nconst p = { id: 1, name: "Laptop", price: 999 };\nconsole.log(updateProduct(p, { price: 899 }));`,
     solution: `interface Product {\n  id: number;\n  name: string;\n  price: number;\n}\n\nfunction updateProduct(product: Product, updates: Partial<Product>): Product {\n  return { ...product, ...updates };\n}\n\nconst p = { id: 1, name: "Laptop", price: 999 };\nconsole.log(updateProduct(p, { price: 899 }));`,
-    hints: ['Partial<Type> makes all optional', 'Use spread operator', 'Return merged object']
+    hints: ['Partial<Type> makes all optional', 'Use spread operator', 'Return merged object']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-16',
@@ -668,7 +852,19 @@ type UserWithoutPassword = Omit<User, "password">;
     estimatedTime: 18,
     initialCode: `interface User {\n  id: number;\n  name: string;\n  email: string;\n  password: string;\n  createdAt: Date;\n}\n\n// Create PublicUser omitting sensitive fields\ntype PublicUser = \n\nfunction getPublicUser(user: User): PublicUser {\n  \n}`,
     solution: `interface User {\n  id: number;\n  name: string;\n  email: string;\n  password: string;\n  createdAt: Date;\n}\n\ntype PublicUser = Omit<User, "password" | "createdAt">;\n\nfunction getPublicUser(user: User): PublicUser {\n  const { password, createdAt, ...publicData } = user;\n  return publicData;\n}`,
-    hints: ['Omit<Type, "key1" | "key2">', 'Pick opposite of Omit', 'Use destructuring to extract']
+    hints: ['Omit<Type, "key1" | "key2">', 'Pick opposite of Omit', 'Use destructuring to extract']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-17',
@@ -713,7 +909,19 @@ config.apiKey = "new"; // Error!
     estimatedTime: 18,
     initialCode: `type Environment = "dev" | "staging" | "prod";\n\n// Create config for each environment\ntype Config = \n\nconst configs: Config = {\n  \n};\n\nconsole.log(configs);`,
     solution: `type Environment = "dev" | "staging" | "prod";\n\ntype Config = Record<Environment, { apiUrl: string; debug: boolean }>;\n\nconst configs: Config = {\n  dev: { apiUrl: "http://localhost", debug: true },\n  staging: { apiUrl: "https://staging.api", debug: true },\n  prod: { apiUrl: "https://api.com", debug: false }\n};\n\nconsole.log(configs);`,
-    hints: ['Record<Keys, ValueType>', 'Keys must be string | number | symbol', 'Readonly prevents modification']
+    hints: ['Record<Keys, ValueType>', 'Keys must be string | number | symbol', 'Readonly prevents modification']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-18',
@@ -761,7 +969,19 @@ function isFish(pet: Fish | Bird): pet is Fish {
     estimatedTime: 20,
     initialCode: `interface User {\n  type: "user";\n  name: string;\n}\n\ninterface Admin {\n  type: "admin";\n  name: string;\n  permissions: string[];\n}\n\n// Create type guard\nfunction isAdmin(person: User | Admin):  {\n  \n}\n\nfunction greet(person: User | Admin) {\n  if (isAdmin(person)) {\n    console.log(\`Admin \${person.name} with \${person.permissions.length} perms\`);\n  }\n}`,
     solution: `interface User {\n  type: "user";\n  name: string;\n}\n\ninterface Admin {\n  type: "admin";\n  name: string;\n  permissions: string[];\n}\n\nfunction isAdmin(person: User | Admin): person is Admin {\n  return person.type === "admin";\n}\n\nfunction greet(person: User | Admin) {\n  if (isAdmin(person)) {\n    console.log(\`Admin \${person.name} with \${person.permissions.length} perms\`);\n  } else {\n    console.log(\`User \${person.name}\`);\n  }\n}`,
-    hints: ['Return type: value is Type', 'Check discriminating property', 'Narrows type in if block']
+    hints: ['Return type: value is Type', 'Check discriminating property', 'Narrows type in if block']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-19',
@@ -806,7 +1026,19 @@ function area(shape: Shape): number {
     estimatedTime: 22,
     initialCode: `// Define discriminated union\ninterface Success {\n  \n}\n\ninterface Error {\n  \n}\n\ntype Result = Success | Error;\n\nfunction handleResult(result: Result): string {\n  \n}`,
     solution: `interface Success {\n  status: "success";\n  data: any;\n}\n\ninterface Error {\n  status: "error";\n  message: string;\n}\n\ntype Result = Success | Error;\n\nfunction handleResult(result: Result): string {\n  switch (result.status) {\n    case "success":\n      return \`Got data: \${result.data}\`;\n    case "error":\n      return \`Error: \${result.message}\`;\n  }\n}`,
-    hints: ['Common tag property (kind, type, status)', 'Use in switch statement', 'Each variant is interface']
+    hints: ['Common tag property (kind, type, status)', 'Use in switch statement', 'Each variant is interface']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-20',
@@ -818,6 +1050,19 @@ function area(shape: Shape): number {
 \`\`\`typescript
 type Flags<T> = {
   [K in keyof T]: boolean;
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
 };
 
 interface User {
@@ -896,6 +1141,19 @@ type Numbers = Filter<string | number | boolean, number>;
     initialCode: `// Create NonNullable type\ntype MyNonNullable<T> = \n\ntype A = MyNonNullable<string | null | undefined>;\n// Should be string`,
     solution: `type MyNonNullable<T> = T extends null | undefined ? never : T;\n\ntype A = MyNonNullable<string | null | undefined>;\n\nfunction process(value: A) {\n  console.log(value.toUpperCase());\n}`,
     hints: ['extends checks if type matches', 'never removes from union', 'Built-in: NonNullable<T>']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-22',
@@ -937,6 +1195,19 @@ type EventHandler = \`on\${Capitalize<EventName>}\`;
     initialCode: `type Property = "margin" | "padding";\ntype Side = "top" | "bottom" | "left" | "right";\n\n// Create combined type like "margin-top", "padding-left", etc.\ntype CSSProperty = \n\nconst prop: CSSProperty = "margin-top"; // Should be valid`,
     solution: `type Property = "margin" | "padding";\ntype Side = "top" | "bottom" | "left" | "right";\n\ntype CSSProperty = \`\${Property}-\${Side}\`;\n\nconst prop1: CSSProperty = "margin-top";\nconst prop2: CSSProperty = "padding-left";\n\nfunction setStyle(property: CSSProperty, value: string) {\n  console.log(\`Setting \${property} to \${value}\`);\n}`,
     hints: ['Use template literal syntax', 'Unions create all combinations', 'Intrinsic helpers available']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-23',
@@ -948,6 +1219,19 @@ type EventHandler = \`on\${Capitalize<EventName>}\`;
 \`\`\`typescript
 interface StringMap {
   [key: string]: string;
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
 }
 
 let map: StringMap = {
@@ -1039,7 +1323,19 @@ class Calculator {
     estimatedTime: 25,
     initialCode: `// Create @measure decorator\nfunction measure(target: any, key: string, descriptor: PropertyDescriptor) {\n  \n}\n\nclass Service {\n  @measure\n  async fetchData() {\n    await new Promise(resolve => setTimeout(resolve, 1000));\n    return "data";\n  }\n}`,
     solution: `function measure(target: any, key: string, descriptor: PropertyDescriptor) {\n  const original = descriptor.value;\n  \n  descriptor.value = async function(...args: any[]) {\n    const start = performance.now();\n    const result = await original.apply(this, args);\n    const end = performance.now();\n    console.log(\`\${key} took \${end - start}ms\`);\n    return result;\n  };\n}\n\nclass Service {\n  @measure\n  async fetchData() {\n    await new Promise(resolve => setTimeout(resolve, 1000));\n    return "data";\n  }\n}`,
-    hints: ['Descriptor.value is the method', 'Wrap original function', 'Return from decorator']
+    hints: ['Descriptor.value is the method', 'Wrap original function', 'Return from decorator']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-25',
@@ -1090,7 +1386,19 @@ let c = new Shapes.Circle(10);
     estimatedTime: 20,
     initialCode: `// File: validator.ts\nexport function isEmail(s: string): boolean {\n  return s.includes('@');\n}\n\nexport function isURL(s: string): boolean {\n  return s.startsWith('http');\n}\n\n// File: app.ts\n// Import and use validators\n`,
     solution: `// validator.ts\nexport function isEmail(s: string): boolean {\n  return s.includes('@');\n}\n\nexport function isURL(s: string): boolean {\n  return s.startsWith('http');\n}\n\n// app.ts\nimport { isEmail, isURL } from './validator';\n\nconsole.log(isEmail('test@example.com'));\nconsole.log(isURL('https://example.com'));`,
-    hints: ['export keyword', 'import { name } from path', 'Use ES6 modules over namespaces']
+    hints: ['export keyword', 'import { name } from path', 'Use ES6 modules over namespaces']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-26',
@@ -1139,7 +1447,19 @@ export function init(config: Config): void;
     estimatedTime: 20,
     initialCode: `// Create declaration file for jQuery-like library\n// global.d.ts\n\n// Declare $ function\n\n// Usage:\n// $(selector).text(value)\n// $(selector).on(event, handler)`,
     solution: `// global.d.ts\ninterface JQuery {\n  text(value?: string): JQuery;\n  on(event: string, handler: () => void): JQuery;\n  addClass(className: string): JQuery;\n}\n\ndeclare function $(selector: string): JQuery;\n\n// Usage\nconst elem = $("#myElement");\nelem.text("Hello").addClass("active");`,
-    hints: ['declare keyword for globals', 'Interface for methods', 'Chainable returns self']
+    hints: ['declare keyword for globals', 'Interface for methods', 'Chainable returns self']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-27',
@@ -1151,6 +1471,19 @@ export function init(config: Config): void;
 \`\`\`typescript
 interface HasLength {
   length: number;
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
 }
 
 function longest<T extends HasLength>(a: T, b: T): T {
@@ -1219,7 +1552,19 @@ type Value = Awaited<Promise<number>>; // number
     estimatedTime: 25,
     initialCode: `// Create Parameters type\ntype MyParameters<T> = \n\nfunction test(name: string, age: number): void {}\n\ntype Params = MyParameters<typeof test>;\n// Should be [string, number]`,
     solution: `type MyParameters<T> = T extends (...args: infer P) => any ? P : never;\n\nfunction test(name: string, age: number): void {}\n\ntype Params = MyParameters<typeof test>;\n\nfunction call(...args: Params) {\n  test(...args);\n}`,
-    hints: ['infer in conditional type', 'Match function signature', '...args is array']
+    hints: ['infer in conditional type', 'Match function signature', '...args is array']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-29',
@@ -1267,7 +1612,19 @@ const inputRef = useRef<HTMLInputElement>(null);
     estimatedTime: 25,
     initialCode: `// Create Button component with props\ninterface ButtonProps {\n  \n}\n\nconst Button: React.FC<ButtonProps> = () => {\n  \n};\n\n// Usage: <Button label="Click me" onClick={() => {}} />`,
     solution: `interface ButtonProps {\n  label: string;\n  onClick: () => void;\n  disabled?: boolean;\n}\n\nconst Button: React.FC<ButtonProps> = ({ label, onClick, disabled }) => {\n  return (\n    <button onClick={onClick} disabled={disabled}>\n      {label}\n    </button>\n  );\n};\n\n// Usage\n<Button label="Click me" onClick={() => console.log("Clicked")} />`,
-    hints: ['React.FC<Props>', 'Event types from React', 'Optional props with ?']
+    hints: ['React.FC<Props>', 'Event types from React', 'Optional props with ?']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'ts-30',
@@ -1319,6 +1676,18 @@ Build a production-ready API client!`,
       'Private method for shared logic',
       'Handle errors gracefully',
       'Type-safe method signatures'
+    ]    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
     ]
   }
 ];

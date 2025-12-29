@@ -329,7 +329,29 @@ Every navigation menu on websites like YouTube, Amazon, Netflix uses anchor tags
     estimatedTime: 8,
     initialCode: `<h1>My Image</h1>\n<!-- Add image here -->`,
     solution: `<h1>My Image</h1>\n<img src="https://via.placeholder.com/400" alt="Placeholder image" width="400">`,
-    hints: ['img is self-closing', 'Always add alt', 'src is the image URL']
+    hints: ['img is self-closing', 'Always add alt', 'src is the image URL'],
+    testCases: [
+      {
+        name: 'Has img tag',
+        test: (code) => /<img\s+[^>]*>/i.test(code),
+        errorMessage: 'Add an <img> tag'
+      },
+      {
+        name: 'Has src attribute',
+        test: (code) => /<img\s+[^>]*src=/i.test(code),
+        errorMessage: 'Image must have a src attribute'
+      },
+      {
+        name: 'Has alt attribute',
+        test: (code) => /<img\s+[^>]*alt=/i.test(code),
+        errorMessage: 'Image must have an alt attribute for accessibility'
+      },
+      {
+        name: 'Uses placeholder URL',
+        test: (code) => /https:\/\/via\.placeholder\.com\/400/i.test(code),
+        errorMessage: 'Use the placeholder URL: https://via.placeholder.com/400'
+      }
+    ]
   },
   {
     id: 'html-7',
@@ -355,7 +377,34 @@ Every navigation menu on websites like YouTube, Amazon, Netflix uses anchor tags
     estimatedTime: 15,
     initialCode: `<form>\n  <!-- Add labels and inputs -->\n  \n</form>`,
     solution: `<form>\n  <label for="name">Name:</label>\n  <input type="text" id="name" name="name">\n  \n  <label for="email">Email:</label>\n  <input type="email" id="email" name="email">\n  \n  <button type="submit">Submit</button>\n</form>`,
-    hints: ['label "for" matches input "id"', 'Use type="email" for email', 'button inside form']
+    hints: ['label "for" matches input "id"', 'Use type="email" for email', 'button inside form'],
+    testCases: [
+      {
+        name: 'Has form tag',
+        test: (code) => /<form>/i.test(code),
+        errorMessage: 'Wrap inputs in a <form> tag'
+      },
+      {
+        name: 'Has text input for name',
+        test: (code) => /<input\s+[^>]*type="text"[^>]*>/i.test(code),
+        errorMessage: 'Add an input with type="text" for name'
+      },
+      {
+        name: 'Has email input',
+        test: (code) => /<input\s+[^>]*type="email"[^>]*>/i.test(code),
+        errorMessage: 'Add an input with type="email"'
+      },
+      {
+        name: 'Has submit button',
+        test: (code) => /<button[^>]*type="submit"[^>]*>/i.test(code),
+        errorMessage: 'Add a button with type="submit"'
+      },
+      {
+        name: 'Has labels',
+        test: (code) => (code.match(/<label/gi) || []).length >= 2,
+        errorMessage: 'Add labels for both inputs'
+      }
+    ]
   },
   {
     id: 'html-8',
@@ -379,7 +428,32 @@ Every navigation menu on websites like YouTube, Amazon, Netflix uses anchor tags
     estimatedTime: 15,
     initialCode: `<form>\n  <p>Skill Level:</p>\n  <!-- Add radio buttons -->\n  \n  <p>Languages:</p>\n  <!-- Add checkboxes -->\n</form>`,
     solution: `<form>\n  <p>Skill Level:</p>\n  <input type="radio" name="level" value="beginner" id="beg">\n  <label for="beg">Beginner</label>\n  <input type="radio" name="level" value="advanced" id="adv">\n  <label for="adv">Advanced</label>\n  \n  <p>Languages:</p>\n  <input type="checkbox" name="lang" value="html" id="html">\n  <label for="html">HTML</label>\n  <input type="checkbox" name="lang" value="css" id="css">\n  <label for="css">CSS</label>\n</form>`,
-    hints: ['Same name for radio group', 'Different names for checkboxes', 'id for label connection']
+    hints: ['Same name for radio group', 'Different names for checkboxes', 'id for label connection'],
+    testCases: [
+      {
+        name: 'Has radio buttons',
+        test: (code) => (code.match(/<input\s+[^>]*type="radio"/gi) || []).length >= 2,
+        errorMessage: 'Add at least 2 radio buttons'
+      },
+      {
+        name: 'Radio buttons have same name',
+        test: (code) => {
+          const radioMatches = code.match(/<input\s+[^>]*type="radio"[^>]*>/gi) || []
+          if (radioMatches.length < 2) return false
+          const names = radioMatches.map(r => {
+            const match = r.match(/name="([^"]+)"/i)
+            return match ? match[1] : ''
+          })
+          return names[0] === names[1]
+        },
+        errorMessage: 'Radio buttons should have the same name attribute'
+      },
+      {
+        name: 'Has checkboxes',
+        test: (code) => (code.match(/<input\s+[^>]*type="checkbox"/gi) || []).length >= 2,
+        errorMessage: 'Add at least 2 checkboxes'
+      }
+    ]
   },
   {
     id: 'html-9',
@@ -406,7 +480,29 @@ Every navigation menu on websites like YouTube, Amazon, Netflix uses anchor tags
     estimatedTime: 12,
     initialCode: `<table>\n  <!-- Add table header and rows -->\n</table>`,
     solution: `<table>\n  <tr>\n    <th>Language</th>\n    <th>Difficulty</th>\n  </tr>\n  <tr>\n    <td>HTML</td>\n    <td>Easy</td>\n  </tr>\n  <tr>\n    <td>JavaScript</td>\n    <td>Medium</td>\n  </tr>\n</table>`,
-    hints: ['tr = table row', 'th = header cell', 'td = data cell']
+    hints: ['tr = table row', 'th = header cell', 'td = data cell'],
+    testCases: [
+      {
+        name: 'Has table tag',
+        test: (code) => /<table>/i.test(code),
+        errorMessage: 'Wrap content in a <table> tag'
+      },
+      {
+        name: 'Has table rows',
+        test: (code) => (code.match(/<tr>/gi) || []).length >= 3,
+        errorMessage: 'Add at least 3 table rows (1 header + 2 data)'
+      },
+      {
+        name: 'Has header cells',
+        test: (code) => (code.match(/<th>/gi) || []).length >= 2,
+        errorMessage: 'Add header cells with <th> tags'
+      },
+      {
+        name: 'Has data cells',
+        test: (code) => (code.match(/<td>/gi) || []).length >= 2,
+        errorMessage: 'Add data cells with <td> tags'
+      }
+    ]
   },
   {
     id: 'html-10',
@@ -434,7 +530,29 @@ Instead of generic <div>, use meaningful tags:
     estimatedTime: 15,
     initialCode: `<!DOCTYPE html>\n<html>\n<body>\n  <!-- Add semantic structure -->\n</body>\n</html>`,
     solution: `<!DOCTYPE html>\n<html>\n<body>\n  <header>\n    <h1>My Website</h1>\n  </header>\n  <nav>\n    <a href="#home">Home</a>\n    <a href="#about">About</a>\n  </nav>\n  <main>\n    <h2>Welcome</h2>\n    <p>This is the main content.</p>\n  </main>\n  <footer>\n    <p>&copy; 2025 My Site</p>\n  </footer>\n</body>\n</html>`,
-    hints: ['header at top', 'nav for links', 'main for content', 'footer at bottom']
+    hints: ['header at top', 'nav for links', 'main for content', 'footer at bottom'],
+    testCases: [
+      {
+        name: 'Has header tag',
+        test: (code) => /<header>/i.test(code),
+        errorMessage: 'Add a <header> tag'
+      },
+      {
+        name: 'Has nav tag',
+        test: (code) => /<nav>/i.test(code),
+        errorMessage: 'Add a <nav> tag for navigation'
+      },
+      {
+        name: 'Has main tag',
+        test: (code) => /<main>/i.test(code),
+        errorMessage: 'Add a <main> tag for main content'
+      },
+      {
+        name: 'Has footer tag',
+        test: (code) => /<footer>/i.test(code),
+        errorMessage: 'Add a <footer> tag'
+      }
+    ]
   },
 
   // SECTION 2: INTERMEDIATE HTML (Lessons 11-25)
@@ -462,7 +580,24 @@ Special characters need HTML entities to display properly.
     estimatedTime: 10,
     initialCode: `<p><!-- Add HTML & CSS with copyright --></p>`,
     solution: `<p>HTML &amp; CSS &copy; 2025</p>`,
-    hints: ['&amp; for &', '&copy; for ©', 'Use entities inside tags']
+    hints: ['&amp; for &', '&copy; for ©', 'Use entities inside tags'],
+    testCases: [
+      {
+        name: 'Has paragraph tag',
+        test: (code) => /<p>/i.test(code),
+        errorMessage: 'Use a <p> tag'
+      },
+      {
+        name: 'Uses &amp; entity',
+        test: (code) => /&amp;/i.test(code),
+        errorMessage: 'Use &amp; HTML entity for the & symbol'
+      },
+      {
+        name: 'Uses &copy; entity',
+        test: (code) => /&copy;/i.test(code),
+        errorMessage: 'Use &copy; HTML entity for the © symbol'
+      }
+    ]
   },
   {
     id: 'html-12',
@@ -489,7 +624,29 @@ Special characters need HTML entities to display properly.
     estimatedTime: 12,
     initialCode: `<!-- Create your div structure -->`,
     solution: `<div class="card">\n  <h2>Welcome</h2>\n  <p>This is <span class="highlight">amazing</span> content!</p>\n</div>`,
-    hints: ['div for blocks', 'span for inline', 'Use class attribute']
+    hints: ['div for blocks', 'span for inline', 'Use class attribute'],
+    testCases: [
+      {
+        name: 'Has div tag',
+        test: (code) => /<div/i.test(code),
+        errorMessage: 'Add a <div> tag'
+      },
+      {
+        name: 'Div has class attribute',
+        test: (code) => /<div\s+[^>]*class=/i.test(code),
+        errorMessage: 'Add a class attribute to the div'
+      },
+      {
+        name: 'Has span tag',
+        test: (code) => /<span/i.test(code),
+        errorMessage: 'Add a <span> tag'
+      },
+      {
+        name: 'Has heading',
+        test: (code) => /<h[1-6]>/i.test(code),
+        errorMessage: 'Add a heading tag'
+      }
+    ]
   },
   {
     id: 'html-13',
@@ -517,7 +674,29 @@ Comments are not displayed in the browser.
     estimatedTime: 8,
     initialCode: `<header>\n  <h1>My Site</h1>\n</header>\n\n<main>\n  <p>Content</p>\n</main>`,
     solution: `<!-- Site Header -->\n<header>\n  <h1>My Site</h1>\n</header>\n\n<!-- Main Content Area -->\n<main>\n  <p>Content</p>\n</main>`,
-    hints: ['<!-- comment -->', 'Describe sections', 'Help other developers']
+    hints: ['<!-- comment -->', 'Describe sections', 'Help other developers'],
+    testCases: [
+      {
+        name: 'Has HTML comments',
+        test: (code) => /<!--[\s\S]*-->/i.test(code),
+        errorMessage: 'Add HTML comments using <!-- and -->'
+      },
+      {
+        name: 'Has at least 2 comments',
+        test: (code) => (code.match(/<!--/g) || []).length >= 2,
+        errorMessage: 'Add at least 2 comments'
+      },
+      {
+        name: 'Has header tag',
+        test: (code) => /<header>/i.test(code),
+        errorMessage: 'Keep the <header> tag'
+      },
+      {
+        name: 'Has main tag',
+        test: (code) => /<main>/i.test(code),
+        errorMessage: 'Keep the <main> tag'
+      }
+    ]
   },
   {
     id: 'html-14',
@@ -541,7 +720,29 @@ Attributes provide additional information about elements.
     estimatedTime: 12,
     initialCode: `<!-- Create a link to google.com, opens in new tab, with title -->`,
     solution: `<a href="https://google.com" target="_blank" title="Visit Google">Google</a>`,
-    hints: ['href for URL', 'target="_blank" for new tab', 'title shows on hover']
+    hints: ['href for URL', 'target="_blank" for new tab', 'title shows on hover'],
+    testCases: [
+      {
+        name: 'Has anchor tag',
+        test: (code) => /<a\s+[^>]*>/i.test(code),
+        errorMessage: 'Add an <a> tag'
+      },
+      {
+        name: 'Has href attribute',
+        test: (code) => /<a\s+[^>]*href=/i.test(code),
+        errorMessage: 'Add href attribute to the link'
+      },
+      {
+        name: 'Has target="_blank"',
+        test: (code) => /target="_blank"/i.test(code),
+        errorMessage: 'Add target="_blank" to open link in new tab'
+      },
+      {
+        name: 'Has title attribute',
+        test: (code) => /<a\s+[^>]*title=/i.test(code),
+        errorMessage: 'Add title attribute for tooltip'
+      }
+    ]
   },
   {
     id: 'html-15',
@@ -576,7 +777,24 @@ Lists can contain other lists.
     estimatedTime: 15,
     initialCode: `<ul>\n  <!-- Add Web Development with nested list of HTML, CSS, JS -->\n</ul>`,
     solution: `<ul>\n  <li>Web Development\n    <ul>\n      <li>HTML</li>\n      <li>CSS</li>\n      <li>JavaScript</li>\n      <li>TypeScript</li>\n    </ul>\n  </li>\n  <li>Backend\n    <ul>\n      <li>Python</li>\n      <li>Node.js</li>\n    </ul>\n  </li>\n</ul>`,
-    hints: ['Put ul inside li', 'Indent for readability', 'Can nest multiple levels']
+    hints: ['Put ul inside li', 'Indent for readability', 'Can nest multiple levels'],
+    testCases: [
+      {
+        name: 'Has outer ul tag',
+        test: (code) => /<ul>/i.test(code),
+        errorMessage: 'Add a <ul> tag'
+      },
+      {
+        name: 'Has nested ul tag',
+        test: (code) => (code.match(/<ul>/gi) || []).length >= 2,
+        errorMessage: 'Add a nested <ul> inside an <li>'
+      },
+      {
+        name: 'Has list items',
+        test: (code) => (code.match(/<li>/gi) || []).length >= 4,
+        errorMessage: 'Add at least 4 list items total'
+      }
+    ]
   },
   {
     id: 'html-16',
@@ -604,6 +822,19 @@ Use for terms and definitions.
     initialCode: `<dl>\n  <!-- Add terms and definitions -->\n</dl>`,
     solution: `<dl>\n  <dt>Variable</dt>\n  <dd>A container for storing data values</dd>\n  \n  <dt>Function</dt>\n  <dd>A reusable block of code</dd>\n  \n  <dt>Array</dt>\n  <dd>A collection of items</dd>\n</dl>`,
     hints: ['dl = description list', 'dt = term', 'dd = definition']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-17',
@@ -631,6 +862,19 @@ Use for terms and definitions.
     initialCode: `<!-- Add a famous quote with blockquote and cite -->`,
     solution: `<blockquote>\n  "Code is like humor. When you have to explain it, it's bad."\n  <cite>- Cory House</cite>\n</blockquote>`,
     hints: ['blockquote for long quotes', 'cite for attribution', 'q for inline quotes']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-18',
@@ -664,7 +908,19 @@ function greet() {
     estimatedTime: 12,
     initialCode: `<!-- Display a code block -->`,
     solution: `<p>To declare a variable, use <code>let name = "value";</code></p>\n\n<pre><code>function add(a, b) {\n  return a + b;\n}</code></pre>`,
-    hints: ['pre preserves spacing', 'code for code snippets', 'Combine for code blocks']
+    hints: ['pre preserves spacing', 'code for code snippets', 'Combine for code blocks']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-19',
@@ -689,6 +945,19 @@ function greet() {
     initialCode: `<p><!-- Add sentence with HTML, CSS, JS abbreviations --></p>`,
     solution: `<p>Web development uses <abbr title="HyperText Markup Language">HTML</abbr>, <abbr title="Cascading Style Sheets">CSS</abbr>, <abbr title="JavaScript">JS</abbr>, and <abbr title="TypeScript">TS</abbr>.</p>`,
     hints: ['abbr with title attribute', 'title shows on hover', 'dfn for definitions']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-20',
@@ -713,6 +982,19 @@ function greet() {
     initialCode: `<article>\n  <!-- Add title, image with caption, and content -->\n</article>`,
     solution: `<article>\n  <h2>Learning HTML</h2>\n  <figure>\n    <img src="html-logo.png" alt="HTML5 Logo">\n    <figcaption>HTML5 brings semantic meaning</figcaption>\n  </figure>\n  <p>HTML5 introduced many new semantic elements.</p>\n  <time datetime="2025-12-24">December 24, 2025</time>\n</article>`,
     hints: ['article for content', 'figure wraps img', 'figcaption for caption', 'time for dates']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-21',
@@ -742,6 +1024,19 @@ console.log(div.dataset.role);   // "admin"
     initialCode: `<!-- Create product div with data-id, data-name, data-price -->`,
     solution: `<div class="product" data-id="101" data-name="Laptop" data-price="999">\n  <h3>Premium Laptop</h3>\n  <p>$999</p>\n</div>`,
     hints: ['data-* format', 'Use kebab-case', 'Access via dataset in JS']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-22',
@@ -769,6 +1064,19 @@ Provide metadata about the page.
     initialCode: `<!DOCTYPE html>\n<html>\n<head>\n  <title>My Site</title>\n  <!-- Add meta tags -->\n</head>\n<body></body>\n</html>`,
     solution: `<!DOCTYPE html>\n<html>\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <meta name="description" content="Learn web development with interactive tutorials">\n  <meta name="keywords" content="HTML, CSS, JavaScript, TypeScript, Python">\n  <title>My Site</title>\n</head>\n<body></body>\n</html>`,
     hints: ['charset for encoding', 'viewport for responsive', 'description for SEO']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-23',
@@ -798,6 +1106,19 @@ Provide metadata about the page.
     initialCode: `<!-- Add audio element with controls -->`,
     solution: `<audio controls>\n  <source src="music.mp3" type="audio/mpeg">\n  <source src="music.ogg" type="audio/ogg">\n  Your browser does not support the audio element.\n</audio>`,
     hints: ['audio tag with controls', 'Multiple sources for compatibility', 'Fallback text']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-24',
@@ -827,6 +1148,19 @@ Provide metadata about the page.
     initialCode: `<!-- Add video element -->`,
     solution: `<video width="640" height="360" controls poster="thumbnail.jpg">\n  <source src="tutorial.mp4" type="video/mp4">\n  <source src="tutorial.webm" type="video/webm">\n  Your browser does not support the video tag.\n</video>`,
     hints: ['video tag with dimensions', 'poster for thumbnail', 'Multiple formats']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-25',
@@ -858,6 +1192,19 @@ Embed another webpage or content.
     initialCode: `<!-- Embed YouTube video using iframe -->`,
     solution: `<iframe \n  width="560" \n  height="315" \n  src="https://www.youtube.com/embed/dQw4w9WgXcQ" \n  title="YouTube video player" \n  frameborder="0" \n  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" \n  allowfullscreen>\n</iframe>`,
     hints: ['iframe src for URL', 'width and height', 'title for accessibility']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
 
   // ADVANCED SECTION (Lessons 26-40)
@@ -889,6 +1236,19 @@ ctx.fillRect(50, 50, 200, 100);
     initialCode: `<!-- Add canvas with id and dimensions -->`,
     solution: `<canvas id="drawingCanvas" width="500" height="400" style="border: 1px solid black;">\n  Your browser does not support the canvas element.\n</canvas>`,
     hints: ['canvas tag with id', 'Set width and height', 'Fallback text']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-27',
@@ -916,6 +1276,19 @@ ctx.fillRect(50, 50, 200, 100);
     initialCode: `<!-- Create SVG with shapes -->`,
     solution: `<svg width="300" height="200">\n  <circle cx="150" cy="100" r="60" fill="purple" />\n  <rect x="100" y="50" width="100" height="100" fill="orange" opacity="0.7" />\n</svg>`,
     hints: ['svg container', 'circle with cx, cy, r', 'rect with x, y, width, height']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-28',
@@ -947,6 +1320,19 @@ Create expandable/collapsible sections.
     initialCode: `<!-- Create FAQ item with details -->`,
     solution: `<details>\n  <summary>What is HTML?</summary>\n  <p>HTML (HyperText Markup Language) is the standard markup language for creating web pages. It structures content on the web.</p>\n</details>\n\n<details open>\n  <summary>What is TypeScript?</summary>\n  <p>TypeScript is a superset of JavaScript that adds static typing, making code more reliable and maintainable.</p>\n</details>`,
     hints: ['details wraps content', 'summary is the heading', 'open attribute']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-29',
@@ -972,6 +1358,19 @@ Create expandable/collapsible sections.
     initialCode: `<!-- Add progress and meter elements -->`,
     solution: `<label for="file">Download progress:</label>\n<progress id="file" value="45" max="100">45%</progress>\n\n<label for="disk">Disk usage:</label>\n<meter id="disk" value="80" min="0" max="100" low="30" high="70" optimum="50">80GB</meter>`,
     hints: ['progress for ongoing tasks', 'meter for measurements', 'low/high/optimum thresholds']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-30',
@@ -1006,6 +1405,19 @@ closeBtn.onclick = () => dialog.close();
     initialCode: `<!-- Create dialog structure -->`,
     solution: `<dialog id="infoDialog">\n  <h2>Welcome!</h2>\n  <p>This is a modal dialog box.</p>\n  <button onclick="document.getElementById('infoDialog').close()">Close</button>\n</dialog>\n\n<button onclick="document.getElementById('infoDialog').showModal()">Show Info</button>`,
     hints: ['dialog tag', 'showModal() opens as modal', 'close() dismisses']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-31',
@@ -1040,6 +1452,19 @@ document.body.appendChild(clone);
     initialCode: `<!-- Create template for product card -->`,
     solution: `<template id="product-template">\n  <div class="product-card">\n    <img src="" alt="">\n    <h3 class="product-name"></h3>\n    <p class="product-price"></p>\n    <button>Add to Cart</button>\n  </div>\n</template>`,
     hints: ['template tag', 'Content not rendered', 'Clone with JavaScript']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-32',
@@ -1071,7 +1496,19 @@ customElements.define('my-button', MyButton);
     estimatedTime: 20,
     initialCode: `<!-- Use custom element (understanding concept) -->\n<user-card name="John" role="Developer"></user-card>`,
     solution: `<!-- Custom elements extend HTML functionality -->\n<user-card name="Alice" role="Designer"></user-card>\n<user-card name="Bob" role="Developer"></user-card>`,
-    hints: ['Custom tag names need hyphen', 'Defined via JavaScript', 'Reusable components']
+    hints: ['Custom tag names need hyphen', 'Defined via JavaScript', 'Reusable components']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-33',
@@ -1102,6 +1539,19 @@ Serve different images for different screens.
     initialCode: `<!-- Create picture element for responsive image -->`,
     solution: `<picture>\n  <source media="(min-width: 1200px)" srcset="hero-large.jpg">\n  <source media="(min-width: 768px)" srcset="hero-medium.jpg">\n  <source media="(min-width: 480px)" srcset="hero-small.jpg">\n  <img src="hero-mobile.jpg" alt="Hero image" loading="lazy">\n</picture>`,
     hints: ['picture container', 'source with media queries', 'img as fallback']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-34',
@@ -1131,6 +1581,19 @@ Provide autocomplete options for inputs.
     initialCode: `<!-- Create input with datalist -->`,
     solution: `<label for="language">Choose a language:</label>\n<input list="languages" id="language" name="language" placeholder="Select or type...">\n\n<datalist id="languages">\n  <option value="HTML">\n  <option value="CSS">\n  <option value="JavaScript">\n  <option value="TypeScript">\n  <option value="Python">\n</datalist>`,
     hints: ['input with list attribute', 'datalist with matching id', 'option values']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-35',
@@ -1156,6 +1619,19 @@ Display results of calculations.
     initialCode: `<!-- Create form with inputs and output -->`,
     solution: `<form oninput="total.value = parseInt(price.value) * parseInt(quantity.value)">\n  <label for="price">Price: $</label>\n  <input type="number" id="price" name="price" value="10">\n  \n  <label for="quantity">Quantity:</label>\n  <input type="number" id="quantity" name="quantity" value="1">\n  \n  <output name="total" for="price quantity">10</output> dollars\n</form>`,
     hints: ['output tag', 'for attribute references inputs', 'oninput for live updates']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-36',
@@ -1181,6 +1657,19 @@ Default is yellow background, customizable with CSS.
     initialCode: `<!-- Create paragraph with marked text -->`,
     solution: `<h2>Search results for "HTML"</h2>\n<article>\n  <h3>Introduction to Web Development</h3>\n  <p>Learn <mark>HTML</mark>, CSS, and JavaScript. <mark>HTML</mark> is the foundation of web pages. Master <mark>HTML</mark> first!</p>\n</article>`,
     hints: ['mark tag highlights', 'Default yellow background', 'Useful for search results']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-37',
@@ -1205,6 +1694,19 @@ Add pronunciation or explanations above text (common in Asian languages).
     initialCode: `<!-- Create ruby annotation -->`,
     solution: `<p>The word \n<ruby>\n  明日 <rp>(</rp><rt>Ashita</rt><rp>)</rp>\n</ruby>\nmeans "tomorrow" in Japanese.</p>`,
     hints: ['ruby wraps text', 'rt is annotation', 'rp for fallback parentheses']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-38',
@@ -1232,6 +1734,19 @@ Override bidirectional text.
     initialCode: `<!-- Add text with RTL direction -->`,
     solution: `<p>English: Hello World</p>\n<p><bdo dir="rtl">dlroW olleH :esreveR</bdo></p>\n<p>Mixed: <bdo dir="rtl">مرحبا</bdo> means hello in Arabic</p>`,
     hints: ['bdo tag', 'dir="rtl" or "ltr"', 'Overrides normal flow']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-39',
@@ -1259,6 +1774,19 @@ Set base URL for all relative URLs on page.
     initialCode: `<!DOCTYPE html>\n<html>\n<head>\n  <!-- Add base URL -->\n  <title>My Site</title>\n</head>\n<body>\n  <a href="about.html">About</a>\n</body>\n</html>`,
     solution: `<!DOCTYPE html>\n<html>\n<head>\n  <base href="https://mywebsite.com/" target="_blank">\n  <title>My Site</title>\n</head>\n<body>\n  <a href="about.html">About</a>\n  <a href="contact.html">Contact</a>\n</body>\n</html>`,
     hints: ['base in head', 'href for base URL', 'target for default']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'html-40',
@@ -1289,6 +1817,19 @@ Add machine-readable data for search engines.
     initialCode: `<!-- Add product microdata -->`,
     solution: `<div itemscope itemtype="https://schema.org/Product">\n  <h2 itemprop="name">TypeScript Course</h2>\n  <img itemprop="image" src="course.jpg" alt="Course">\n  <p itemprop="description">Learn TypeScript from basics to advanced.</p>\n  <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">\n    <span itemprop="price">49.99</span>\n    <span itemprop="priceCurrency">USD</span>\n  </div>\n</div>`,
     hints: ['itemscope starts scope', 'itemtype defines type', 'itemprop for properties']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
 
   // PROJECT LESSON
@@ -1328,6 +1869,19 @@ This is your first complete webpage!`,
       'Use sections for each part',
       'Remember form labels and inputs',
       'Don\'t forget the footer'
+    ]
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
     ]
   }
 ];

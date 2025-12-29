@@ -56,6 +56,19 @@ disp('Matrix:')
 disp(matrix)
 fprintf('Determinant: %.2f\\n', det(matrix))`,
     hints: ['disp() for output', 'fprintf() for formatted output', 'Vectors/matrices use []']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'matlab-2',
@@ -116,5 +129,18 @@ v_squared = arrayfun(square, v);
 disp('Squared vector:')
 disp(v_squared)`,
     hints: ['function keyword', 'Multiple outputs with []', 'Anonymous: @(args) expr']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   }
 ]

@@ -53,6 +53,19 @@ server.listen(3000, () => {
     solution: `const os = require('os')\n\nconsole.log('Platform:', os.platform())\nconsole.log('Total Memory:', os.totalmem())\nconsole.log('Free Memory:', os.freemem())`,
     expectedOutput: 'Platform',
     hints: ['Use require() to import', 'os.platform() for OS', 'os.totalmem() for memory']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'node-2',
@@ -109,7 +122,19 @@ exports.subtract = function(a, b) { return a - b }
     initialCode: `// Create a greeting module\nfunction greet(name) {\n  // Return greeting message\n}\n\nfunction farewell(name) {\n  // Return farewell message\n}\n\nmodule.exports = { greet, farewell }`,
     solution: `function greet(name) {\n  return \`Hello, \${name}!\`\n}\n\nfunction farewell(name) {\n  return \`Goodbye, \${name}!\`\n}\n\nmodule.exports = { greet, farewell }\n\n// Test\nconst { greet, farewell } = module.exports\nconsole.log(greet("Alice"))\nconsole.log(farewell("Bob"))`,
     expectedOutput: 'Hello',
-    hints: ['Return string from functions', 'Use template literals', 'Export both functions']
+    hints: ['Return string from functions', 'Use template literals', 'Export both functions']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'node-3',
@@ -165,7 +190,19 @@ async function readData() {
     initialCode: `const fs = require('fs')\n\n// Read a file asynchronously\nfunction readFileContent(filename) {\n  fs.readFile(filename, 'utf8', (err, data) => {\n    // Handle error and data\n  })\n}\n\nreadFileContent('example.txt')`,
     solution: `const fs = require('fs')\n\nfunction readFileContent(filename) {\n  fs.readFile(filename, 'utf8', (err, data) => {\n    if (err) {\n      console.error('Error reading file:', err)\n      return\n    }\n    console.log('File content:', data)\n  })\n}\n\nreadFileContent('example.txt')`,
     expectedOutput: 'File',
-    hints: ['Check for errors first', 'Use utf8 encoding', 'Console.log the data']
+    hints: ['Check for errors first', 'Use utf8 encoding', 'Console.log the data']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   ...Array.from({ length: 37 }, (_, i) => {
     const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 12 ? 'Beginner' : i < 28 ? 'Intermediate' : 'Advanced'

@@ -60,7 +60,19 @@ local numbers = {10, 20, 30, 40, 50}
 for i = 1, #numbers do
   print(numbers[i])
 end`,
-    hints: ['print() for output', 'local for local variables', '.. for string concatenation']
+    hints: ['print() for output', 'local for local variables', '.. for string concatenation']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'lua-2',
@@ -120,5 +132,18 @@ end
 print(factorial(5))
 print(sum({1, 2, 3, 4, 5}))`,
     hints: ['function keyword', 'return for results', 'if...then...else...end for conditions']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   }
 ]

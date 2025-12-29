@@ -47,7 +47,19 @@ var mutable = 20    // Can be reassigned
     println(numbers.sum)
   }
 }`,
-    hints: ['Use object to define singleton', 'val for immutable', 'println for output']
+    hints: ['Use object to define singleton', 'val for immutable', 'println for output']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'scala-2',
@@ -99,6 +111,18 @@ def operate(x: Int, f: Int => Int): Int = {
     println(isEven(4))
   }
 }`,
-    hints: ['Use def for functions', 'Last expression is returned', 'Type inference works for most cases']
+    hints: ['Use def for functions', 'Last expression is returned', 'Type inference works for most cases']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   }
 ]

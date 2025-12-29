@@ -99,6 +99,19 @@ itemCount = itemCount + 1;       // Now 2 items
     solution: `const name = "Alex";\nlet age = 25;\n\nconsole.log("Name:", name);\nconsole.log("Age:", age);`,
     expectedOutput: 'Name:',
     hints: ['const for values that won\'t change', 'let for values that might change', 'console.log() to display']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-2',
@@ -134,7 +147,19 @@ Functions can return values using the \`return\` keyword.
     initialCode: `// Create multiply function\n\n// Call it with 6 and 7\nconst result = multiply(6, 7);\nconsole.log(result);`,
     solution: `function multiply(a, b) {\n  return a * b;\n}\n\nconst result = multiply(6, 7);\nconsole.log(result);`,
     expectedOutput: '42',
-    hints: ['function keyword', 'parameters in ()', 'return the result', 'Call with arguments']
+    hints: ['function keyword', 'parameters in ()', 'return the result', 'Call with arguments']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-3',
@@ -173,6 +198,19 @@ fruits.forEach(fruit => {
     solution: `const languages = ["HTML", "CSS", "JavaScript"];\n\nlanguages.push("Python");\n\nlanguages.forEach(lang => {\n  console.log(lang);\n});`,
     expectedOutput: 'HTML',
     hints: ['.push() to add', '.forEach() to loop', 'arrow function for callback']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-4',
@@ -208,7 +246,19 @@ console.log(person.greet());   // Call method
     initialCode: `const car = {\n  // Add properties and method\n};\n\nconsole.log(car.getInfo());`,
     solution: `const car = {\n  brand: "Toyota",\n  model: "Camry",\n  year: 2024,\n  getInfo: function() {\n    return this.brand + " " + this.model + " (" + this.year + ")";\n  }\n};\n\nconsole.log(car.getInfo());`,
     expectedOutput: 'Toyota',
-    hints: ['Properties are key: value pairs', 'Methods are functions inside objects', 'this refers to the object']
+    hints: ['Properties are key: value pairs', 'Methods are functions inside objects', 'this refers to the object']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-5',
@@ -246,6 +296,19 @@ document.body.appendChild(newDiv);
     solution: `const heading = document.querySelector('h1');\n\nheading.textContent = "DOM Master!";\nheading.style.color = "blue";`,
     expectedOutput: 'DOM Master!',
     hints: ['querySelector to select', 'textContent to change text', 'style.color to change color']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-6',
@@ -285,6 +348,19 @@ button.addEventListener('click', () => {
     solution: `const button = document.querySelector('button');\n\nbutton.addEventListener('click', () => {\n  console.log('Hello!');\n});`,
     expectedOutput: 'Hello!',
     hints: ['addEventListener method', 'First parameter is event type', 'Second parameter is function']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
 
   // INTERMEDIATE JAVASCRIPT (Lessons 7-20)
@@ -320,6 +396,19 @@ const sum = numbers.reduce((acc, n) => acc + n, 0);
     initialCode: `const prices = [10, 25, 30, 15, 50];\n\n// Double all prices\n\n// Get prices over 20\n\n// Calculate total`,
     solution: `const prices = [10, 25, 30, 15, 50];\n\nconst doubled = prices.map(p => p * 2);\nconsole.log('Doubled:', doubled);\n\nconst expensive = prices.filter(p => p > 20);\nconsole.log('Over 20:', expensive);\n\nconst total = prices.reduce((sum, p) => sum + p, 0);\nconsole.log('Total:', total);`,
     hints: ['map returns new array', 'filter selects items', 'reduce accumulates value']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-8',
@@ -342,6 +431,19 @@ const { name, age, city = 'Unknown' } = user;
 \`\`\`javascript
 function greet({ name, age }) {
   console.log(\`\${name} is \${age}\`);
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
 }
 \`\`\`
 
@@ -382,7 +484,19 @@ sum(1, 2, 3, 4); // 10
     estimatedTime: 18,
     initialCode: `// Combine arrays with spread\n\n// Create function with rest parameters`,
     solution: `const fruits = ['apple', 'banana'];\nconst vegetables = ['carrot', 'broccoli'];\nconst food = [...fruits, ...vegetables];\nconsole.log(food);\n\nfunction multiply(...numbers) {\n  return numbers.reduce((product, n) => product * n, 1);\n}\n\nconsole.log(multiply(2, 3, 4)); // 24`,
-    hints: ['... for spread', '... in parameters for rest', 'Spread creates copies']
+    hints: ['... for spread', '... in parameters for rest', 'Spread creates copies']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-10',
@@ -419,6 +533,19 @@ const msg = \`Total: $\${price * 1.1}\`;
     initialCode: `const product = 'Laptop';\nconst price = 999;\nconst discount = 0.1;\n\n// Create message with template literal`,
     solution: `const product = 'Laptop';\nconst price = 999;\nconst discount = 0.1;\n\nconst message = \`\nProduct: \${product}\nOriginal Price: $\${price}\nDiscount: \${discount * 100}%\nFinal Price: $\${price * (1 - discount)}\n\`;\n\nconsole.log(message);`,
     hints: ['Backticks ` `', '${} for expressions', 'Multi-line supported']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-11',
@@ -455,7 +582,19 @@ const obj = {
     estimatedTime: 15,
     initialCode: `// Create arrow function that returns object`,
     solution: `const createUser = (name, age, role) => ({\n  name,\n  age,\n  role,\n  active: true,\n  createdAt: new Date()\n});\n\nconst user = createUser('Alice', 25, 'developer');\nconsole.log(user);`,
-    hints: ['() around object literal', 'No return keyword needed', 'this binding difference']
+    hints: ['() around object literal', 'No return keyword needed', 'this binding difference']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-12',
@@ -487,7 +626,19 @@ try {
     estimatedTime: 20,
     initialCode: `// Create async function that waits\nasync function delayedGreeting(name) {\n  // Wait 1 second, then return greeting\n}`,
     solution: `async function delayedGreeting(name) {\n  await new Promise(resolve => setTimeout(resolve, 1000));\n  return \`Hello, \${name}!\`;\n}\n\ndelayedGreeting('Alice').then(msg => console.log(msg));`,
-    hints: ['async keyword', 'await for promises', 'Returns promise']
+    hints: ['async keyword', 'await for promises', 'Returns promise']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-13',
@@ -518,6 +669,19 @@ promise
     initialCode: `// Create promise that resolves after delay`,
     solution: `function delay(ms) {\n  return new Promise(resolve => {\n    setTimeout(() => resolve(\`Waited \${ms}ms\`), ms);\n  });\n}\n\ndelay(1000)\n  .then(message => console.log(message))\n  .catch(error => console.error(error));`,
     hints: ['new Promise(executor)', 'resolve for success', 'reject for errors']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-14',
@@ -557,7 +721,19 @@ class Student extends Person {
     estimatedTime: 20,
     initialCode: `// Create Book class`,
     solution: `class Book {\n  constructor(title, author, pages) {\n    this.title = title;\n    this.author = author;\n    this.pages = pages;\n  }\n  \n  getInfo() {\n    return \`\${this.title} by \${this.author} (\${this.pages} pages)\`;\n  }\n  \n  isLong() {\n    return this.pages > 300;\n  }\n}\n\nconst book = new Book('1984', 'George Orwell', 328);\nconsole.log(book.getInfo());\nconsole.log('Long book?', book.isLong());`,
-    hints: ['class keyword', 'constructor for initialization', 'methods without function keyword']
+    hints: ['class keyword', 'constructor for initialization', 'methods without function keyword']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-15',
@@ -587,6 +763,19 @@ import * as utils from './utils.js';
     initialCode: `// Export functions\nexport const multiply = (a, b) => a * b;\nexport const divide = (a, b) => a / b;\n\n// Import in another file:\n// import { multiply, divide } from './math.js';`,
     solution: `// math.js\nexport const add = (a, b) => a + b;\nexport const subtract = (a, b) => a - b;\nexport const multiply = (a, b) => a * b;\nexport const divide = (a, b) => a / b;\n\nexport default class Calculator {\n  calculate(a, op, b) {\n    switch(op) {\n      case '+': return add(a, b);\n      case '-': return subtract(a, b);\n      case '*': return multiply(a, b);\n      case '/': return divide(a, b);\n    }\n  }\n}`,
     hints: ['export keyword', 'default export', 'import { named }']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-16',
@@ -619,6 +808,19 @@ localStorage.clear(); // Remove all
     initialCode: `// Save user preferences\n\n// Retrieve preferences`,
     solution: `const preferences = {\n  theme: 'dark',\n  language: 'en',\n  notifications: true\n};\n\n// Save\nlocalStorage.setItem('prefs', JSON.stringify(preferences));\n\n// Retrieve\nconst saved = localStorage.getItem('prefs');\nif (saved) {\n  const prefs = JSON.parse(saved);\n  console.log('Loaded preferences:', prefs);\n}`,
     hints: ['setItem(key, value)', 'getItem(key)', 'JSON.stringify for objects']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-17',
@@ -650,6 +852,19 @@ fetch(url, {
     initialCode: `// Fetch user data\nasync function getUser(id) {\n  // Implement fetch\n}`,
     solution: `async function getUser(id) {\n  try {\n    const response = await fetch(\`https://jsonplaceholder.typicode.com/users/\${id}\`);\n    if (!response.ok) throw new Error('Failed to fetch');\n    const user = await response.json();\n    return user;\n  } catch (error) {\n    console.error('Error:', error);\n    return null;\n  }\n}\n\ngetUser(1).then(user => console.log(user));`,
     hints: ['fetch returns promise', '.json() to parse', 'async/await recommended']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-18',
@@ -682,7 +897,19 @@ function divide(a, b) {
     estimatedTime: 15,
     initialCode: `function parseJSON(str) {\n  // Add try/catch\n}`,
     solution: `function parseJSON(str) {\n  try {\n    const data = JSON.parse(str);\n    return { success: true, data };\n  } catch (error) {\n    return { success: false, error: error.message };\n  }\n}\n\nconsole.log(parseJSON('{"name": "Alice"}'));\nconsole.log(parseJSON('invalid json'));`,
-    hints: ['try/catch blocks', 'throw new Error()', 'finally optional']
+    hints: ['try/catch blocks', 'throw new Error()', 'finally optional']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-19',
@@ -714,6 +941,19 @@ const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
     initialCode: `function isValidEmail(email) {\n  // Add regex validation\n}`,
     solution: `function isValidEmail(email) {\n  const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n  return emailRegex.test(email);\n}\n\nconsole.log(isValidEmail('user@example.com')); // true\nconsole.log(isValidEmail('invalid.email')); // false`,
     hints: ['/pattern/flags', '.test() returns boolean', '.match() returns matches']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-20',
@@ -747,7 +987,19 @@ input.addEventListener('input', search);
     estimatedTime: 25,
     initialCode: `function debounce(func, delay) {\n  // Implement debounce\n}`,
     solution: `function debounce(func, delay) {\n  let timeoutId;\n  return function(...args) {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => {\n      func.apply(this, args);\n    }, delay);\n  };\n}\n\nconst log = debounce(() => console.log('Executed!'), 1000);\n\n// Call multiple times, only last call executes\nlog();\nlog();\nlog();`,
-    hints: ['Closure to store timeout', 'clearTimeout before new', 'setTimeout to delay']
+    hints: ['Closure to store timeout', 'clearTimeout before new', 'setTimeout to delay']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
 
   // ADVANCED JAVASCRIPT (Lessons 21-36)
@@ -781,6 +1033,19 @@ map.has('name'); // true
     initialCode: `const numbers = [1, 2, 2, 3, 4, 4, 5];\n// Remove duplicates`,
     solution: `const numbers = [1, 2, 2, 3, 4, 4, 5];\nconst unique = [...new Set(numbers)];\nconsole.log(unique);\n\nconst userMap = new Map();\nuserMap.set('id', 1);\nuserMap.set('name', 'Alice');\nuserMap.set('role', 'admin');\n\nconsole.log(userMap.get('name'));`,
     hints: ['new Set(array)', 'Spread to array', 'Map for any key type']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-22',
@@ -813,7 +1078,19 @@ class User {
     estimatedTime: 20,
     initialCode: `// WeakMap for private data\nconst private = new WeakMap();\n\nclass Account {\n  // Store private balance\n}`,
     solution: `const privateData = new WeakMap();\n\nclass Account {\n  constructor(owner, balance) {\n    this.owner = owner;\n    privateData.set(this, { balance });\n  }\n  \n  getBalance() {\n    return privateData.get(this).balance;\n  }\n  \n  deposit(amount) {\n    const data = privateData.get(this);\n    data.balance += amount;\n  }\n}`,
-    hints: ['Keys must be objects', 'Garbage collected', 'Perfect for private data']
+    hints: ['Keys must be objects', 'Garbage collected', 'Perfect for private data']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-23',
@@ -843,7 +1120,19 @@ const proxy = new Proxy(target, {
     estimatedTime: 25,
     initialCode: `// Create proxy that validates age`,
     solution: `const user = { name: 'Alice', age: 25 };\n\nconst proxy = new Proxy(user, {\n  set(target, prop, value) {\n    if (prop === 'age') {\n      if (typeof value !== 'number' || value < 0) {\n        throw new Error('Age must be positive number');\n      }\n    }\n    target[prop] = value;\n    return true;\n  }\n});\n\nproxy.age = 30; // OK\n// proxy.age = -5; // Error`,
-    hints: ['new Proxy(target, handler)', 'get/set traps', 'Validation logic']
+    hints: ['new Proxy(target, handler)', 'get/set traps', 'Validation logic']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-24',
@@ -880,7 +1169,19 @@ function* fibonacci() {
     estimatedTime: 20,
     initialCode: `function* range(start, end) {\n  // Yield numbers from start to end\n}`,
     solution: `function* range(start, end) {\n  for (let i = start; i <= end; i++) {\n    yield i;\n  }\n}\n\nfor (const num of range(1, 5)) {\n  console.log(num);\n}`,
-    hints: ['function* syntax', 'yield keyword', 'Pause and resume']
+    hints: ['function* syntax', 'yield keyword', 'Pause and resume']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-25',
@@ -915,6 +1216,19 @@ obj[Symbol.iterator] = function*() { ... };
     initialCode: `// Create object with Symbol property`,
     solution: `const _password = Symbol('password');\n\nclass User {\n  constructor(name, password) {\n    this.name = name;\n    this[_password] = password;\n  }\n  \n  checkPassword(input) {\n    return this[_password] === input;\n  }\n}\n\nconst user = new User('Alice', 'secret123');\nconsole.log(user.checkPassword('secret123'));`,
     hints: ['Symbol() creates unique', 'Use as object key', 'Not enumerable']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-26',
@@ -930,6 +1244,19 @@ const iterator = {
   next() {
     if (this.current <= this.last) {
       return { value: this.current++, done: false };
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
     }
     return { done: true };
   }
@@ -983,6 +1310,19 @@ const pipe = (...fns) => x =>
     initialCode: `// Create pipe function`,
     solution: `const pipe = (...fns) => x => fns.reduce((acc, fn) => fn(acc), x);\n\nconst trim = str => str.trim();\nconst uppercase = str => str.toUpperCase();\nconst exclaim = str => str + '!';\n\nconst shout = pipe(trim, uppercase, exclaim);\n\nconsole.log(shout('  hello  ')); // "HELLO!"`,
     hints: ['reduce/reduceRight', 'Function returns function', 'Left-to-right or right-to-left']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-28',
@@ -1015,7 +1355,19 @@ const curry = fn => {
     estimatedTime: 25,
     initialCode: `// Create curried multiply function`,
     solution: `const multiply = a => b => c => a * b * c;\n\nconst multiplyBy2 = multiply(2);\nconst multiplyBy2And3 = multiplyBy2(3);\nconsole.log(multiplyBy2And3(4)); // 24\n\n// Generic curry\nconst curry = fn => {\n  return function curried(...args) {\n    if (args.length >= fn.length) {\n      return fn(...args);\n    }\n    return (...nextArgs) => curried(...args, ...nextArgs);\n  };\n};`,
-    hints: ['Return function that returns function', 'Partial application', 'Build up arguments']
+    hints: ['Return function that returns function', 'Partial application', 'Build up arguments']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-29',
@@ -1044,6 +1396,19 @@ const memoize = fn => {
     initialCode: `function fibonacci(n) {\n  if (n <= 1) return n;\n  return fibonacci(n - 1) + fibonacci(n - 2);\n}\n\n// Add memoization`,
     solution: `const memoize = fn => {\n  const cache = new Map();\n  return (...args) => {\n    const key = JSON.stringify(args);\n    if (cache.has(key)) {\n      return cache.get(key);\n    }\n    const result = fn(...args);\n    cache.set(key, result);\n    return result;\n  };\n};\n\nconst fibonacci = memoize(function(n) {\n  if (n <= 1) return n;\n  return fibonacci(n - 1) + fibonacci(n - 2);\n});\n\nconsole.log(fibonacci(40)); // Fast!`,
     hints: ['Cache by arguments', 'Check cache first', 'Store and return']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-30',
@@ -1077,7 +1442,19 @@ class EventEmitter {
     estimatedTime: 25,
     initialCode: `class EventEmitter {\n  // Implement\n}`,
     solution: `class EventEmitter {\n  constructor() {\n    this.events = new Map();\n  }\n  \n  on(event, callback) {\n    if (!this.events.has(event)) {\n      this.events.set(event, []);\n    }\n    this.events.get(event).push(callback);\n  }\n  \n  emit(event, data) {\n    if (this.events.has(event)) {\n      this.events.get(event).forEach(cb => cb(data));\n    }\n  }\n  \n  off(event, callback) {\n    if (this.events.has(event)) {\n      const callbacks = this.events.get(event).filter(cb => cb !== callback);\n      this.events.set(event, callbacks);\n    }\n  }\n}\n\nconst emitter = new EventEmitter();\nemitter.on('data', data => console.log('Received:', data));\nemitter.emit('data', {id: 1});`,
-    hints: ['Store callbacks by event', 'on() subscribes', 'emit() notifies']
+    hints: ['Store callbacks by event', 'on() subscribes', 'emit() notifies']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-31',
@@ -1104,7 +1481,19 @@ function createUser(name, role) {
     estimatedTime: 20,
     initialCode: `// Create factory for creating products`,
     solution: `function createProduct(name, price, category) {\n  return {\n    name,\n    price,\n    category,\n    getInfo() {\n      return \`\${this.name} - $\${this.price} (\${this.category})\`;\n    },\n    applyDiscount(percent) {\n      this.price *= (1 - percent / 100);\n      return this;\n    }\n  };\n}\n\nconst laptop = createProduct('Laptop', 999, 'Electronics');\nconsole.log(laptop.applyDiscount(10).getInfo());`,
-    hints: ['Return object literal', 'Methods included', 'No new keyword needed']
+    hints: ['Return object literal', 'Methods included', 'No new keyword needed']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-32',
@@ -1134,7 +1523,19 @@ const module = (function() {
     estimatedTime: 25,
     initialCode: `// Create counter module`,
     solution: `const Counter = (function() {\n  let count = 0;\n  \n  return {\n    increment() {\n      count++;\n      return count;\n    },\n    decrement() {\n      count--;\n      return count;\n    },\n    getCount() {\n      return count;\n    },\n    reset() {\n      count = 0;\n    }\n  };\n})();\n\nCounter.increment();\nCounter.increment();\nconsole.log(Counter.getCount()); // 2`,
-    hints: ['IIFE creates scope', 'Return public API', 'Private variables in closure']
+    hints: ['IIFE creates scope', 'Return public API', 'Private variables in closure']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-33',
@@ -1160,7 +1561,19 @@ class Singleton {
     estimatedTime: 20,
     initialCode: `// Create Database singleton`,
     solution: `class Database {\n  constructor() {\n    if (Database.instance) {\n      return Database.instance;\n    }\n    this.connection = 'Connected';\n    this.data = [];\n    Database.instance = this;\n  }\n  \n  query(sql) {\n    console.log(\`Executing: \${sql}\`);\n  }\n}\n\nconst db1 = new Database();\nconst db2 = new Database();\nconsole.log(db1 === db2); // true`,
-    hints: ['Check for existing instance', 'Store instance as static', 'Return existing']
+    hints: ['Check for existing instance', 'Store instance as static', 'Return existing']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-34',
@@ -1188,6 +1601,19 @@ Promise.race([promise1, promise2])
     initialCode: `// Fetch multiple users simultaneously`,
     solution: `async function fetchUsers(ids) {\n  const promises = ids.map(id => \n    fetch(\`https://jsonplaceholder.typicode.com/users/\${id}\`)\n      .then(r => r.json())\n  );\n  \n  try {\n    const users = await Promise.all(promises);\n    return users;\n  } catch (error) {\n    console.error('Failed to fetch:', error);\n    return [];\n  }\n}\n\nfetchUsers([1, 2, 3]).then(users => console.log(users));`,
     hints: ['Promise.all([...])', 'Returns array of results', 'Fails if any fails']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-35',
@@ -1217,6 +1643,19 @@ self.onmessage = e => {
     initialCode: `// Web Worker for heavy computation\n// worker.js\nself.onmessage = function(e) {\n  // Process data\n  const result = e.data * 2;\n  self.postMessage(result);\n};`,
     solution: `// Main thread\n// const worker = new Worker('worker.js');\n// worker.postMessage(10);\n// worker.onmessage = e => console.log('Result:', e.data);\n\n// Worker file (worker.js):\nself.onmessage = function(e) {\n  const numbers = e.data;\n  const sum = numbers.reduce((a, b) => a + b, 0);\n  self.postMessage(sum);\n};`,
     hints: ['Separate JavaScript file', 'postMessage to communicate', 'No DOM access in worker']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'js-36',
@@ -1243,7 +1682,19 @@ observer.observe(element);
     estimatedTime: 25,
     initialCode: `// Create lazy image loader`,
     solution: `const imageObserver = new IntersectionObserver((entries, observer) => {\n  entries.forEach(entry => {\n    if (entry.isIntersecting) {\n      const img = entry.target;\n      img.src = img.dataset.src;\n      img.classList.add('loaded');\n      observer.unobserve(img);\n    }\n  });\n}, {\n  rootMargin: '50px'\n});\n\n// Usage:\n// document.querySelectorAll('img[data-src]').forEach(img => {\n//   imageObserver.observe(img);\n// });`,
-    hints: ['IntersectionObserver API', 'isIntersecting property', 'unobserve when done']
+    hints: ['IntersectionObserver API', 'isIntersecting property', 'unobserve when done']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
 
   // PROJECT LESSON
@@ -1290,6 +1741,19 @@ Build the complete functionality!`,
       'Add click listener for complete toggle',
       'stopPropagation() prevents bubbling',
       'Enter key should also add task'
+    ]
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
     ]
   }
 ];

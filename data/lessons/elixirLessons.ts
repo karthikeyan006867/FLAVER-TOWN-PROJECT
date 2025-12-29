@@ -57,6 +57,19 @@ IO.inspect(numbers)
 person = {"Alice", 30, "Engineer"}
 IO.inspect(person)`,
     hints: ['IO.puts for output', 'Use #{} for interpolation', 'Pattern matching with =']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'elixir-2',
@@ -113,5 +126,18 @@ end
 IO.puts(Calculator.add(5, 3))
 IO.puts(Calculator.factorial(5))`,
     hints: ['defmodule for modules', 'def for public functions', 'Pattern matching in function heads']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   }
 ]

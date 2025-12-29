@@ -55,6 +55,19 @@ matrix = [1 2 3; 4 5 6]
 println("Matrix:\\n", matrix)
 println("Transpose:\\n", transpose(matrix))`,
     hints: ['println() for output', 'Arrays start at index 1', 'Built-in math functions']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'julia-2',
@@ -113,5 +126,18 @@ println(factorial(5))
 println(square(7))
 println(greet("Julia"))`,
     hints: ['function...end syntax', 'Short form: name(x) = expr', '::Type for type annotations']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   }
 ]

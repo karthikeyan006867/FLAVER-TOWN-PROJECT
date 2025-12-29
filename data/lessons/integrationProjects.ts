@@ -244,6 +244,18 @@ Create a complete, responsive landing page!`,
       'Flexbox for card layout',
       'Add hover transitions',
       'Mobile-first responsive design'
+    ]    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
     ]
   },
   {
@@ -547,6 +559,18 @@ Build a complete quiz application!`,
       'Use template literals for HTML',
       'Track currentQuestion and score',
       'Disable buttons after selection'
+    ]    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
     ]
   },
   {
@@ -764,6 +788,18 @@ if __name__ == '__main__':
       'Use CORS to allow frontend access',
       'Fetch API with async/await',
       'Send JSON in POST requests'
+    ]    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
     ]
   }
 ];

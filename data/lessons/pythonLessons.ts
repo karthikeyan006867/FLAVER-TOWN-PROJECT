@@ -117,6 +117,19 @@ print(f"Verified: {is_verified}")
     solution: `name = "Sarah"\nage = 22\n\nprint(f"Hello! My name is {name} and I am {age} years old.")`,
     expectedOutput: 'Hello',
     hints: ['Variables don\'t need var/let/const', 'f-strings use f"text {variable}"', 'print() displays output']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-2',
@@ -153,6 +166,19 @@ type(42)       # <class 'int'>
     solution: `text_number = "123"\nnumber = int(text_number)\nresult = number + 77\nprint(result)`,
     expectedOutput: '200',
     hints: ['int() converts to integer', 'Then add 77', 'print() to display']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-3',
@@ -192,6 +218,19 @@ for fruit in fruits:
     solution: `languages = ["HTML", "CSS", "JavaScript"]\n\nlanguages.append("Python")\nlanguages.pop(0)\n\nfor lang in languages:\n    print(lang)`,
     expectedOutput: 'CSS',
     hints: ['.append() to add', '.pop(0) removes first', 'for loop to iterate']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-4',
@@ -232,6 +271,19 @@ def greet(name="Guest"):
     solution: `def calculate_area(width, height):\n    return width * height\n\narea = calculate_area(10, 5)\nprint(area)`,
     expectedOutput: '50',
     hints: ['def keyword', 'parameters in ()', 'return the calculation']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-5',
@@ -276,7 +328,19 @@ for key, value in person.items():
     initialCode: `# Create student dictionary\nstudent = \n\n# Print each key-value pair`,
     solution: `student = {\n    "name": "Emma",\n    "grade": "A",\n    "age": 16\n}\n\nfor key, value in student.items():\n    print(f"{key}: {value}")`,
     expectedOutput: 'name:',
-    hints: ['Use curly braces {}', 'key: value pairs', '.items() for looping']
+    hints: ['Use curly braces {}', 'key: value pairs', '.items() for looping']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-6',
@@ -314,6 +378,19 @@ print(my_dog.bark())  # "Buddy says Woof!"
     solution: `class Car:\n    def __init__(self, brand, model):\n        self.brand = brand\n        self.model = model\n    \n    def get_info(self):\n        return f"{self.brand} {self.model}"\n\nmy_car = Car("Toyota", "Camry")\nprint(my_car.get_info())`,
     expectedOutput: 'Toyota',
     hints: ['__init__ with self, brand, model', 'self.brand = brand', 'get_info returns formatted string']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
 
   // INTERMEDIATE PYTHON (Lessons 7-20)
@@ -341,6 +418,19 @@ fruits.reverse()             # Reverse in place
     initialCode: `numbers = [3, 1, 4, 1, 5, 9, 2, 6]\n\n# Sort, remove duplicates using set, convert back to list`,
     solution: `numbers = [3, 1, 4, 1, 5, 9, 2, 6]\n\nnumbers.sort()\nprint("Sorted:", numbers)\n\nunique = list(set(numbers))\nunique.sort()\nprint("Unique:", unique)`,
     hints: ['.sort() sorts in place', 'set() removes duplicates', 'list() converts back']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-8',
@@ -360,6 +450,19 @@ user = {'name': 'Alice', 'age': 25}\n\nuser.get('name')              # Safe acce
     initialCode: `inventory = {'apples': 10, 'bananas': 5}\n\n# Add oranges: 8\n# Print all items`,
     solution: `inventory = {'apples': 10, 'bananas': 5}\n\ninventory['oranges'] = 8\n\nfor item, count in inventory.items():\n    print(f"{item}: {count}")`,
     hints: ['.items() for key-value pairs', 'Use f-strings', 'Loop through dictionary']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-9',
@@ -391,6 +494,19 @@ upper = [name.upper() for name in names]
     initialCode: `# Create list of squares of even numbers from 1 to 20`,
     solution: `squares_of_evens = [x**2 for x in range(1, 21) if x % 2 == 0]\nprint(squares_of_evens)\n\n# Alternative with multiple operations\nnames = ['Alice', 'Bob', 'Charlie']\nlengths = [len(name) for name in names]\nprint(lengths)`,
     hints: ['[expression for item in iterable if condition]', 'Condition is optional', 'More concise than loops']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-10',
@@ -424,6 +540,19 @@ sorted_users = sorted(users, key=lambda u: u['age'])
     initialCode: `products = [\n    {'name': 'Laptop', 'price': 999},\n    {'name': 'Mouse', 'price': 25},\n    {'name': 'Keyboard', 'price': 75}\n]\n\n# Sort by price`,
     solution: `products = [\n    {'name': 'Laptop', 'price': 999},\n    {'name': 'Mouse', 'price': 25},\n    {'name': 'Keyboard', 'price': 75}\n]\n\nsorted_products = sorted(products, key=lambda p: p['price'])\n\nfor product in sorted_products:\n    print(f"{product['name']}: \${product['price']}")`,
     hints: ['lambda args: expression', 'key parameter for sorted', 'Single expression only']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-11',
@@ -460,6 +589,19 @@ with open('file.txt', 'a') as f:
     initialCode: `# Write to file\nwith open('data.txt', 'w') as f:\n    # Add lines\n\n# Read from file\nwith open('data.txt', 'r') as f:\n    # Print content`,
     solution: `# Write to file\nwith open('data.txt', 'w') as f:\n    f.write('Line 1\\n')\n    f.write('Line 2\\n')\n    f.write('Line 3\\n')\n\n# Read from file\nwith open('data.txt', 'r') as f:\n    content = f.read()\n    print(content)`,
     hints: ['with statement auto-closes', "'r', 'w', 'a' modes", '.read() or iterate lines']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-12',
@@ -494,6 +636,19 @@ if age < 0:
     initialCode: `def divide(a, b):\n    # Add error handling\n    pass`,
     solution: `def divide(a, b):\n    try:\n        result = a / b\n        return result\n    except ZeroDivisionError:\n        print("Error: Cannot divide by zero")\n        return None\n    except TypeError:\n        print("Error: Both arguments must be numbers")\n        return None\n\nprint(divide(10, 2))\nprint(divide(10, 0))\nprint(divide(10, "2"))`,
     hints: ['Multiple except blocks', 'except Exception catches all', 'raise to throw exceptions']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-13',
@@ -529,6 +684,19 @@ from math import pi, sqrt
     initialCode: `# Import and use math module\n\n# Calculate square root of 25`,
     solution: `import math\nimport random\nfrom datetime import datetime\n\nprint(f"Square root of 25: {math.sqrt(25)}")\nprint(f"Random number: {random.randint(1, 100)}")\nprint(f"Current time: {datetime.now()}")`,
     hints: ['import module', 'from module import name', 'as for alias']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-14',
@@ -566,6 +734,19 @@ def func(a, *args, **kwargs):
     initialCode: `def create_profile(name, *skills, **info):\n    # Print name, skills, and additional info\n    pass`,
     solution: `def create_profile(name, *skills, **info):\n    print(f"Name: {name}")\n    print(f"Skills: {', '.join(skills)}")\n    for key, value in info.items():\n        print(f"{key}: {value}")\n\ncreate_profile(\n    "Alice",\n    "Python", "JavaScript", "TypeScript",\n    city="NYC",\n    experience=5\n)`,
     hints: ['*args for variable positional', '**kwargs for variable keyword', 'Unpack in function definition']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-15',
@@ -595,6 +776,19 @@ def say_hello():
     initialCode: `# Create decorator that times function execution\nimport time\n\ndef timer(func):\n    # Implement decorator\n    pass`,
     solution: `import time\n\ndef timer(func):\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        result = func(*args, **kwargs);\n        end = time.time()\n        print(f"{func.__name__} took {end - start:.4f} seconds")\n        return result\n    return wrapper\n\n@timer\ndef slow_function():\n    time.sleep(1)\n    return "Done"\n\nslow_function()`,
     hints: ['Return wrapper function', 'Call original function', '@ syntax applies decorator']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-16',
@@ -626,6 +820,19 @@ squares = (x**2 for x in range(10))
     initialCode: `def fibonacci(n):\n    # Generate first n fibonacci numbers\n    pass`,
     solution: `def fibonacci(n):\n    a, b = 0, 1\n    for _ in range(n):\n        yield a\n        a, b = b, a + b\n\nfor num in fibonacci(10):\n    print(num)`,
     hints: ['yield instead of return', 'Lazy evaluation', 'Memory efficient']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-17',
@@ -658,6 +865,19 @@ class MyContext:
     initialCode: `# Create timer context manager\nclass Timer:\n    def __enter__(self):\n        # Start timer\n        pass\n    \n    def __exit__(self, *args):\n        # End and print time\n        pass`,
     solution: `import time\n\nclass Timer:\n    def __enter__(self):\n        self.start = time.time()\n        return self\n    \n    def __exit__(self, *args):\n        elapsed = time.time() - self.start\n        print(f"Elapsed time: {elapsed:.4f} seconds")\n\nwith Timer():\n    time.sleep(0.1)\n    print("Working...")`,
     hints: ['__enter__ and __exit__ methods', 'with statement', 'Automatic cleanup']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-18',
@@ -691,6 +911,19 @@ re.sub(r'\\d+', 'X', text) # Replace
     initialCode: `import re\n\ndef is_valid_email(email):\n    # Add regex validation\n    pass`,
     solution: `import re\n\ndef is_valid_email(email):\n    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'\n    return bool(re.match(pattern, email))\n\nprint(is_valid_email("user@example.com"))  # True\nprint(is_valid_email("invalid.email"))      # False`,
     hints: ['re.match(), re.search(), re.findall()', 'r"" for raw strings', 'Pattern syntax']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-19',
@@ -726,6 +959,19 @@ p = Point(1, 2)
     initialCode: `from collections import Counter\n\ntext = "hello world"\n# Count letter frequency`,
     solution: `from collections import Counter\n\ntext = "hello world"\nletter_counts = Counter(text.replace(' ', ''))\n\nprint("Letter frequencies:")\nfor letter, count in letter_counts.most_common():\n    print(f"{letter}: {count}")`,
     hints: ['Counter(iterable)', '.most_common()', 'Dictionary-like']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-20',
@@ -756,6 +1002,19 @@ chain([1,2], [3,4])  # 1, 2, 3, 4
     initialCode: `from itertools import combinations\n\n# Generate all 2-number combinations from [1,2,3,4]`,
     solution: `from itertools import combinations, permutations\n\nnumbers = [1, 2, 3, 4]\n\nprint("Combinations (2):")\nfor combo in combinations(numbers, 2):\n    print(combo)\n\nprint("\\nPermutations (2):")\nfor perm in permutations(numbers, 2):\n    print(perm)`,
     hints: ['combinations vs permutations', 'Returns iterator', 'Many utility functions']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
 
   // ADVANCED PYTHON (Lessons 21-36)
@@ -793,6 +1052,19 @@ class Circle:
     initialCode: `class Rectangle:\n    # Add width, height properties and area`,
     solution: `class Rectangle:\n    def __init__(self, width, height):\n        self._width = width\n        self._height = height\n    \n    @property\n    def width(self):\n        return self._width\n    \n    @width.setter\n    def width(self, value):\n        if value <= 0:\n            raise ValueError("Width must be positive")\n        self._width = value\n    \n    @property\n    def height(self):\n        return self._height\n    \n    @height.setter\n    def height(self, value):\n        if value <= 0:\n            raise ValueError("Height must be positive")\n        self._height = value\n    \n    @property\n    def area(self):\n        return self._width * self._height\n\nrect = Rectangle(10, 5)\nprint(f"Area: {rect.area}")`,
     hints: ['@property for getter', '@prop.setter for setter', 'Computed properties']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-22',
@@ -826,6 +1098,19 @@ class Vector:
     initialCode: `class Money:\n    def __init__(self, amount):\n        self.amount = amount\n    \n    # Add __add__, __str__, __eq__`,
     solution: `class Money:\n    def __init__(self, amount):\n        self.amount = amount\n    \n    def __add__(self, other):\n        return Money(self.amount + other.amount)\n    \n    def __sub__(self, other):\n        return Money(self.amount - other.amount)\n    \n    def __str__(self):\n        return f"$" + str(round(self.amount, 2))\n    \n    def __eq__(self, other):\n        return self.amount == other.amount\n\nm1 = Money(100)\nm2 = Money(50)\nprint(m1 + m2)\nprint(m1 - m2)`,
     hints: ['__add__ for +', '__str__ for string', '__eq__ for ==']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-23',
@@ -854,6 +1139,19 @@ class Dog(Animal):
     initialCode: `from abc import ABC, abstractmethod\n\nclass Shape(ABC):\n    # Add abstract area method`,
     solution: `from abc import ABC, abstractmethod\nimport math\n\nclass Shape(ABC):\n    @abstractmethod\n    def area(self):\n        pass\n    \n    @abstractmethod\n    def perimeter(self):\n        pass\n\nclass Circle(Shape):\n    def __init__(self, radius):\n        self.radius = radius\n    \n    def area(self):\n        return math.pi * self.radius ** 2\n    \n    def perimeter(self):\n        return 2 * math.pi * self.radius\n\ncircle = Circle(5)\nprint(f"Area: {circle.area():.2f}")`,
     hints: ['from abc import ABC, abstractmethod', '@abstractmethod decorator', 'Must implement in subclass']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-24',
@@ -887,6 +1185,19 @@ print(person.name)
     initialCode: `from dataclasses import dataclass\n\n# Create Product dataclass`,
     solution: `from dataclasses import dataclass\n\n@dataclass\nclass Product:\n    name: str\n    price: float\n    quantity: int = 0\n    \n    def total_value(self):\n        return self.price * self.quantity\n\nproduct = Product("Laptop", 999.99, 5)\nprint(product)\nprint(f"Total value: \${product.total_value()}")`,
     hints: ['@dataclass decorator', 'Type hints required', 'Auto methods']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-25',
@@ -910,6 +1221,19 @@ def greet(name: str) -> str:
     initialCode: `from typing import List, Dict\n\ndef count_words(text):\n    # Add type hints\n    pass`,
     solution: `from typing import List, Dict\n\ndef count_words(text: str) -> Dict[str, int]:\n    words = text.lower().split()\n    counts: Dict[str, int] = {}\n    for word in words:\n        counts[word] = counts.get(word, 0) + 1\n    return counts\n\nresult = count_words("hello world hello")\nprint(result)`,
     hints: ['param: type', '-> return_type', 'typing module for complex types']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-26',
@@ -934,6 +1258,19 @@ async def main():\n    await asyncio.gather(\n        task1(),\n        task2()\
     initialCode: `import asyncio\n\nasync def fetch_data(id):\n    # Simulate async operation\n    pass`,
     solution: `import asyncio\n\nasync def fetch_data(id):\n    print(f"Fetching data {id}...")\n    await asyncio.sleep(1)  # Simulate I/O\n    return f"Data {id}"\n\nasync def main():\n    results = await asyncio.gather(\n        fetch_data(1),\n        fetch_data(2),\n        fetch_data(3)\n    )\n    print(results)\n\n# asyncio.run(main())`,
     hints: ['async def', 'await for async ops', 'asyncio.gather for parallel']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-27',
@@ -956,6 +1293,19 @@ class Meta(type):
     initialCode: `# Metaclass adds class-level tracking`,
     solution: `class Tracker(type):\n    instances = []\n    \n    def __call__(cls, *args, **kwargs):\n        instance = super().__call__(*args, **kwargs)\n        Tracker.instances.append(instance)\n        return instance\n\nclass MyClass(metaclass=Tracker):\n    pass\n\nobj1 = MyClass()\nobj2 = MyClass()\nprint(f"Created {len(Tracker.instances)} instances")`,
     hints: ['type is the base metaclass', '__new__ creates class', 'Advanced Python feature']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-28',
@@ -975,6 +1325,19 @@ import threading\n\ndef worker(name):\n    print(f"Worker {name} starting")\n   
     initialCode: `import threading\nimport time\n\ndef count_down(n):\n    # Count down from n\n    pass`,
     solution: `import threading\nimport time\n\ndef count_down(name, n):\n    for i in range(n, 0, -1):\n        print(f"{name}: {i}")\n        time.sleep(0.5)\n    print(f"{name}: Done!")\n\nthread1 = threading.Thread(target=count_down, args=("Thread-1", 5))\nthread2 = threading.Thread(target=count_down, args=("Thread-2", 3))\n\nthread1.start()\nthread2.start()\n\nthread1.join()\nthread2.join()`,
     hints: ['threading.Thread', 'target function', 'start() and join()']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-29',
@@ -994,6 +1357,19 @@ from multiprocessing import Pool\n\ndef square(n):\n    return n ** 2\n\nwith Po
     initialCode: `from multiprocessing import Pool\n\ndef process_number(n):\n    # Some CPU-intensive task\n    return n * 2`,
     solution: `from multiprocessing import Pool\n\ndef process_number(n):\n    result = sum(i * i for i in range(n))\n    return result\n\nif __name__ == '__main__':\n    numbers = [1000, 2000, 3000, 4000]\n    \n    with Pool(4) as pool:\n        results = pool.map(process_number, numbers)\n    \n    print(results)`,
     hints: ['Pool for parallel processing', 'CPU-bound tasks', 'if __name__ guard']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-30',
@@ -1013,6 +1389,19 @@ from pathlib import Path\n\npath = Path('folder/file.txt')\nprint(path.name)    
     initialCode: `from pathlib import Path\n\n# Work with paths`,
     solution: `from pathlib import Path\n\n# Current directory\nproject_dir = Path.cwd()\nprint(f"Current directory: {project_dir}")\n\n# Create path\ndata_file = project_dir / "data" / "info.txt"\nprint(f"File path: {data_file}")\nprint(f"Parent: {data_file.parent}")\nprint(f"Name: {data_file.name}")\nprint(f"Extension: {data_file.suffix}")`,
     hints: ['Path() creates path', '/ operator joins', 'Cross-platform']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-31',
@@ -1032,6 +1421,19 @@ import json\n\n# Python to JSON\ndata = {'name': 'Alice', 'age': 25}\njson_str =
     initialCode: `import json\n\nusers = [\n    {'name': 'Alice', 'age': 25},\n    {'name': 'Bob', 'age': 30}\n]\n\n# Convert to JSON string`,
     solution: `import json\n\nusers = [\n    {'name': 'Alice', 'age': 25},\n    {'name': 'Bob', 'age': 30}\n]\n\n# To JSON string\njson_str = json.dumps(users, indent=2)\nprint(json_str)\n\n# From JSON string\nparsed = json.loads(json_str)\nfor user in parsed:\n    print(f"{user['name']}: {user['age']}")`,
     hints: ['json.dumps() to string', 'json.loads() from string', 'json.dump/load for files']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-32',
@@ -1056,6 +1458,19 @@ pip install package_name\npip freeze > requirements.txt\npip install -r requirem
     initialCode: `# Virtual environment commands (conceptual)\n# python -m venv env\n# source env/bin/activate\n# pip install requests\n# pip freeze > requirements.txt`,
     solution: `# Virtual environment workflow\n# 1. Create: python -m venv myenv\n# 2. Activate: source myenv/bin/activate (Unix) or myenv\\Scripts\\activate (Windows)\n# 3. Install packages: pip install requests numpy\n# 4. Save dependencies: pip freeze > requirements.txt\n# 5. Install from requirements: pip install -r requirements.txt\n# 6. Deactivate: deactivate`,
     hints: ['Isolates dependencies', 'Per-project environments', 'requirements.txt for sharing']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-33',
@@ -1080,6 +1495,19 @@ data = {'name': 'Alice', 'age': 25}\nresponse = requests.post(url, json=data)\np
     initialCode: `# import requests\n\n# Fetch user data from API\n# def get_user(user_id):\n#     pass`,
     solution: `# import requests\n\n# def get_user(user_id):\n#     url = f"https://jsonplaceholder.typicode.com/users/{user_id}"\n#     response = requests.get(url)\n#     if response.status_code == 200:\n#         return response.json()\n#     return None\n\n# user = get_user(1)\n# if user:\n#     print(f"Name: {user['name']}")\n#     print(f"Email: {user['email']}")`,
     hints: ['requests.get(url)', 'response.json()', 'Check status_code']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-34',
@@ -1104,6 +1532,19 @@ pytest test_file.py
     initialCode: `def multiply(a, b):\n    return a * b\n\n# Write test function`,
     solution: `def multiply(a, b):\n    return a * b\n\ndef test_multiply():\n    assert multiply(2, 3) == 6\n    assert multiply(-2, 3) == -6\n    assert multiply(0, 5) == 0\n    assert multiply(4, 1) == 4\n\n# Run with: pytest test_file.py`,
     hints: ['Test functions start with test_', 'assert for validation', 'pytest discovers tests']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-35',
@@ -1123,6 +1564,19 @@ num = 3.14159\nf"{num:.2f}"  # "3.14"\n\nvalue = 42\nf"{value:05d}"  # "00042"\n
     initialCode: `price = 99.99\nquantity = 5\n\n# Format nicely`,
     solution: `price = 99.99\nquantity = 5\ntotal = price * quantity\n\nprint(f"Price: \${round(price, 2)}")\nprint(f"Quantity: {str(quantity).zfill(3)}")\nprint(f"Total: \${round(total, 2)}")\nprint(f"Calculation: {price} × {quantity} = \${total}")`,
     hints: ['round() for decimals', 'str.zfill() for padding', 'f-strings for interpolation']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'py-36',
@@ -1147,6 +1601,19 @@ logging.basicConfig(\n    filename='app.log',\n    level=logging.INFO,\n    form
     initialCode: `import logging\n\n# Configure logging\n\ndef process_data(data):\n    # Add logging\n    pass`,
     solution: `import logging\n\nlogging.basicConfig(\n    level=logging.INFO,\n    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'\n)\n\nlogger = logging.getLogger(__name__)\n\ndef process_data(data):\n    logger.info(f"Processing {len(data)} items")\n    try:\n        result = sum(data)\n        logger.info(f"Result: {result}")\n        return result\n    except Exception as e:\n        logger.error(f"Error: {e}")\n        return None\n\nprocess_data([1, 2, 3, 4, 5])`,
     hints: ['logging.basicConfig()', 'Different log levels', 'format for custom output']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
 
   // PROJECT LESSON
@@ -1196,6 +1663,19 @@ Build a complete working system!`,
       'enumerate() for numbered list',
       '.lower() for case-insensitive search',
       'Check if list is empty before displaying'
+    ]
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
     ]
   }
 ];

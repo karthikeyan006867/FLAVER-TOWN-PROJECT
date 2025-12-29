@@ -54,6 +54,19 @@ df <- data.frame(
 )
 print(df)`,
     hints: ['Use <- for assignment', 'c() creates vectors', 'paste() concatenates strings']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'r-2',
@@ -119,6 +132,18 @@ calculate_stats <- function(numbers) {
 print(factorial(5))
 data <- c(10, 20, 30, 40, 50)
 print(calculate_stats(data))`,
-    hints: ['function() creates functions', 'Use list() for multiple returns', 'Built-in stats functions: mean, median, sd']
+    hints: ['function() creates functions', 'Use list() for multiple returns', 'Built-in stats functions: mean, median, sd']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   }
 ]

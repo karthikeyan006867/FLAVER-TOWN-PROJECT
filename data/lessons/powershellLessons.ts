@@ -61,7 +61,19 @@ Write-Host "Name: $($person.Name)"
 
 # Pipeline
 Get-Process | Select-Object -First 5 Name, CPU`,
-    hints: ['$ for variables', '@() for arrays', '@{} for hash tables', '| for pipeline']
+    hints: ['$ for variables', '@() for arrays', '@{} for hash tables', '| for pipeline']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'powershell-2',
@@ -118,6 +130,18 @@ function Get-FileCount {
 }
 
 Write-Host "Factorial of 5: $(Get-Factorial -n 5)"`,
-    hints: ['param() for parameters', 'Verb-Noun naming convention', 'Return keyword optional']
+    hints: ['param() for parameters', 'Verb-Noun naming convention', 'Return keyword optional']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   }
 ]

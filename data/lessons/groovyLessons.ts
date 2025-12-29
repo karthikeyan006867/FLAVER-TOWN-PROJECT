@@ -60,6 +60,18 @@ println "Name: $\{person.name}"
 // Closures
 def square = { x -> x * x }
 println "Square of 5: $\{square(5)}"`,
-    hints: ['def for dynamic typing', 'println without parentheses', 'GString interpolation with ${}']
+    hints: ['def for dynamic typing', 'println without parentheses', 'GString interpolation with ${}'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets minimum length',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write more code to match the lesson requirements'
+      }
+    ]
   }
 ]

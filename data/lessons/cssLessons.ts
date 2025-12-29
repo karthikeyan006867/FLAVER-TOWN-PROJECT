@@ -84,7 +84,19 @@ Every beautiful website—Instagram, Netflix, Spotify—uses CSS for its unique 
     estimatedTime: 10,
     initialCode: `h1 {\n  /* Add your styles here */\n}`,
     solution: `h1 {\n  color: blue;\n  font-size: 32px;\n}`,
-    hints: ['color for text color', 'font-size for size', 'Use semicolons']
+    hints: ['color for text color', 'font-size for size', 'Use semicolons']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-2',
@@ -113,6 +125,19 @@ background-image: url('img.jpg');
     initialCode: `div {\n  /* Add styles */\n}`,
     solution: `div {\n  background-color: #3498db;\n  color: white;\n}`,
     hints: ['Use hex color #3498db', 'color for text', 'background-color for background']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-3',
@@ -147,7 +172,19 @@ margin-left: 15px;
     estimatedTime: 12,
     initialCode: `.box {\n  /* Add box model properties */\n}`,
     solution: `.box {\n  padding: 20px;\n  margin: 10px;\n  border: 1px solid black;\n}`,
-    hints: ['padding inside', 'margin outside', 'border syntax: width style color']
+    hints: ['padding inside', 'margin outside', 'border syntax: width style color']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-4',
@@ -177,7 +214,19 @@ Flexbox makes layouts easy!
     estimatedTime: 15,
     initialCode: `.container {\n  /* Make it flex and center items */\n}`,
     solution: `.container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100vh;\n}`,
-    hints: ['display: flex to enable flexbox', 'justify-content for horizontal', 'align-items for vertical']
+    hints: ['display: flex to enable flexbox', 'justify-content for horizontal', 'align-items for vertical']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-5',
@@ -219,7 +268,19 @@ Adapt your design to different screen sizes!
     estimatedTime: 15,
     initialCode: `body {\n  font-size: 16px;\n}\n\n/* Add media query for desktop */`,
     solution: `body {\n  font-size: 16px;\n}\n\n@media (min-width: 1024px) {\n  body {\n    font-size: 20px;\n  }\n}`,
-    hints: ['@media (min-width: px)', 'Larger screens = larger breakpoint', 'Mobile first approach']
+    hints: ['@media (min-width: px)', 'Larger screens = larger breakpoint', 'Mobile first approach']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
 
   // INTERMEDIATE CSS (Lessons 6-20)
@@ -252,7 +313,19 @@ grid-template-rows: auto 300px auto;
     estimatedTime: 18,
     initialCode: `.grid-container {\n  /* Add grid styles */\n}`,
     solution: `.grid-container {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 24px;\n}`,
-    hints: ['display: grid', 'repeat(count, size)', 'gap for spacing']
+    hints: ['display: grid', 'repeat(count, size)', 'gap for spacing']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-7',
@@ -281,7 +354,19 @@ grid-template-rows: auto 300px auto;
     estimatedTime: 20,
     initialCode: `.layout {\n  /* Add grid template areas */\n}`,
     solution: `.layout {\n  display: grid;\n  grid-template-areas:\n    "nav nav"\n    "sidebar content"\n    "footer footer";\n  grid-template-columns: 250px 1fr;\n  gap: 16px;\n}\n\n.nav { grid-area: nav; }\n.sidebar { grid-area: sidebar; }\n.content { grid-area: content; }\n.footer { grid-area: footer; }`,
-    hints: ['grid-template-areas', 'Quotes for each row', 'grid-area to assign']
+    hints: ['grid-template-areas', 'Quotes for each row', 'grid-area to assign']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-8',
@@ -313,7 +398,19 @@ transition: all 0.3s ease-in-out 0.1s;
     estimatedTime: 15,
     initialCode: `.card {\n  background: white;\n  color: black;\n}\n\n.card:hover {\n  background: black;\n  color: white;\n}`,
     solution: `.card {\n  background: white;\n  color: black;\n  transition: all 0.4s ease;\n}\n\n.card:hover {\n  background: black;\n  color: white;\n}`,
-    hints: ['transition property', 'all or specific properties', 'Duration in seconds']
+    hints: ['transition property', 'all or specific properties', 'Duration in seconds']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-9',
@@ -341,6 +438,19 @@ transform: rotate(45deg) scale(1.2) translate(10px, 20px);
     initialCode: `.box {\n  width: 100px;\n  height: 100px;\n  background: purple;\n}\n\n.box:hover {\n  /* Add transform */\n}`,
     solution: `.box {\n  width: 100px;\n  height: 100px;\n  background: purple;\n  transition: transform 0.3s ease;\n}\n\n.box:hover {\n  transform: scale(1.2) rotate(15deg);\n}`,
     hints: ['transform property', 'Combine with transition', 'Multiple functions']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-10',
@@ -372,7 +482,19 @@ animation: bounce 1s ease-in-out infinite;
     estimatedTime: 20,
     initialCode: `@keyframes fadeIn {\n  /* Add keyframes */\n}\n\n.fade-element {\n  /* Apply animation */\n}`,
     solution: `@keyframes fadeIn {\n  from {\n    opacity: 0;\n    transform: translateY(20px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n.fade-element {\n  animation: fadeIn 0.6s ease-out;\n}`,
-    hints: ['@keyframes name', 'from/to or percentages', 'animation property']
+    hints: ['@keyframes name', 'from/to or percentages', 'animation property']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-11',
@@ -407,7 +529,19 @@ p::first-letter {
     estimatedTime: 15,
     initialCode: `.quote {\n  /* Add ::before and ::after */\n}`,
     solution: `.quote {\n  position: relative;\n  padding: 20px;\n}\n\n.quote::before {\n  content: '"';\n  font-size: 4em;\n  position: absolute;\n  left: -10px;\n  top: -20px;\n  color: #ccc;\n}\n\n.quote::after {\n  content: '"';\n  font-size: 4em;\n  position: absolute;\n  right: -10px;\n  bottom: -40px;\n  color: #ccc;\n}`,
-    hints: ['::before ::after', 'content property required', 'Can style like elements']
+    hints: ['::before ::after', 'content property required', 'Can style like elements']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-12',
@@ -439,7 +573,19 @@ p::first-letter {
     estimatedTime: 18,
     initialCode: `:root {\n  /* Define variables */\n}\n\n.card {\n  /* Use variables */\n}`,
     solution: `:root {\n  --primary: #2ecc71;\n  --secondary: #3498db;\n  --spacing-sm: 8px;\n  --spacing-md: 16px;\n  --spacing-lg: 24px;\n}\n\n.card {\n  background: var(--primary);\n  padding: var(--spacing-md);\n  margin: var(--spacing-lg);\n  border: 2px solid var(--secondary);\n}`,
-    hints: ['--variable-name', 'var(--variable-name)', ':root for global']
+    hints: ['--variable-name', 'var(--variable-name)', ':root for global']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-13',
@@ -475,6 +621,19 @@ background: linear-gradient(
     initialCode: `.hero {\n  /* Add gradient */\n}`,
     solution: `.hero {\n  background: linear-gradient(\n    135deg,\n    #667eea 0%,\n    #764ba2 100%\n  );\n  min-height: 400px;\n}`,
     hints: ['linear-gradient(direction, color1, color2)', 'Direction: to right, 45deg, etc', 'Multiple color stops']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-14',
@@ -500,7 +659,19 @@ Width/height = content + padding + border
     estimatedTime: 12,
     initialCode: `/* Add global box-sizing */`,
     solution: `*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\n.box {\n  width: 300px;\n  padding: 20px;\n  border: 5px solid black;\n  /* Total width stays 300px with border-box */\n}`,
-    hints: ['box-sizing: border-box', 'Apply to * for all elements', 'Include ::before ::after']
+    hints: ['box-sizing: border-box', 'Apply to * for all elements', 'Include ::before ::after']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-15',
@@ -531,6 +702,19 @@ filter: blur(2px) brightness(120%) contrast(110%);
     initialCode: `.image {\n  transition: filter 0.3s;\n}\n\n.image:hover {\n  /* Add filters */\n}`,
     solution: `.image {\n  transition: filter 0.3s ease;\n}\n\n.image:hover {\n  filter: brightness(1.2) contrast(1.1) saturate(1.3);\n}`,
     hints: ['filter property', 'Multiple values', 'Combine with transition']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-16',
@@ -563,6 +747,19 @@ clip-path: polygon(
     initialCode: `.triangle {\n  width: 200px;\n  height: 200px;\n  background: red;\n  /* Add clip-path */\n}`,
     solution: `.triangle {\n  width: 200px;\n  height: 200px;\n  background: red;\n  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);\n}`,
     hints: ['clip-path: polygon()', 'Points as x% y%', 'Three points for triangle']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-17',
@@ -592,6 +789,19 @@ object-position: center top;
     initialCode: `.card-image {\n  width: 300px;\n  height: 200px;\n  /* Add object-fit */\n}`,
     solution: `.card-image {\n  width: 300px;\n  height: 200px;\n  object-fit: cover;\n  object-position: center;\n}`,
     hints: ['object-fit: cover', 'For images and videos', 'object-position for alignment']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-18',
@@ -621,7 +831,19 @@ grid-auto-flow: dense;   /* Pack items tightly */
     estimatedTime: 15,
     initialCode: `.gallery {\n  display: grid;\n  /* Add auto-flow */\n}`,
     solution: `.gallery {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));\n  grid-auto-rows: 200px;\n  gap: 16px;\n}`,
-    hints: ['auto-fill/auto-fit', 'minmax() for flexibility', 'grid-auto-rows for height']
+    hints: ['auto-fill/auto-fit', 'minmax() for flexibility', 'grid-auto-rows for height']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-19',
@@ -655,7 +877,19 @@ grid-auto-flow: dense;   /* Pack items tightly */
     estimatedTime: 12,
     initialCode: `.video-container {\n  width: 100%;\n  /* Add aspect-ratio */\n}`,
     solution: `.video-container {\n  width: 100%;\n  aspect-ratio: 16 / 9;\n  background: #000;\n}`,
-    hints: ['aspect-ratio: width / height', 'Width as percentage', '16/9, 4/3, 1/1']
+    hints: ['aspect-ratio: width / height', 'Width as percentage', '16/9, 4/3, 1/1']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-20',
@@ -686,7 +920,19 @@ grid-auto-flow: dense;   /* Pack items tightly */
     estimatedTime: 18,
     initialCode: `.scroll-container {\n  /* Add scroll-snap */\n}\n\n.scroll-section {\n  /* Add snap alignment */\n}`,
     solution: `.scroll-container {\n  scroll-snap-type: y mandatory;\n  overflow-y: scroll;\n  height: 100vh;\n}\n\n.scroll-section {\n  scroll-snap-align: start;\n  height: 100vh;\n}`,
-    hints: ['scroll-snap-type: axis proximity/mandatory', 'scroll-snap-align on children', 'x or y axis']
+    hints: ['scroll-snap-type: axis proximity/mandatory', 'scroll-snap-align on children', 'x or y axis']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
 
   // ADVANCED CSS (Lessons 21-35)
@@ -716,7 +962,19 @@ input[type="checkbox"]:checked {
     estimatedTime: 20,
     initialCode: `input[type="checkbox"] {\n  /* Style checkbox */\n}`,
     solution: `input[type="checkbox"] {\n  appearance: none;\n  width: 24px;\n  height: 24px;\n  border: 2px solid #3498db;\n  border-radius: 4px;\n  cursor: pointer;\n  position: relative;\n  transition: all 0.2s;\n}\n\ninput[type="checkbox"]:checked {\n  background: #3498db;\n}\n\ninput[type="checkbox"]:checked::after {\n  content: '✓';\n  position: absolute;\n  color: white;\n  left: 4px;\n  top: 0;\n}`,
-    hints: ['appearance: none', '::after for checkmark', ':checked state']
+    hints: ['appearance: none', '::after for checkmark', ':checked state']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-22',
@@ -742,7 +1000,19 @@ h2::before {
     estimatedTime: 18,
     initialCode: `.container {\n  /* Add counter */\n}\n\n.item::before {\n  /* Display counter */\n}`,
     solution: `.container {\n  counter-reset: item;\n}\n\n.item::before {\n  counter-increment: item;\n  content: counter(item) ". ";\n  font-weight: bold;\n  color: #3498db;\n}`,
-    hints: ['counter-reset on parent', 'counter-increment', 'content: counter(name)']
+    hints: ['counter-reset on parent', 'counter-increment', 'content: counter(name)']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-23',
@@ -765,7 +1035,19 @@ h2::before {
     estimatedTime: 20,
     initialCode: `.glass-card {\n  /* Add glassmorphism effect */\n}`,
     solution: `.glass-card {\n  background: rgba(255, 255, 255, 0.15);\n  backdrop-filter: blur(12px) saturate(180%);\n  border-radius: 16px;\n  padding: 32px;\n  border: 1px solid rgba(255, 255, 255, 0.3);\n  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);\n}`,
-    hints: ['backdrop-filter: blur()', 'Semi-transparent background', 'Multiple filter values']
+    hints: ['backdrop-filter: blur()', 'Semi-transparent background', 'Multiple filter values']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-24',
@@ -793,7 +1075,19 @@ h2::before {
     estimatedTime: 15,
     initialCode: `/* Subgrid inherits parent grid */\n.nested-grid {\n  grid-template-columns: subgrid;\n}`,
     solution: `.container {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 16px;\n}\n\n.item {\n  grid-column: span 2;\n  display: grid;\n  grid-template-columns: subgrid;\n}`,
-    hints: ['subgrid value', 'Inherits from parent', 'Limited browser support']
+    hints: ['subgrid value', 'Inherits from parent', 'Limited browser support']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-25',
@@ -818,6 +1112,19 @@ contain: content;     /* Layout, paint, style */
     initialCode: `.component {\n  /* Add containment */\n}`,
     solution: `.component {\n  contain: layout style paint;\n  /* Tells browser this is isolated component */\n}`,
     hints: ['Performance optimization', 'Isolates rendering', 'Use for independent components']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-26',
@@ -843,6 +1150,19 @@ mix-blend-mode: difference;
     initialCode: `.overlay {\n  /* Add blend mode */\n}`,
     solution: `.overlay {\n  background: #3498db;\n  mix-blend-mode: multiply;\n  padding: 20px;\n  color: white;\n}`,
     hints: ['mix-blend-mode property', 'Similar to Photoshop', 'Experiment with values']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-27',
@@ -870,7 +1190,19 @@ html {
     estimatedTime: 10,
     initialCode: `html {\n  /* Add smooth scroll */\n}`,
     solution: `html {\n  scroll-behavior: smooth;\n  scroll-padding-top: 100px; /* Account for fixed nav */\n}`,
-    hints: ['scroll-behavior: smooth', 'On html element', 'scroll-padding for offset']
+    hints: ['scroll-behavior: smooth', 'On html element', 'scroll-padding for offset']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-28',
@@ -899,7 +1231,19 @@ shape-outside: polygon(0 0, 100% 0, 100% 100%);
     estimatedTime: 20,
     initialCode: `.float-image {\n  /* Add shape-outside */\n}`,
     solution: `.float-image {\n  float: left;\n  width: 200px;\n  height: 200px;\n  shape-outside: circle(50%);\n  clip-path: circle(50%);\n  margin: 0 20px 20px 0;\n}`,
-    hints: ['shape-outside property', 'Requires float', 'clip-path for visual']
+    hints: ['shape-outside property', 'Requires float', 'clip-path for visual']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-29',
@@ -927,7 +1271,19 @@ shape-outside: polygon(0 0, 100% 0, 100% 100%);
     estimatedTime: 20,
     initialCode: `.card {\n  container-type: inline-size;\n}\n\n/* Add container query */`,
     solution: `.card {\n  container-type: inline-size;\n  container-name: mycard;\n}\n\n@container mycard (min-width: 500px) {\n  .card-content {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n  }\n}`,
-    hints: ['container-type on parent', '@container query', 'Query the container, not viewport']
+    hints: ['container-type on parent', '@container query', 'Query the container, not viewport']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-30',
@@ -960,6 +1316,19 @@ border-inline-start: 2px solid;
     initialCode: `.box {\n  /* Use logical properties */\n}`,
     solution: `.box {\n  padding-inline: 24px;\n  padding-block: 16px;\n  margin-block-end: 20px;\n  border-inline-start: 4px solid #3498db;\n}`,
     hints: ['inline = horizontal', 'block = vertical', 'Adapts to writing mode']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-31',
@@ -992,7 +1361,19 @@ border-inline-start: 2px solid;
     estimatedTime: 15,
     initialCode: `.container {\n  /* Use nesting */\n}`,
     solution: `.container {\n  padding: 20px;\n  \n  & .title {\n    font-size: 24px;\n    color: #333;\n  }\n  \n  & .content {\n    margin-top: 16px;\n    \n    & p {\n      line-height: 1.6;\n    }\n  }\n  \n  &:hover {\n    background: #f5f5f5;\n  }\n}`,
-    hints: ['& for parent reference', 'Nest selectors', 'New CSS feature']
+    hints: ['& for parent reference', 'Nest selectors', 'New CSS feature']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-32',
@@ -1022,7 +1403,19 @@ column-gap: 10px;
     estimatedTime: 12,
     initialCode: `.flex-row {\n  display: flex;\n  /* Add gap */\n}`,
     solution: `.flex-row {\n  display: flex;\n  gap: 16px;\n  flex-wrap: wrap;\n}\n\n.flex-column {\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n}`,
-    hints: ['gap property', 'Works in flex and grid', 'Replaces margin tricks']
+    hints: ['gap property', 'Works in flex and grid', 'Replaces margin tricks']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-33',
@@ -1045,7 +1438,19 @@ column-gap: 10px;
     estimatedTime: 10,
     initialCode: `:root {\n  /* Set accent color */\n}`,
     solution: `:root {\n  accent-color: #2ecc71;\n}\n\n/* All checkboxes, radios, etc will use this color */`,
-    hints: ['accent-color property', 'On :root for global', 'Affects form controls']
+    hints: ['accent-color property', 'On :root for global', 'Affects form controls']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-34',
@@ -1072,7 +1477,19 @@ div:has(input:checked) {
     estimatedTime: 18,
     initialCode: `/* Style container with checked input */\n.form-group:has() {\n  \n}`,
     solution: `.form-group:has(input:checked) {\n  border-color: green;\n  background: #e8f5e9;\n}\n\n.card:has(.featured) {\n  border: 3px solid gold;\n}`,
-    hints: [':has(selector)', 'Selects parent', 'Check for child state']
+    hints: [':has(selector)', 'Selects parent', 'Check for child state']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
   {
     id: 'css-35',
@@ -1105,7 +1522,19 @@ article :is(h1, h2) span {
     estimatedTime: 15,
     initialCode: `/* Group heading styles */`,
     solution: `:is(h1, h2, h3, h4, h5, h6) {\n  font-family: 'Arial', sans-serif;\n  font-weight: bold;\n  line-height: 1.2;\n}\n\n:is(.btn, .button, .link-button):hover {\n  opacity: 0.8;\n}`,
-    hints: [':is() groups selectors', ':where() same but zero specificity', 'Cleaner code']
+    hints: [':is() groups selectors', ':where() same but zero specificity', 'Cleaner code']    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write code following the lesson requirements'
+      }
+    ]
   },
 
   // PROJECT LESSON
@@ -1142,5 +1571,18 @@ Make it beautiful!`,
     initialCode: `.card {\n  /* Add your styles */\n}\n\n.card:hover {\n  /* Hover effect */\n}`,
     solution: `.card {\n  background: white;\n  padding: 30px;\n  margin: 20px;\n  border-radius: 12px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n  max-width: 400px;\n  transition: transform 0.3s ease;\n}\n\n.card:hover {\n  transform: translateY(-5px);\n  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);\n}\n\n@media (max-width: 768px) {\n  .card {\n    margin: 10px;\n    padding: 20px;\n  }\n}`,
     hints: ['box-shadow for depth', 'transform for movement', 'transition for smooth animation', 'Media query for mobile']
+    ,
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
   }
 ];

@@ -58,6 +58,18 @@ main = do
   print (double 5)
   print (factorial 5)
   print doubled`,
-    hints: ['Functions without parentheses', 'Pattern matching in definitions', 'map for transforming lists']
+    hints: ['Functions without parentheses', 'Pattern matching in definitions', 'map for transforming lists'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets minimum length',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Write more code to match the lesson requirements'
+      }
+    ]
   }
 ]
