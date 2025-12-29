@@ -36,12 +36,6 @@ export default function AchievementsPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [sortBy, setSortBy] = useState<'points' | 'rarity' | 'name'>('points')
 
-  const { completedLessons, streak, totalPoints, timeSpent } = useProgressStore()
-  const [filter, setFilter] = useState<string>('All')
-  const [rarityFilter, setRarityFilter] = useState<string>('All')
-  const [searchTerm, setSearchTerm] = useState('')
-  const [sortBy, setSortBy] = useState<'points' | 'rarity' | 'name'>('points')
-
   // Calculate progress for each achievement
   const achievements: Achievement[] = achievementsData.map(ach => {
     let progress = 0
@@ -191,7 +185,7 @@ export default function AchievementsPage() {
           </div>
 
           {/* Category Filters - Keep for backward compatibility */}
-          <div className="flex gap-2 mb-8 overflow-x-auto pb-2 hidden">
+          <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
           </div>
 
           {/* Achievements Grid */}
@@ -261,13 +255,7 @@ export default function AchievementsPage() {
                       <CheckCircle2 className="h-6 w-6 text-white" />
                     </div>
                   </div>
-                )}>
-                  </div>
-                  <div className="flex items-center justify-between text-sm pt-2">
-                    <span className="text-gray-500 capitalize">{achievement.category}</span>
-                    <span className="text-primary-400 font-semibold">+{achievement.points} pts</span>
-                  </div>
-                </div>
+                )}
               </div>
             ))}
           </div>

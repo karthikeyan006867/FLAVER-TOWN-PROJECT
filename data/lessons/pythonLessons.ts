@@ -2393,7 +2393,7 @@ predictions = model.predict(X_test)
 score = model.score(X_test, y_test)
 \`\`\``,
     language: 'python',
-    difficulty: 'Expert',
+    difficulty: 'Advanced',
     estimatedTime: 40,
     initialCode: `from sklearn.linear_model import LinearRegression\n\n# Create and train a simple linear regression model\nX = [[1], [2], [3], [4]]\ny = [3, 5, 7, 9]`,
     solution: `from sklearn.linear_model import LinearRegression\n\nX = [[1], [2], [3], [4]]\ny = [3, 5, 7, 9]\n\nmodel = LinearRegression()\nmodel.fit(X, y)\n\nprediction = model.predict([[5]])\nprint(f"Prediction for 5: {prediction[0]}")`,
@@ -2869,7 +2869,7 @@ class Subject:
             observer.update()
 \`\`\``,
     language: 'python',
-    difficulty: 'Expert',
+    difficulty: 'Advanced',
     estimatedTime: 40,
     initialCode: `# Implement a simple Singleton class\nclass DatabaseConnection:\n    # Your code here\n    pass`,
     solution: `class DatabaseConnection:\n    _instance = None\n    \n    def __new__(cls):\n        if cls._instance is None:\n            cls._instance = super().__new__(cls)\n            cls._instance.connection = "Connected"\n        return cls._instance\n\n# Test\ndb1 = DatabaseConnection()\ndb2 = DatabaseConnection()\nprint(db1 is db2)  # True`,
@@ -2911,7 +2911,7 @@ project/
 
 Implement the full stack!`,
     language: 'python',
-    difficulty: 'Expert',
+    difficulty: 'Advanced',
     estimatedTime: 120,
     isProject: true,
     projectDescription: 'Build complete task manager web app',
