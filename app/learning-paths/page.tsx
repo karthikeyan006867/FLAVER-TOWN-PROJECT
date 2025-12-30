@@ -1,9 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import { useProgressStore } from '@/store/progressStore'
+import { courses } from '@/data/courses'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import { Map, Check, Lock, Award, TrendingUp, BookOpen, Code, Database, Smartphone } from 'lucide-react'
+import Link from 'next/link'
+import { Map, Check, Lock, Award, TrendingUp, BookOpen, Code, Database, Smartphone, Brain, Globe, Zap, Shield } from 'lucide-react'
 
 const learningPaths = [
   {
@@ -12,9 +15,8 @@ const learningPaths = [
     description: 'Master modern web development from frontend to backend',
     icon: Code,
     color: 'blue',
-    duration: '12 weeks',
-    courses: ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'MongoDB'],
-    progress: 45,
+    duration: '16 weeks',
+    courseIds: ['html', 'css', 'javascript', 'typescript', 'react', 'nodejs'],
     enrolled: true
   },
   {
@@ -23,9 +25,8 @@ const learningPaths = [
     description: 'Build native and cross-platform mobile applications',
     icon: Smartphone,
     color: 'purple',
-    duration: '10 weeks',
-    courses: ['JavaScript', 'React', 'React Native', 'Swift', 'Kotlin'],
-    progress: 20,
+    duration: '14 weeks',
+    courseIds: ['javascript', 'typescript', 'react', 'dart', 'swift', 'kotlin'],
     enrolled: true
   },
   {
@@ -34,26 +35,88 @@ const learningPaths = [
     description: 'Learn server-side development and API design',
     icon: Database,
     color: 'green',
-    duration: '8 weeks',
-    courses: ['Python', 'Node.js', 'SQL', 'MongoDB', 'Redis', 'Docker'],
-    progress: 0,
+    duration: '12 weeks',
+    courseIds: ['python', 'nodejs', 'sql', 'go', 'rust', 'java'],
     enrolled: false
   },
   {
     id: 'data-science',
-    title: 'Data Science & ML',
-    description: 'Analyze data and build machine learning models',
+    title: 'Data Science & Analytics',
+    description: 'Analyze data and build analytical solutions',
     icon: TrendingUp,
     color: 'yellow',
     duration: '14 weeks',
-    courses: ['Python', 'NumPy', 'Pandas', 'Scikit-learn', 'TensorFlow'],
-    progress: 0,
+    courseIds: ['python', 'r', 'sql', 'matlab', 'julia'],
+    enrolled: false
+  },
+  {
+    id: 'systems-prog',
+    title: 'Systems Programming',
+    description: 'Low-level programming and performance optimization',
+    icon: Zap,
+    color: 'red',
+    duration: '12 weeks',
+    courseIds: ['rust', 'go', 'csharp', 'cpp'],
+    enrolled: false
+  },
+  {
+    id: 'devops',
+    title: 'DevOps & Automation',
+    description: 'Automate deployments and manage infrastructure',
+    icon: Shield,
+    color: 'cyan',
+    duration: '10 weeks',
+    courseIds: ['bash', 'powershell', 'python', 'go'],
+    enrolled: false
+  },
+  {
+    id: 'functional',
+    title: 'Functional Programming',
+    description: 'Master functional programming paradigms',
+    icon: Brain,
+    color: 'indigo',
+    duration: '10 weeks',
+    courseIds: ['haskell', 'elixir', 'clojure', 'scala', 'fsharp', 'ocaml'],
+    enrolled: false
+  },
+  {
+    id: 'scripting',
+    title: 'Scripting & Automation',
+    description: 'Automate tasks with scripting languages',
+    icon: Globe,
+    color: 'pink',
+    duration: '8 weeks',
+    courseIds: ['python', 'ruby', 'php', 'perl', 'lua', 'groovy'],
     enrolled: false
   }
 ]
 
 export default function LearningPathsPage() {
   const [selectedPath, setSelectedPath] = useState(learningPaths[0])
+  const { completedLessons, courseProgress } = useProgressStore()
+
+  const getPathProgress = (path: typeof learningPaths[0]) => {
+    const pathCourses = courses.filter(c => path.courseIds.includes(c.id))
+    if (pathCourses.length === 0) return 0
+    
+    const totalLessons = pathCourses.reduce((sum, course) => sum + course.lessons.length, 0)
+    const completedInPath = completedLessons.filter(lessonId => 
+      pathCourses.some(course => course.lessons.some(lesson => lesson.id === lessonId))
+    ).length
+    
+    return Math.round((completedInPath / totalLessons) * 100)
+  }
+
+  const getCourseProgress = (courseId: string) => {
+    const course = courses.find(c => c.id === courseId)
+    if (!course) return 0
+    
+    const completed = completedLessons.filter(lessonId => 
+      course.lessons.some(lesson => lesson.id === lessonId)
+    ).length
+    
+    return Math.round((completed / course.lessons.length) * 100)
+  }
 
   return (
     <div className="min-h-screen bg-gray-950">
@@ -77,13 +140,15 @@ export default function LearningPathsPage() {
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {learningPaths.map((path) => {
               const Icon = path.icon
+              const progress = getPathProgress(path)
+              
               return (
                 <div
                   key={path.id}
                   onClick={() => setSelectedPath(path)}
                   className={`card-gradient border-2 rounded-xl p-6 cursor-pointer transition-all ${
                     selectedPath.id === path.id
-                      ? `border-${path.color}-500`
+                      ? `border-${path.color}-500 shadow-lg`
                       : 'border-gray-700 hover:border-gray-600'
                   }`}
                 >
@@ -104,28 +169,26 @@ export default function LearningPathsPage() {
                   <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
                     <span className="flex items-center gap-1">
                       <BookOpen className="h-4 w-4" />
-                      {path.courses.length} courses
+                      {path.courseIds.length} courses
                     </span>
                     <span>{path.duration}</span>
                   </div>
 
-                  {path.enrolled && (
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm text-gray-400">Progress</span>
-                        <span className="text-sm font-semibold">{path.progress}%</span>
-                      </div>
-                      <div className="w-full bg-gray-800 rounded-full h-2">
-                        <div
-                          className={`bg-${path.color}-500 h-2 rounded-full transition-all`}
-                          style={{ width: `${path.progress}%` }}
-                        />
-                      </div>
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-gray-400">Progress</span>
+                      <span className="text-sm font-semibold">{progress}%</span>
                     </div>
-                  )}
+                    <div className="w-full bg-gray-800 rounded-full h-2">
+                      <div
+                        className={`bg-${path.color}-500 h-2 rounded-full transition-all`}
+                        style={{ width: `${progress}%` }}
+                      />
+                    </div>
+                  </div>
 
                   {!path.enrolled && (
-                    <button className={`w-full mt-4 px-4 py-2 bg-${path.color}-500 text-white rounded-lg hover:bg-${path.color}-600 transition-colors font-semibold`}>
+                    <button className={`w-full mt-4 px-4 py-2 bg-${path.color}-500 text-white rounded-lg hover:opacity-90 transition-colors font-semibold`}>
                       Start Learning
                     </button>
                   )}
@@ -140,59 +203,64 @@ export default function LearningPathsPage() {
               <h2 className="text-2xl font-bold mb-6">{selectedPath.title} - Course Roadmap</h2>
               
               <div className="space-y-4">
-                {selectedPath.courses.map((course, index) => {
-                  const isCompleted = index < selectedPath.progress / 20
-                  const isCurrent = index === Math.floor(selectedPath.progress / 20)
-                  const isLocked = index > Math.floor(selectedPath.progress / 20)
+                {selectedPath.courseIds.map((courseId, index) => {
+                  const course = courses.find(c => c.id === courseId)
+                  if (!course) return null
+                  
+                  const progress = getCourseProgress(courseId)
+                  const isCompleted = progress === 100
+                  const isStarted = progress > 0
                   
                   return (
-                    <div
-                      key={index}
-                      className={`flex items-center gap-4 p-4 rounded-lg border-2 transition-all ${
+                    <Link
+                      key={courseId}
+                      href={`/courses/${courseId}`}
+                      className={`flex items-center gap-4 p-4 rounded-lg border-2 transition-all hover:scale-[1.02] ${
                         isCompleted
                           ? 'border-green-500/30 bg-green-500/10'
-                          : isCurrent
+                          : isStarted
                           ? 'border-primary-500/30 bg-primary-500/10'
                           : 'border-gray-700 bg-gray-800/30'
                       }`}
                     >
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                        isCompleted
-                          ? 'bg-green-500'
-                          : isCurrent
-                          ? 'bg-primary-500'
-                          : 'bg-gray-700'
-                      }`}>
-                        {isCompleted ? (
-                          <Check className="h-5 w-5 text-white" />
-                        ) : isLocked ? (
-                          <Lock className="h-5 w-5 text-gray-500" />
-                        ) : (
-                          <span className="text-white font-bold">{index + 1}</span>
-                        )}
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-2xl flex-shrink-0`}>
+                        {course.icon}
                       </div>
 
                       <div className="flex-1">
-                        <h3 className="font-semibold">{course}</h3>
-                        <p className="text-sm text-gray-400">
-                          {isCompleted
-                            ? 'Completed'
-                            : isCurrent
-                            ? 'In Progress'
-                            : 'Locked'}
-                        </p>
+                        <div className="flex items-center gap-3 mb-1">
+                          <h3 className="font-semibold">{course.title}</h3>
+                          {isCompleted && <Award className="h-5 w-5 text-green-400" />}
+                        </div>
+                        <p className="text-sm text-gray-400 mb-2">{course.description}</p>
+                        
+                        {/* Progress bar */}
+                        <div className="flex items-center gap-2">
+                          <div className="flex-1 bg-gray-700 rounded-full h-1.5">
+                            <div
+                              className={`h-1.5 rounded-full transition-all ${
+                                isCompleted ? 'bg-green-500' : 'bg-primary-500'
+                              }`}
+                              style={{ width: `${progress}%` }}
+                            />
+                          </div>
+                          <span className="text-xs text-gray-400 min-w-[3rem] text-right">{progress}%</span>
+                        </div>
                       </div>
 
-                      {isCompleted && (
-                        <Award className="h-5 w-5 text-green-400" />
-                      )}
-                      
-                      {!isLocked && !isCompleted && (
-                        <button className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors font-semibold">
-                          Continue
-                        </button>
-                      )}
-                    </div>
+                      <div className="flex flex-col items-end gap-2">
+                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                          isCompleted
+                            ? 'bg-green-500/20 text-green-400'
+                            : isStarted
+                            ? 'bg-primary-500/20 text-primary-400'
+                            : 'bg-gray-700 text-gray-400'
+                        }`}>
+                          {isCompleted ? 'Completed' : isStarted ? 'In Progress' : 'Not Started'}
+                        </span>
+                        <span className="text-xs text-gray-500">{course.lessons.length} lessons</span>
+                      </div>
+                    </Link>
                   )
                 })}
               </div>
