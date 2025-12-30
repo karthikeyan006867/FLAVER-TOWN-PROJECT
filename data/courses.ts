@@ -79,6 +79,7 @@ export interface Course {
   icon: string
   color: string
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced'
+  category: 'Frontend' | 'Backend' | 'Database' | 'Mobile' | 'DevOps' | 'Data Science' | 'Systems' | 'Full-Stack'
   duration: string
   lessons: Lesson[]
 }
@@ -91,6 +92,7 @@ export const courses: Course[] = [
     icon: '📝',
     color: 'from-orange-500 to-red-500',
     difficulty: 'Beginner',
+    category: 'Frontend',
     duration: '4 weeks',
     lessons: htmlLessons
   },
@@ -101,6 +103,7 @@ export const courses: Course[] = [
     icon: '🎨',
     color: 'from-blue-500 to-cyan-500',
     difficulty: 'Beginner',
+    category: 'Frontend',
     duration: '5 weeks',
     lessons: cssLessons
   },
@@ -111,6 +114,7 @@ export const courses: Course[] = [
     icon: '⚡',
     color: 'from-yellow-500 to-orange-500',
     difficulty: 'Beginner',
+    category: 'Frontend',
     duration: '8 weeks',
     lessons: jsLessons
   },
@@ -121,6 +125,7 @@ export const courses: Course[] = [
     icon: '🐍',
     color: 'from-green-500 to-teal-500',
     difficulty: 'Beginner',
+    category: 'Backend',
     duration: '10 weeks',
     lessons: pythonLessons
   },
@@ -131,6 +136,7 @@ export const courses: Course[] = [
     icon: '📘',
     color: 'from-blue-600 to-indigo-600',
     difficulty: 'Intermediate',
+    category: 'Frontend',
     duration: '6 weeks',
     lessons: typescriptLessons
   },
@@ -141,6 +147,7 @@ export const courses: Course[] = [
     icon: '⚛️',
     color: 'from-cyan-500 to-blue-500',
     difficulty: 'Intermediate',
+    category: 'Frontend',
     duration: '8 weeks',
     lessons: reactLessons
   },
@@ -151,6 +158,7 @@ export const courses: Course[] = [
     icon: '🟢',
     color: 'from-green-600 to-emerald-600',
     difficulty: 'Intermediate',
+    category: 'Backend',
     duration: '10 weeks',
     lessons: nodejsLessons
   },
@@ -161,6 +169,7 @@ export const courses: Course[] = [
     icon: '💎',
     color: 'from-red-600 to-pink-600',
     difficulty: 'Intermediate',
+    category: 'Backend',
     duration: '8 weeks',
     lessons: rubyLessons
   },
@@ -171,6 +180,7 @@ export const courses: Course[] = [
     icon: '🐘',
     color: 'from-indigo-600 to-purple-600',
     difficulty: 'Intermediate',
+    category: 'Backend',
     duration: '8 weeks',
     lessons: phpLessons
   },
@@ -181,6 +191,7 @@ export const courses: Course[] = [
     icon: '☕',
     color: 'from-orange-600 to-red-700',
     difficulty: 'Intermediate',
+    category: 'Backend',
     duration: '12 weeks',
     lessons: javaLessons
   },
@@ -191,6 +202,7 @@ export const courses: Course[] = [
     icon: '🎯',
     color: 'from-purple-600 to-violet-600',
     difficulty: 'Intermediate',
+    category: 'Backend',
     duration: '12 weeks',
     lessons: csharpLessons
   },
@@ -201,6 +213,7 @@ export const courses: Course[] = [
     icon: '🐹',
     color: 'from-sky-500 to-blue-600',
     difficulty: 'Advanced',
+    category: 'Backend',
     duration: '10 weeks',
     lessons: goLessons
   },
@@ -211,6 +224,7 @@ export const courses: Course[] = [
     icon: '🦀',
     color: 'from-amber-600 to-orange-700',
     difficulty: 'Advanced',
+    category: 'Backend',
     duration: '14 weeks',
     lessons: rustLessons
   },
@@ -221,6 +235,7 @@ export const courses: Course[] = [
     icon: '🍎',
     color: 'from-orange-500 to-red-600',
     difficulty: 'Advanced',
+    category: 'Mobile',
     duration: '12 weeks',
     lessons: swiftLessons
   },
@@ -231,6 +246,7 @@ export const courses: Course[] = [
     icon: '🚀',
     color: 'from-purple-500 to-pink-500',
     difficulty: 'Intermediate',
+    category: 'Full-Stack',
     duration: '6 weeks',
     lessons: integrationProjects
   },
@@ -241,6 +257,7 @@ export const courses: Course[] = [
     icon: '🎨',
     color: 'from-purple-500 to-pink-600',
     difficulty: 'Intermediate',
+    category: 'Mobile',
     duration: '8 weeks',
     lessons: kotlinLessons
   },
@@ -251,6 +268,7 @@ export const courses: Course[] = [
     icon: '🔴',
     color: 'from-red-600 to-orange-600',
     difficulty: 'Advanced',
+    category: 'Systems',
     duration: '10 weeks',
     lessons: scalaLessons
   },
@@ -261,6 +279,7 @@ export const courses: Course[] = [
     icon: '🎯',
     color: 'from-blue-500 to-cyan-500',
     difficulty: 'Intermediate',
+    category: 'Mobile',
     duration: '9 weeks',
     lessons: dartLessons
   },
@@ -271,6 +290,7 @@ export const courses: Course[] = [
     icon: '📊',
     color: 'from-blue-700 to-indigo-600',
     difficulty: 'Intermediate',
+    category: 'Data Science',
     duration: '8 weeks',
     lessons: rLessons
   },
@@ -281,6 +301,7 @@ export const courses: Course[] = [
     icon: '🗄️',
     color: 'from-gray-600 to-slate-700',
     difficulty: 'Beginner',
+    category: 'Database',
     duration: '6 weeks',
     lessons: sqlLessons
   },
@@ -291,6 +312,7 @@ export const courses: Course[] = [
     icon: '💻',
     color: 'from-green-700 to-emerald-800',
     difficulty: 'Intermediate',
+    category: 'DevOps',
     duration: '5 weeks',
     lessons: bashLessons
   },
@@ -301,6 +323,7 @@ export const courses: Course[] = [
     icon: '💧',
     color: 'from-purple-600 to-violet-700',
     difficulty: 'Advanced',
+    category: 'Systems',
     duration: '10 weeks',
     lessons: elixirLessons
   },
@@ -311,6 +334,7 @@ export const courses: Course[] = [
     icon: '🔷',
     color: 'from-purple-700 to-pink-700',
     difficulty: 'Advanced',
+    category: 'Systems',
     duration: '12 weeks',
     lessons: haskellLessons
   },
@@ -321,6 +345,7 @@ export const courses: Course[] = [
     icon: '🌙',
     color: 'from-blue-600 to-indigo-700',
     difficulty: 'Beginner',
+    category: 'Systems',
     duration: '4 weeks',
     lessons: luaLessons
   },
@@ -331,6 +356,7 @@ export const courses: Course[] = [
     icon: '🐪',
     color: 'from-blue-800 to-purple-800',
     difficulty: 'Intermediate',
+    category: 'Systems',
     duration: '6 weeks',
     lessons: perlLessons
   },
@@ -341,6 +367,7 @@ export const courses: Course[] = [
     icon: '🔬',
     color: 'from-purple-600 to-red-600',
     difficulty: 'Intermediate',
+    category: 'Data Science',
     duration: '8 weeks',
     lessons: juliaLessons
   },
@@ -351,6 +378,7 @@ export const courses: Course[] = [
     icon: '⚡',
     color: 'from-blue-700 to-cyan-700',
     difficulty: 'Intermediate',
+    category: 'DevOps',
     duration: '6 weeks',
     lessons: powershellLessons
   },
@@ -361,6 +389,7 @@ export const courses: Course[] = [
     icon: '🎸',
     color: 'from-teal-600 to-green-700',
     difficulty: 'Intermediate',
+    category: 'Systems',
     duration: '6 weeks',
     lessons: groovyLessons
   },
@@ -371,6 +400,7 @@ export const courses: Course[] = [
     icon: '⚙️',
     color: 'from-green-600 to-blue-700',
     difficulty: 'Advanced',
+    category: 'Systems',
     duration: '10 weeks',
     lessons: clojureLessons
   },
@@ -381,6 +411,7 @@ export const courses: Course[] = [
     icon: '📡',
     color: 'from-red-700 to-pink-700',
     difficulty: 'Advanced',
+    category: 'Systems',
     duration: '12 weeks',
     lessons: erlangLessons
   },
@@ -391,6 +422,7 @@ export const courses: Course[] = [
     icon: '🔷',
     color: 'from-blue-600 to-purple-700',
     difficulty: 'Intermediate',
+    category: 'Systems',
     duration: '8 weeks',
     lessons: fsharpLessons
   },
@@ -401,6 +433,7 @@ export const courses: Course[] = [
     icon: '🐫',
     color: 'from-orange-600 to-red-700',
     difficulty: 'Advanced',
+    category: 'Systems',
     duration: '10 weeks',
     lessons: ocamlLessons
   },
@@ -411,6 +444,7 @@ export const courses: Course[] = [
     icon: '📐',
     color: 'from-orange-500 to-yellow-600',
     difficulty: 'Intermediate',
+    category: 'Data Science',
     duration: '8 weeks',
     lessons: matlabLessons
   },
@@ -421,6 +455,7 @@ export const courses: Course[] = [
     icon: '🍏',
     color: 'from-gray-600 to-blue-700',
     difficulty: 'Intermediate',
+    category: 'Mobile',
     duration: '8 weeks',
     lessons: objectivecLessons
   },
@@ -431,6 +466,7 @@ export const courses: Course[] = [
     icon: '💎',
     color: 'from-cyan-500 to-blue-600',
     difficulty: 'Intermediate',
+    category: 'Systems',
     duration: '7 weeks',
     lessons: crystalLessons
   },
@@ -441,6 +477,7 @@ export const courses: Course[] = [
     icon: '🟢',
     color: 'from-green-500 to-teal-500',
     difficulty: 'Intermediate',
+    category: 'Frontend',
     duration: '7 weeks',
     lessons: vueLessons
   },
@@ -451,6 +488,7 @@ export const courses: Course[] = [
     icon: '🅰️',
     color: 'from-red-600 to-pink-600',
     difficulty: 'Advanced',
+    category: 'Frontend',
     duration: '10 weeks',
     lessons: angularLessons
   },
@@ -461,6 +499,7 @@ export const courses: Course[] = [
     icon: '🎸',
     color: 'from-green-700 to-emerald-700',
     difficulty: 'Intermediate',
+    category: 'Backend',
     duration: '9 weeks',
     lessons: djangoLessons
   },
@@ -471,6 +510,7 @@ export const courses: Course[] = [
     icon: '🧪',
     color: 'from-gray-600 to-slate-600',
     difficulty: 'Intermediate',
+    category: 'Backend',
     duration: '6 weeks',
     lessons: flaskLessons
   },
@@ -481,6 +521,7 @@ export const courses: Course[] = [
     icon: '🍃',
     color: 'from-green-600 to-lime-600',
     difficulty: 'Intermediate',
+    category: 'Database',
     duration: '6 weeks',
     lessons: mongodbLessons
   },
@@ -491,6 +532,7 @@ export const courses: Course[] = [
     icon: '🐘',
     color: 'from-blue-700 to-indigo-700',
     difficulty: 'Advanced',
+    category: 'Database',
     duration: '8 weeks',
     lessons: postgresqlLessons
   },
@@ -501,6 +543,7 @@ export const courses: Course[] = [
     icon: '🐳',
     color: 'from-blue-500 to-cyan-600',
     difficulty: 'Intermediate',
+    category: 'DevOps',
     duration: '6 weeks',
     lessons: dockerLessons
   },
@@ -511,6 +554,7 @@ export const courses: Course[] = [
     icon: '☸️',
     color: 'from-blue-600 to-purple-600',
     difficulty: 'Advanced',
+    category: 'DevOps',
     duration: '10 weeks',
     lessons: kubernetesLessons
   },
@@ -521,6 +565,7 @@ export const courses: Course[] = [
     icon: '📦',
     color: 'from-orange-600 to-red-600',
     difficulty: 'Beginner',
+    category: 'DevOps',
     duration: '4 weeks',
     lessons: gitLessons
   },
@@ -531,6 +576,7 @@ export const courses: Course[] = [
     icon: '🔷',
     color: 'from-pink-600 to-purple-600',
     difficulty: 'Intermediate',
+    category: 'Full-Stack',
     duration: '6 weeks',
     lessons: graphqlLessons
   },
@@ -541,6 +587,7 @@ export const courses: Course[] = [
     icon: '▲',
     color: 'from-gray-800 to-black',
     difficulty: 'Advanced',
+    category: 'Full-Stack',
     duration: '8 weeks',
     lessons: nextjsLessons
   },
@@ -551,6 +598,7 @@ export const courses: Course[] = [
     icon: '🎨',
     color: 'from-cyan-500 to-blue-500',
     difficulty: 'Beginner',
+    category: 'Frontend',
     duration: '3 weeks',
     lessons: tailwindLessons
   },
@@ -561,6 +609,7 @@ export const courses: Course[] = [
     icon: '☁️',
     color: 'from-orange-500 to-yellow-500',
     difficulty: 'Advanced',
+    category: 'DevOps',
     duration: '12 weeks',
     lessons: awsLessons
   },
@@ -571,6 +620,7 @@ export const courses: Course[] = [
     icon: '🤖',
     color: 'from-purple-600 to-pink-600',
     difficulty: 'Advanced',
+    category: 'Data Science',
     duration: '14 weeks',
     lessons: mlLessons
   },
@@ -581,6 +631,7 @@ export const courses: Course[] = [
     icon: '🔒',
     color: 'from-red-700 to-orange-700',
     difficulty: 'Intermediate',
+    category: 'Full-Stack',
     duration: '8 weeks',
     lessons: cybersecurityLessons
   }
