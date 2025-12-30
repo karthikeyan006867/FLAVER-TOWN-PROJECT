@@ -35,7 +35,8 @@ export default function AdminDashboard() {
   })
 
   // Admin email check
-  const isAdmin = user?.emailAddresses[0]?.emailAddress === 'kaarthii009.g@gmail.com'
+  const adminEmails = ['kaarthii009.g@gmail.com', 'karthii009.g@gmail.com']
+  const isAdmin = user?.emailAddresses[0]?.emailAddress && adminEmails.includes(user.emailAddresses[0].emailAddress)
 
   useEffect(() => {
     if (isLoaded && isAdmin) {
@@ -149,7 +150,9 @@ export default function AdminDashboard() {
             <h1 className="text-3xl md:text-4xl font-bold mb-2">
               <span className="text-gradient">Admin Dashboard</span>
             </h1>
-            <p className="text-gray-400">Manage users and track platform analytics</p>
+            <p className="text-gray-400">
+              Welcome, kartikeyan • Manage users and track platform analytics
+            </p>
           </div>
 
           {/* Stats Cards */}

@@ -46,7 +46,8 @@ export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  const isAdmin = user?.emailAddresses[0]?.emailAddress === 'kaarthii009.g@gmail.com'
+  const adminEmails = ['kaarthii009.g@gmail.com', 'karthii009.g@gmail.com']
+  const isAdmin = user?.emailAddresses[0]?.emailAddress && adminEmails.includes(user.emailAddresses[0].emailAddress)
 
   return (
     <>

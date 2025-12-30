@@ -11,7 +11,8 @@ export async function GET() {
 
     // Get the current user to check if admin
     const currentUser = await clerkClient.users.getUser(userId)
-    const isAdmin = currentUser.emailAddresses[0]?.emailAddress === 'kaarthii009.g@gmail.com'
+    const adminEmails = ['kaarthii009.g@gmail.com', 'karthii009.g@gmail.com']
+    const isAdmin = currentUser.emailAddresses[0]?.emailAddress && adminEmails.includes(currentUser.emailAddresses[0].emailAddress)
 
     if (!isAdmin) {
       return NextResponse.json({ error: 'Forbidden - Admin access only' }, { status: 403 })
