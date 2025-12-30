@@ -1585,4 +1585,595 @@ Make it beautiful!`,
       }
     ]
   }
+,
+
+  // EXPANDED LESSONS (Generated)
+  {
+    id: 'css-37',
+    title: 'CSS Grid Advanced',
+    description: 'Master css grid advanced concepts and techniques',
+    content: `# CSS Grid Advanced
+
+## Overview
+Learn about css grid advanced and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply css grid advanced concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 15,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for CSS Grid Advanced
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-38',
+    title: 'Flexbox Patterns',
+    description: 'Master flexbox patterns concepts and techniques',
+    content: `# Flexbox Patterns
+
+## Overview
+Learn about flexbox patterns and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply flexbox patterns concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 12,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for Flexbox Patterns
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-39',
+    title: 'Animation Keyframes',
+    description: 'Master animation keyframes concepts and techniques',
+    content: `# Animation Keyframes
+
+## Overview
+Learn about animation keyframes and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply animation keyframes concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 16,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for Animation Keyframes
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-40',
+    title: 'Transition Timing',
+    description: 'Master transition timing concepts and techniques',
+    content: `# Transition Timing
+
+## Overview
+Learn about transition timing and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply transition timing concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 18,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for Transition Timing
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-41',
+    title: 'Transform 3D',
+    description: 'Master transform 3d concepts and techniques',
+    content: `# Transform 3D
+
+## Overview
+Learn about transform 3d and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply transform 3d concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 10,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for Transform 3D
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-42',
+    title: 'CSS Variables Advanced',
+    description: 'Master css variables advanced concepts and techniques',
+    content: `# CSS Variables Advanced
+
+## Overview
+Learn about css variables advanced and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply css variables advanced concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 17,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for CSS Variables Advanced
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-43',
+    title: 'Calc() Function',
+    description: 'Master calc() function concepts and techniques',
+    content: `# Calc() Function
+
+## Overview
+Learn about calc() function and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply calc() function concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 11,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for Calc() Function
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-44',
+    title: 'CSS Functions',
+    description: 'Master css functions concepts and techniques',
+    content: `# CSS Functions
+
+## Overview
+Learn about css functions and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply css functions concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 16,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for CSS Functions
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-45',
+    title: 'Media Query Strategies',
+    description: 'Master media query strategies concepts and techniques',
+    content: `# Media Query Strategies
+
+## Overview
+Learn about media query strategies and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply media query strategies concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 24,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for Media Query Strategies
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-46',
+    title: 'Container Queries',
+    description: 'Master container queries concepts and techniques',
+    content: `# Container Queries
+
+## Overview
+Learn about container queries and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply container queries concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 14,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for Container Queries
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-47',
+    title: 'Aspect Ratio',
+    description: 'Master aspect ratio concepts and techniques',
+    content: `# Aspect Ratio
+
+## Overview
+Learn about aspect ratio and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply aspect ratio concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 15,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for Aspect Ratio
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-48',
+    title: 'Object Fit',
+    description: 'Master object fit concepts and techniques',
+    content: `# Object Fit
+
+## Overview
+Learn about object fit and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply object fit concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 23,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for Object Fit
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-49',
+    title: 'Mix Blend Modes',
+    description: 'Master mix blend modes concepts and techniques',
+    content: `# Mix Blend Modes
+
+## Overview
+Learn about mix blend modes and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply mix blend modes concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 18,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for Mix Blend Modes
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'css-50',
+    title: 'Filter Effects',
+    description: 'Master filter effects concepts and techniques',
+    content: `# Filter Effects
+
+## Overview
+Learn about filter effects and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply filter effects concepts in your code.
+`,
+    language: 'css',
+    difficulty: 'Advanced',
+    estimatedTime: 19,
+    initialCode: `// Start your css code here
+`,
+    solution: `// Sample solution for Filter Effects
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  }
 ];

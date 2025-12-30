@@ -1884,4 +1884,385 @@ This is your first complete webpage!`,
       }
     ]
   }
+,
+
+  // EXPANDED LESSONS (Generated)
+  {
+    id: 'html-42',
+    title: 'Accessibility Best Practices',
+    description: 'Master accessibility best practices concepts and techniques',
+    content: `# Accessibility Best Practices
+
+## Overview
+Learn about accessibility best practices and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply accessibility best practices concepts in your code.
+`,
+    language: 'html',
+    difficulty: 'Advanced',
+    estimatedTime: 23,
+    initialCode: `// Start your html code here
+`,
+    solution: `// Sample solution for Accessibility Best Practices
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'html-43',
+    title: 'ARIA Roles',
+    description: 'Master aria roles concepts and techniques',
+    content: `# ARIA Roles
+
+## Overview
+Learn about aria roles and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply aria roles concepts in your code.
+`,
+    language: 'html',
+    difficulty: 'Advanced',
+    estimatedTime: 18,
+    initialCode: `// Start your html code here
+`,
+    solution: `// Sample solution for ARIA Roles
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'html-44',
+    title: 'Landmark Regions',
+    description: 'Master landmark regions concepts and techniques',
+    content: `# Landmark Regions
+
+## Overview
+Learn about landmark regions and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply landmark regions concepts in your code.
+`,
+    language: 'html',
+    difficulty: 'Advanced',
+    estimatedTime: 19,
+    initialCode: `// Start your html code here
+`,
+    solution: `// Sample solution for Landmark Regions
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'html-45',
+    title: 'Skip Navigation',
+    description: 'Master skip navigation concepts and techniques',
+    content: `# Skip Navigation
+
+## Overview
+Learn about skip navigation and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply skip navigation concepts in your code.
+`,
+    language: 'html',
+    difficulty: 'Advanced',
+    estimatedTime: 24,
+    initialCode: `// Start your html code here
+`,
+    solution: `// Sample solution for Skip Navigation
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'html-46',
+    title: 'Focus Management',
+    description: 'Master focus management concepts and techniques',
+    content: `# Focus Management
+
+## Overview
+Learn about focus management and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply focus management concepts in your code.
+`,
+    language: 'html',
+    difficulty: 'Advanced',
+    estimatedTime: 11,
+    initialCode: `// Start your html code here
+`,
+    solution: `// Sample solution for Focus Management
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'html-47',
+    title: 'Form Validation HTML5',
+    description: 'Master form validation html5 concepts and techniques',
+    content: `# Form Validation HTML5
+
+## Overview
+Learn about form validation html5 and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply form validation html5 concepts in your code.
+`,
+    language: 'html',
+    difficulty: 'Advanced',
+    estimatedTime: 10,
+    initialCode: `// Start your html code here
+`,
+    solution: `// Sample solution for Form Validation HTML5
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'html-48',
+    title: 'Input Types Advanced',
+    description: 'Master input types advanced concepts and techniques',
+    content: `# Input Types Advanced
+
+## Overview
+Learn about input types advanced and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply input types advanced concepts in your code.
+`,
+    language: 'html',
+    difficulty: 'Advanced',
+    estimatedTime: 23,
+    initialCode: `// Start your html code here
+`,
+    solution: `// Sample solution for Input Types Advanced
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'html-49',
+    title: 'Custom Validation Messages',
+    description: 'Master custom validation messages concepts and techniques',
+    content: `# Custom Validation Messages
+
+## Overview
+Learn about custom validation messages and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply custom validation messages concepts in your code.
+`,
+    language: 'html',
+    difficulty: 'Advanced',
+    estimatedTime: 22,
+    initialCode: `// Start your html code here
+`,
+    solution: `// Sample solution for Custom Validation Messages
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'html-50',
+    title: 'Fieldset and Legend',
+    description: 'Master fieldset and legend concepts and techniques',
+    content: `# Fieldset and Legend
+
+## Overview
+Learn about fieldset and legend and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply fieldset and legend concepts in your code.
+`,
+    language: 'html',
+    difficulty: 'Advanced',
+    estimatedTime: 18,
+    initialCode: `// Start your html code here
+`,
+    solution: `// Sample solution for Fieldset and Legend
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  }
 ];

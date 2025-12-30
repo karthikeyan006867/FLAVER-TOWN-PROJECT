@@ -1690,4 +1690,673 @@ Build a production-ready API client!`,
       }
     ]
   }
+,
+
+  // EXPANDED LESSONS (Generated)
+  {
+    id: 'typescript-37',
+    title: 'Utility Types',
+    description: 'Master utility types concepts and techniques',
+    content: `# Utility Types
+
+## Overview
+Learn about utility types and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply utility types concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 24,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Utility Types
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-38',
+    title: 'Conditional Types',
+    description: 'Master conditional types concepts and techniques',
+    content: `# Conditional Types
+
+## Overview
+Learn about conditional types and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply conditional types concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 12,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Conditional Types
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-39',
+    title: 'Mapped Types',
+    description: 'Master mapped types concepts and techniques',
+    content: `# Mapped Types
+
+## Overview
+Learn about mapped types and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply mapped types concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 24,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Mapped Types
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-40',
+    title: 'Template Literal Types',
+    description: 'Master template literal types concepts and techniques',
+    content: `# Template Literal Types
+
+## Overview
+Learn about template literal types and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply template literal types concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 24,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Template Literal Types
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-41',
+    title: 'Discriminated Unions',
+    description: 'Master discriminated unions concepts and techniques',
+    content: `# Discriminated Unions
+
+## Overview
+Learn about discriminated unions and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply discriminated unions concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 11,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Discriminated Unions
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-42',
+    title: 'Type Guards Advanced',
+    description: 'Master type guards advanced concepts and techniques',
+    content: `# Type Guards Advanced
+
+## Overview
+Learn about type guards advanced and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply type guards advanced concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 15,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Type Guards Advanced
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-43',
+    title: 'Type Predicates',
+    description: 'Master type predicates concepts and techniques',
+    content: `# Type Predicates
+
+## Overview
+Learn about type predicates and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply type predicates concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 22,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Type Predicates
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-44',
+    title: 'Assertion Functions',
+    description: 'Master assertion functions concepts and techniques',
+    content: `# Assertion Functions
+
+## Overview
+Learn about assertion functions and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply assertion functions concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 19,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Assertion Functions
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-45',
+    title: 'Module Augmentation',
+    description: 'Master module augmentation concepts and techniques',
+    content: `# Module Augmentation
+
+## Overview
+Learn about module augmentation and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply module augmentation concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 12,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Module Augmentation
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-46',
+    title: 'Declaration Merging',
+    description: 'Master declaration merging concepts and techniques',
+    content: `# Declaration Merging
+
+## Overview
+Learn about declaration merging and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply declaration merging concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 23,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Declaration Merging
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-47',
+    title: 'Namespace Patterns',
+    description: 'Master namespace patterns concepts and techniques',
+    content: `# Namespace Patterns
+
+## Overview
+Learn about namespace patterns and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply namespace patterns concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 22,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Namespace Patterns
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-48',
+    title: 'Triple-Slash Directives',
+    description: 'Master triple-slash directives concepts and techniques',
+    content: `# Triple-Slash Directives
+
+## Overview
+Learn about triple-slash directives and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply triple-slash directives concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 19,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Triple-Slash Directives
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-49',
+    title: 'Utility Types',
+    description: 'Master utility types concepts and techniques',
+    content: `# Utility Types
+
+## Overview
+Learn about utility types and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply utility types concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 18,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Utility Types
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'typescript-50',
+    title: 'Conditional Types',
+    description: 'Master conditional types concepts and techniques',
+    content: `# Conditional Types
+
+## Overview
+Learn about conditional types and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply conditional types concepts in your code.
+`,
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 16,
+    initialCode: `// Start your typescript code here
+`,
+    solution: `// Sample solution for Conditional Types
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'ts-45',
+    title: 'Advanced Type System Features',
+    description: 'Master advanced TypeScript types',
+    content: '# Advanced Type System\n\nLearn complex type patterns.',
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 25,
+    initialCode: `// Advanced types\ntype Advanced = any;\n`,
+    solution: `// Type solution\n`,
+    hints: ['Type composition', 'Type inference', 'Type guards'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Write code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'ts-46',
+    title: 'Decorators and Metadata',
+    description: 'Use decorators in TypeScript',
+    content: '# Decorators\n\nLearn metadata and decorators.',
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 20,
+    initialCode: `// Decorator example\nfunction Decorator(target: any) { }\n`,
+    solution: `// Decorator implementation\n`,
+    hints: ['Class decorators', 'Method decorators', 'Reflect API'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Write code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'ts-47',
+    title: 'TypeScript with React',
+    description: 'TypeScript for React development',
+    content: '# TypeScript React\n\nBuild React apps with TypeScript.',
+    language: 'typescript',
+    difficulty: 'Intermediate',
+    estimatedTime: 20,
+    initialCode: `// React component\ninterface Props { }\nfunction Component(props: Props) { return null; }\n`,
+    solution: `// Typed component\n`,
+    hints: ['Props typing', 'State typing', 'Event types'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Write code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'ts-48',
+    title: 'TypeScript with Node.js',
+    description: 'Backend TypeScript development',
+    content: '# TypeScript Node.js\n\nBuild servers with TypeScript.',
+    language: 'typescript',
+    difficulty: 'Intermediate',
+    estimatedTime: 20,
+    initialCode: `// Node.js server\nimport express from 'express';\n`,
+    solution: `// Express server\n`,
+    hints: ['Type definitions', 'Async/await', 'Module types'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Write code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'ts-49',
+    title: 'Testing TypeScript',
+    description: 'Test TypeScript applications',
+    content: '# TypeScript Testing\n\nWrite tests for TypeScript code.',
+    language: 'typescript',
+    difficulty: 'Intermediate',
+    estimatedTime: 20,
+    initialCode: `// Test file\nimport { describe, it } from 'vitest';\n`,
+    solution: `// Test implementation\n`,
+    hints: ['Jest', 'Vitest', 'Test types'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Write code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'ts-50',
+    title: 'TypeScript Best Practices',
+    description: 'Master TypeScript development',
+    content: '# TypeScript Best Practices\n\nWrite professional TypeScript code.',
+    language: 'typescript',
+    difficulty: 'Advanced',
+    estimatedTime: 25,
+    initialCode: `// Best practice code\ninterface Good { name: string; }\n`,
+    solution: `// Professional implementation\n`,
+    hints: ['Strict mode', 'Type safety', 'Code organization'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Write code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  }
 ];

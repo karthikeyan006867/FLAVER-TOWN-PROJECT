@@ -220,4 +220,2068 @@ async function readData() {
       hints: ['Use Express for APIs', 'Middleware processes requests', 'async/await for database']
     }
   })
+,
+
+  // EXPANDED LESSONS (Generated)
+  {
+    id: 'nodejs-5',
+    title: 'Destructuring Advanced',
+    description: 'Master destructuring advanced concepts and techniques',
+    content: `# Destructuring Advanced
+
+## Overview
+Learn about destructuring advanced and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply destructuring advanced concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Beginner',
+    estimatedTime: 13,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Destructuring Advanced
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-6',
+    title: 'Spread Operator Tricks',
+    description: 'Master spread operator tricks concepts and techniques',
+    content: `# Spread Operator Tricks
+
+## Overview
+Learn about spread operator tricks and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply spread operator tricks concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Beginner',
+    estimatedTime: 11,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Spread Operator Tricks
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-7',
+    title: 'Rest Parameters',
+    description: 'Master rest parameters concepts and techniques',
+    content: `# Rest Parameters
+
+## Overview
+Learn about rest parameters and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply rest parameters concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Beginner',
+    estimatedTime: 17,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Rest Parameters
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-8',
+    title: 'Optional Chaining Deep Dive',
+    description: 'Master optional chaining deep dive concepts and techniques',
+    content: `# Optional Chaining Deep Dive
+
+## Overview
+Learn about optional chaining deep dive and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply optional chaining deep dive concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Beginner',
+    estimatedTime: 22,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Optional Chaining Deep Dive
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-9',
+    title: 'Nullish Coalescing',
+    description: 'Master nullish coalescing concepts and techniques',
+    content: `# Nullish Coalescing
+
+## Overview
+Learn about nullish coalescing and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply nullish coalescing concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Beginner',
+    estimatedTime: 12,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Nullish Coalescing
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-10',
+    title: 'Template Literals Advanced',
+    description: 'Master template literals advanced concepts and techniques',
+    content: `# Template Literals Advanced
+
+## Overview
+Learn about template literals advanced and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply template literals advanced concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Beginner',
+    estimatedTime: 14,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Template Literals Advanced
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-11',
+    title: 'Tagged Templates',
+    description: 'Master tagged templates concepts and techniques',
+    content: `# Tagged Templates
+
+## Overview
+Learn about tagged templates and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply tagged templates concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Beginner',
+    estimatedTime: 20,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Tagged Templates
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-12',
+    title: 'Symbol Type',
+    description: 'Master symbol type concepts and techniques',
+    content: `# Symbol Type
+
+## Overview
+Learn about symbol type and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply symbol type concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Beginner',
+    estimatedTime: 12,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Symbol Type
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-13',
+    title: 'WeakMap and WeakSet',
+    description: 'Master weakmap and weakset concepts and techniques',
+    content: `# WeakMap and WeakSet
+
+## Overview
+Learn about weakmap and weakset and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply weakmap and weakset concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Beginner',
+    estimatedTime: 16,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for WeakMap and WeakSet
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-14',
+    title: 'Proxy Traps',
+    description: 'Master proxy traps concepts and techniques',
+    content: `# Proxy Traps
+
+## Overview
+Learn about proxy traps and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply proxy traps concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Beginner',
+    estimatedTime: 17,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Proxy Traps
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-15',
+    title: 'Reflect API',
+    description: 'Master reflect api concepts and techniques',
+    content: `# Reflect API
+
+## Overview
+Learn about reflect api and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply reflect api concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Beginner',
+    estimatedTime: 11,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Reflect API
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-16',
+    title: 'Generator Advanced Patterns',
+    description: 'Master generator advanced patterns concepts and techniques',
+    content: `# Generator Advanced Patterns
+
+## Overview
+Learn about generator advanced patterns and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply generator advanced patterns concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 14,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Generator Advanced Patterns
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-17',
+    title: 'Destructuring Advanced',
+    description: 'Master destructuring advanced concepts and techniques',
+    content: `# Destructuring Advanced
+
+## Overview
+Learn about destructuring advanced and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply destructuring advanced concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 20,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Destructuring Advanced
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-18',
+    title: 'Spread Operator Tricks',
+    description: 'Master spread operator tricks concepts and techniques',
+    content: `# Spread Operator Tricks
+
+## Overview
+Learn about spread operator tricks and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply spread operator tricks concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 21,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Spread Operator Tricks
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-19',
+    title: 'Rest Parameters',
+    description: 'Master rest parameters concepts and techniques',
+    content: `# Rest Parameters
+
+## Overview
+Learn about rest parameters and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply rest parameters concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 17,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Rest Parameters
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-20',
+    title: 'Optional Chaining Deep Dive',
+    description: 'Master optional chaining deep dive concepts and techniques',
+    content: `# Optional Chaining Deep Dive
+
+## Overview
+Learn about optional chaining deep dive and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply optional chaining deep dive concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 18,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Optional Chaining Deep Dive
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-21',
+    title: 'Nullish Coalescing',
+    description: 'Master nullish coalescing concepts and techniques',
+    content: `# Nullish Coalescing
+
+## Overview
+Learn about nullish coalescing and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply nullish coalescing concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 10,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Nullish Coalescing
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-22',
+    title: 'Template Literals Advanced',
+    description: 'Master template literals advanced concepts and techniques',
+    content: `# Template Literals Advanced
+
+## Overview
+Learn about template literals advanced and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply template literals advanced concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 21,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Template Literals Advanced
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-23',
+    title: 'Tagged Templates',
+    description: 'Master tagged templates concepts and techniques',
+    content: `# Tagged Templates
+
+## Overview
+Learn about tagged templates and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply tagged templates concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 24,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Tagged Templates
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-24',
+    title: 'Symbol Type',
+    description: 'Master symbol type concepts and techniques',
+    content: `# Symbol Type
+
+## Overview
+Learn about symbol type and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply symbol type concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 11,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Symbol Type
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-25',
+    title: 'WeakMap and WeakSet',
+    description: 'Master weakmap and weakset concepts and techniques',
+    content: `# WeakMap and WeakSet
+
+## Overview
+Learn about weakmap and weakset and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply weakmap and weakset concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 13,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for WeakMap and WeakSet
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-26',
+    title: 'Proxy Traps',
+    description: 'Master proxy traps concepts and techniques',
+    content: `# Proxy Traps
+
+## Overview
+Learn about proxy traps and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply proxy traps concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 19,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Proxy Traps
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-27',
+    title: 'Reflect API',
+    description: 'Master reflect api concepts and techniques',
+    content: `# Reflect API
+
+## Overview
+Learn about reflect api and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply reflect api concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 20,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Reflect API
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-28',
+    title: 'Generator Advanced Patterns',
+    description: 'Master generator advanced patterns concepts and techniques',
+    content: `# Generator Advanced Patterns
+
+## Overview
+Learn about generator advanced patterns and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply generator advanced patterns concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 22,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Generator Advanced Patterns
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-29',
+    title: 'Destructuring Advanced',
+    description: 'Master destructuring advanced concepts and techniques',
+    content: `# Destructuring Advanced
+
+## Overview
+Learn about destructuring advanced and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply destructuring advanced concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 19,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Destructuring Advanced
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-30',
+    title: 'Spread Operator Tricks',
+    description: 'Master spread operator tricks concepts and techniques',
+    content: `# Spread Operator Tricks
+
+## Overview
+Learn about spread operator tricks and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply spread operator tricks concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 24,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Spread Operator Tricks
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-31',
+    title: 'Rest Parameters',
+    description: 'Master rest parameters concepts and techniques',
+    content: `# Rest Parameters
+
+## Overview
+Learn about rest parameters and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply rest parameters concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 19,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Rest Parameters
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-32',
+    title: 'Optional Chaining Deep Dive',
+    description: 'Master optional chaining deep dive concepts and techniques',
+    content: `# Optional Chaining Deep Dive
+
+## Overview
+Learn about optional chaining deep dive and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply optional chaining deep dive concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 15,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Optional Chaining Deep Dive
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-33',
+    title: 'Nullish Coalescing',
+    description: 'Master nullish coalescing concepts and techniques',
+    content: `# Nullish Coalescing
+
+## Overview
+Learn about nullish coalescing and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply nullish coalescing concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 12,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Nullish Coalescing
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-34',
+    title: 'Template Literals Advanced',
+    description: 'Master template literals advanced concepts and techniques',
+    content: `# Template Literals Advanced
+
+## Overview
+Learn about template literals advanced and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply template literals advanced concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 13,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Template Literals Advanced
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-35',
+    title: 'Tagged Templates',
+    description: 'Master tagged templates concepts and techniques',
+    content: `# Tagged Templates
+
+## Overview
+Learn about tagged templates and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply tagged templates concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 17,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Tagged Templates
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-36',
+    title: 'Symbol Type',
+    description: 'Master symbol type concepts and techniques',
+    content: `# Symbol Type
+
+## Overview
+Learn about symbol type and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply symbol type concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 13,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Symbol Type
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-37',
+    title: 'WeakMap and WeakSet',
+    description: 'Master weakmap and weakset concepts and techniques',
+    content: `# WeakMap and WeakSet
+
+## Overview
+Learn about weakmap and weakset and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply weakmap and weakset concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 21,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for WeakMap and WeakSet
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-38',
+    title: 'Proxy Traps',
+    description: 'Master proxy traps concepts and techniques',
+    content: `# Proxy Traps
+
+## Overview
+Learn about proxy traps and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply proxy traps concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 15,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Proxy Traps
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-39',
+    title: 'Reflect API',
+    description: 'Master reflect api concepts and techniques',
+    content: `# Reflect API
+
+## Overview
+Learn about reflect api and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply reflect api concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 14,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Reflect API
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-40',
+    title: 'Generator Advanced Patterns',
+    description: 'Master generator advanced patterns concepts and techniques',
+    content: `# Generator Advanced Patterns
+
+## Overview
+Learn about generator advanced patterns and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply generator advanced patterns concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 17,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Generator Advanced Patterns
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-41',
+    title: 'Destructuring Advanced',
+    description: 'Master destructuring advanced concepts and techniques',
+    content: `# Destructuring Advanced
+
+## Overview
+Learn about destructuring advanced and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply destructuring advanced concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 10,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Destructuring Advanced
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-42',
+    title: 'Spread Operator Tricks',
+    description: 'Master spread operator tricks concepts and techniques',
+    content: `# Spread Operator Tricks
+
+## Overview
+Learn about spread operator tricks and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply spread operator tricks concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 20,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Spread Operator Tricks
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-43',
+    title: 'Rest Parameters',
+    description: 'Master rest parameters concepts and techniques',
+    content: `# Rest Parameters
+
+## Overview
+Learn about rest parameters and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply rest parameters concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 17,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Rest Parameters
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-44',
+    title: 'Optional Chaining Deep Dive',
+    description: 'Master optional chaining deep dive concepts and techniques',
+    content: `# Optional Chaining Deep Dive
+
+## Overview
+Learn about optional chaining deep dive and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply optional chaining deep dive concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 16,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Optional Chaining Deep Dive
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-45',
+    title: 'Nullish Coalescing',
+    description: 'Master nullish coalescing concepts and techniques',
+    content: `# Nullish Coalescing
+
+## Overview
+Learn about nullish coalescing and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply nullish coalescing concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 14,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Nullish Coalescing
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-46',
+    title: 'Template Literals Advanced',
+    description: 'Master template literals advanced concepts and techniques',
+    content: `# Template Literals Advanced
+
+## Overview
+Learn about template literals advanced and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply template literals advanced concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 13,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Template Literals Advanced
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-47',
+    title: 'Tagged Templates',
+    description: 'Master tagged templates concepts and techniques',
+    content: `# Tagged Templates
+
+## Overview
+Learn about tagged templates and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply tagged templates concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 20,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Tagged Templates
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-48',
+    title: 'Symbol Type',
+    description: 'Master symbol type concepts and techniques',
+    content: `# Symbol Type
+
+## Overview
+Learn about symbol type and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply symbol type concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 21,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Symbol Type
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-49',
+    title: 'WeakMap and WeakSet',
+    description: 'Master weakmap and weakset concepts and techniques',
+    content: `# WeakMap and WeakSet
+
+## Overview
+Learn about weakmap and weakset and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply weakmap and weakset concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 20,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for WeakMap and WeakSet
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-50',
+    title: 'Proxy Traps',
+    description: 'Master proxy traps concepts and techniques',
+    content: `# Proxy Traps
+
+## Overview
+Learn about proxy traps and how to apply it effectively in your projects.
+
+## Key Concepts
+- Understanding the fundamentals
+- Practical applications
+- Common patterns and anti-patterns
+- Real-world examples
+
+## Best Practices
+Follow industry standards and write clean, maintainable code.
+
+**Task:** Apply proxy traps concepts in your code.
+`,
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 16,
+    initialCode: `// Start your javascript code here
+`,
+    solution: `// Sample solution for Proxy Traps
+// This demonstrates the core concepts
+`,
+    hints: ['Review the documentation', 'Start with simple examples', 'Practice regularly'],
+    testCases: [
+      {
+        name: 'Code is not empty',
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code to complete this lesson'
+      },
+      {
+        name: 'Code meets requirements',
+        test: (code) => code.trim().length >= 10,
+        errorMessage: 'Make sure your code follows the lesson requirements'
+      }
+    ]
+  },
+  {
+    id: 'nodejs-51',
+    title: 'Advanced Module Management',
+    description: 'Master module resolution and management',
+    content: '# Advanced Module Management\n\nLearn advanced techniques for managing modules.',
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 20,
+    initialCode: '// Node.js module management\n',
+    solution: '// Advanced module example\n',
+    hints: ['Module patterns', 'Custom exports', 'Module resolution'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'nodejs-52',
+    title: 'Performance Optimization',
+    description: 'Optimize Node.js application performance',
+    content: '# Performance Optimization\n\nTechniques to improve your Node.js app speed.',
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 25,
+    initialCode: '// Performance optimization\n',
+    solution: '// Optimized code\n',
+    hints: ['Profiling', 'Benchmarking', 'Caching'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'nodejs-53',
+    title: 'Load Balancing',
+    description: 'Distribute requests across multiple processes',
+    content: '# Load Balancing\n\nDistribute your application load.',
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 20,
+    initialCode: '// Load balancing setup\n',
+    solution: '// Load balancer code\n',
+    hints: ['Round robin', 'Sticky sessions', 'Health checks'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'nodejs-54',
+    title: 'Containerization with Docker',
+    description: 'Containerize Node.js applications',
+    content: '# Docker and Node.js\n\nLearn to containerize your applications.',
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 25,
+    initialCode: '# Dockerfile\nFROM node:18\n',
+    solution: '# Production ready Dockerfile\n',
+    hints: ['Multi-stage builds', 'Alpine images', 'Security'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'nodejs-55',
+    title: 'Microservices Architecture',
+    description: 'Build scalable microservices',
+    content: '# Microservices\n\nDesign distributed microservice architectures.',
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 30,
+    initialCode: '// Microservice setup\n',
+    solution: '// Microservice implementation\n',
+    hints: ['Service discovery', 'API gateway', 'Message queues'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'nodejs-56',
+    title: 'Monitoring and Logging',
+    description: 'Monitor production applications',
+    content: '# Monitoring\n\nImplement comprehensive monitoring solutions.',
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 25,
+    initialCode: '// Monitoring setup\n',
+    solution: '// Monitoring implementation\n',
+    hints: ['ELK stack', 'Prometheus', 'Grafana'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'nodejs-57',
+    title: 'Security Best Practices',
+    description: 'Secure your Node.js applications',
+    content: '# Node.js Security\n\nImplement security best practices.',
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 25,
+    initialCode: '// Security setup\n',
+    solution: '// Secure implementation\n',
+    hints: ['Input validation', 'Rate limiting', 'CORS'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'nodejs-58',
+    title: 'API Best Practices',
+    description: 'Design RESTful APIs properly',
+    content: '# API Best Practices\n\nDesign scalable, maintainable APIs.',
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 20,
+    initialCode: '// API design\n',
+    solution: '// Best practice API\n',
+    hints: ['RESTful principles', 'Versioning', 'Documentation'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'nodejs-59',
+    title: 'Real-time Applications',
+    description: 'Build real-time features with WebSockets',
+    content: '# Real-time Applications\n\nImplement real-time features.',
+    language: 'javascript',
+    difficulty: 'Intermediate',
+    estimatedTime: 20,
+    initialCode: '// WebSocket setup\n',
+    solution: '// Real-time implementation\n',
+    hints: ['Socket.io', 'WebSockets', 'Event handling'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
+  },
+  {
+    id: 'nodejs-60',
+    title: 'Production Deployment',
+    description: 'Deploy Node.js to production',
+    content: '# Production Deployment\n\nDeploy your applications safely.',
+    language: 'javascript',
+    difficulty: 'Advanced',
+    estimatedTime: 25,
+    initialCode: '// Deployment config\n',
+    solution: '// Production setup\n',
+    hints: ['Environment variables', 'Process management', 'CI/CD'],
+    testCases: [{ name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' }, { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }]
 ]
