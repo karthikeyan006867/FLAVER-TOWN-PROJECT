@@ -1,6 +1,6 @@
 import { Lesson } from '../courses'
 
-export const goLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
+export const goLessons: Lesson[] = Array.from({ length: 40 }, (_, i) => {
   const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 15 ? 'Beginner' : i < 30 ? 'Intermediate' : 'Advanced'
   return {
   id: `go-${i + 1}`,
