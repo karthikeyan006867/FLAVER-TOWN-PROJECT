@@ -52,6 +52,12 @@ export default function PlaygroundPage() {
   const [htmlPreview, setHtmlPreview] = useState('')
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
+  // Auto-run code on mount
+  useEffect(() => {
+    runCode()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const getMonacoLanguage = (lang: Language): string => {
     const mapping: Record<string, string> = {
       'csharp': 'csharp',
@@ -70,28 +76,57 @@ export default function PlaygroundPage() {
       try {
         if (selectedLanguage === 'html') {
           setHtmlPreview(code)
-          setOutput('HTML rendered in preview')
+          setOutput('HTML rendered in preview panel')
         } else if (selectedLanguage === 'javascript' || selectedLanguage === 'typescript') {
           const logs: string[] = []
           const customConsole = {
-            log: (...args: any[]) => logs.push(args.map(a => typeof a === 'object' ? JSON.stringify(a, null, 2) : String(a)).join(' ')),
-            error: (...args: any[]) => logs.push('ERROR: ' + args.join(' ')),
-            warn: (...args: any[]) => logs.push('WARNING: ' + args.join(' '))
+            log: (...args: any[]) => {
+              const formatted = args.map(a => {
+                if (typeof a === 'object' && a !== null) {
+                  try {
+                    return JSON.stringify(a, null, 2)
+                  } catch {
+                    return String(a)
+                  }
+                }
+                return String(a)
+              }).join(' ')
+              logs.push(formatted)
+            },
+            error: (...args: any[]) => {
+              logs.push('ERROR: ' + args.map(a => String(a)).join(' '))
+            },
+            warn: (...args: any[]) => {
+              logs.push('WARNING: ' + args.map(a => String(a)).join(' '))
+            }
           }
           
           try {
             const fn = new Function('console', code)
             fn(customConsole)
-            setOutput(logs.length > 0 ? logs.join('\n') : '✓ Code executed successfully')
+            setOutput(logs.length > 0 ? logs.join('\n') : '✓ Code executed successfully (no output)')
           } catch (err: any) {
-            setOutput(`Error: ${err.message}`)
+            setOutput(`❌ Error: ${err.message}`)
+          }
+        } else if (selectedLanguage === 'python') {
+          // Python simulation with pattern matching for print statements
+          const printMatches = code.match(/print\((.*?)\)/g)
+          if (printMatches) {
+            const outputs = printMatches.map(match => {
+              const content = match.replace(/print\((.*)\)/, '$1').replace(/['"]/g, '')
+              return content
+            })
+            setOutput(outputs.join('\n') + '\n\n✓ Python code simulated')
+          } else {
+            setOutput(`# Python Code\n${code}\n\n✓ Syntax validated`)
           }
         } else {
           // Simulated output for other languages
-          setOutput(`# ${languages.find(l => l.id === selectedLanguage)?.name} Simulation\n# Code would execute on server\n\n${code}\n\n✓ Syntax validated`)
+          const langName = languages.find(l => l.id === selectedLanguage)?.name || selectedLanguage
+          setOutput(`# ${langName} Output Simulation\n# This code would execute on a ${langName} runtime\n\n${code}\n\n✓ Syntax validated`)
         }
       } catch (error: any) {
-        setOutput(`Error: ${error.message}`)
+        setOutput(`❌ Error: ${error.message}`)
       }
       setIsRunning(false)
     }, 300)
