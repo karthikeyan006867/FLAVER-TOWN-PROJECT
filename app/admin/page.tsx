@@ -2,6 +2,7 @@
 
 import { useUser } from '@clerk/nextjs'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import { Users, TrendingUp, Award, BookOpen, Search, Download, Filter, BarChart3 } from 'lucide-react'
@@ -129,7 +130,7 @@ export default function AdminDashboard() {
         <main className="ml-0 md:ml-64 pt-16 pb-20">
           <div className="max-w-4xl mx-auto px-6 py-20 text-center">
             <h1 className="text-4xl font-bold text-red-500 mb-4">Access Denied</h1>
-            <p className="text-gray-400">You don't have permission to access this page.</p>
+            <p className="text-gray-400">You don&apos;t have permission to access this page.</p>
           </div>
         </main>
       </div>
@@ -258,10 +259,12 @@ export default function AdminDashboard() {
                       <tr key={userProgress.userId} className="hover:bg-gray-800/50 transition">
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-3">
-                            <img
+                            <Image
                               src={userProgress.imageUrl || '/default-avatar.svg'}
                               alt={userProgress.name}
-                              className="w-10 h-10 rounded-full border-2 border-gray-700"
+                              width={40}
+                              height={40}
+                              className="rounded-full border-2 border-gray-700"
                             />
                             <div>
                               <div className="font-medium">{userProgress.name}</div>

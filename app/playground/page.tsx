@@ -240,7 +240,7 @@ export default function PlaygroundPage() {
       runCode()
     }, 500)
     return () => clearTimeout(timer)
-  }, [selectedLanguage])
+  }, [selectedLanguage, runCode])
 
   // Auto-run for web mode on code change
   useEffect(() => {
@@ -250,7 +250,7 @@ export default function PlaygroundPage() {
       }, 1000) // Debounce 1 second
       return () => clearTimeout(timer)
     }
-  }, [htmlCode, cssCode, jsCode, selectedLanguage])
+  }, [htmlCode, cssCode, jsCode, selectedLanguage, runCode])
 
   const handleLanguageChange = (lang: Language) => {
     setSelectedLanguage(lang)
