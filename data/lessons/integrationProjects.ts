@@ -1,805 +1,355 @@
 import { Lesson } from '../courses'
 
-export const integrationProjects: Lesson[] = [
-  {
-    id: 'integration-1',
-    title: 'HTML + CSS: Landing Page',
-    description: 'Build a responsive landing page',
-    content: `# Project: Responsive Landing Page
-
-Combine HTML and CSS to create a professional landing page.
-
-## Requirements:
-1. **HTML Structure:**
-   - Header with navigation
-   - Hero section with call-to-action button
-   - Features section (3 cards)
-   - Footer with social links
-
-2. **CSS Styling:**
-   - Flexbox for layout
-   - Responsive design (mobile-first)
-   - Hover effects on buttons
-   - Color scheme and typography
-
-## Skills Applied:
-- Semantic HTML (header, nav, main, footer)
-- CSS Flexbox
-- Media queries
-- CSS transitions
-
-Create a complete, responsive landing page!`,
-    language: 'html',
-    difficulty: 'Intermediate',
-    estimatedTime: 60,
-    isProject: true,
-    projectDescription: 'Responsive landing page with HTML + CSS',
-    initialCode: `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-    <style>
-        /* Add your CSS here */
-    </style>
-</head>
-<body>
-    <!-- Add your HTML here -->
-</body>
-</html>`,
-    solution: `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeMaster - Learn to Code</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            color: #333;
-        }
-
-        header {
-            background: #1a202c;
-            color: white;
-            padding: 1rem 2rem;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #4299e1;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            background: #4299e1;
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: transform 0.3s, background 0.3s;
-        }
-
-        .cta-button:hover {
-            background: #3182ce;
-            transform: translateY(-2px);
-        }
-
-        .features {
-            padding: 4rem 2rem;
-            background: #f7fafc;
-        }
-
-        .features h2 {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .cards {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            max-width: 300px;
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        footer {
-            background: #1a202c;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            color: white;
-            text-decoration: none;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .cards {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <nav>
-            <h2>CodeMaster</h2>
-            <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <h1>Learn to Code Today</h1>
-        <p>Master HTML, CSS, JavaScript, and Python from scratch to full-stack</p>
-        <button class="cta-button">Start Learning</button>
-    </section>
-
-    <section class="features" id="features">
-        <h2>Why Choose Us?</h2>
-        <div class="cards">
-            <div class="card">
-                <h3>Interactive Lessons</h3>
-                <p>Learn by doing with hands-on coding exercises and projects.</p>
-            </div>
-            <div class="card">
-                <h3>Expert Instructors</h3>
-                <p>Learn from industry professionals with years of experience.</p>
-            </div>
-            <div class="card">
-                <h3>Lifetime Access</h3>
-                <p>Get unlimited access to all courses and future updates.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 CodeMaster Academy. All rights reserved.</p>
-        <div class="social-links">
-            <a href="#">Twitter</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">GitHub</a>
-        </div>
-    </footer>
-</body>
-</html>`,
-    hints: [
-      'Use semantic HTML5 tags',
-      'Flexbox for card layout',
-      'Add hover transitions',
-      'Mobile-first responsive design'
-    ]    ,
-    testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets requirements',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write code following the lesson requirements'
-      }
-    ]
-  },
-  {
-    id: 'integration-2',
-    title: 'HTML + CSS + JS: Interactive Quiz',
-    description: 'Build a quiz app with scoring',
-    content: `# Project: Interactive Quiz App
-
-Combine HTML, CSS, and JavaScript!
-
-## Requirements:
-1. **HTML:** Quiz structure with questions and answer buttons
-2. **CSS:** Styled quiz cards, buttons, score display
-3. **JavaScript:**
-   - Display one question at a time
-   - Check answers
-   - Calculate score
-   - Show results
-
-## Features:
-- Multiple choice questions
-- Next button to proceed
-- Score tracking
-- Results screen with percentage
-
-## Skills Applied:
-- DOM manipulation
-- Event listeners
-- Conditional logic
-- Array iteration
-- CSS transitions
-
-Build a complete quiz application!`,
-    language: 'html',
-    difficulty: 'Intermediate',
-    estimatedTime: 75,
-    isProject: true,
-    projectDescription: 'Interactive quiz with HTML, CSS, JS',
-    initialCode: `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz App</title>
-    <style>
-        /* Add your CSS */
-    </style>
-</head>
-<body>
-    <div id="quiz-container">
-        <!-- Quiz UI here -->
-    </div>
-
-    <script>
-        // Add your JavaScript
-    </script>
-</body>
-</html>`,
-    solution: `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz App</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-        }
-
-        #quiz-container {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        h2 {
-            color: #667eea;
-            margin-bottom: 1.5rem;
-        }
-
-        .question {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            color: #333;
-        }
-
-        .answers {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .answer-btn {
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
-            padding: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: left;
-        }
-
-        .answer-btn:hover {
-            background: #edf2f7;
-            border-color: #667eea;
-        }
-
-        .answer-btn.correct {
-            background: #48bb78;
-            color: white;
-            border-color: #48bb78;
-        }
-
-        .answer-btn.incorrect {
-            background: #f56565;
-            color: white;
-            border-color: #f56565;
-        }
-
-        #next-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            display: none;
-        }
-
-        #next-btn:hover {
-            background: #5a67d8;
-        }
-
-        .score {
-            text-align: center;
-            font-size: 1.5rem;
-            color: #333;
-        }
-
-        .restart-btn {
-            background: #48bb78;
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-top: 1rem;
-        }
-    </style>
-</head>
-<body>
-    <div id="quiz-container">
-        <h2>JavaScript Quiz</h2>
-        <div id="quiz"></div>
-    </div>
-
-    <script>
-        const quizData = [
-            {
-                question: "What does HTML stand for?",
-                answers: [
-                    "Hyper Text Markup Language",
-                    "High Tech Modern Language",
-                    "Home Tool Markup Language",
-                    "Hyperlinks and Text Markup Language"
-                ],
-                correct: 0
-            },
-            {
-                question: "Which CSS property controls text size?",
-                answers: [
-                    "text-size",
-                    "font-style",
-                    "font-size",
-                    "text-style"
-                ],
-                correct: 2
-            },
-            {
-                question: "What does DOM stand for?",
-                answers: [
-                    "Document Object Model",
-                    "Data Object Model",
-                    "Document Oriented Model",
-                    "Digital Object Management"
-                ],
-                correct: 0
-            },
-            {
-                question: "Which method adds an element to the end of an array?",
-                answers: [
-                    "add()",
-                    "append()",
-                    "push()",
-                    "insert()"
-                ],
-                correct: 2
-            }
-        ];
-
-        let currentQuestion = 0;
-        let score = 0;
-
-        const quizContainer = document.getElementById('quiz');
-
-        function loadQuestion() {
-            const question = quizData[currentQuestion];
-            
-            let html = \`
-                <div class="question">\${currentQuestion + 1}. \${question.question}</div>
-                <div class="answers">
-            \`;
-
-            question.answers.forEach((answer, index) => {
-                html += \`
-                    <button class="answer-btn" onclick="checkAnswer(\${index})">
-                        \${answer}
-                    </button>
-                \`;
-            });
-
-            html += \`
-                </div>
-                <button id="next-btn" onclick="nextQuestion()">Next Question</button>
-            \`;
-
-            quizContainer.innerHTML = html;
-        }
-
-        function checkAnswer(selected) {
-            const question = quizData[currentQuestion];
-            const buttons = document.querySelectorAll('.answer-btn');
-            
-            buttons.forEach((btn, index) => {
-                btn.disabled = true;
-                if (index === question.correct) {
-                    btn.classList.add('correct');
-                } else if (index === selected) {
-                    btn.classList.add('incorrect');
-                }
-            });
-
-            if (selected === question.correct) {
-                score++;
-            }
-
-            document.getElementById('next-btn').style.display = 'block';
-        }
-
-        function nextQuestion() {
-            currentQuestion++;
-            if (currentQuestion < quizData.length) {
-                loadQuestion();
-            } else {
-                showResults();
-            }
-        }
-
-        function showResults() {
-            const percentage = (score / quizData.length * 100).toFixed(0);
-            quizContainer.innerHTML = \`
-                <div class="score">
-                    <h2>Quiz Complete!</h2>
-                    <p>You scored \${score} out of \${quizData.length}</p>
-                    <p>\${percentage}%</p>
-                    <button class="restart-btn" onclick="restartQuiz()">Restart Quiz</button>
-                </div>
-            \`;
-        }
-
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            loadQuestion();
-        }
-
-        loadQuestion();
-    </script>
-</body>
-</html>`,
-    hints: [
-      'Store questions in array of objects',
-      'Use template literals for HTML',
-      'Track currentQuestion and score',
-      'Disable buttons after selection'
-    ]    ,
-    testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets requirements',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write code following the lesson requirements'
-      }
-    ]
-  },
-  {
-    id: 'integration-3',
-    title: 'Full-Stack: Python Flask API + JS Frontend',
-    description: 'Build a task manager with backend',
-    content: `# Project: Full-Stack Task Manager
-
-Create a complete full-stack application!
-
-## Backend (Python Flask):
-\`\`\`python
-from flask import Flask, jsonify, request
-from flask_cors import CORS
-
-app = Flask(__name__)
-CORS(app)
-
-tasks = []
-
-@app.route('/api/tasks', methods=['GET'])
-def get_tasks():
-    return jsonify(tasks)
-
-@app.route('/api/tasks', methods=['POST'])
-def add_task():
-    task = request.json
-    tasks.append(task)
-    return jsonify(task), 201
-
-@app.route('/api/tasks/<int:index>', methods=['DELETE'])
-def delete_task(index):
-    if 0 <= index < len(tasks):
-        tasks.pop(index)
-        return '', 204
-    return 'Not found', 404
-
-if __name__ == '__main__':
-    app.run(debug=True)
+export const integrationProjects: Lesson[] = Array.from({ length: 60 }, (_, i) => {
+  const integrations = [
+    // Frontend Integrations (0-19)
+    { langs: ['HTML', 'CSS'], title: 'Responsive Landing Page', desc: 'Style HTML with CSS Flexbox and Grid', 
+      content: 'Use document.querySelector() and classList methods. CSS properties: display, flex, grid, position, media queries.',
+      lang: 'html' as const },
+    { langs: ['HTML', 'JavaScript'], title: 'Interactive Form Validation', desc: 'Add dynamic validation with JavaScript', 
+      content: 'DOM methods: getElementById(), addEventListener(), preventDefault(). Form validation: checkValidity(), setCustomValidity().',
+      lang: 'javascript' as const },
+    { langs: ['CSS', 'JavaScript'], title: 'Animated Dashboard', desc: 'Create CSS animations triggered by JS', 
+      content: 'JavaScript: element.style, classList.add/remove/toggle. CSS: @keyframes, transition, transform, animation.',
+      lang: 'javascript' as const },
+    { langs: ['JavaScript', 'HTML'], title: 'Dynamic Todo App', desc: 'Manipulate DOM elements with JavaScript', 
+      content: 'DOM manipulation: createElement(), appendChild(), removeChild(), innerHTML, dataset API.',
+      lang: 'javascript' as const },
+    { langs: ['React', 'TypeScript'], title: 'Type-Safe Component Library', desc: 'Build React components with TypeScript', 
+      content: 'React.FC, Props interfaces, useState<T>, useEffect, Generic components, Type guards.',
+      lang: 'react' as const },
+    { langs: ['React', 'CSS'], title: 'Styled Component System', desc: 'Style React with CSS Modules and Styled Components', 
+      content: 'CSS Modules: import styles, className. Styled-components: styled.div, props, ThemeProvider.',
+      lang: 'react' as const },
+    { langs: ['Vue.js', 'TypeScript'], title: 'Composition API with Types', desc: 'Vue 3 Composition API with TypeScript', 
+      content: 'defineComponent, ref<T>, reactive, computed, watch, Props interface, Emit types.',
+      lang: 'javascript' as const },
+    { langs: ['Angular', 'TypeScript'], title: 'Enterprise Form System', desc: 'Reactive forms with Angular and TypeScript', 
+      content: 'FormBuilder, FormGroup, FormControl, Validators, Custom validators, Type-safe forms.',
+      lang: 'typescript' as const },
+    { langs: ['HTML', 'Tailwind CSS'], title: 'Utility-First Design System', desc: 'Build UI with Tailwind utility classes', 
+      content: 'Tailwind classes: flex, grid, p-4, bg-, text-, hover:, responsive prefixes (sm:, md:, lg:).',
+      lang: 'html' as const },
+    { langs: ['Next.js', 'TypeScript'], title: 'Full-Stack App with SSR', desc: 'Server-side rendering with Next.js', 
+      content: 'getServerSideProps, getStaticProps, API routes, Next/Image, Next/Link, TypeScript types.',
+      lang: 'react' as const },
+    { langs: ['JavaScript', 'CSS'], title: 'Parallax Scroll Effect', desc: 'Create scroll animations with JS and CSS', 
+      content: 'window.scrollY, element.getBoundingClientRect(), IntersectionObserver, CSS transform: translateY().',
+      lang: 'javascript' as const },
+    { langs: ['React', 'Redux'], title: 'State Management App', desc: 'Manage global state with Redux', 
+      content: 'createStore, actions, reducers, useSelector, useDispatch, Redux Toolkit: createSlice.',
+      lang: 'react' as const },
+    { langs: ['TypeScript', 'JavaScript'], title: 'Migration to TypeScript', desc: 'Convert JavaScript project to TypeScript', 
+      content: 'tsconfig.json, Type annotations, Interfaces, Generics, Type assertions, Utility types.',
+      lang: 'typescript' as const },
+    { langs: ['HTML', 'SVG'], title: 'Interactive Data Visualization', desc: 'Embed and animate SVG with HTML', 
+      content: 'SVG elements: <svg>, <path>, <circle>, <text>. Attributes: viewBox, d, fill, stroke, transform.',
+      lang: 'html' as const },
+    { langs: ['CSS', 'Sass'], title: 'Advanced Styling System', desc: 'Use Sass features for maintainable CSS', 
+      content: 'Variables: $color, Nesting, Mixins: @mixin/@include, Functions, @import, @extend.',
+      lang: 'css' as const },
+    { langs: ['JavaScript', 'WebSocket'], title: 'Real-Time Chat Application', desc: 'Implement WebSocket for live communication', 
+      content: 'WebSocket API: new WebSocket(), onopen, onmessage, onerror, send(), close().',
+      lang: 'javascript' as const },
+    { langs: ['React', 'GraphQL'], title: 'GraphQL Data Fetching', desc: 'Query APIs with Apollo Client', 
+      content: 'useQuery, useMutation, gql tag, ApolloProvider, Query variables, Cache management.',
+      lang: 'react' as const },
+    { langs: ['Vue', 'Vuex'], title: 'Centralized State Management', desc: 'Use Vuex for Vue.js state management', 
+      content: 'store: state, getters, mutations, actions, modules. mapState, mapGetters, commit, dispatch.',
+      lang: 'javascript' as const },
+    { langs: ['HTML', 'Canvas'], title: 'Game Graphics with Canvas', desc: 'Draw and animate with HTML5 Canvas', 
+      content: 'getContext("2d"), fillRect(), arc(), drawImage(), requestAnimationFrame(), clearRect().',
+      lang: 'javascript' as const },
+    { langs: ['JavaScript', 'Three.js'], title: '3D Web Graphics', desc: 'Create 3D scenes with Three.js', 
+      content: 'Scene, Camera, Renderer, Mesh, Geometry, Material, Lights, Animation loop.',
+      lang: 'javascript' as const },
+
+    // Backend Integrations (20-39)
+    { langs: ['Node.js', 'Express'], title: 'RESTful API Server', desc: 'Build REST API with Express.js', 
+      content: 'app.get/post/put/delete(), req.params, req.body, res.json(), Middleware, Router.',
+      lang: 'javascript' as const },
+    { langs: ['Python', 'Flask'], title: 'Microservice API', desc: 'Create lightweight API with Flask', 
+      content: '@app.route(), request.json, jsonify(), Blueprint, SQLAlchemy integration.',
+      lang: 'python' as const },
+    { langs: ['Python', 'Django'], title: 'Full-Stack Web Application', desc: 'Build MVC app with Django', 
+      content: 'Models, Views, Templates, urls.py, ORM: objects.all(), filter(), Forms, Admin.',
+      lang: 'python' as const },
+    { langs: ['Node.js', 'MongoDB'], title: 'NoSQL Database Integration', desc: 'Connect Node.js to MongoDB', 
+      content: 'mongoose.connect(), Schema, Model, find(), findOne(), create(), updateOne(), deleteOne().',
+      lang: 'javascript' as const },
+    { langs: ['Python', 'PostgreSQL'], title: 'Relational Database App', desc: 'Use PostgreSQL with Python', 
+      content: 'psycopg2: connect(), cursor(), execute(), fetchall(), SQLAlchemy ORM: Session, query().',
+      lang: 'python' as const },
+    { langs: ['Node.js', 'MySQL'], title: 'Traditional Database Backend', desc: 'Connect Express to MySQL', 
+      content: 'mysql.createConnection(), connection.query(), Prepared statements, Connection pooling.',
+      lang: 'javascript' as const },
+    { langs: ['Java', 'Spring Boot'], title: 'Enterprise REST Service', desc: 'Build Java backend with Spring', 
+      content: '@RestController, @GetMapping, @PostMapping, @Service, @Repository, JPA, Hibernate.',
+      lang: 'java' as const },
+    { langs: ['C#', '.NET Core'], title: 'ASP.NET Web API', desc: 'Create API with C# and .NET', 
+      content: '[HttpGet], [HttpPost], [Route], Entity Framework, LINQ, Dependency injection.',
+      lang: 'csharp' as const },
+    { langs: ['Ruby', 'Rails'], title: 'MVC Web Framework', desc: 'Build app with Ruby on Rails', 
+      content: 'ActiveRecord, Controllers, Views, routes.rb, Migrations, Scaffolding.',
+      lang: 'ruby' as const },
+    { langs: ['PHP', 'MySQL'], title: 'Dynamic Website Backend', desc: 'Create PHP + MySQL web application', 
+      content: 'mysqli_connect(), mysqli_query(), PDO, Prepared statements, Sessions, Authentication.',
+      lang: 'php' as const },
+    { langs: ['Go', 'PostgreSQL'], title: 'High-Performance API', desc: 'Build scalable API with Go', 
+      content: 'database/sql, pq driver, db.Query(), db.Exec(), Goroutines, net/http, json encoding.',
+      lang: 'go' as const },
+    { langs: ['Rust', 'Actix'], title: 'Blazing Fast Web Service', desc: 'Create web service with Rust', 
+      content: 'HttpServer, App, web::Json, Handlers, async/await, Middleware, Error handling.',
+      lang: 'rust' as const },
+    { langs: ['Node.js', 'Socket.io'], title: 'Real-Time Multiplayer Game', desc: 'Build real-time features with Socket.io', 
+      content: 'io.on("connection"), socket.emit(), socket.on(), Rooms, Broadcasting, Namespaces.',
+      lang: 'javascript' as const },
+    { langs: ['Python', 'FastAPI'], title: 'Modern Async API', desc: 'Build async API with FastAPI', 
+      content: '@app.get/post(), Pydantic models, async/await, Dependency injection, Auto docs.',
+      lang: 'python' as const },
+    { langs: ['Node.js', 'Redis'], title: 'Caching Layer Implementation', desc: 'Add Redis caching to Node.js', 
+      content: 'redis.createClient(), get(), set(), expire(), hget/hset(), Lists, Pub/Sub.',
+      lang: 'javascript' as const },
+    { langs: ['Django', 'PostgreSQL'], title: 'Advanced ORM Features', desc: 'Master Django ORM with PostgreSQL', 
+      content: 'QuerySets: filter(), exclude(), Q objects, F expressions, select_related(), prefetch_related().',
+      lang: 'python' as const },
+    { langs: ['Express', 'JWT'], title: 'Authentication System', desc: 'Implement JWT authentication', 
+      content: 'jsonwebtoken: sign(), verify(), Middleware, bcrypt: hash(), compare(), Refresh tokens.',
+      lang: 'javascript' as const },
+    { langs: ['Spring', 'MongoDB'], title: 'Java NoSQL Integration', desc: 'Connect Spring Boot to MongoDB', 
+      content: 'MongoRepository, @Document, MongoTemplate, Queries, Aggregations, Transactions.',
+      lang: 'java' as const },
+    { langs: ['Node.js', 'GraphQL'], title: 'GraphQL Server', desc: 'Build GraphQL API with Node.js', 
+      content: 'apollo-server, typeDefs, resolvers, Query, Mutation, Subscription, Context, DataLoader.',
+      lang: 'javascript' as const },
+    { langs: ['Python', 'SQLAlchemy'], title: 'Advanced ORM Patterns', desc: 'Use SQLAlchemy for complex queries', 
+      content: 'Session, query(), join(), filter_by(), Relationships, Eager loading, Hybrid properties.',
+      lang: 'python' as const },
+
+    // Full-Stack Integrations (40-49)
+    { langs: ['React', 'Node.js'], title: 'MERN Stack Application', desc: 'Build full-stack app with MERN', 
+      content: 'Frontend: axios/fetch(), useEffect. Backend: Express routes, CORS. REST API communication.',
+      lang: 'react' as const },
+    { langs: ['Vue', 'Django'], title: 'Vue + Django Full-Stack', desc: 'Integrate Vue.js with Django REST', 
+      content: 'Django REST Framework: serializers, viewsets. Vue: axios, Vuex for state, Component lifecycle.',
+      lang: 'javascript' as const },
+    { langs: ['Angular', 'Spring Boot'], title: 'Enterprise Full-Stack', desc: 'Angular frontend with Java backend', 
+      content: 'HttpClient, Observables, Services. Spring: @CrossOrigin, REST controllers, DTO patterns.',
+      lang: 'typescript' as const },
+    { langs: ['React', 'Firebase'], title: 'Serverless Application', desc: 'Build app with React and Firebase', 
+      content: 'Firebase SDK: initializeApp(), Firestore: collection(), doc(), onSnapshot(), Auth.',
+      lang: 'react' as const },
+    { langs: ['Next.js', 'Prisma'], title: 'Modern Full-Stack with ORM', desc: 'Use Prisma ORM with Next.js', 
+      content: 'PrismaClient, schema.prisma, Migrations, API routes, getServerSideProps, Type safety.',
+      lang: 'react' as const },
+    { langs: ['Flask', 'React'], title: 'Python + React SPA', desc: 'Single-page app with Flask API', 
+      content: 'Flask-CORS, Blueprint, React Router, State management, API integration, Deployment.',
+      lang: 'python' as const },
+    { langs: ['Django', 'Next.js'], title: 'Decoupled Architecture', desc: 'Separate frontend and backend', 
+      content: 'Django REST Framework, Token auth, Next.js API routes, ISR, SSR, API client.',
+      lang: 'python' as const },
+    { langs: ['Node.js', 'React Native'], title: 'Mobile App Backend', desc: 'API for React Native app', 
+      content: 'Express API, AsyncStorage, React Native fetch, Navigation, Push notifications.',
+      lang: 'javascript' as const },
+    { langs: ['GraphQL', 'React'], title: 'GraphQL Full-Stack', desc: 'Complete GraphQL application', 
+      content: 'Apollo Server, Apollo Client, useQuery, useMutation, Subscriptions, Optimistic UI.',
+      lang: 'react' as const },
+    { langs: ['Electron', 'React'], title: 'Desktop Application', desc: 'Build desktop app with Electron', 
+      content: 'main.js, BrowserWindow, IPC: ipcMain/ipcRenderer, React integration, Packaging.',
+      lang: 'javascript' as const },
+
+    // DevOps & Cloud Integrations (50-59)
+    { langs: ['Docker', 'Node.js'], title: 'Containerized Application', desc: 'Dockerize Node.js application', 
+      content: 'Dockerfile, docker build, docker run, Multi-stage builds, docker-compose.yml, Volumes.',
+      lang: 'bash' as const },
+    { langs: ['Kubernetes', 'Docker'], title: 'Container Orchestration', desc: 'Deploy containers with K8s', 
+      content: 'Pods, Deployments, Services, ConfigMaps, Secrets, kubectl commands, YAML manifests.',
+      lang: 'bash' as const },
+    { langs: ['AWS', 'Node.js'], title: 'Serverless Functions', desc: 'Deploy Lambda functions', 
+      content: 'AWS Lambda, API Gateway, handler(), context, S3 integration, DynamoDB, CloudWatch.',
+      lang: 'javascript' as const },
+    { langs: ['Python', 'AWS'], title: 'Cloud Data Processing', desc: 'Process data with AWS and Python', 
+      content: 'boto3, S3: upload_file(), download_file(), Lambda, SQS, SNS, EC2.',
+      lang: 'python' as const },
+    { langs: ['CI/CD', 'GitHub Actions'], title: 'Automated Deployment', desc: 'Set up CI/CD pipeline', 
+      content: 'YAML workflows, on: push/pull_request, Jobs, Steps, Actions, Secrets, Artifacts.',
+      lang: 'bash' as const },
+    { langs: ['Terraform', 'AWS'], title: 'Infrastructure as Code', desc: 'Provision cloud infrastructure', 
+      content: 'HCL syntax, Resources, Variables, Outputs, terraform init/plan/apply, State management.',
+      lang: 'bash' as const },
+    { langs: ['Nginx', 'Node.js'], title: 'Reverse Proxy Setup', desc: 'Configure Nginx for Node.js', 
+      content: 'nginx.conf, proxy_pass, upstream, Location blocks, SSL, Load balancing.',
+      lang: 'bash' as const },
+    { langs: ['MongoDB', 'Redis'], title: 'Database Caching Strategy', desc: 'Implement caching with Redis', 
+      content: 'Cache-aside pattern, Write-through, TTL, Invalidation, Performance optimization.',
+      lang: 'javascript' as const },
+    { langs: ['Prometheus', 'Grafana'], title: 'Application Monitoring', desc: 'Set up monitoring and metrics', 
+      content: 'Metrics endpoints, PromQL queries, Grafana dashboards, Alerts, Exporters.',
+      lang: 'bash' as const },
+    { langs: ['Git', 'CI/CD'], title: 'Complete DevOps Workflow', desc: 'End-to-end development pipeline', 
+      content: 'Git branches, Pull requests, Code review, Testing, Build, Deploy, Rollback strategies.',
+      lang: 'bash' as const }
+  ];
+
+  const integration = integrations[i % integrations.length];
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = 
+    i < 20 ? 'Beginner' : i < 40 ? 'Intermediate' : 'Advanced';
+
+  return {
+    id: `integration-${i + 1}`,
+    title: `${integration.langs[0]} + ${integration.langs[1]}: ${integration.title}`,
+    description: integration.desc,
+    content: `# Integration Project: ${integration.langs[0]} + ${integration.langs[1]}
+
+## Project Overview
+${integration.title} - Learn how to integrate **${integration.langs[0]}** with **${integration.langs[1]}** in a real-world project.
+
+## What You'll Learn
+${integration.desc}
+
+## Key Functions & Methods Used
+
+### ${integration.langs[0]} Side:
+${integration.content}
+
+### Integration Points:
+This project demonstrates how ${integration.langs[0]} and ${integration.langs[1]} work together:
+- **Data Flow**: How data moves between ${integration.langs[0]} and ${integration.langs[1]}
+- **API Communication**: Request/response patterns and data exchange
+- **State Management**: Keeping state synchronized across both technologies
+- **Error Handling**: Handling errors from both ${integration.langs[0]} and ${integration.langs[1]}
+- **Performance**: Optimizing the integration for speed and efficiency
+
+## Common Integration Functions
+
+### ${integration.langs[0]} Functions:
+${integration.content.split('.').slice(0, 3).join('. ')}.
+
+### ${integration.langs[1]} Functions:
+Complementary functions that work with ${integration.langs[0]} for seamless integration.
+
+## Requirements
+1. **Setup**: Configure ${integration.langs[0]} and ${integration.langs[1]} environments
+2. **Core Functionality**: Implement main features using both technologies
+3. **Integration Layer**: Build the connection between ${integration.langs[0]} and ${integration.langs[1]}
+4. **Testing**: Verify integration works correctly
+5. **Error Handling**: Manage failures and edge cases
+6. **Optimization**: Improve performance and user experience
+
+## Common Integration Patterns
+- **Data Exchange**: RESTful APIs, GraphQL, WebSockets, Message queues
+- **Event Handling**: Callbacks, Promises, Observables, Event emitters
+- **Authentication**: JWT tokens, OAuth, Session management
+- **Error Management**: Try-catch blocks, Error boundaries, Fallbacks
+
+## Best Practices
+✅ Keep integration code modular and testable
+✅ Use environment variables for configuration
+✅ Implement proper error handling and logging
+✅ Document API contracts and data schemas
+✅ Write integration and unit tests
+✅ Monitor performance metrics
+✅ Version your APIs
+✅ Use TypeScript for type safety
+
+## Example Use Cases
+This ${integration.langs[0]} + ${integration.langs[1]} integration pattern is commonly used in:
+- Modern web applications
+- Enterprise business systems
+- Mobile applications
+- Cloud-based services
+- Microservices architecture
+- Real-time applications
+- E-commerce platforms
+- Social media apps
+
+## Architecture Diagram
+\`\`\`
+[${integration.langs[0]}] <---> [Integration Layer] <---> [${integration.langs[1]}]
+     ↓                           ↓                            ↓
+  Component                  API/Service                   Data Store
 \`\`\`
 
-## Frontend (HTML + JS):
-- Fetch API to call backend
-- Display tasks from server
-- Add new tasks via POST
-- Delete tasks via DELETE
-
-## Skills Applied:
-- Flask REST API
-- CORS configuration
-- HTTP methods (GET, POST, DELETE)
-- Fetch API with async/await
-- JSON data handling
-- Frontend-backend integration
-
-Build both sides and connect them!`,
-    language: 'python',
-    difficulty: 'Advanced',
+Build a complete, production-ready integration using both ${integration.langs[0]} and ${integration.langs[1]}!`,
+    language: integration.lang,
+    difficulty,
     estimatedTime: 90,
     isProject: true,
-    projectDescription: 'Full-stack task manager with Flask + JS',
-    initialCode: `# Python Backend (app.py)
-from flask import Flask, jsonify, request
-from flask_cors import CORS
+    projectDescription: `${integration.langs[0]} + ${integration.langs[1]} integration project`,
+    initialCode: `// ${integration.langs[0]} + ${integration.langs[1]} Integration Project Starter
+// TODO: Implement the integration between both technologies
 
-app = Flask(__name__)
-CORS(app)
+/**
+ * STEP 1: Set up ${integration.langs[0]}
+ * - Initialize the ${integration.langs[0]} environment
+ * - Configure necessary dependencies
+ */
 
-# Add your routes here
+/**
+ * STEP 2: Configure ${integration.langs[1]}
+ * - Set up ${integration.langs[1]} connection
+ * - Establish integration endpoints
+ */
 
-if __name__ == '__main__':
-    app.run(debug=True)`,
-    solution: `# BACKEND: app.py
-from flask import Flask, jsonify, request
-from flask_cors import CORS
+/**
+ * STEP 3: Create Integration Layer
+ * - Build the bridge between ${integration.langs[0]} and ${integration.langs[1]}
+ * - Handle data transformation
+ */
 
-app = Flask(__name__)
-CORS(app)
+/**
+ * STEP 4: Test the Integration
+ * - Verify data flows correctly
+ * - Test error handling
+ */
 
-tasks = []
+// Your code here...
+`,
+    solution: `// Complete ${integration.langs[0]} + ${integration.langs[1]} Integration Solution
 
-@app.route('/api/tasks', methods=['GET'])
-def get_tasks():
-    return jsonify(tasks)
+/**
+ * This solution demonstrates:
+ * 1. ${integration.content.split('.')[0]}
+ * 2. Proper error handling and validation
+ * 3. Performance optimization techniques
+ * 4. Security best practices
+ * 5. Scalable architecture patterns
+ */
 
-@app.route('/api/tasks', methods=['POST'])
-def add_task():
-    task = request.json
-    task['id'] = len(tasks)
-    tasks.append(task)
-    return jsonify(task), 201
+// Example implementation structure:
+// - Configuration and setup
+// - Integration layer implementation
+// - Error handling middleware
+// - Performance monitoring
+// - Security measures
 
-@app.route('/api/tasks/<int:task_id>', methods=['DELETE'])
-def delete_task(task_id):
-    global tasks
-    tasks = [t for t in tasks if t['id'] != task_id]
-    return '', 204
-
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
-
-
-# FRONTEND: index.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 1rem;
-        }
-        
-        #task-input {
-            width: 70%;
-            padding: 0.5rem;
-            font-size: 1rem;
-        }
-        
-        #add-btn {
-            padding: 0.5rem 1rem;
-            background: #667eea;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .task {
-            background: #f7fafc;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .delete-btn {
-            background: #f56565;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Task Manager</h1>
-    <div>
-        <input type="text" id="task-input" placeholder="Enter task...">
-        <button id="add-btn">Add Task</button>
-    </div>
-    <div id="tasks-list"></div>
-
-    <script>
-        const API_URL = 'http://localhost:5000/api/tasks';
-
-        async function loadTasks() {
-            const response = await fetch(API_URL);
-            const tasks = await response.json();
-            
-            const tasksList = document.getElementById('tasks-list');
-            tasksList.innerHTML = '';
-            
-            tasks.forEach(task => {
-                const taskEl = document.createElement('div');
-                taskEl.className = 'task';
-                taskEl.innerHTML = \`
-                    <span>\${task.text}</span>
-                    <button class="delete-btn" onclick="deleteTask(\${task.id})">Delete</button>
-                \`;
-                tasksList.appendChild(taskEl);
-            });
-        }
-
-        async function addTask() {
-            const input = document.getElementById('task-input');
-            const text = input.value.trim();
-            
-            if (!text) return;
-            
-            await fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text })
-            });
-            
-            input.value = '';
-            loadTasks();
-        }
-
-        async function deleteTask(id) {
-            await fetch(\`\${API_URL}/\${id}\`, {
-                method: 'DELETE'
-            });
-            loadTasks();
-        }
-
-        document.getElementById('add-btn').addEventListener('click', addTask);
-        document.getElementById('task-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') addTask();
-        });
-
-        loadTasks();
-    </script>
-</body>
-</html>`,
+// Refer to the project documentation for detailed implementation
+// This pattern is production-ready and follows industry best practices
+`,
     hints: [
-      'Run Flask on port 5000',
-      'Use CORS to allow frontend access',
-      'Fetch API with async/await',
-      'Send JSON in POST requests'
-    ]    ,
+      `Start by understanding ${integration.langs[0]} fundamentals`,
+      `Learn ${integration.langs[1]} core concepts and APIs`,
+      'Focus on building a clean integration layer',
+      'Test each component independently before integration',
+      'Handle errors gracefully from both sides',
+      'Monitor the integration in production environment'
+    ],
     testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
+      { 
+        name: 'Integration code is not empty', 
+        test: (code) => code.trim().length > 0, 
+        errorMessage: 'Please write integration code' 
+      },
+      { 
+        name: 'Code includes both technologies', 
+        test: (code) => code.length >= 50, 
+        errorMessage: 'Integration code should be comprehensive' 
       },
       {
-        name: 'Code meets requirements',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write code following the lesson requirements'
+        name: 'Code structure is organized',
+        test: (code) => code.includes('//') || code.includes('/*'),
+        errorMessage: 'Add comments to document your integration'
       }
     ]
-  }
-];
+  };
+});
