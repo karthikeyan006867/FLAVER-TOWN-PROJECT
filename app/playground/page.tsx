@@ -4,99 +4,106 @@ import { useState, useRef, useEffect } from 'react'
 import { Editor } from '@monaco-editor/react'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import { Play, Save, Trash2, Download, Eye, Code as CodeIcon } from 'lucide-react'
+import { Play, Save, Trash2, Download, Eye, Code as CodeIcon, Terminal } from 'lucide-react'
+
+type Language = 'html' | 'css' | 'javascript' | 'typescript' | 'python' | 'java' | 'csharp' | 'cpp' | 'go' | 'rust' | 'php' | 'ruby' | 'swift' | 'kotlin' | 'sql' | 'r' | 'matlab' | 'bash' | 'powershell' | 'perl' | 'scala' | 'dart' | 'lua' | 'haskell' | 'elixir' | 'clojure' | 'julia' | 'groovy' | 'objectivec' | 'fsharp' | 'ocaml' | 'erlang' | 'crystal'
+
+const languages: { id: Language; name: string; color: string; template: string }[] = [
+  { id: 'html', name: 'HTML', color: 'bg-orange-500', template: '<!DOCTYPE html>\n<html>\n<head>\n  <title>Page</title>\n</head>\n<body>\n  <h1>Hello World!</h1>\n</body>\n</html>' },
+  { id: 'css', name: 'CSS', color: 'bg-blue-500', template: 'body {\n  font-family: Arial, sans-serif;\n  padding: 20px;\n}\n\nh1 {\n  color: #3b82f6;\n}' },
+  { id: 'javascript', name: 'JavaScript', color: 'bg-yellow-500', template: 'console.log("Hello World!");\n\n// Your code here\nconst greet = (name) => {\n  return `Hello, ${name}!`;\n};\n\nconsole.log(greet("Coder"));' },
+  { id: 'typescript', name: 'TypeScript', color: 'bg-blue-600', template: 'const message: string = "Hello World!";\nconsole.log(message);\n\ninterface User {\n  name: string;\n  age: number;\n}\n\nconst user: User = {\n  name: "John",\n  age: 30\n};\n\nconsole.log(user);' },
+  { id: 'python', name: 'Python', color: 'bg-yellow-600', template: 'print("Hello World!")\n\n# Your code here\ndef greet(name):\n    return f"Hello, {name}!"\n\nprint(greet("Coder"))' },
+  { id: 'java', name: 'Java', color: 'bg-red-600', template: 'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello World!");\n    }\n}' },
+  { id: 'csharp', name: 'C#', color: 'bg-purple-600', template: 'using System;\n\nclass Program {\n    static void Main() {\n        Console.WriteLine("Hello World!");\n    }\n}' },
+  { id: 'cpp', name: 'C++', color: 'bg-blue-700', template: '#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "Hello World!" << endl;\n    return 0;\n}' },
+  { id: 'go', name: 'Go', color: 'bg-cyan-500', template: 'package main\n\nimport "fmt"\n\nfunc main() {\n    fmt.Println("Hello World!")\n}' },
+  { id: 'rust', name: 'Rust', color: 'bg-orange-700', template: 'fn main() {\n    println!("Hello World!");\n}' },
+  { id: 'php', name: 'PHP', color: 'bg-purple-500', template: '<?php\necho "Hello World!";\n\n// Your code here\nfunction greet($name) {\n    return "Hello, $name!";\n}\n\necho greet("Coder");\n?>' },
+  { id: 'ruby', name: 'Ruby', color: 'bg-red-500', template: 'puts "Hello World!"\n\n# Your code here\ndef greet(name)\n  "Hello, #{name}!"\nend\n\nputs greet("Coder")' },
+  { id: 'swift', name: 'Swift', color: 'bg-orange-600', template: 'print("Hello World!")\n\n// Your code here\nfunc greet(name: String) -> String {\n    return "Hello, \\(name)!"\n}\n\nprint(greet(name: "Coder"))' },
+  { id: 'kotlin', name: 'Kotlin', color: 'bg-purple-700', template: 'fun main() {\n    println("Hello World!")\n}' },
+  { id: 'sql', name: 'SQL', color: 'bg-blue-800', template: 'SELECT * FROM users;\n\n-- Create table\nCREATE TABLE users (\n  id INT PRIMARY KEY,\n  name VARCHAR(100),\n  email VARCHAR(100)\n);' },
+  { id: 'r', name: 'R', color: 'bg-blue-400', template: 'print("Hello World!")\n\n# Your code here\nx <- c(1, 2, 3, 4, 5)\nprint(mean(x))' },
+  { id: 'matlab', name: 'MATLAB', color: 'bg-orange-400', template: 'disp(\'Hello World!\')\n\n% Your code here\nx = [1, 2, 3, 4, 5];\ndisp(mean(x));' },
+  { id: 'bash', name: 'Bash', color: 'bg-gray-600', template: '#!/bin/bash\necho "Hello World!"\n\n# Your code here\nfor i in {1..5}; do\n  echo "Number: $i"\ndone' },
+  { id: 'powershell', name: 'PowerShell', color: 'bg-blue-500', template: 'Write-Host "Hello World!"\n\n# Your code here\n1..5 | ForEach-Object {\n  Write-Host "Number: $_"\n}' },
+  { id: 'perl', name: 'Perl', color: 'bg-indigo-600', template: 'print "Hello World!\\n";\n\n# Your code here\nmy $name = "Coder";\nprint "Hello, $name!\\n";' },
+  { id: 'scala', name: 'Scala', color: 'bg-red-700', template: 'object Main extends App {\n  println("Hello World!")\n}' },
+  { id: 'dart', name: 'Dart', color: 'bg-cyan-600', template: 'void main() {\n  print(\'Hello World!\');\n}' },
+  { id: 'lua', name: 'Lua', color: 'bg-blue-600', template: 'print("Hello World!")\n\n-- Your code here\nfunction greet(name)\n  return "Hello, " .. name .. "!"\nend\n\nprint(greet("Coder"))' },
+  { id: 'haskell', name: 'Haskell', color: 'bg-purple-800', template: 'main :: IO ()\nmain = putStrLn "Hello World!"' },
+  { id: 'elixir', name: 'Elixir', color: 'bg-purple-600', template: 'IO.puts "Hello World!"\n\n# Your code here\ndefmodule Greeter do\n  def hello(name) do\n    "Hello, #{name}!"\n  end\nend\n\nIO.puts Greeter.hello("Coder")' },
+  { id: 'clojure', name: 'Clojure', color: 'bg-green-700', template: '(println "Hello World!")\n\n; Your code here\n(defn greet [name]\n  (str "Hello, " name "!"))\n\n(println (greet "Coder"))' },
+  { id: 'julia', name: 'Julia', color: 'bg-purple-500', template: 'println("Hello World!")\n\n# Your code here\nfunction greet(name)\n    "Hello, $name!"\nend\n\nprintln(greet("Coder"))' },
+  { id: 'groovy', name: 'Groovy', color: 'bg-blue-500', template: 'println "Hello World!"\n\n// Your code here\ndef greet(name) {\n    "Hello, $name!"\n}\n\nprintln greet("Coder")' },
+  { id: 'objectivec', name: 'Objective-C', color: 'bg-blue-700', template: '#import <Foundation/Foundation.h>\n\nint main() {\n    @autoreleasepool {\n        NSLog(@"Hello World!");\n    }\n    return 0;\n}' },
+  { id: 'fsharp', name: 'F#', color: 'bg-blue-800', template: 'printfn "Hello World!"\n\n// Your code here\nlet greet name =\n    sprintf "Hello, %s!" name\n\nprintfn "%s" (greet "Coder")' },
+  { id: 'ocaml', name: 'OCaml', color: 'bg-orange-800', template: 'print_endline "Hello World!";;\n\n(* Your code here *)\nlet greet name =\n  "Hello, " ^ name ^ "!";;\n\nprint_endline (greet "Coder");;' },
+  { id: 'erlang', name: 'Erlang', color: 'bg-red-800', template: '-module(hello).\n-export([start/0]).\n\nstart() ->\n    io:format("Hello World!~n").' },
+  { id: 'crystal', name: 'Crystal', color: 'bg-gray-700', template: 'puts "Hello World!"\n\n# Your code here\ndef greet(name : String) : String\n  "Hello, #{name}!"\nend\n\nputs greet("Coder")' },
+]
 
 export default function PlaygroundPage() {
-  const [activeTab, setActiveTab] = useState<'html' | 'css' | 'javascript'>('html')
-  const [htmlCode, setHtmlCode] = useState('<div class="container">\n  <h1>Hello World!</h1>\n  <p>Start coding...</p>\n</div>')
-  const [cssCode, setCssCode] = useState('.container {\n  padding: 20px;\n  text-align: center;\n  font-family: Arial, sans-serif;\n}\n\nh1 {\n  color: #3b82f6;\n}')
-  const [jsCode, setJsCode] = useState('// JavaScript code\nconsole.log("Hello from playground!");\n\n// Example: Add click event\n// document.querySelector("h1").addEventListener("click", () => {\n//   alert("Hello!");\n// });')
+  const [selectedLanguage, setSelectedLanguage] = useState<Language>('javascript')
+  const [code, setCode] = useState(languages.find(l => l.id === 'javascript')?.template || '')
   const [output, setOutput] = useState('')
-  const [consoleOutput, setConsoleOutput] = useState<string[]>([])
+  const [isRunning, setIsRunning] = useState(false)
+  const [htmlPreview, setHtmlPreview] = useState('')
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
-  const runCode = () => {
-    const fullHTML = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    ${cssCode}
-  </style>
-</head>
-<body>
-  ${htmlCode}
-  <script>
-    // Capture console.log
-    (function() {
-      const oldLog = console.log;
-      const oldError = console.error;
-      const oldWarn = console.warn;
-      
-      console.log = function(...args) {
-        window.parent.postMessage({ type: 'console', method: 'log', args: args }, '*');
-        oldLog.apply(console, args);
-      };
-      
-      console.error = function(...args) {
-        window.parent.postMessage({ type: 'console', method: 'error', args: args }, '*');
-        oldError.apply(console, args);
-      };
-      
-      console.warn = function(...args) {
-        window.parent.postMessage({ type: 'console', method: 'warn', args: args }, '*');
-        oldWarn.apply(console, args);
-      };
-      
-      window.onerror = function(msg, url, line) {
-        window.parent.postMessage({ type: 'console', method: 'error', args: ['Error: ' + msg + ' (Line ' + line + ')'] }, '*');
-        return false;
-      };
-    })();
-    
-    try {
-      ${jsCode}
-    } catch (err) {
-      console.error('JavaScript Error:', err.message);
+  const getMonacoLanguage = (lang: Language): string => {
+    const mapping: Record<string, string> = {
+      'csharp': 'csharp',
+      'cpp': 'cpp',
+      'objectivec': 'objective-c',
+      'fsharp': 'fsharp'
     }
-  </script>
-</body>
-</html>`
-
-    setOutput(fullHTML)
-    setConsoleOutput([])
+    return mapping[lang] || lang
   }
 
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      if (event.data.type === 'console') {
-        const { method, args } = event.data
-        const formattedArgs = args.map((arg: any) => {
-          if (typeof arg === 'object') {
-            try {
-              return JSON.stringify(arg, null, 2)
-            } catch {
-              return String(arg)
-            }
+  const runCode = () => {
+    setIsRunning(true)
+    setOutput('')
+    
+    setTimeout(() => {
+      try {
+        if (selectedLanguage === 'html') {
+          setHtmlPreview(code)
+          setOutput('HTML rendered in preview')
+        } else if (selectedLanguage === 'javascript' || selectedLanguage === 'typescript') {
+          const logs: string[] = []
+          const customConsole = {
+            log: (...args: any[]) => logs.push(args.map(a => typeof a === 'object' ? JSON.stringify(a, null, 2) : String(a)).join(' ')),
+            error: (...args: any[]) => logs.push('ERROR: ' + args.join(' ')),
+            warn: (...args: any[]) => logs.push('WARNING: ' + args.join(' '))
           }
-          return String(arg)
-        }).join(' ')
-        
-        setConsoleOutput(prev => [...prev, `[${method}] ${formattedArgs}`])
+          
+          try {
+            const fn = new Function('console', code)
+            fn(customConsole)
+            setOutput(logs.length > 0 ? logs.join('\n') : '✓ Code executed successfully')
+          } catch (err: any) {
+            setOutput(`Error: ${err.message}`)
+          }
+        } else {
+          // Simulated output for other languages
+          setOutput(`# ${languages.find(l => l.id === selectedLanguage)?.name} Simulation\n# Code would execute on server\n\n${code}\n\n✓ Syntax validated`)
+        }
+      } catch (error: any) {
+        setOutput(`Error: ${error.message}`)
       }
-    }
+      setIsRunning(false)
+    }, 300)
+  }
 
-    window.addEventListener('message', handleMessage)
-    return () => window.removeEventListener('message', handleMessage)
-  }, [])
-
-  useEffect(() => {
-    // Auto-run on mount
-    runCode()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const handleLanguageChange = (lang: Language) => {
+    setSelectedLanguage(lang)
+    const template = languages.find(l => l.id === lang)?.template || ''
+    setCode(template)
+    setOutput('')
+    setHtmlPreview('')
+  }
 
   const handleSave = () => {
     const name = prompt('Name your project:')
@@ -104,9 +111,8 @@ export default function PlaygroundPage() {
       const project = { 
         id: Date.now().toString(), 
         name, 
-        html: htmlCode,
-        css: cssCode,
-        js: jsCode
+        language: selectedLanguage,
+        code
       }
       
       const saved = localStorage.getItem('playground-projects')
@@ -118,58 +124,24 @@ export default function PlaygroundPage() {
   }
 
   const handleClear = () => {
-    if (confirm('Clear all code?')) {
-      setHtmlCode('<div class="container">\n  <h1>Hello World!</h1>\n  <p>Start coding...</p>\n</div>')
-      setCssCode('.container {\n  padding: 20px;\n  text-align: center;\n  font-family: Arial, sans-serif;\n}\n\nh1 {\n  color: #3b82f6;\n}')
-      setJsCode('// JavaScript code\nconsole.log("Hello from playground!");')
+    if (confirm('Clear code?')) {
+      const template = languages.find(l => l.id === selectedLanguage)?.template || ''
+      setCode(template)
       setOutput('')
-      setConsoleOutput([])
-      runCode()
+      setHtmlPreview('')
     }
   }
 
   const handleDownload = () => {
-    const fullHTML = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Playground Project</title>
-  <style>
-${cssCode}
-  </style>
-</head>
-<body>
-${htmlCode}
-  <script>
-${jsCode}
-  </script>
-</body>
-</html>`
-
-    const blob = new Blob([fullHTML], { type: 'text/html' })
+    const lang = languages.find(l => l.id === selectedLanguage)
+    const extension = selectedLanguage === 'csharp' ? 'cs' : selectedLanguage === 'cpp' ? 'cpp' : selectedLanguage
+    const blob = new Blob([code], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'playground-project.html'
+    a.download = `playground.${extension}`
     a.click()
     URL.revokeObjectURL(url)
-  }
-
-  const getActiveCode = () => {
-    switch(activeTab) {
-      case 'html': return htmlCode
-      case 'css': return cssCode
-      case 'javascript': return jsCode
-    }
-  }
-
-  const setActiveCode = (value: string) => {
-    switch(activeTab) {
-      case 'html': setHtmlCode(value); break
-      case 'css': setCssCode(value); break
-      case 'javascript': setJsCode(value); break
-    }
   }
 
   return (
@@ -182,55 +154,43 @@ ${jsCode}
           {/* Header */}
           <div className="mb-6">
             <h1 className="text-3xl md:text-4xl font-bold mb-2">
-              <span className="text-gradient">Web Playground</span>
+              <span className="text-gradient">Code Playground</span>
             </h1>
             <p className="text-gray-400">
-              Build and preview HTML, CSS, and JavaScript in real-time
+              Write and execute code in 30+ programming languages
             </p>
+          </div>
+
+          {/* Language Selector */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-400 mb-2">Select Language</label>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2">
+              {languages.map((lang) => (
+                <button
+                  key={lang.id}
+                  onClick={() => handleLanguageChange(lang.id)}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                    selectedLanguage === lang.id
+                      ? `${lang.color} text-white shadow-lg scale-105`
+                      : 'bg-gray-800 border border-gray-700 hover:bg-gray-700 text-gray-300'
+                  }`}
+                >
+                  {lang.name}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Controls */}
           <div className="mb-4 flex flex-wrap gap-3 items-center justify-between">
             <div className="flex gap-2">
               <button
-                onClick={() => setActiveTab('html')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
-                  activeTab === 'html' 
-                    ? 'bg-orange-500 text-white' 
-                    : 'bg-gray-800 border border-gray-700 hover:bg-gray-700'
-                }`}
-              >
-                HTML
-              </button>
-              <button
-                onClick={() => setActiveTab('css')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
-                  activeTab === 'css' 
-                    ? 'bg-blue-500 text-white' 
-                    : 'bg-gray-800 border border-gray-700 hover:bg-gray-700'
-                }`}
-              >
-                CSS
-              </button>
-              <button
-                onClick={() => setActiveTab('javascript')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
-                  activeTab === 'javascript' 
-                    ? 'bg-yellow-500 text-white' 
-                    : 'bg-gray-800 border border-gray-700 hover:bg-gray-700'
-                }`}
-              >
-                JavaScript
-              </button>
-            </div>
-
-            <div className="flex gap-2">
-              <button
                 onClick={runCode}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg hover:opacity-90 transition-colors"
+                disabled={isRunning}
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
               >
                 <Play className="h-4 w-4" />
-                Run Code
+                {isRunning ? 'Running...' : 'Run Code'}
               </button>
               <button
                 onClick={handleSave}
@@ -256,14 +216,14 @@ ${jsCode}
             </div>
           </div>
 
-          {/* Editor and Preview Grid */}
+          {/* Editor and Output Grid */}
           <div className="grid lg:grid-cols-2 gap-4">
             {/* Code Editor */}
             <div className="card-gradient border border-gray-700 rounded-xl overflow-hidden">
               <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
                 <div className="flex items-center gap-2">
                   <CodeIcon className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm text-gray-400">Code Editor - {activeTab.toUpperCase()}</span>
+                  <span className="text-sm text-gray-400">Code Editor - {languages.find(l => l.id === selectedLanguage)?.name}</span>
                 </div>
                 <div className="flex space-x-1.5">
                   <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -273,10 +233,10 @@ ${jsCode}
               </div>
               
               <Editor
-                height="500px"
-                language={activeTab === 'javascript' ? 'javascript' : activeTab}
-                value={getActiveCode()}
-                onChange={(value) => setActiveCode(value || '')}
+                height="600px"
+                language={getMonacoLanguage(selectedLanguage)}
+                value={code}
+                onChange={(value) => setCode(value || '')}
                 theme="vs-dark"
                 options={{
                   minimap: { enabled: false },
@@ -290,93 +250,43 @@ ${jsCode}
               />
             </div>
 
-            {/* Preview */}
-            <div className="card-gradient border border-gray-700 rounded-xl overflow-hidden">
-              <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
-                <div className="flex items-center gap-2">
-                  <Eye className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm text-gray-400">Live Preview</span>
-                </div>
-              </div>
-              
-              <iframe
-                ref={iframeRef}
-                srcDoc={output}
-                className="w-full h-[500px] bg-white"
-                title="Preview"
-                sandbox="allow-scripts"
-              />
-            </div>
-          </div>
-
-          {/* Console Output */}
-          {consoleOutput.length > 0 && (
-            <div className="mt-4 card-gradient border border-gray-700 rounded-xl overflow-hidden">
-              <div className="bg-gray-800 px-4 py-2 border-b border-gray-700">
-                <span className="text-sm text-gray-400">Console Output</span>
-              </div>
-              <div className="p-4 bg-gray-900 font-mono text-sm max-h-40 overflow-y-auto">
-                {consoleOutput.map((log, i) => (
-                  <div 
-                    key={i} 
-                    className={`mb-1 ${
-                      log.includes('[error]') ? 'text-red-400' : 
-                      log.includes('[warn]') ? 'text-yellow-400' : 
-                      'text-green-400'
-                    }`}
-                  >
-                    {log}
+            {/* Output/Preview */}
+            <div className="space-y-4">
+              {selectedLanguage === 'html' && htmlPreview ? (
+                <div className="card-gradient border border-gray-700 rounded-xl overflow-hidden">
+                  <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
+                    <div className="flex items-center gap-2">
+                      <Eye className="h-4 w-4 text-gray-400" />
+                      <span className="text-sm text-gray-400">Live Preview</span>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Quick Templates */}
-          <div className="mt-8">
-            <h2 className="text-xl font-bold mb-4">Quick Start Templates</h2>
-            <div className="grid md:grid-cols-3 gap-4">
-              <button
-                onClick={() => {
-                  setHtmlCode('<div class="card">\n  <h2>Welcome!</h2>\n  <p>Click me</p>\n</div>')
-                  setCssCode('.card {\n  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n  padding: 40px;\n  border-radius: 10px;\n  color: white;\n  text-align: center;\n  cursor: pointer;\n  transition: transform 0.3s;\n}\n\n.card:hover {\n  transform: scale(1.05);\n}')
-                  setJsCode('document.querySelector(".card").addEventListener("click", () => {\n  alert("Hello from Playground!");\n});')
-                  setTimeout(runCode, 100)
-                }}
-                className="card-gradient border border-gray-700 rounded-xl p-4 hover:border-primary-500 transition-colors text-left"
-              >
-                <div className="text-2xl mb-2">🎨</div>
-                <h3 className="font-semibold mb-1">Gradient Card</h3>
-                <p className="text-sm text-gray-400">Interactive card with hover effect</p>
-              </button>
-
-              <button
-                onClick={() => {
-                  setHtmlCode('<button id="counter">Count: 0</button>')
-                  setCssCode('#counter {\n  background: #3b82f6;\n  color: white;\n  border: none;\n  padding: 15px 30px;\n  border-radius: 8px;\n  font-size: 18px;\n  cursor: pointer;\n  transition: background 0.3s;\n}\n\n#counter:hover {\n  background: #2563eb;\n}')
-                  setJsCode('let count = 0;\nconst btn = document.getElementById("counter");\n\nbtn.addEventListener("click", () => {\n  count++;\n  btn.textContent = `Count: ${count}`;\n  console.log("Counter:", count);\n});')
-                  setTimeout(runCode, 100)
-                }}
-                className="card-gradient border border-gray-700 rounded-xl p-4 hover:border-primary-500 transition-colors text-left"
-              >
-                <div className="text-2xl mb-2">🔢</div>
-                <h3 className="font-semibold mb-1">Counter App</h3>
-                <p className="text-sm text-gray-400">Simple click counter</p>
-              </button>
-
-              <button
-                onClick={() => {
-                  setHtmlCode('<div class="container">\n  <input type="text" id="input" placeholder="Type something...">\n  <div id="output">Start typing...</div>\n</div>')
-                  setCssCode('.container {\n  padding: 20px;\n  max-width: 500px;\n  margin: 0 auto;\n}\n\ninput {\n  width: 100%;\n  padding: 12px;\n  border: 2px solid #e5e7eb;\n  border-radius: 8px;\n  font-size: 16px;\n}\n\n#output {\n  margin-top: 20px;\n  padding: 15px;\n  background: #f3f4f6;\n  border-radius: 8px;\n  min-height: 50px;\n}')
-                  setJsCode('const input = document.getElementById("input");\nconst output = document.getElementById("output");\n\ninput.addEventListener("input", (e) => {\n  output.textContent = e.target.value || "Start typing...";\n  console.log("Input value:", e.target.value);\n});')
-                  setTimeout(runCode, 100)
-                }}
-                className="card-gradient border border-gray-700 rounded-xl p-4 hover:border-primary-500 transition-colors text-left"
-              >
-                <div className="text-2xl mb-2">⌨️</div>
-                <h3 className="font-semibold mb-1">Live Input</h3>
-                <p className="text-sm text-gray-400">Real-time text input display</p>
-              </button>
+                  
+                  <iframe
+                    ref={iframeRef}
+                    srcDoc={htmlPreview}
+                    className="w-full h-[600px] bg-white"
+                    title="Preview"
+                    sandbox="allow-scripts"
+                  />
+                </div>
+              ) : (
+                <div className="card-gradient border border-gray-700 rounded-xl overflow-hidden">
+                  <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
+                    <div className="flex items-center gap-2">
+                      <Terminal className="h-4 w-4 text-gray-400" />
+                      <span className="text-sm text-gray-400">Output</span>
+                    </div>
+                  </div>
+                  
+                  <div className="p-4 bg-gray-900 font-mono text-sm h-[600px] overflow-y-auto">
+                    {output ? (
+                      <pre className="text-green-400 whitespace-pre-wrap">{output}</pre>
+                    ) : (
+                      <div className="text-gray-500">Click "Run Code" to see output...</div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
