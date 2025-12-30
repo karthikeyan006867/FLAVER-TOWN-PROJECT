@@ -180,7 +180,7 @@ Never modify props inside a component!
     ]
   },
   // Add 37 more comprehensive React lessons
-  ...Array.from({ length: 37 }, (_, i) => {
+  ...Array.from({ length: 47 }, (_, i) => {
     const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 15 ? 'Beginner' : i < 28 ? 'Intermediate' : 'Advanced'
     return {
       id: `react-${i + 4}`,

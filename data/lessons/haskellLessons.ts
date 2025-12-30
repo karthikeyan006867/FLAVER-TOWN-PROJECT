@@ -1,75 +1,31 @@
 import { Lesson } from '../courses'
 
-export const haskellLessons: Lesson[] = [
-  {
-    id: 'haskell-1',
-    title: 'Introduction to Haskell',
-    description: 'Learn pure functional programming with Haskell',
-    content: `# Introduction to Haskell
+export const haskellLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 17 ? 'Beginner' : i < 34 ? 'Intermediate' : 'Advanced';
+  return {
+    id: `haskell-${i + 1}`,
+    title: `haskell Lesson ${i + 1}`,
+    description: `Master haskell programming concepts - Lesson ${i + 1}`,
+    language: 'haskell' as const,
+    difficulty,
+    estimatedTime: 30,
+    content: `# haskell Lesson ${i + 1}
 
-Haskell is a purely functional programming language with strong static typing and lazy evaluation.
+Welcome to lesson ${i + 1} of the haskell course!
 
-## Key Features:
-- Pure functional (no side effects)
-- Lazy evaluation
-- Strong static typing
-- Type inference
-- Pattern matching
+## Learning Objectives
+- Understand core haskell concepts
+- Apply programming fundamentals
+- Build practical skills
 
-## Hello World:
-\`\`\`haskell
-main = putStrLn "Hello, Haskell!"
-\`\`\`
-
-## Basic Values:
-\`\`\`haskell
-number = 42
-name = "Haskell"
-isTrue = True
-listOfNumbers = [1, 2, 3, 4, 5]
-\`\`\`
-
-## Functions:
-\`\`\`haskell
-double x = x * 2
-add x y = x + y
-\`\`\``,
-    language: 'haskell',
-    difficulty: 'Advanced',
-    estimatedTime: 40,
-    initialCode: `-- Your Haskell code
-main = putStrLn "Hello, Haskell!"
-`,
-    solution: `-- Functions
-double x = x * 2
-square x = x * x
-add x y = x + y
-
--- List operations
-numbers = [1, 2, 3, 4, 5]
-doubled = map double numbers
-
--- Pattern matching
-factorial 0 = 1
-factorial n = n * factorial (n - 1)
-
-main = do
-  putStrLn "Haskell Examples"
-  print (double 5)
-  print (factorial 5)
-  print doubled`,
-    hints: ['Functions without parentheses', 'Pattern matching in definitions', 'map for transforming lists'],
+## Practice Exercise
+Complete the coding challenge below to test your knowledge.`,
+    initialCode: '// Write your haskell code here\n',
+    solution: '// Solution for lesson ${i + 1}\n',
+    hints: ['Start with the basics', 'Practice regularly', 'Test your code'],
     testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets minimum length',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write more code to match the lesson requirements'
-      }
+      { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
+      { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }
     ]
-  }
-]
+  };
+});

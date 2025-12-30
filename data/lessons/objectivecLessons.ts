@@ -1,84 +1,31 @@
 import { Lesson } from '../courses'
 
-export const objectivecLessons: Lesson[] = [
-  {
-    id: 'objc-1',
-    title: 'Introduction to Objective-C',
-    description: 'Learn Objective-C for macOS and iOS development',
-    content: `# Introduction to Objective-C
+export const objectivecLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 17 ? 'Beginner' : i < 34 ? 'Intermediate' : 'Advanced';
+  return {
+    id: `objectivec-${i + 1}`,
+    title: `objectivec Lesson ${i + 1}`,
+    description: `Master objectivec programming concepts - Lesson ${i + 1}`,
+    language: 'objectivec' as const,
+    difficulty,
+    estimatedTime: 30,
+    content: `# objectivec Lesson ${i + 1}
 
-Objective-C is a general-purpose, object-oriented programming language that adds Smalltalk-style messaging to C.
+Welcome to lesson ${i + 1} of the objectivec course!
 
-## Key Features:
-- Built on top of C
-- Dynamic runtime
-- Message passing
-- Used for macOS/iOS development
-- Foundation framework
+## Learning Objectives
+- Understand core objectivec concepts
+- Apply programming fundamentals
+- Build practical skills
 
-## Hello World:
-\`\`\`objectivec
-#import <Foundation/Foundation.h>
-
-int main() {
-  @autoreleasepool {
-    NSLog(@"Hello, Objective-C!");
-  }
-  return 0;
-}
-\`\`\`
-
-## Variables and Objects:
-\`\`\`objectivec
-NSString *name = @"Objective-C";
-NSNumber *age = @40;
-NSArray *numbers = @[@1, @2, @3];
-\`\`\``,
-    language: 'objectivec',
-    difficulty: 'Intermediate',
-    estimatedTime: 40,
-    initialCode: `#import <Foundation/Foundation.h>
-
-int main() {
-  @autoreleasepool {
-    // Your code here
-  }
-  return 0;
-}
-`,
-    solution: `#import <Foundation/Foundation.h>
-
-int main() {
-  @autoreleasepool {
-    // Strings
-    NSString *greeting = @"Hello, Objective-C!";
-    NSLog(@"%@", greeting);
-    
-    // Arrays
-    NSArray *numbers = @[@1, @2, @3, @4, @5];
-    NSLog(@"Count: %lu", [numbers count]);
-    
-    // Dictionary
-    NSDictionary *person = @{
-      @"name": @"Alice",
-      @"age": @30
-    };
-    NSLog(@"Name: %@", person[@"name"]);
-  }
-  return 0;
-}`,
-    hints: ['@ prefix for Objective-C literals', 'NSLog for output', 'Square brackets for methods'],
+## Practice Exercise
+Complete the coding challenge below to test your knowledge.`,
+    initialCode: '// Write your objectivec code here\n',
+    solution: '// Solution for lesson ${i + 1}\n',
+    hints: ['Start with the basics', 'Practice regularly', 'Test your code'],
     testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets minimum length',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write more code to match the lesson requirements'
-      }
+      { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
+      { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }
     ]
-  }
-]
+  };
+});

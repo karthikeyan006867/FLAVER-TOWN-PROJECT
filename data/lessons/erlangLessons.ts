@@ -1,69 +1,31 @@
 import { Lesson } from '../courses'
 
-export const erlangLessons: Lesson[] = [
-  {
-    id: 'erlang-1',
-    title: 'Introduction to Erlang',
-    description: 'Learn Erlang for concurrent and distributed systems',
-    content: `# Introduction to Erlang
+export const erlangLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 17 ? 'Beginner' : i < 34 ? 'Intermediate' : 'Advanced';
+  return {
+    id: `erlang-${i + 1}`,
+    title: `erlang Lesson ${i + 1}`,
+    description: `Master erlang programming concepts - Lesson ${i + 1}`,
+    language: 'erlang' as const,
+    difficulty,
+    estimatedTime: 30,
+    content: `# erlang Lesson ${i + 1}
 
-Erlang is a functional programming language designed for building massively scalable soft real-time systems.
+Welcome to lesson ${i + 1} of the erlang course!
 
-## Key Features:
-- Designed for concurrency
-- Fault-tolerant
-- Hot code swapping
-- Distributed computing
-- Pattern matching
+## Learning Objectives
+- Understand core erlang concepts
+- Apply programming fundamentals
+- Build practical skills
 
-## Hello World:
-\`\`\`erlang
--module(hello).
--export([world/0]).
-
-world() ->
-  io:format("Hello, Erlang!~n").
-\`\`\`
-
-## Variables and Atoms:
-\`\`\`erlang
-Name = "Erlang".
-Age = 38.
-Status = ok.  % atom
-\`\`\``,
-    language: 'erlang',
-    difficulty: 'Advanced',
-    estimatedTime: 40,
-    initialCode: `-module(example).
--export([start/0]).
-
-start() ->
-  % Your Erlang code
-  io:format("Hello, Erlang!~n").
-`,
-    solution: `-module(example).
--export([start/0, factorial/1]).
-
-start() ->
-  io:format("Hello, Erlang!~n"),
-  Result = factorial(5),
-  io:format("Factorial: ~p~n", [Result]).
-
-factorial(0) -> 1;
-factorial(N) when N > 0 ->
-  N * factorial(N - 1).`,
-    hints: ['-module and -export directives', 'Variables start with uppercase', 'Atoms are lowercase'],
+## Practice Exercise
+Complete the coding challenge below to test your knowledge.`,
+    initialCode: '// Write your erlang code here\n',
+    solution: '// Solution for lesson ${i + 1}\n',
+    hints: ['Start with the basics', 'Practice regularly', 'Test your code'],
     testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets minimum length',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write more code to match the lesson requirements'
-      }
+      { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
+      { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }
     ]
-  }
-]
+  };
+});

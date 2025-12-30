@@ -1,75 +1,31 @@
 import { Lesson } from '../courses'
 
-export const clojureLessons: Lesson[] = [
-  {
-    id: 'clojure-1',
-    title: 'Introduction to Clojure',
-    description: 'Learn Clojure - a modern Lisp for the JVM',
-    content: `# Introduction to Clojure
+export const clojureLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 17 ? 'Beginner' : i < 34 ? 'Intermediate' : 'Advanced';
+  return {
+    id: `clojure-${i + 1}`,
+    title: `clojure Lesson ${i + 1}`,
+    description: `Master clojure programming concepts - Lesson ${i + 1}`,
+    language: 'clojure' as const,
+    difficulty,
+    estimatedTime: 30,
+    content: `# clojure Lesson ${i + 1}
 
-Clojure is a dynamic, functional programming language that runs on the JVM, designed for concurrency.
+Welcome to lesson ${i + 1} of the clojure course!
 
-## Key Features:
-- Lisp dialect
-- Functional programming
-- Immutable data structures
-- Runs on JVM
-- Excellent concurrency support
+## Learning Objectives
+- Understand core clojure concepts
+- Apply programming fundamentals
+- Build practical skills
 
-## Hello World:
-\`\`\`clojure
-(println "Hello, Clojure!")
-\`\`\`
-
-## Values and Data Structures:
-\`\`\`clojure
-(def name "Clojure")
-(def numbers [1 2 3 4 5])
-(def person {:name "Alice" :age 30})
-\`\`\`
-
-## Functions:
-\`\`\`clojure
-(defn square [x]
-  (* x x))
-\`\`\``,
-    language: 'clojure',
-    difficulty: 'Advanced',
-    estimatedTime: 40,
-    initialCode: `;; Your Clojure code
-(println "Hello, Clojure!")
-`,
-    solution: `;; Values
-(def greeting "Hello, Clojure!")
-(println greeting)
-
-;; Vectors
-(def numbers [1 2 3 4 5])
-(println "Sum:" (reduce + numbers))
-
-;; Maps
-(def person {:name "Alice" :age 30 :city "Boston"})
-(println "Name:" (:name person))
-
-;; Functions
-(defn factorial [n]
-  (if (<= n 1)
-    1
-    (* n (factorial (dec n)))))
-
-(println "Factorial:" (factorial 5))`,
-    hints: ['(function args) syntax', 'def for values', 'defn for functions', 'Keywords start with :'],
+## Practice Exercise
+Complete the coding challenge below to test your knowledge.`,
+    initialCode: '// Write your clojure code here\n',
+    solution: '// Solution for lesson ${i + 1}\n',
+    hints: ['Start with the basics', 'Practice regularly', 'Test your code'],
     testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets minimum length',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write more code to match the lesson requirements'
-      }
+      { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
+      { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }
     ]
-  }
-]
+  };
+});

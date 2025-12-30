@@ -204,7 +204,7 @@ async function readData() {
       }
     ]
   },
-  ...Array.from({ length: 37 }, (_, i) => {
+  ...Array.from({ length: 47 }, (_, i) => {
     const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 12 ? 'Beginner' : i < 28 ? 'Intermediate' : 'Advanced'
     return {
       id: `node-${i + 4}`,

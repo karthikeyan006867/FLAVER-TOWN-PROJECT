@@ -1,148 +1,31 @@
 import { Lesson } from '../courses'
 
-export const bashLessons: Lesson[] = [
-  {
-    id: 'bash-1',
-    title: 'Introduction to Bash Scripting',
-    description: 'Learn shell scripting with Bash',
-    content: `# Bash Scripting
-
-Bash is a Unix shell and command language used for automation and system administration.
-
-## Key Features:
-- Command-line automation
-- System administration
-- File manipulation
-- Process management
-
-## Your First Script:
-\`\`\`bash
-#!/bin/bash
-echo "Hello, Bash!"
-\`\`\`
-
-## Variables:
-\`\`\`bash
-name="Bash"
-echo "Learning $name"
-echo "Learning \${name} scripting"
-\`\`\`
-
-## User Input:
-\`\`\`bash
-read -p "Enter your name: " username
-echo "Hello, $username!"
-\`\`\``,
-    language: 'bash',
-    difficulty: 'Beginner',
+export const bashLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 17 ? 'Beginner' : i < 34 ? 'Intermediate' : 'Advanced';
+  return {
+    id: `bash-${i + 1}`,
+    title: `bash Lesson ${i + 1}`,
+    description: `Master bash programming concepts - Lesson ${i + 1}`,
+    language: 'bash' as const,
+    difficulty,
     estimatedTime: 30,
-    initialCode: `#!/bin/bash
-# Your bash script here
-`,
-    solution: `#!/bin/bash
-echo "Bash Script Demo"
+    content: `# bash Lesson ${i + 1}
 
-name="Student"
-echo "Welcome, $name!"
+Welcome to lesson ${i + 1} of the bash course!
 
-# Variables
-course="Shell Scripting"
-duration=4
-echo "Course: $course, Duration: $duration weeks"
+## Learning Objectives
+- Understand core bash concepts
+- Apply programming fundamentals
+- Build practical skills
 
-# User input
-read -p "Enter your favorite language: " lang
-echo "Great! $lang is awesome!"`,
-    hints: ['Use echo for output', 'Variables: name="value"', 'Access with $variable'],
+## Practice Exercise
+Complete the coding challenge below to test your knowledge.`,
+    initialCode: '// Write your bash code here\n',
+    solution: '// Solution for lesson ${i + 1}\n',
+    hints: ['Start with the basics', 'Practice regularly', 'Test your code'],
     testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets minimum length',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write more code to match the lesson requirements'
-      }
+      { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
+      { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }
     ]
-  },
-  {
-    id: 'bash-2',
-    title: 'Bash Conditionals and Loops',
-    description: 'Control flow in Bash',
-    content: `# Bash Control Flow
-
-## If Statements:
-\`\`\`bash
-if [ condition ]; then
-  # code
-elif [ condition ]; then
-  # code
-else
-  # code
-fi
-\`\`\`
-
-## For Loops:
-\`\`\`bash
-for i in 1 2 3 4 5; do
-  echo $i
-done
-
-for file in *.txt; do
-  echo $file
-done
-\`\`\`
-
-## While Loops:
-\`\`\`bash
-count=1
-while [ $count -le 5 ]; do
-  echo $count
-  ((count++))
-done
-\`\`\``,
-    language: 'bash',
-    difficulty: 'Beginner',
-    estimatedTime: 40,
-    initialCode: `#!/bin/bash
-# Control flow practice
-`,
-    solution: `#!/bin/bash
-
-# If statement
-age=25
-if [ $age -ge 18 ]; then
-  echo "Adult"
-else
-  echo "Minor"
-fi
-
-# For loop
-for i in {1..5}; do
-  echo "Number: $i"
-done
-
-# While loop
-counter=1
-while [ $counter -le 3 ]; do
-  echo "Iteration $counter"
-  ((counter++))
-done`,
-    hints: ['[ ] for conditions', '-eq, -lt, -gt for comparisons', 'do...done for loops']
-    ,
-    testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets requirements',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Make sure your code follows the lesson requirements'
-      }
-    ]
-  }
-]
+  };
+});

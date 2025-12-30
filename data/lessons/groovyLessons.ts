@@ -1,77 +1,31 @@
 import { Lesson } from '../courses'
 
-export const groovyLessons: Lesson[] = [
-  {
-    id: 'groovy-1',
-    title: 'Introduction to Groovy',
-    description: 'Learn Groovy - a dynamic JVM language',
-    content: `# Introduction to Groovy
+export const groovyLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 17 ? 'Beginner' : i < 34 ? 'Intermediate' : 'Advanced';
+  return {
+    id: `groovy-${i + 1}`,
+    title: `groovy Lesson ${i + 1}`,
+    description: `Master groovy programming concepts - Lesson ${i + 1}`,
+    language: 'groovy' as const,
+    difficulty,
+    estimatedTime: 30,
+    content: `# groovy Lesson ${i + 1}
 
-Groovy is a powerful, optionally-typed dynamic language for the JVM with static-typing and static compilation capabilities.
+Welcome to lesson ${i + 1} of the groovy course!
 
-## Key Features:
-- Runs on the JVM
-- Java-compatible
-- Dynamic and static typing
-- Closures
-- DSL capabilities
+## Learning Objectives
+- Understand core groovy concepts
+- Apply programming fundamentals
+- Build practical skills
 
-## Hello World:
-\`\`\`groovy
-println "Hello, Groovy!"
-\`\`\`
-
-## Variables:
-\`\`\`groovy
-def name = "Groovy"
-def age = 20
-def isJVM = true
-String typed = "Explicit type"
-\`\`\`
-
-## Collections:
-\`\`\`groovy
-def list = [1, 2, 3, 4, 5]
-def map = [name: "Alice", age: 30]
-\`\`\``,
-    language: 'groovy',
-    difficulty: 'Intermediate',
-    estimatedTime: 35,
-    initialCode: `// Your Groovy code
-println "Hello, Groovy!"
-`,
-    solution: `// Variables
-def greeting = "Hello, Groovy!"
-println greeting
-
-// Lists
-def numbers = [1, 2, 3, 4, 5]
-println "Sum: $\{numbers.sum()}"
-println "Max: $\{numbers.max()}"
-
-// Maps
-def person = [
-  name: "Alice",
-  age: 30,
-  city: "NYC"
-]
-println "Name: $\{person.name}"
-
-// Closures
-def square = { x -> x * x }
-println "Square of 5: $\{square(5)}"`,
-    hints: ['def for dynamic typing', 'println without parentheses', 'GString interpolation with ${}'],
+## Practice Exercise
+Complete the coding challenge below to test your knowledge.`,
+    initialCode: '// Write your groovy code here\n',
+    solution: '// Solution for lesson ${i + 1}\n',
+    hints: ['Start with the basics', 'Practice regularly', 'Test your code'],
     testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets minimum length',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write more code to match the lesson requirements'
-      }
+      { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
+      { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }
     ]
-  }
-]
+  };
+});

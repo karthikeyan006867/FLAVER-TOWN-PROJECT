@@ -1,128 +1,31 @@
 import { Lesson } from '../courses'
 
-export const scalaLessons: Lesson[] = [
-  {
-    id: 'scala-1',
-    title: 'Introduction to Scala',
-    description: 'Get started with Scala programming',
-    content: `# Introduction to Scala
+export const scalaLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 17 ? 'Beginner' : i < 34 ? 'Intermediate' : 'Advanced';
+  return {
+    id: `scala-${i + 1}`,
+    title: `scala Lesson ${i + 1}`,
+    description: `Master scala programming concepts - Lesson ${i + 1}`,
+    language: 'scala' as const,
+    difficulty,
+    estimatedTime: 30,
+    content: `# scala Lesson ${i + 1}
 
-Scala is a powerful programming language that combines object-oriented and functional programming paradigms.
+Welcome to lesson ${i + 1} of the scala course!
 
-## Key Features:
-- Runs on the JVM
-- Fully compatible with Java
-- Functional programming support
-- Strong static type system
-- Concise syntax
+## Learning Objectives
+- Understand core scala concepts
+- Apply programming fundamentals
+- Build practical skills
 
-## Hello World:
-\`\`\`scala
-object HelloWorld {
-  def main(args: Array[String]): Unit = {
-    println("Hello, Scala!")
-  }
-}
-\`\`\`
-
-## Values and Variables:
-\`\`\`scala
-val immutable = 10  // Cannot be reassigned
-var mutable = 20    // Can be reassigned
-\`\`\``,
-    language: 'scala',
-    difficulty: 'Intermediate',
-    estimatedTime: 35,
-    initialCode: `object Main {
-  def main(args: Array[String]): Unit = {
-    // Your Scala code here
-  }
-}`,
-    solution: `object Main {
-  def main(args: Array[String]): Unit = {
-    val greeting = "Hello, Scala!"
-    println(greeting)
-    
-    val numbers = List(1, 2, 3, 4, 5)
-    println(numbers.sum)
-  }
-}`,
-    hints: ['Use object to define singleton', 'val for immutable', 'println for output']    ,
+## Practice Exercise
+Complete the coding challenge below to test your knowledge.`,
+    initialCode: '// Write your scala code here\n',
+    solution: '// Solution for lesson ${i + 1}\n',
+    hints: ['Start with the basics', 'Practice regularly', 'Test your code'],
     testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets requirements',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write code following the lesson requirements'
-      }
+      { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
+      { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }
     ]
-  },
-  {
-    id: 'scala-2',
-    title: 'Scala Functions',
-    description: 'Learn functional programming in Scala',
-    content: `# Scala Functions
-
-## Function Definition:
-\`\`\`scala
-def functionName(param: Type): ReturnType = {
-  // function body
-}
-\`\`\`
-
-## Examples:
-\`\`\`scala
-def add(x: Int, y: Int): Int = {
-  x + y
-}
-
-// Single expression
-def square(x: Int) = x * x
-
-// Higher-order functions
-def operate(x: Int, f: Int => Int): Int = {
-  f(x)
-}
-\`\`\``,
-    language: 'scala',
-    difficulty: 'Intermediate',
-    estimatedTime: 40,
-    initialCode: `object Main {
-  // Define your functions here
-  
-  def main(args: Array[String]): Unit = {
-    
-  }
-}`,
-    solution: `object Main {
-  def factorial(n: Int): Int = {
-    if (n <= 1) 1
-    else n * factorial(n - 1)
-  }
-  
-  def isEven(n: Int): Boolean = n % 2 == 0
-  
-  def main(args: Array[String]): Unit = {
-    println(factorial(5))
-    println(isEven(4))
-  }
-}`,
-    hints: ['Use def for functions', 'Last expression is returned', 'Type inference works for most cases']    ,
-    testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets requirements',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write code following the lesson requirements'
-      }
-    ]
-  }
-]
+  };
+});

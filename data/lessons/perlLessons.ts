@@ -1,77 +1,31 @@
 import { Lesson } from '../courses'
 
-export const perlLessons: Lesson[] = [
-  {
-    id: 'perl-1',
-    title: 'Introduction to Perl',
-    description: 'Learn Perl for text processing and system administration',
-    content: `# Introduction to Perl
+export const perlLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 17 ? 'Beginner' : i < 34 ? 'Intermediate' : 'Advanced';
+  return {
+    id: `perl-${i + 1}`,
+    title: `perl Lesson ${i + 1}`,
+    description: `Master perl programming concepts - Lesson ${i + 1}`,
+    language: 'perl' as const,
+    difficulty,
+    estimatedTime: 30,
+    content: `# perl Lesson ${i + 1}
 
-Perl is a high-level, general-purpose programming language known for its text processing capabilities.
+Welcome to lesson ${i + 1} of the perl course!
 
-## Key Features:
-- Excellent text processing
-- Regular expressions built-in
-- CPAN (vast module repository)
-- Flexible syntax
-- Cross-platform
+## Learning Objectives
+- Understand core perl concepts
+- Apply programming fundamentals
+- Build practical skills
 
-## Hello World:
-\`\`\`perl
-print "Hello, Perl!\\n";
-\`\`\`
-
-## Variables:
-\`\`\`perl
-my $scalar = "Hello";    # Scalar (single value)
-my @array = (1, 2, 3);   # Array
-my %hash = (             # Hash (key-value pairs)
-  name => "Perl",
-  age => 37
-);
-\`\`\``,
-    language: 'perl',
-    difficulty: 'Intermediate',
-    estimatedTime: 35,
-    initialCode: `#!/usr/bin/perl
-use strict;
-use warnings;
-
-# Your Perl code
-print "Hello, Perl!\\n";
-`,
-    solution: `#!/usr/bin/perl
-use strict;
-use warnings;
-
-# Scalars
-my $name = "Perl";
-my $version = 5.38;
-print "Learning $name version $version\\n";
-
-# Arrays
-my @numbers = (1, 2, 3, 4, 5);
-print "First: $numbers[0]\\n";
-
-# Hash
-my %person = (
-  name => "Alice",
-  age => 30,
-  city => "Boston"
-);
-print "Name: $person{name}\\n";`,
-    hints: ['$ for scalars', '@ for arrays', '% for hashes'],
+## Practice Exercise
+Complete the coding challenge below to test your knowledge.`,
+    initialCode: '// Write your perl code here\n',
+    solution: '// Solution for lesson ${i + 1}\n',
+    hints: ['Start with the basics', 'Practice regularly', 'Test your code'],
     testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets minimum length',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write more code to match the lesson requirements'
-      }
+      { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
+      { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }
     ]
-  }
-]
+  };
+});

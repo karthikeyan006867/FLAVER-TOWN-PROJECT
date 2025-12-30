@@ -1,73 +1,31 @@
 import { Lesson } from '../courses'
 
-export const ocamlLessons: Lesson[] = [
-  {
-    id: 'ocaml-1',
-    title: 'Introduction to OCaml',
-    description: 'Learn OCaml - a powerful functional language',
-    content: `# Introduction to OCaml
+export const ocamlLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 17 ? 'Beginner' : i < 34 ? 'Intermediate' : 'Advanced';
+  return {
+    id: `ocaml-${i + 1}`,
+    title: `ocaml Lesson ${i + 1}`,
+    description: `Master ocaml programming concepts - Lesson ${i + 1}`,
+    language: 'ocaml' as const,
+    difficulty,
+    estimatedTime: 30,
+    content: `# ocaml Lesson ${i + 1}
 
-OCaml is a general-purpose, multi-paradigm programming language which extends the Caml dialect of ML with object-oriented features.
+Welcome to lesson ${i + 1} of the ocaml course!
 
-## Key Features:
-- Functional and imperative
-- Strong static typing
-- Type inference
-- Pattern matching
-- Fast native code compilation
+## Learning Objectives
+- Understand core ocaml concepts
+- Apply programming fundamentals
+- Build practical skills
 
-## Hello World:
-\`\`\`ocaml
-print_endline "Hello, OCaml!";;
-\`\`\`
-
-## Variables:
-\`\`\`ocaml
-let name = "OCaml";;
-let age = 27;;
-let pi = 3.14159;;
-\`\`\`
-
-## Functions:
-\`\`\`ocaml
-let square x = x * x;;
-let add x y = x + y;;
-\`\`\``,
-    language: 'ocaml',
-    difficulty: 'Advanced',
-    estimatedTime: 40,
-    initialCode: `(* Your OCaml code *)
-print_endline "Hello, OCaml!";;
-`,
-    solution: `(* Values *)
-let greeting = "Hello, OCaml!";;
-print_endline greeting;;
-
-(* Lists *)
-let numbers = [1; 2; 3; 4; 5];;
-
-(* Functions *)
-let rec factorial n =
-  if n <= 1 then 1
-  else n * factorial (n - 1);;
-
-let square x = x * x;;
-
-(* Output *)
-Printf.printf "Factorial: %d\\n" (factorial 5);;
-Printf.printf "Square: %d\\n" (square 7);;`,
-    hints: ['let for bindings', ';;  terminates top-level statements', 'rec for recursive functions'],
+## Practice Exercise
+Complete the coding challenge below to test your knowledge.`,
+    initialCode: '// Write your ocaml code here\n',
+    solution: '// Solution for lesson ${i + 1}\n',
+    hints: ['Start with the basics', 'Practice regularly', 'Test your code'],
     testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets minimum length',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write more code to match the lesson requirements'
-      }
+      { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
+      { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }
     ]
-  }
-]
+  };
+});

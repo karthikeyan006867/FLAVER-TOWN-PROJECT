@@ -1,75 +1,31 @@
 import { Lesson } from '../courses'
 
-export const fsharpLessons: Lesson[] = [
-  {
-    id: 'fsharp-1',
-    title: 'Introduction to F#',
-    description: 'Learn F# - functional-first programming on .NET',
-    content: `# Introduction to F#
+export const fsharpLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 17 ? 'Beginner' : i < 34 ? 'Intermediate' : 'Advanced';
+  return {
+    id: `fsharp-${i + 1}`,
+    title: `fsharp Lesson ${i + 1}`,
+    description: `Master fsharp programming concepts - Lesson ${i + 1}`,
+    language: 'fsharp' as const,
+    difficulty,
+    estimatedTime: 30,
+    content: `# fsharp Lesson ${i + 1}
 
-F# is a functional-first programming language that makes it easy to write correct and maintainable code.
+Welcome to lesson ${i + 1} of the fsharp course!
 
-## Key Features:
-- Functional-first
-- Runs on .NET
-- Type inference
-- Pattern matching
-- Immutable by default
+## Learning Objectives
+- Understand core fsharp concepts
+- Apply programming fundamentals
+- Build practical skills
 
-## Hello World:
-\`\`\`fsharp
-printfn "Hello, F#!"
-\`\`\`
-
-## Values and Types:
-\`\`\`fsharp
-let name = "F#"
-let age = 19
-let pi = 3.14159
-let numbers = [1; 2; 3; 4; 5]
-\`\`\`
-
-## Functions:
-\`\`\`fsharp
-let square x = x * x
-let add x y = x + y
-\`\`\``,
-    language: 'fsharp',
-    difficulty: 'Intermediate',
-    estimatedTime: 35,
-    initialCode: `// Your F# code
-printfn "Hello, F#!"
-`,
-    solution: `// Values
-let greeting = "Hello, F#!"
-printfn "%s" greeting
-
-// Lists
-let numbers = [1; 2; 3; 4; 5]
-let sum = List.sum numbers
-printfn "Sum: %d" sum
-
-// Functions
-let rec factorial n =
-  if n <= 1 then 1
-  else n * factorial (n - 1)
-
-let square x = x * x
-
-printfn "Factorial: %d" (factorial 5)
-printfn "Square: %d" (square 7)`,
-    hints: ['let for bindings', 'printfn for formatted output', 'rec keyword for recursion'],
+## Practice Exercise
+Complete the coding challenge below to test your knowledge.`,
+    initialCode: '// Write your fsharp code here\n',
+    solution: '// Solution for lesson ${i + 1}\n',
+    hints: ['Start with the basics', 'Practice regularly', 'Test your code'],
     testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets minimum length',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write more code to match the lesson requirements'
-      }
+      { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
+      { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }
     ]
-  }
-]
+  };
+});

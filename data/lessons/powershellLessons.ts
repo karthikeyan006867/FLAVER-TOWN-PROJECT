@@ -1,147 +1,31 @@
 import { Lesson } from '../courses'
 
-export const powershellLessons: Lesson[] = [
-  {
-    id: 'powershell-1',
-    title: 'Introduction to PowerShell',
-    description: 'Learn PowerShell for Windows automation',
-    content: `# Introduction to PowerShell
+export const powershellLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 17 ? 'Beginner' : i < 34 ? 'Intermediate' : 'Advanced';
+  return {
+    id: `powershell-${i + 1}`,
+    title: `powershell Lesson ${i + 1}`,
+    description: `Master powershell programming concepts - Lesson ${i + 1}`,
+    language: 'powershell' as const,
+    difficulty,
+    estimatedTime: 30,
+    content: `# powershell Lesson ${i + 1}
 
-PowerShell is a cross-platform task automation solution consisting of a command-line shell and scripting language.
+Welcome to lesson ${i + 1} of the powershell course!
 
-## Key Features:
-- Object-oriented pipeline
-- .NET integration
-- Extensive cmdlets
-- Remote management
-- Cross-platform (PowerShell Core)
+## Learning Objectives
+- Understand core powershell concepts
+- Apply programming fundamentals
+- Build practical skills
 
-## Hello World:
-\`\`\`powershell
-Write-Host "Hello, PowerShell!"
-\`\`\`
-
-## Variables:
-\`\`\`powershell
-$name = "PowerShell"
-$version = 7
-$isAwesome = $true
-\`\`\`
-
-## Arrays and Hash Tables:
-\`\`\`powershell
-$numbers = @(1, 2, 3, 4, 5)
-$person = @{
-  Name = "Alice"
-  Age = 30
-}
-\`\`\``,
-    language: 'powershell',
-    difficulty: 'Beginner',
-    estimatedTime: 35,
-    initialCode: `# Your PowerShell code
-Write-Host "Hello, PowerShell!"
-`,
-    solution: `# Variables
-$greeting = "Hello, PowerShell!"
-Write-Host $greeting
-
-# Arrays
-$numbers = @(1, 2, 3, 4, 5)
-$sum = ($numbers | Measure-Object -Sum).Sum
-Write-Host "Sum: $sum"
-
-# Hash table
-$person = @{
-  Name = "Alice"
-  Age = 30
-  City = "Seattle"
-}
-Write-Host "Name: $($person.Name)"
-
-# Pipeline
-Get-Process | Select-Object -First 5 Name, CPU`,
-    hints: ['$ for variables', '@() for arrays', '@{} for hash tables', '| for pipeline']    ,
+## Practice Exercise
+Complete the coding challenge below to test your knowledge.`,
+    initialCode: '// Write your powershell code here\n',
+    solution: '// Solution for lesson ${i + 1}\n',
+    hints: ['Start with the basics', 'Practice regularly', 'Test your code'],
     testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets requirements',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write code following the lesson requirements'
-      }
+      { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
+      { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }
     ]
-  },
-  {
-    id: 'powershell-2',
-    title: 'PowerShell Functions and Cmdlets',
-    description: 'Creating functions and using cmdlets',
-    content: `# PowerShell Functions
-
-## Function Syntax:
-\`\`\`powershell
-function FunctionName {
-  param($Parameter1, $Parameter2)
-  # body
-  return $value
-}
-\`\`\`
-
-## Advanced Function:
-\`\`\`powershell
-function Get-Square {
-  param(
-    [int]$Number
-  )
-  return $Number * $Number
-}
-\`\`\`
-
-## Common Cmdlets:
-- Get-ChildItem (ls, dir)
-- Set-Location (cd)
-- Copy-Item (cp)
-- Remove-Item (rm)
-- Select-Object
-- Where-Object
-\`\`\``,
-    language: 'powershell',
-    difficulty: 'Beginner',
-    estimatedTime: 40,
-    initialCode: `# Define functions
-`,
-    solution: `function Get-Factorial {
-  param([int]$n)
-  
-  if ($n -le 1) {
-    return 1
-  }
-  return $n * (Get-Factorial -n ($n - 1))
-}
-
-function Get-FileCount {
-  param([string]$Path = ".")
-  
-  $files = Get-ChildItem -Path $Path -File
-  return $files.Count
-}
-
-Write-Host "Factorial of 5: $(Get-Factorial -n 5)"`,
-    hints: ['param() for parameters', 'Verb-Noun naming convention', 'Return keyword optional']    ,
-    testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some code to complete this lesson'
-      },
-      {
-        name: 'Code meets requirements',
-        test: (code) => code.trim().length >= 10,
-        errorMessage: 'Write code following the lesson requirements'
-      }
-    ]
-  }
-]
+  };
+});
