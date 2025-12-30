@@ -34,26 +34,29 @@ export default function AnalyticsPage() {
   // Calculate language-specific progress
   const languageProgress = useMemo(() => {
     return courses.map(course => {
-      const progress = courseProgress[course.id]
+      const courseLessons = course.lessons.map(l => l.id)
+      const completed = completedLessons.filter(id => courseLessons.includes(id)).length
+      const total = course.lessons.length
+      const percentage = total > 0 ? Math.round((completed / total) * 100) : 0
+      
       return {
-        language: course.title.replace(' Pro', '').replace(' Fundamentals', '').replace(' Full Stack', ''),
-        progress: progress?.percentage || 0,
-        lessons: progress?.completed || 0,
-        total: course.lessons.length
+        language: course.title.replace(' Programming', '').replace(' Fundamentals', '').replace(' Full Stack', ''),
+        progress: percentage,
+        lessons: completed,
+        total: total
       }
     }).filter(item => item.progress > 0)
-  }, [courseProgress])
+  }, [completedLessons])
 
   // Generate weekly activity data based on actual time
   const activityData = useMemo(() => {
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     const today = new Date().getDay()
+    const currentDayIndex = today === 0 ? 6 : today - 1 // Convert Sunday=0 to Monday=0 format
     
     return days.map((day, index) => {
-      // Distribute weekly time across days with some variance
-      const baseMinutes = weeklyTime / 7
-      const variance = (Math.random() - 0.5) * baseMinutes * 0.5
-      const minutes = Math.max(0, Math.floor(baseMinutes + variance))
+      // Only show activity for current day, rest are 0 (can be enhanced with actual daily tracking)
+      const minutes = index === currentDayIndex ? weeklyTime : 0
       
       return { day, minutes }
     })
@@ -222,20 +225,20 @@ export default function AnalyticsPage() {
           {/* Study Patterns */}
           <div className="mt-8 grid md:grid-cols-2 gap-6">
             <div className="card-gradient border border-gray-700 rounded-xl p-6">
-              <h2 className="text-xl font-bold mb-4">Best Study Time</h2>
+              <h2 className="text-xl font-bold mb-4">Total Progress</h2>
               <div className="text-center py-8">
-                <div className="text-4xl mb-2">🌅</div>
-                <div className="text-2xl font-bold mb-1">Morning</div>
-                <div className="text-sm text-gray-400">You&apos;re most productive 9-11 AM</div>
+                <div className="text-4xl mb-2">📊</div>
+                <div className="text-2xl font-bold mb-1">{completedLessons.length} Lessons</div>
+                <div className="text-sm text-gray-400">Completed across all courses</div>
               </div>
             </div>
 
             <div className="card-gradient border border-gray-700 rounded-xl p-6">
-              <h2 className="text-xl font-bold mb-4">Favorite Language</h2>
+              <h2 className="text-xl font-bold mb-4">Most Progress</h2>
               <div className="text-center py-8">
-                <div className="text-4xl mb-2">💛</div>
-                <div className="text-2xl font-bold mb-1">JavaScript</div>
-                <div className="text-sm text-gray-400">Most time spent learning</div>
+                <div className="text-4xl mb-2">🎯</div>
+                <div className="text-2xl font-bold mb-1">{languageProgress.length > 0 ? languageProgress[0].language : 'Start Learning'}</div>
+                <div className="text-sm text-gray-400">{languageProgress.length > 0 ? `${languageProgress[0].progress}% complete` : 'Begin your first course'}</div>
               </div>
             </div>
           </div>

@@ -5,10 +5,11 @@ import { useUser } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import { useSettingsStore } from '@/store/settingsStore'
+import { useProgressStore } from '@/store/progressStore'
 import { 
   User, Bell, Moon, Globe, Shield, Code, Save, Check, 
   Eye, Keyboard, Smartphone, Palette, Type, Zap, Target,
-  Volume2, ChevronRight, RotateCcw, Download, Upload, Sun
+  Volume2, ChevronRight, RotateCcw, Download, Upload, Sun, Trash2
 } from 'lucide-react'
 
 type SettingTab = 'appearance' | 'editor' | 'learning' | 'notifications' | 'privacy' | 'accessibility' | 'account'
@@ -16,6 +17,7 @@ type SettingTab = 'appearance' | 'editor' | 'learning' | 'notifications' | 'priv
 export default function SettingsPage() {
   const { user } = useUser()
   const { settings, updateSettings, resetSettings } = useSettingsStore()
+  const progressStore = useProgressStore()
   const [activeTab, setActiveTab] = useState<SettingTab>('appearance')
   const [saved, setSaved] = useState(false)
 
@@ -28,6 +30,17 @@ export default function SettingsPage() {
     if (confirm('Are you sure you want to reset all settings to default?')) {
       resetSettings()
       handleSave()
+    }
+  }
+
+  const handleResetProgress = () => {
+    if (confirm('⚠️ WARNING: This will delete ALL your progress, points, and completed lessons. This action cannot be undone!\n\nAre you absolutely sure?')) {
+      if (confirm('This is your final confirmation. All progress will be permanently deleted. Continue?')) {
+        // Clear the progress store
+        localStorage.removeItem('progress-storage')
+        // Reload the page to reset the store
+        window.location.reload()
+      }
     }
   }
 
@@ -656,6 +669,29 @@ export default function SettingsPage() {
                           <span className="font-semibold">Import Data</span>
                           <Upload className="h-5 w-5 text-gray-400" />
                         </button>
+
+                        <div className="border-t border-gray-700 pt-3 mt-3">
+                          <div className="p-4 bg-red-900/20 border border-red-700/50 rounded-lg mb-3">
+                            <div className="flex items-start gap-3">
+                              <div className="text-red-400 mt-0.5">⚠️</div>
+                              <div>
+                                <div className="font-semibold text-red-400 mb-1">Danger Zone</div>
+                                <p className="text-sm text-gray-300">These actions cannot be undone. Please be careful.</p>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <button 
+                            onClick={handleResetProgress}
+                            className="w-full flex items-center justify-between p-4 bg-red-900/30 border border-red-700 text-red-400 rounded-lg hover:bg-red-900/50 transition-colors"
+                          >
+                            <div className="text-left">
+                              <div className="font-semibold">Reset All Progress</div>
+                              <div className="text-xs text-red-300 mt-0.5">Delete all lessons, points, and achievements</div>
+                            </div>
+                            <Trash2 className="h-5 w-5" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

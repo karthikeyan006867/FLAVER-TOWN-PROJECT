@@ -6,6 +6,9 @@
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 10, 14, 39;
   --background-end-rgb: 15, 23, 42;
+  --animation-duration: 300ms;
+  --color-primary: #3b82f6;
+  --color-accent: #8b5cf6;
 }
 
 /* Color Scheme Variables */
@@ -986,6 +989,61 @@ body {
 
 .code-highlight {
   animation: codeHighlight 1s ease-in-out;
+}
+
+/* REDUCED MOTION SUPPORT */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* HIGH CONTRAST MODE */
+.high-contrast {
+  filter: contrast(1.2);
+}
+
+.high-contrast .card-gradient {
+  border-width: 2px;
+}
+
+.high-contrast button,
+.high-contrast a {
+  outline: 2px solid transparent;
+}
+
+.high-contrast button:focus,
+.high-contrast a:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* COMPACT MODE */
+.compact-mode .card-gradient {
+  @apply p-3;
+}
+
+.compact-mode h1 {
+  @apply text-2xl;
+}
+
+.compact-mode h2 {
+  @apply text-xl;
+}
+
+.compact-mode .text-lg {
+  @apply text-base;
+}
+
+.compact-mode .py-8 {
+  @apply py-4;
+}
+
+.compact-mode .py-12 {
+  @apply py-6;
 }
 
 

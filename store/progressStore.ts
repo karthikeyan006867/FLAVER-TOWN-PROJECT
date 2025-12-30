@@ -46,27 +46,19 @@ function getStartOfWeek(): string {
 export const useProgressStore = create<ProgressState>()(
   persist(
     (set, get) => ({
-      completedLessons: [
-        'html-1', 'html-2', 'html-3', // HTML basics (30 min)
-        'css-1', 'css-2', // CSS intro (20 min)
-        'js-1', 'js-2', 'js-3', // JavaScript fundamentals (30 min)
-        'py-1', 'py-2' // Python intro (20 min)
-      ], // Total: 100 minutes from lessons
-      completedChallenges: [
-        'js-ch-1', // FizzBuzz (15 min)
-        'js-ch-2'  // Reverse String (15 min)
-      ], // Total: 30 minutes from challenges
+      completedLessons: [], // Start empty for new users
+      completedChallenges: [], // Start empty for new users
       courseProgress: {},
-      streak: 1,
-      longestStreak: 1,
-      totalPoints: 1100, // 10 lessons × 100 + 2 challenges × 50
-      lastStudyDate: new Date().toISOString().split('T')[0],
-      timeSpent: 130, // 100 min (lessons) + 30 min (challenges) = 2h 10min
-      weeklyTime: 130,
+      streak: 0,
+      longestStreak: 0,
+      totalPoints: 0,
+      lastStudyDate: '',
+      timeSpent: 0,
+      weeklyTime: 0,
       weekStartDate: getStartOfWeek(),
-      weeklyLessons: 10, // lessons completed this week
-      weeklyChallenges: 2, // challenges completed this week
-      weeklyPoints: 1100, // points earned this week
+      weeklyLessons: 0,
+      weeklyChallenges: 0,
+      weeklyPoints: 0,
 
       completeLesson: (lessonId: string, courseId: string) => {
         const { completedLessons, totalPoints, weeklyLessons, weeklyPoints, weekStartDate } = get()
@@ -146,7 +138,14 @@ export const useProgressStore = create<ProgressState>()(
         const today = new Date().toISOString().split('T')[0]
         const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0]
         
-        if (lastStudyDate === yesterday) {
+        // If this is the first study session, start with streak of 1
+        if (!lastStudyDate || lastStudyDate === '') {
+          set({ 
+            streak: 1, 
+            longestStreak: 1,
+            lastStudyDate: today 
+          })
+        } else if (lastStudyDate === yesterday) {
           const newStreak = streak + 1
           set({ 
             streak: newStreak, 

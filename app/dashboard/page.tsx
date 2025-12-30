@@ -7,9 +7,11 @@ import Link from 'next/link'
 import { Trophy, Flame, Target, Clock, BookOpen, Code, TrendingUp, Calendar } from 'lucide-react'
 import { courses } from '@/data/courses'
 import { useProgressStore } from '@/store/progressStore'
+import { useSettingsStore } from '@/store/settingsStore'
 
 export default function DashboardPage() {
   const { user } = useUser()
+  const { settings } = useSettingsStore()
   const { 
     completedLessons, 
     completedChallenges,
@@ -195,10 +197,10 @@ export default function DashboardPage() {
                     <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
                       <div 
                         className="bg-gradient-to-r from-primary-500 to-accent-500 h-2 rounded-full"
-                        style={{ width: `${Math.min((weeklyTime / 300) * 100, 100)}%` }}
+                        style={{ width: `${Math.min((weeklyTime / (settings.dailyGoal * 7)) * 100, 100)}%` }}
                       ></div>
                     </div>
-                    <p className="text-xs text-gray-500 mt-1">Goal: 300 minutes/week</p>
+                    <p className="text-xs text-gray-500 mt-1">Goal: {settings.dailyGoal * 7} minutes/week</p>
                   </div>
                 </div>
               </div>
@@ -234,19 +236,19 @@ export default function DashboardPage() {
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm text-gray-400">Weekly Goal</span>
                       <span className="text-xs font-semibold text-primary-400">
-                        {Math.round((weeklyTime / 300) * 100)}%
+                        {Math.round((weeklyTime / (settings.dailyGoal * 7)) * 100)}%
                       </span>
                     </div>
                     <div className="w-full bg-gray-800 rounded-full h-2">
                       <div 
                         className="bg-gradient-to-r from-primary-500 to-accent-500 h-2 rounded-full transition-all"
-                        style={{ width: `${Math.min((weeklyTime / 300) * 100, 100)}%` }}
+                        style={{ width: `${Math.min((weeklyTime / (settings.dailyGoal * 7)) * 100, 100)}%` }}
                       ></div>
                     </div>
                     <p className="text-xs text-gray-500 mt-2">
-                      {weeklyTime >= 300 
+                      {weeklyTime >= (settings.dailyGoal * 7)
                         ? "✅ Weekly goal achieved!" 
-                        : `${300 - weeklyTime} min to goal`}
+                        : `${(settings.dailyGoal * 7) - weeklyTime} min to goal`}
                     </p>
                   </div>
                 </div>
@@ -258,10 +260,10 @@ export default function DashboardPage() {
                 <div className="text-center mb-4">
                   <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary-500/20 to-accent-500/20 border-4 border-primary-500/30 mb-2">
                     <span className="text-3xl font-bold text-gradient">
-                      {Math.round((stats.lessonsCompleted / 50) * 100)}%
+                      {Math.round((stats.lessonsCompleted / settings.dailyGoal) * 100)}%
                     </span>
                   </div>
-                  <p className="text-sm text-gray-400">{stats.lessonsCompleted} lessons completed</p>
+                  <p className="text-sm text-gray-400">{stats.lessonsCompleted} / {settings.dailyGoal} lessons today</p>
                 </div>
                 <Link
                   href="/courses"

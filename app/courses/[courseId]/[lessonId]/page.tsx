@@ -5,6 +5,7 @@ import { notFound, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { courses } from '@/data/courses'
 import { useProgressStore } from '@/store/progressStore'
+import { useSettingsStore } from '@/store/settingsStore'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import CodeEditor from '@/components/CodeEditor'
@@ -20,7 +21,8 @@ export default function LessonPage({
   const lesson = course?.lessons.find(l => l.id === params.lessonId)
   
   const { completeLesson, isLessonCompleted, isLessonUnlocked } = useProgressStore()
-  const [showHints, setShowHints] = useState(false)
+  const { settings } = useSettingsStore()
+  const [showHints, setShowHints] = useState(settings.showHintsAutomatically)
   const [completed, setCompleted] = useState(false)
   const [isUnlocked, setIsUnlocked] = useState(true)
   const router = useRouter()
@@ -37,6 +39,11 @@ export default function LessonPage({
     }
   }, [lesson, isLessonCompleted, isLessonUnlocked, params.courseId, router])
 
+  // Auto-expand hints if setting is enabled
+  useEffect(() => {
+    setShowHints(settings.showHintsAutomatically)
+  }, [settings.showHintsAutomatically])
+
   if (!course || !lesson) {
     notFound()
   }
@@ -50,11 +57,13 @@ export default function LessonPage({
       completeLesson(lesson.id, params.courseId)
       setCompleted(true)
     }
-    setTimeout(() => {
-      if (nextLesson) {
+    
+    // Auto-play next lesson if setting is enabled
+    if (settings.autoPlayNextLesson && nextLesson) {
+      setTimeout(() => {
         router.push(`/courses/${params.courseId}/${nextLesson.id}`)
-      }
-    }, 2000)
+      }, 2000)
+    }
   }
 
   return (

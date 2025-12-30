@@ -1,88 +1,174 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { Editor } from '@monaco-editor/react'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import CodeEditor from '@/components/CodeEditor'
-import { Play, Save, Share2, Trash2, Download, Upload, Copy } from 'lucide-react'
-
-const languageTemplates = {
-  javascript: `// Welcome to Code Playground!\n// Write and test code in any language\n\nconsole.log('Hello, World!');`,
-  python: `# Welcome to Code Playground!\n# Write and test Python code\n\nprint('Hello, World!')`,
-  typescript: `// TypeScript Playground\n// Enjoy type-safe coding\n\nconst greeting: string = 'Hello, World!';\nconsole.log(greeting);`,
-  java: `// Java Playground\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, World!");\n    }\n}`,
-  csharp: `// C# Playground\nusing System;\n\nclass Program {\n    static void Main() {\n        Console.WriteLine("Hello, World!");\n    }\n}`,
-  go: `// Go Playground\npackage main\n\nimport "fmt"\n\nfunc main() {\n    fmt.Println("Hello, World!")\n}`,
-  rust: `// Rust Playground\nfn main() {\n    println!("Hello, World!");\n}`,
-  ruby: `# Ruby Playground\nputs 'Hello, World!'`,
-  php: `<?php\n// PHP Playground\necho "Hello, World!";\n?>`,
-  swift: `// Swift Playground\nimport Foundation\n\nprint("Hello, World!")`
-}
+import { Play, Save, Trash2, Download, Eye, Code as CodeIcon } from 'lucide-react'
 
 export default function PlaygroundPage() {
-  const [language, setLanguage] = useState<'javascript' | 'python' | 'typescript' | 'java' | 'csharp' | 'go' | 'rust' | 'ruby' | 'php' | 'swift'>('javascript')
-  const [code, setCode] = useState(languageTemplates.javascript)
-  const [savedSnippets, setSavedSnippets] = useState<Array<{ id: string; name: string; language: string; code: string }>>([])
+  const [activeTab, setActiveTab] = useState<'html' | 'css' | 'javascript'>('html')
+  const [htmlCode, setHtmlCode] = useState('<div class="container">\n  <h1>Hello World!</h1>\n  <p>Start coding...</p>\n</div>')
+  const [cssCode, setCssCode] = useState('.container {\n  padding: 20px;\n  text-align: center;\n  font-family: Arial, sans-serif;\n}\n\nh1 {\n  color: #3b82f6;\n}')
+  const [jsCode, setJsCode] = useState('// JavaScript code\nconsole.log("Hello from playground!");\n\n// Example: Add click event\n// document.querySelector("h1").addEventListener("click", () => {\n//   alert("Hello!");\n// });')
+  const [output, setOutput] = useState('')
+  const [consoleOutput, setConsoleOutput] = useState<string[]>([])
+  const iframeRef = useRef<HTMLIFrameElement>(null)
 
-  const languages = [
-    { value: 'javascript', label: 'JavaScript' },
-    { value: 'python', label: 'Python' },
-    { value: 'typescript', label: 'TypeScript' },
-    { value: 'java', label: 'Java' },
-    { value: 'csharp', label: 'C#' },
-    { value: 'go', label: 'Go' },
-    { value: 'rust', label: 'Rust' },
-    { value: 'ruby', label: 'Ruby' },
-    { value: 'php', label: 'PHP' },
-    { value: 'swift', label: 'Swift' }
-  ]
+  const runCode = () => {
+    const fullHTML = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    ${cssCode}
+  </style>
+</head>
+<body>
+  ${htmlCode}
+  <script>
+    // Capture console.log
+    (function() {
+      const oldLog = console.log;
+      const oldError = console.error;
+      const oldWarn = console.warn;
+      
+      console.log = function(...args) {
+        window.parent.postMessage({ type: 'console', method: 'log', args: args }, '*');
+        oldLog.apply(console, args);
+      };
+      
+      console.error = function(...args) {
+        window.parent.postMessage({ type: 'console', method: 'error', args: args }, '*');
+        oldError.apply(console, args);
+      };
+      
+      console.warn = function(...args) {
+        window.parent.postMessage({ type: 'console', method: 'warn', args: args }, '*');
+        oldWarn.apply(console, args);
+      };
+      
+      window.onerror = function(msg, url, line) {
+        window.parent.postMessage({ type: 'console', method: 'error', args: ['Error: ' + msg + ' (Line ' + line + ')'] }, '*');
+        return false;
+      };
+    })();
+    
+    try {
+      ${jsCode}
+    } catch (err) {
+      console.error('JavaScript Error:', err.message);
+    }
+  </script>
+</body>
+</html>`
 
-  const handleLanguageChange = (newLang: any) => {
-    setLanguage(newLang)
-    setCode(languageTemplates[newLang as keyof typeof languageTemplates] || languageTemplates.javascript)
+    setOutput(fullHTML)
+    setConsoleOutput([])
   }
+
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data.type === 'console') {
+        const { method, args } = event.data
+        const formattedArgs = args.map((arg: any) => {
+          if (typeof arg === 'object') {
+            try {
+              return JSON.stringify(arg, null, 2)
+            } catch {
+              return String(arg)
+            }
+          }
+          return String(arg)
+        }).join(' ')
+        
+        setConsoleOutput(prev => [...prev, `[${method}] ${formattedArgs}`])
+      }
+    }
+
+    window.addEventListener('message', handleMessage)
+    return () => window.removeEventListener('message', handleMessage)
+  }, [])
+
+  useEffect(() => {
+    // Auto-run on mount
+    runCode()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleSave = () => {
-    const name = prompt('Name your code snippet:')
+    const name = prompt('Name your project:')
     if (name) {
-      const newSnippet = { 
+      const project = { 
         id: Date.now().toString(), 
         name, 
-        language, 
-        code 
+        html: htmlCode,
+        css: cssCode,
+        js: jsCode
       }
-      setSavedSnippets([...savedSnippets, newSnippet])
       
-      // Save to localStorage
-      const saved = localStorage.getItem('playground-snippets')
-      const snippets = saved ? JSON.parse(saved) : []
-      localStorage.setItem('playground-snippets', JSON.stringify([...snippets, newSnippet]))
+      const saved = localStorage.getItem('playground-projects')
+      const projects = saved ? JSON.parse(saved) : []
+      localStorage.setItem('playground-projects', JSON.stringify([...projects, project]))
       
-      alert('Snippet saved!')
+      alert('Project saved!')
     }
-  }
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code)
-    alert('Code copied to clipboard!')
   }
 
   const handleClear = () => {
     if (confirm('Clear all code?')) {
-      setCode(languageTemplates[language])
+      setHtmlCode('<div class="container">\n  <h1>Hello World!</h1>\n  <p>Start coding...</p>\n</div>')
+      setCssCode('.container {\n  padding: 20px;\n  text-align: center;\n  font-family: Arial, sans-serif;\n}\n\nh1 {\n  color: #3b82f6;\n}')
+      setJsCode('// JavaScript code\nconsole.log("Hello from playground!");')
+      setOutput('')
+      setConsoleOutput([])
+      runCode()
     }
   }
 
-  const loadSnippet = (snippet: typeof savedSnippets[0]) => {
-    setLanguage(snippet.language as any)
-    setCode(snippet.code)
+  const handleDownload = () => {
+    const fullHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playground Project</title>
+  <style>
+${cssCode}
+  </style>
+</head>
+<body>
+${htmlCode}
+  <script>
+${jsCode}
+  </script>
+</body>
+</html>`
+
+    const blob = new Blob([fullHTML], { type: 'text/html' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'playground-project.html'
+    a.click()
+    URL.revokeObjectURL(url)
   }
 
-  const deleteSnippet = (id: string) => {
-    if (confirm('Delete this snippet?')) {
-      const updated = savedSnippets.filter(s => s.id !== id)
-      setSavedSnippets(updated)
-      localStorage.setItem('playground-snippets', JSON.stringify(updated))
+  const getActiveCode = () => {
+    switch(activeTab) {
+      case 'html': return htmlCode
+      case 'css': return cssCode
+      case 'javascript': return jsCode
+    }
+  }
+
+  const setActiveCode = (value: string) => {
+    switch(activeTab) {
+      case 'html': setHtmlCode(value); break
+      case 'css': setCssCode(value); break
+      case 'javascript': setJsCode(value); break
     }
   }
 
@@ -92,30 +178,60 @@ export default function PlaygroundPage() {
       <Sidebar />
       
       <main className="ml-0 md:ml-64 pt-16 pb-20 transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Header */}
           <div className="mb-6">
             <h1 className="text-3xl md:text-4xl font-bold mb-2">
-              <span className="text-gradient">Code Playground</span>
+              <span className="text-gradient">Web Playground</span>
             </h1>
             <p className="text-gray-400">
-              Write, test, and experiment with code in any language
+              Build and preview HTML, CSS, and JavaScript in real-time
             </p>
           </div>
 
           {/* Controls */}
-          <div className="mb-4 flex flex-wrap gap-3">
-            <select
-              value={language}
-              onChange={(e) => handleLanguageChange(e.target.value)}
-              className="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
-            >
-              {languages.map(lang => (
-                <option key={lang.value} value={lang.value}>{lang.label}</option>
-              ))}
-            </select>
+          <div className="mb-4 flex flex-wrap gap-3 items-center justify-between">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setActiveTab('html')}
+                className={`px-4 py-2 rounded-lg transition-colors ${
+                  activeTab === 'html' 
+                    ? 'bg-orange-500 text-white' 
+                    : 'bg-gray-800 border border-gray-700 hover:bg-gray-700'
+                }`}
+              >
+                HTML
+              </button>
+              <button
+                onClick={() => setActiveTab('css')}
+                className={`px-4 py-2 rounded-lg transition-colors ${
+                  activeTab === 'css' 
+                    ? 'bg-blue-500 text-white' 
+                    : 'bg-gray-800 border border-gray-700 hover:bg-gray-700'
+                }`}
+              >
+                CSS
+              </button>
+              <button
+                onClick={() => setActiveTab('javascript')}
+                className={`px-4 py-2 rounded-lg transition-colors ${
+                  activeTab === 'javascript' 
+                    ? 'bg-yellow-500 text-white' 
+                    : 'bg-gray-800 border border-gray-700 hover:bg-gray-700'
+                }`}
+              >
+                JavaScript
+              </button>
+            </div>
 
-            <div className="flex gap-2 ml-auto">
+            <div className="flex gap-2">
+              <button
+                onClick={runCode}
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg hover:opacity-90 transition-colors"
+              >
+                <Play className="h-4 w-4" />
+                Run Code
+              </button>
               <button
                 onClick={handleSave}
                 className="flex items-center gap-2 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors"
@@ -124,11 +240,11 @@ export default function PlaygroundPage() {
                 Save
               </button>
               <button
-                onClick={handleCopy}
+                onClick={handleDownload}
                 className="flex items-center gap-2 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors"
               >
-                <Copy className="h-4 w-4" />
-                Copy
+                <Download className="h-4 w-4" />
+                Download
               </button>
               <button
                 onClick={handleClear}
@@ -140,51 +256,129 @@ export default function PlaygroundPage() {
             </div>
           </div>
 
-          {/* Editor */}
-          <div className="card-gradient border border-gray-700 rounded-xl p-4 mb-6">
-            <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-              <Play className="h-5 w-5 text-green-400" />
-              Code Editor
-            </h3>
-            <CodeEditor
-              language={language}
-              initialCode={code}
-            />
+          {/* Editor and Preview Grid */}
+          <div className="grid lg:grid-cols-2 gap-4">
+            {/* Code Editor */}
+            <div className="card-gradient border border-gray-700 rounded-xl overflow-hidden">
+              <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
+                <div className="flex items-center gap-2">
+                  <CodeIcon className="h-4 w-4 text-gray-400" />
+                  <span className="text-sm text-gray-400">Code Editor - {activeTab.toUpperCase()}</span>
+                </div>
+                <div className="flex space-x-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+              </div>
+              
+              <Editor
+                height="500px"
+                language={activeTab === 'javascript' ? 'javascript' : activeTab}
+                value={getActiveCode()}
+                onChange={(value) => setActiveCode(value || '')}
+                theme="vs-dark"
+                options={{
+                  minimap: { enabled: false },
+                  fontSize: 14,
+                  lineNumbers: 'on',
+                  roundedSelection: false,
+                  scrollBeyondLastLine: false,
+                  automaticLayout: true,
+                  tabSize: 2,
+                }}
+              />
+            </div>
+
+            {/* Preview */}
+            <div className="card-gradient border border-gray-700 rounded-xl overflow-hidden">
+              <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
+                <div className="flex items-center gap-2">
+                  <Eye className="h-4 w-4 text-gray-400" />
+                  <span className="text-sm text-gray-400">Live Preview</span>
+                </div>
+              </div>
+              
+              <iframe
+                ref={iframeRef}
+                srcDoc={output}
+                className="w-full h-[500px] bg-white"
+                title="Preview"
+                sandbox="allow-scripts"
+              />
+            </div>
           </div>
 
-          {/* Saved Snippets */}
-          {savedSnippets.length > 0 && (
-            <div className="mt-8">
-              <h2 className="text-2xl font-bold mb-4">Saved Snippets</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {savedSnippets.map(snippet => (
-                  <div key={snippet.id} className="card-gradient border border-gray-700 rounded-xl p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <h3 className="font-semibold">{snippet.name}</h3>
-                        <p className="text-xs text-gray-400">{snippet.language}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => loadSnippet(snippet)}
-                          className="text-primary-400 hover:text-primary-300 text-sm"
-                        >
-                          Load
-                        </button>
-                        <button
-                          onClick={() => deleteSnippet(snippet.id)}
-                          className="text-red-400 hover:text-red-300"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </div>
-                    <pre className="text-xs text-gray-400 overflow-hidden line-clamp-3">{snippet.code}</pre>
+          {/* Console Output */}
+          {consoleOutput.length > 0 && (
+            <div className="mt-4 card-gradient border border-gray-700 rounded-xl overflow-hidden">
+              <div className="bg-gray-800 px-4 py-2 border-b border-gray-700">
+                <span className="text-sm text-gray-400">Console Output</span>
+              </div>
+              <div className="p-4 bg-gray-900 font-mono text-sm max-h-40 overflow-y-auto">
+                {consoleOutput.map((log, i) => (
+                  <div 
+                    key={i} 
+                    className={`mb-1 ${
+                      log.includes('[error]') ? 'text-red-400' : 
+                      log.includes('[warn]') ? 'text-yellow-400' : 
+                      'text-green-400'
+                    }`}
+                  >
+                    {log}
                   </div>
                 ))}
               </div>
             </div>
           )}
+
+          {/* Quick Templates */}
+          <div className="mt-8">
+            <h2 className="text-xl font-bold mb-4">Quick Start Templates</h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              <button
+                onClick={() => {
+                  setHtmlCode('<div class="card">\n  <h2>Welcome!</h2>\n  <p>Click me</p>\n</div>')
+                  setCssCode('.card {\n  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n  padding: 40px;\n  border-radius: 10px;\n  color: white;\n  text-align: center;\n  cursor: pointer;\n  transition: transform 0.3s;\n}\n\n.card:hover {\n  transform: scale(1.05);\n}')
+                  setJsCode('document.querySelector(".card").addEventListener("click", () => {\n  alert("Hello from Playground!");\n});')
+                  setTimeout(runCode, 100)
+                }}
+                className="card-gradient border border-gray-700 rounded-xl p-4 hover:border-primary-500 transition-colors text-left"
+              >
+                <div className="text-2xl mb-2">🎨</div>
+                <h3 className="font-semibold mb-1">Gradient Card</h3>
+                <p className="text-sm text-gray-400">Interactive card with hover effect</p>
+              </button>
+
+              <button
+                onClick={() => {
+                  setHtmlCode('<button id="counter">Count: 0</button>')
+                  setCssCode('#counter {\n  background: #3b82f6;\n  color: white;\n  border: none;\n  padding: 15px 30px;\n  border-radius: 8px;\n  font-size: 18px;\n  cursor: pointer;\n  transition: background 0.3s;\n}\n\n#counter:hover {\n  background: #2563eb;\n}')
+                  setJsCode('let count = 0;\nconst btn = document.getElementById("counter");\n\nbtn.addEventListener("click", () => {\n  count++;\n  btn.textContent = `Count: ${count}`;\n  console.log("Counter:", count);\n});')
+                  setTimeout(runCode, 100)
+                }}
+                className="card-gradient border border-gray-700 rounded-xl p-4 hover:border-primary-500 transition-colors text-left"
+              >
+                <div className="text-2xl mb-2">🔢</div>
+                <h3 className="font-semibold mb-1">Counter App</h3>
+                <p className="text-sm text-gray-400">Simple click counter</p>
+              </button>
+
+              <button
+                onClick={() => {
+                  setHtmlCode('<div class="container">\n  <input type="text" id="input" placeholder="Type something...">\n  <div id="output">Start typing...</div>\n</div>')
+                  setCssCode('.container {\n  padding: 20px;\n  max-width: 500px;\n  margin: 0 auto;\n}\n\ninput {\n  width: 100%;\n  padding: 12px;\n  border: 2px solid #e5e7eb;\n  border-radius: 8px;\n  font-size: 16px;\n}\n\n#output {\n  margin-top: 20px;\n  padding: 15px;\n  background: #f3f4f6;\n  border-radius: 8px;\n  min-height: 50px;\n}')
+                  setJsCode('const input = document.getElementById("input");\nconst output = document.getElementById("output");\n\ninput.addEventListener("input", (e) => {\n  output.textContent = e.target.value || "Start typing...";\n  console.log("Input value:", e.target.value);\n});')
+                  setTimeout(runCode, 100)
+                }}
+                className="card-gradient border border-gray-700 rounded-xl p-4 hover:border-primary-500 transition-colors text-left"
+              >
+                <div className="text-2xl mb-2">⌨️</div>
+                <h3 className="font-semibold mb-1">Live Input</h3>
+                <p className="text-sm text-gray-400">Real-time text input display</p>
+              </button>
+            </div>
+          </div>
         </div>
       </main>
     </div>

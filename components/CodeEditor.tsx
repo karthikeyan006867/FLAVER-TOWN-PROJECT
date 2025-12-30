@@ -1,9 +1,10 @@
 'use client'
 
 import { Editor } from '@monaco-editor/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Play, RotateCcw, Check, X, AlertCircle } from 'lucide-react'
 import { TestCase } from '@/data/courses'
+import { useSettingsStore } from '@/store/settingsStore'
 
 interface CodeEditorProps {
   language: string
@@ -20,12 +21,24 @@ export default function CodeEditor({
   testCases,
   onSuccess 
 }: CodeEditorProps) {
+  const { settings } = useSettingsStore()
   const [code, setCode] = useState(initialCode)
   const [output, setOutput] = useState('')
   const [isRunning, setIsRunning] = useState(false)
   const [testPassed, setTestPassed] = useState<boolean | null>(null)
   const [testResults, setTestResults] = useState<{ name: string; passed: boolean; error?: string }[]>([])
   const [allTestsPassed, setAllTestsPassed] = useState(false)
+
+  // Auto-save functionality
+  useEffect(() => {
+    if (settings.autoSave && code !== initialCode) {
+      const timer = setTimeout(() => {
+        // Auto-save logic (could save to localStorage or trigger parent callback)
+        console.log('Auto-saved code')
+      }, 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [code, settings.autoSave, initialCode])
 
   const getLanguageMode = () => {
     switch (language.toLowerCase()) {
@@ -270,15 +283,18 @@ export default function CodeEditor({
           language={getLanguageMode()}
           value={code}
           onChange={(value) => setCode(value || '')}
-          theme="vs-dark"
+          theme={settings.theme === 'light' ? 'vs-light' : 'vs-dark'}
           options={{
-            minimap: { enabled: false },
-            fontSize: 14,
-            lineNumbers: 'on',
+            minimap: { enabled: settings.editorMinimap },
+            fontSize: settings.editorFontSize,
+            lineNumbers: settings.editorLineNumbers ? 'on' : 'off',
             roundedSelection: false,
             scrollBeyondLastLine: false,
             automaticLayout: true,
-            tabSize: 2,
+            tabSize: settings.editorTabSize,
+            wordWrap: settings.editorWordWrap,
+            fontFamily: settings.editorFontFamily,
+            lineHeight: settings.editorLineHeight,
           }}
         />
       </div>
