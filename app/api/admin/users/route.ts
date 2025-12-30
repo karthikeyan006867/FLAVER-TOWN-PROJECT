@@ -27,6 +27,10 @@ export async function GET() {
       // Try to get progress from user's public metadata or return defaults
       const metadata = user.publicMetadata as any
       
+      // Convert timestamps to ISO strings
+      const lastSignInDate = user.lastSignInAt ? new Date(user.lastSignInAt).toISOString() : null
+      const createdDate = user.createdAt ? new Date(user.createdAt).toISOString() : new Date().toISOString()
+      
       return {
         userId: user.id,
         email: user.emailAddresses[0]?.emailAddress || 'No email',
@@ -36,8 +40,8 @@ export async function GET() {
         achievements: metadata?.achievements || [],
         points: metadata?.points || 0,
         streak: metadata?.streak || 0,
-        lastActive: user.lastSignInAt?.toISOString() || user.createdAt?.toISOString() || new Date().toISOString(),
-        createdAt: user.createdAt?.toISOString() || new Date().toISOString()
+        lastActive: lastSignInDate || createdDate,
+        createdAt: createdDate
       }
     })
 
