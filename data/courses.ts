@@ -33,6 +33,21 @@ import { ocamlLessons } from './lessons/ocamlLessons'
 import { matlabLessons } from './lessons/matlabLessons'
 import { objectivecLessons } from './lessons/objectivecLessons'
 import { crystalLessons } from './lessons/crystalLessons'
+import { vueLessons } from './lessons/vueLessons'
+import { angularLessons } from './lessons/angularLessons'
+import { djangoLessons } from './lessons/djangoLessons'
+import { flaskLessons } from './lessons/flaskLessons'
+import { mongodbLessons } from './lessons/mongodbLessons'
+import { postgresqlLessons } from './lessons/postgresqlLessons'
+import { dockerLessons } from './lessons/dockerLessons'
+import { kubernetesLessons } from './lessons/kubernetesLessons'
+import { gitLessons } from './lessons/gitLessons'
+import { graphqlLessons } from './lessons/graphqlLessons'
+import { nextjsLessons } from './lessons/nextjsLessons'
+import { tailwindLessons } from './lessons/tailwindLessons'
+import { awsLessons } from './lessons/awsLessons'
+import { mlLessons } from './lessons/mlLessons'
+import { cybersecurityLessons } from './lessons/cybersecurityLessons'
 
 export interface TestCase {
   name: string
@@ -427,7 +442,7 @@ export const courses: Course[] = [
     color: 'from-green-500 to-teal-500',
     difficulty: 'Intermediate',
     duration: '7 weeks',
-    lessons: htmlLessons.slice(0, 5)
+    lessons: vueLessons
   },
   {
     id: 'angular',
@@ -437,7 +452,7 @@ export const courses: Course[] = [
     color: 'from-red-600 to-pink-600',
     difficulty: 'Advanced',
     duration: '10 weeks',
-    lessons: typescriptLessons.slice(0, 5)
+    lessons: angularLessons
   },
   {
     id: 'django',
@@ -447,7 +462,7 @@ export const courses: Course[] = [
     color: 'from-green-700 to-emerald-700',
     difficulty: 'Intermediate',
     duration: '9 weeks',
-    lessons: pythonLessons.slice(0, 5)
+    lessons: djangoLessons
   },
   {
     id: 'flask',
@@ -457,7 +472,7 @@ export const courses: Course[] = [
     color: 'from-gray-600 to-slate-600',
     difficulty: 'Intermediate',
     duration: '6 weeks',
-    lessons: pythonLessons.slice(0, 5)
+    lessons: flaskLessons
   },
   {
     id: 'mongodb',
@@ -467,7 +482,7 @@ export const courses: Course[] = [
     color: 'from-green-600 to-lime-600',
     difficulty: 'Intermediate',
     duration: '6 weeks',
-    lessons: sqlLessons.slice(0, 5)
+    lessons: mongodbLessons
   },
   {
     id: 'postgresql',
@@ -477,7 +492,7 @@ export const courses: Course[] = [
     color: 'from-blue-700 to-indigo-700',
     difficulty: 'Advanced',
     duration: '8 weeks',
-    lessons: sqlLessons.slice(0, 5)
+    lessons: postgresqlLessons
   },
   {
     id: 'docker',
@@ -487,7 +502,7 @@ export const courses: Course[] = [
     color: 'from-blue-500 to-cyan-600',
     difficulty: 'Intermediate',
     duration: '6 weeks',
-    lessons: bashLessons.slice(0, 5)
+    lessons: dockerLessons
   },
   {
     id: 'kubernetes',
@@ -497,7 +512,7 @@ export const courses: Course[] = [
     color: 'from-blue-600 to-purple-600',
     difficulty: 'Advanced',
     duration: '10 weeks',
-    lessons: bashLessons.slice(0, 5)
+    lessons: kubernetesLessons
   },
   {
     id: 'git',
@@ -507,7 +522,7 @@ export const courses: Course[] = [
     color: 'from-orange-600 to-red-600',
     difficulty: 'Beginner',
     duration: '4 weeks',
-    lessons: bashLessons.slice(0, 5)
+    lessons: gitLessons
   },
   {
     id: 'graphql',
@@ -517,7 +532,7 @@ export const courses: Course[] = [
     color: 'from-pink-600 to-purple-600',
     difficulty: 'Intermediate',
     duration: '6 weeks',
-    lessons: jsLessons.slice(0, 5)
+    lessons: graphqlLessons
   },
   {
     id: 'nextjs',
@@ -527,7 +542,7 @@ export const courses: Course[] = [
     color: 'from-gray-800 to-black',
     difficulty: 'Advanced',
     duration: '8 weeks',
-    lessons: reactLessons.slice(0, 5)
+    lessons: nextjsLessons
   },
   {
     id: 'tailwind',
@@ -537,7 +552,7 @@ export const courses: Course[] = [
     color: 'from-cyan-500 to-blue-500',
     difficulty: 'Beginner',
     duration: '3 weeks',
-    lessons: cssLessons.slice(0, 5)
+    lessons: tailwindLessons
   },
   {
     id: 'aws',
@@ -547,7 +562,7 @@ export const courses: Course[] = [
     color: 'from-orange-500 to-yellow-500',
     difficulty: 'Advanced',
     duration: '12 weeks',
-    lessons: nodejsLessons.slice(0, 5)
+    lessons: awsLessons
   },
   {
     id: 'machine-learning',
@@ -557,7 +572,7 @@ export const courses: Course[] = [
     color: 'from-purple-600 to-pink-600',
     difficulty: 'Advanced',
     duration: '14 weeks',
-    lessons: pythonLessons.slice(0, 5)
+    lessons: mlLessons
   },
   {
     id: 'cybersecurity',
@@ -567,6 +582,6 @@ export const courses: Course[] = [
     color: 'from-red-700 to-orange-700',
     difficulty: 'Intermediate',
     duration: '8 weeks',
-    lessons: pythonLessons.slice(0, 5)
+    lessons: cybersecurityLessons
   }
 ]
