@@ -282,7 +282,7 @@ export default function PlaygroundPage() {
                     {output ? (
                       <pre className="text-green-400 whitespace-pre-wrap">{output}</pre>
                     ) : (
-                      <div className="text-gray-500">Click "Run Code" to see output...</div>
+                      <div className="text-gray-500">Click &quot;Run Code&quot; to see output...</div>
                     )}
                   </div>
                 </div>
