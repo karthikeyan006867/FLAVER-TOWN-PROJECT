@@ -418,5 +418,155 @@ export const courses: Course[] = [
     difficulty: 'Intermediate',
     duration: '7 weeks',
     lessons: crystalLessons
+  },
+  {
+    id: 'vue',
+    title: 'Vue.js Framework',
+    description: 'Progressive JavaScript framework - components, Vuex, Vue Router, and Composition API',
+    icon: '🟢',
+    color: 'from-green-500 to-teal-500',
+    difficulty: 'Intermediate',
+    duration: '7 weeks',
+    lessons: htmlLessons.slice(0, 5)
+  },
+  {
+    id: 'angular',
+    title: 'Angular Framework',
+    description: 'Enterprise web applications - TypeScript, RxJS, dependency injection, and testing',
+    icon: '🅰️',
+    color: 'from-red-600 to-pink-600',
+    difficulty: 'Advanced',
+    duration: '10 weeks',
+    lessons: typescriptLessons.slice(0, 5)
+  },
+  {
+    id: 'django',
+    title: 'Django Framework',
+    description: 'Python web framework - MVT architecture, ORM, authentication, and REST APIs',
+    icon: '🎸',
+    color: 'from-green-700 to-emerald-700',
+    difficulty: 'Intermediate',
+    duration: '9 weeks',
+    lessons: pythonLessons.slice(0, 5)
+  },
+  {
+    id: 'flask',
+    title: 'Flask Microframework',
+    description: 'Lightweight Python web framework - RESTful APIs, extensions, and deployment',
+    icon: '🧪',
+    color: 'from-gray-600 to-slate-600',
+    difficulty: 'Intermediate',
+    duration: '6 weeks',
+    lessons: pythonLessons.slice(0, 5)
+  },
+  {
+    id: 'mongodb',
+    title: 'MongoDB Database',
+    description: 'NoSQL database - document model, aggregation, indexing, and scalability',
+    icon: '🍃',
+    color: 'from-green-600 to-lime-600',
+    difficulty: 'Intermediate',
+    duration: '6 weeks',
+    lessons: sqlLessons.slice(0, 5)
+  },
+  {
+    id: 'postgresql',
+    title: 'PostgreSQL Advanced',
+    description: 'Enterprise database - JSONB, full-text search, window functions, and performance',
+    icon: '🐘',
+    color: 'from-blue-700 to-indigo-700',
+    difficulty: 'Advanced',
+    duration: '8 weeks',
+    lessons: sqlLessons.slice(0, 5)
+  },
+  {
+    id: 'docker',
+    title: 'Docker & Containers',
+    description: 'Containerization - images, volumes, networks, Docker Compose, and orchestration',
+    icon: '🐳',
+    color: 'from-blue-500 to-cyan-600',
+    difficulty: 'Intermediate',
+    duration: '6 weeks',
+    lessons: bashLessons.slice(0, 5)
+  },
+  {
+    id: 'kubernetes',
+    title: 'Kubernetes Orchestration',
+    description: 'Container orchestration - pods, services, deployments, scaling, and monitoring',
+    icon: '☸️',
+    color: 'from-blue-600 to-purple-600',
+    difficulty: 'Advanced',
+    duration: '10 weeks',
+    lessons: bashLessons.slice(0, 5)
+  },
+  {
+    id: 'git',
+    title: 'Git & Version Control',
+    description: 'Source control mastery - branching, merging, rebasing, workflows, and collaboration',
+    icon: '📦',
+    color: 'from-orange-600 to-red-600',
+    difficulty: 'Beginner',
+    duration: '4 weeks',
+    lessons: bashLessons.slice(0, 5)
+  },
+  {
+    id: 'graphql',
+    title: 'GraphQL APIs',
+    description: 'Modern API development - schemas, resolvers, mutations, subscriptions, and Apollo',
+    icon: '🔷',
+    color: 'from-pink-600 to-purple-600',
+    difficulty: 'Intermediate',
+    duration: '6 weeks',
+    lessons: jsLessons.slice(0, 5)
+  },
+  {
+    id: 'nextjs',
+    title: 'Next.js Framework',
+    description: 'React meta-framework - SSR, SSG, API routes, middleware, and full-stack apps',
+    icon: '▲',
+    color: 'from-gray-800 to-black',
+    difficulty: 'Advanced',
+    duration: '8 weeks',
+    lessons: reactLessons.slice(0, 5)
+  },
+  {
+    id: 'tailwind',
+    title: 'Tailwind CSS',
+    description: 'Utility-first CSS - responsive design, custom themes, plugins, and optimization',
+    icon: '🎨',
+    color: 'from-cyan-500 to-blue-500',
+    difficulty: 'Beginner',
+    duration: '3 weeks',
+    lessons: cssLessons.slice(0, 5)
+  },
+  {
+    id: 'aws',
+    title: 'Amazon Web Services',
+    description: 'Cloud computing - EC2, S3, Lambda, RDS, API Gateway, and serverless architecture',
+    icon: '☁️',
+    color: 'from-orange-500 to-yellow-500',
+    difficulty: 'Advanced',
+    duration: '12 weeks',
+    lessons: nodejsLessons.slice(0, 5)
+  },
+  {
+    id: 'machine-learning',
+    title: 'Machine Learning',
+    description: 'AI fundamentals - supervised learning, neural networks, TensorFlow, and deployment',
+    icon: '🤖',
+    color: 'from-purple-600 to-pink-600',
+    difficulty: 'Advanced',
+    duration: '14 weeks',
+    lessons: pythonLessons.slice(0, 5)
+  },
+  {
+    id: 'cybersecurity',
+    title: 'Cybersecurity Basics',
+    description: 'Security fundamentals - encryption, authentication, OWASP, penetration testing',
+    icon: '🔒',
+    color: 'from-red-700 to-orange-700',
+    difficulty: 'Intermediate',
+    duration: '8 weeks',
+    lessons: pythonLessons.slice(0, 5)
   }
 ]
