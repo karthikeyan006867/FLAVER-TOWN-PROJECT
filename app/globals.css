@@ -57,8 +57,8 @@
 /* Light mode */
 .light {
   --foreground-rgb: 15, 23, 42;
-  --background-start-rgb: 248, 250, 252;
-  --background-end-rgb: 241, 245, 249;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 249, 250, 252;
   --card-bg: 255, 255, 255;
   --card-border: 226, 232, 240; /* gray-200 */
   --text-primary: 15, 23, 42; /* slate-900 */
@@ -71,11 +71,13 @@
 .light .bg-gray-900\/95,
 .light .bg-gray-900\/50 {
   background-color: rgb(255 255 255) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .light .bg-gray-800,
 .light .bg-gray-800\/50 {
   background-color: rgb(249 250 251) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .light .bg-gray-700 {
@@ -84,7 +86,7 @@
 
 .light .border-gray-700,
 .light .border-gray-800 {
-  border-color: rgb(229 231 235) !important;
+  border-color: rgb(226 232 240) !important;
 }
 
 .light .text-gray-300,
@@ -102,8 +104,81 @@
 }
 
 .light .card-gradient {
-  background: linear-gradient(to bottom right, rgb(249 250 251), rgb(243 244 246)) !important;
-  border-color: rgb(229 231 235) !important;
+  background: linear-gradient(to bottom right, rgb(255 255 255), rgb(249 250 251)) !important;
+  border-color: rgb(226 232 240) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.light .backdrop-blur-xl {
+  backdrop-filter: blur(8px);
+}
+
+/* Light mode navbar and sidebar */
+.light nav,
+.light aside {
+  background-color: rgb(255 255 255 / 0.98) !important;
+  border-color: rgb(226 232 240) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Light mode hover states */
+.light button:hover,
+.light a:hover {
+  filter: brightness(0.95);
+}
+
+.light .hover\:bg-gray-800:hover {
+  background-color: rgb(241 245 249) !important;
+}
+
+.light .hover\:bg-gray-700:hover {
+  background-color: rgb(226 232 240) !important;
+}
+
+/* Light mode button gradients */
+.light .bg-gradient-to-r {
+  filter: saturate(1.1) brightness(1.05);
+}
+
+/* Light mode input and select */
+.light input,
+.light select,
+.light textarea {
+  background-color: rgb(255 255 255) !important;
+  border-color: rgb(203 213 225) !important;
+  color: rgb(15 23 42) !important;
+}
+
+.light input:focus,
+.light select:focus,
+.light textarea:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Light mode code blocks */
+.light code {
+  background-color: rgb(241 245 249) !important;
+  color: rgb(15 23 42) !important;
+}
+
+/* Light mode progress bars */
+.light .bg-green-500 {
+  background-color: rgb(34 197 94) !important;
+}
+
+.light .bg-yellow-500 {
+  background-color: rgb(234 179 8) !important;
+}
+
+.light .bg-red-500 {
+  background-color: rgb(239 68 68) !important;
+}
+
+/* Light mode tooltips */
+.light [title]:hover::after {
+  background-color: rgb(15 23 42) !important;
+  color: rgb(255 255 255) !important;
 }
 
 /* Auto mode inherits from system preference */
@@ -123,9 +198,8 @@ body {
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r;
     background-image: linear-gradient(to right, 
-      rgb(var(--primary-color)), 
-      rgb(var(--accent-color)), 
-      rgb(var(--secondary-color))
+      var(--color-primary), 
+      var(--color-accent)
     );
   }
   
@@ -134,11 +208,55 @@ body {
   }
   
   .glow {
-    box-shadow: 0 0 20px rgba(var(--primary-color), 0.3);
+    box-shadow: 0 0 20px var(--color-primary);
   }
   
   .glow-green {
     box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+  }
+  
+  /* Primary color utilities using CSS variables */
+  .bg-primary-500 {
+    background-color: var(--color-primary);
+  }
+  
+  .bg-accent-500 {
+    background-color: var(--color-accent);
+  }
+  
+  .text-primary-400,
+  .text-primary-500 {
+    color: var(--color-primary);
+  }
+  
+  .text-accent-400,
+  .text-accent-500 {
+    color: var(--color-accent);
+  }
+  
+  .border-primary-500 {
+    border-color: var(--color-primary);
+  }
+  
+  .border-accent-500 {
+    border-color: var(--color-accent);
+  }
+  
+  /* Gradient backgrounds using color scheme */
+  .from-primary-500 {
+    --tw-gradient-from: var(--color-primary);
+  }
+  
+  .to-accent-500 {
+    --tw-gradient-to: var(--color-accent);
+  }
+  
+  .from-primary-600 {
+    --tw-gradient-from: var(--color-primary);
+  }
+  
+  .to-accent-600 {
+    --tw-gradient-to: var(--color-accent);
   }
 }
 
