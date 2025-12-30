@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useUser } from '@clerk/nextjs'
 import { 
   Home, 
   BookOpen, 
@@ -17,7 +18,8 @@ import {
   Users,
   FileCode,
   BarChart3,
-  MessageSquare
+  MessageSquare,
+  Shield
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -40,8 +42,11 @@ const bottomNavigation = [
 
 export default function Sidebar() {
   const pathname = usePathname()
+  const { user } = useUser()
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  const isAdmin = user?.emailAddresses[0]?.emailAddress === 'kaarthii009.g@gmail.com'
 
   return (
     <>
@@ -103,8 +108,23 @@ export default function Sidebar() {
           })}
         </nav>
 
-        {/* Bottom Navigation - Settings */}
-        <div className="p-4 border-t border-gray-800">
+        {/* Bottom Navigation - Settings + Admin */}
+        <div className="p-4 border-t border-gray-800 space-y-2">
+          {isAdmin && (
+            <Link
+              href="/admin"
+              onClick={() => setMobileOpen(false)}
+              className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all group ${
+                pathname === '/admin' || pathname?.startsWith('/admin/')
+                  ? 'bg-gradient-to-r from-red-500/20 to-orange-500/20 text-white border border-red-500/30'
+                  : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+              }`}
+              title={collapsed ? 'Admin Dashboard' : ''}
+            >
+              <Shield className={`h-5 w-5 ${pathname === '/admin' ? 'text-red-400' : 'group-hover:text-red-400'}`} />
+              {!collapsed && <span className="font-medium">Admin Dashboard</span>}
+            </Link>
+          )}
           {bottomNavigation.map((item) => {
             const Icon = item.icon
             const isActive = pathname === item.href || pathname?.startsWith(item.href + '/')

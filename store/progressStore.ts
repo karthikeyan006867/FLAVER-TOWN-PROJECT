@@ -218,6 +218,35 @@ export const useProgressStore = create<ProgressState>()(
     }),
     {
       name: 'progress-storage',
+      onRehydrateStorage: () => (state) => {
+        // Sync to Clerk after rehydration
+        if (state) {
+          syncProgressToClerk(state)
+        }
+      },
     }
   )
 )
+
+// Helper function to sync progress to Clerk
+async function syncProgressToClerk(state: ProgressState) {
+  try {
+    await fetch('/api/sync-progress', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        completedLessons: state.completedLessons,
+        achievements: [], // You can add achievements if needed
+        points: state.totalPoints,
+        streak: state.streak
+      })
+    })
+  } catch (error) {
+    console.error('Failed to sync progress to Clerk:', error)
+  }
+}
+
+// Subscribe to store changes and sync
+useProgressStore.subscribe((state) => {
+  syncProgressToClerk(state)
+})
