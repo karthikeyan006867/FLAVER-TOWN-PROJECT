@@ -32,6 +32,9 @@ const navigation = [
   { name: 'Leaderboard', href: '/leaderboard', icon: TrendingUp },
   { name: 'Analytics', href: '/analytics', icon: BarChart3 },
   { name: 'Achievements', href: '/achievements', icon: Trophy },
+]
+
+const bottomNavigation = [
   { name: 'Settings', href: '/settings', icon: Settings },
 ]
 
@@ -75,29 +78,56 @@ export default function Sidebar() {
       </button>
 
       {/* Navigation */}
-      <nav className="p-4 space-y-2">
-        {navigation.map((item) => {
-          const Icon = item.icon
-          const isActive = pathname === item.href || pathname?.startsWith(item.href + '/')
-          
-          return (
-            <Link
-              key={item.name}
-              href={item.href}
-              onClick={() => setMobileOpen(false)}
-              className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all group ${
-                isActive
-                  ? 'bg-gradient-to-r from-primary-500/20 to-accent-500/20 text-white border border-primary-500/30'
-                  : 'text-gray-400 hover:bg-gray-800 hover:text-white'
-              }`}
-              title={collapsed ? item.name : ''}
-            >
-              <Icon className={`h-5 w-5 ${isActive ? 'text-primary-400' : 'group-hover:text-primary-400'}`} />
-              {!collapsed && <span className="font-medium">{item.name}</span>}
-            </Link>
-          )
-        })}
-      </nav>
+      <div className="flex flex-col h-full">
+        <nav className="p-4 space-y-2 flex-1 overflow-y-auto">
+          {navigation.map((item) => {
+            const Icon = item.icon
+            const isActive = pathname === item.href || pathname?.startsWith(item.href + '/')
+            
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all group ${
+                  isActive
+                    ? 'bg-gradient-to-r from-primary-500/20 to-accent-500/20 text-white border border-primary-500/30'
+                    : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                }`}
+                title={collapsed ? item.name : ''}
+              >
+                <Icon className={`h-5 w-5 ${isActive ? 'text-primary-400' : 'group-hover:text-primary-400'}`} />
+                {!collapsed && <span className="font-medium">{item.name}</span>}
+              </Link>
+            )
+          })}
+        </nav>
+
+        {/* Bottom Navigation - Settings */}
+        <div className="p-4 border-t border-gray-800">
+          {bottomNavigation.map((item) => {
+            const Icon = item.icon
+            const isActive = pathname === item.href || pathname?.startsWith(item.href + '/')
+            
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all group ${
+                  isActive
+                    ? 'bg-gradient-to-r from-primary-500/20 to-accent-500/20 text-white border border-primary-500/30'
+                    : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                }`}
+                title={collapsed ? item.name : ''}
+              >
+                <Icon className={`h-5 w-5 ${isActive ? 'text-primary-400' : 'group-hover:text-primary-400'}`} />
+                {!collapsed && <span className="font-medium">{item.name}</span>}
+              </Link>
+            )
+          })}
+        </div>
+      </div>
       </aside>
     </>
   )
