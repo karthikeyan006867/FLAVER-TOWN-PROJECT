@@ -115,6 +115,37 @@ export default function AdminDashboard() {
     a.click()
   }
 
+  const deleteAllUsers = async () => {
+    if (!confirm('⚠️ WARNING: This will delete ALL users except admins. This action cannot be undone. Are you sure?')) {
+      return
+    }
+
+    if (!confirm('Final confirmation: Delete all non-admin users?')) {
+      return
+    }
+
+    try {
+      setLoading(true)
+      const response = await fetch('/api/admin/delete-users', {
+        method: 'DELETE'
+      })
+      
+      const data = await response.json()
+      
+      if (data.success) {
+        alert(`✅ Successfully deleted ${data.deletedCount} users`)
+        fetchAllUsers() // Refresh the list
+      } else {
+        alert(`❌ Error: ${data.error}`)
+      }
+    } catch (error) {
+      console.error('Failed to delete users:', error)
+      alert('❌ Failed to delete users')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   if (!isLoaded) {
     return (
       <div className="min-h-screen bg-gray-950 flex items-center justify-center">
@@ -214,6 +245,13 @@ export default function AdminDashboard() {
                   <option value="lessons">Sort by Lessons</option>
                   <option value="recent">Sort by Recent</option>
                 </select>
+
+                <button
+                  onClick={deleteAllUsers}
+                  className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition"
+                >
+                  🗑️ Delete All Users
+                </button>
 
                 <button
                   onClick={exportData}

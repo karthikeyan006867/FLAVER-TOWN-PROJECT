@@ -11,6 +11,7 @@ interface CourseProgress {
 interface ProgressState {
   completedLessons: string[] // Array of lesson IDs
   completedChallenges: string[] // Array of challenge IDs
+  unlockedAchievements: string[] // Array of achievement IDs
   courseProgress: { [courseId: string]: CourseProgress }
   streak: number
   longestStreak: number // Track longest streak ever achieved
@@ -25,6 +26,7 @@ interface ProgressState {
   
   completeLesson: (lessonId: string, courseId: string) => void
   completeChallenge: (challengeId: string) => void
+  unlockAchievement: (achievementId: string) => void
   updateCourseProgress: (courseId: string) => void
   updateStreak: () => void
   addStudyTime: (minutes: number) => void
@@ -48,6 +50,7 @@ export const useProgressStore = create<ProgressState>()(
     (set, get) => ({
       completedLessons: [], // Start empty for new users
       completedChallenges: [], // Start empty for new users
+      unlockedAchievements: [], // Start empty for new users
       courseProgress: {},
       streak: 0,
       longestStreak: 0,
@@ -59,6 +62,17 @@ export const useProgressStore = create<ProgressState>()(
       weeklyLessons: 0,
       weeklyChallenges: 0,
       weeklyPoints: 0,
+
+      unlockAchievement: (achievementId: string) => {
+        const { unlockedAchievements } = get()
+        if (!unlockedAchievements.includes(achievementId)) {
+          set({
+            unlockedAchievements: [...unlockedAchievements, achievementId]
+          })
+          // Sync to Clerk
+          setTimeout(() => syncProgressToClerk(get()), 100)
+        }
+      },
 
       completeLesson: (lessonId: string, courseId: string) => {
         const { completedLessons, totalPoints, weeklyLessons, weeklyPoints, weekStartDate } = get()
@@ -85,6 +99,9 @@ export const useProgressStore = create<ProgressState>()(
           
           // Add study time (estimate 10 mins per lesson)
           get().addStudyTime(10)
+          
+          // Immediately sync to Clerk
+          setTimeout(() => syncProgressToClerk(get()), 100)
         }
       },
 
@@ -98,6 +115,9 @@ export const useProgressStore = create<ProgressState>()(
           else if (challengeId.includes('hard')) points = 150
           else if (challengeId.includes('medium')) points = 100
           else if (challengeId.includes('easy')) points = 50
+          
+          // Immediately sync to Clerk after update
+          setTimeout(() => syncProgressToClerk(get()), 100)
           
           set({
             completedChallenges: [...completedChallenges, challengeId],
@@ -236,7 +256,7 @@ async function syncProgressToClerk(state: ProgressState) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         completedLessons: state.completedLessons,
-        achievements: [], // You can add achievements if needed
+        achievements: state.unlockedAchievements,
         points: state.totalPoints,
         streak: state.streak
       })
