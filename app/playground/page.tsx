@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { Editor } from '@monaco-editor/react'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
@@ -102,7 +102,7 @@ export default function PlaygroundPage() {
     return mapping[lang] || lang
   }
 
-  const runCode = () => {
+  const runCode = useCallback(() => {
     setIsRunning(true)
     setOutput('')
     
@@ -168,15 +168,8 @@ export default function PlaygroundPage() {
           setHtmlPreview(code)
           setOutput('HTML rendered in preview panel')
         } else if (selectedLanguage === 'javascript' || selectedLanguage === 'typescript') {
-          langConfig = languages.find(l => l.id === lang)
-    if (langConfig?.isMulti && langConfig.templates) {
-      setHtmlCode(langConfig.templates.html || '')
-      setCssCode(langConfig.templates.css || '')
-      setJsCode(langConfig.templates.js || '')
-      setActiveTab('html')
-    } else {
-      setCode(langConfig?.template || '')
-    }mConsole = {
+          const logs: string[] = []
+          const customConsole = {
             log: (...args: any[]) => {
               const formatted = args.map(a => {
                 if (typeof a === 'object' && a !== null) {
@@ -225,7 +218,7 @@ export default function PlaygroundPage() {
       }
       setIsRunning(false)
     }, 300)
-  }
+  }, [selectedLanguage, code, htmlCode, cssCode, jsCode])
 
   // Handle console messages from iframe
   useEffect(() => {
