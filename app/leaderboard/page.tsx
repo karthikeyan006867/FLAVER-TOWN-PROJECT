@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useUser } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
@@ -14,9 +14,8 @@ interface LeaderboardUser {
   streak: number
   completedLessons: number
   completedChallenges: number
-  avatar: string
+  imageUrl?: string
   isCurrentUser: boolean
-  country: string
   level: number
   weeklyPoints: number
   accuracy: number
@@ -26,84 +25,6 @@ interface LeaderboardUser {
   rankChangeValue: number
 }
 
-// Generate realistic leaderboard data
-const generateLeaderboard = (currentUser: any, userPoints: number, userStreak: number, completedLessons: number, completedChallenges: number): LeaderboardUser[] => {
-  const avatars = ['🧑‍💻', '👨‍💻', '👩‍💻', '🦸', '🧙', '🥷', '🤖', '👾', '🦾', '🎯', '⚡', '🔥', '💎', '🌟', '🚀']
-  const countries = ['🇺🇸', '🇬🇧', '🇨🇦', '🇩🇪', '🇫🇷', '🇯🇵', '🇮🇳', '🇧🇷', '🇦🇺', '🇰🇷', '🇸🇬', '🇳🇱', '🇸🇪', '🇪🇸', '🇮🇹']
-  const names = [
-    'CodeMaster', 'DevNinja', 'ByteWizard', 'SyntaxGuru', 'AlgoKing', 
-    'DebugQueen', 'StackOverflow', 'GitCommander', 'ReactPro', 'PyThanos',
-    'JavaJedi', 'RustRanger', 'GoGopher', 'SwiftSamurai', 'TypeScriptTitan',
-    'CloudCrusader', 'DataDragon', 'APIArchitect', 'FullStackPhoenix', 'CyberSage',
-    'CodeCrusher', 'BugHunter', 'DevDynamo', 'LogicLion', 'ScriptSorcerer'
-  ]
-
-  const topUsers: LeaderboardUser[] = []
-  
-  // Generate top competitors
-  for (let i = 0; i < 25; i++) {
-    const basePoints = 15000 - (i * 500) + Math.floor(Math.random() * 300)
-    topUsers.push({
-      rank: i + 1,
-      name: names[i % names.length] + (i >= names.length ? Math.floor(i / names.length) : ''),
-      points: basePoints,
-      streak: Math.floor(Math.random() * 150) + 50,
-      completedLessons: Math.floor(Math.random() * 200) + 100,
-      completedChallenges: Math.floor(Math.random() * 80) + 40,
-      avatar: avatars[Math.floor(Math.random() * avatars.length)],
-      isCurrentUser: false,
-      country: countries[Math.floor(Math.random() * countries.length)],
-      level: Math.floor(basePoints / 500),
-      weeklyPoints: Math.floor(Math.random() * 2000) + 500,
-      accuracy: Math.floor(Math.random() * 15) + 85,
-      fastestSolve: Math.floor(Math.random() * 300) + 60,
-      languagesLearned: Math.floor(Math.random() * 10) + 5,
-      rankChange: ['up', 'down', 'same'][Math.floor(Math.random() * 3)] as 'up' | 'down' | 'same',
-      rankChangeValue: Math.floor(Math.random() * 5) + 1
-    })
-  }
-
-  // Insert current user
-  if (currentUser) {
-    const userName = currentUser.firstName || currentUser.username || 'You'
-    const userRank = Math.max(1, Math.min(100, Math.floor((15000 - userPoints) / 500) + 1))
-    
-    const userEntry: LeaderboardUser = {
-      rank: userRank,
-      name: userName,
-      points: userPoints,
-      streak: userStreak,
-      completedLessons: completedLessons,
-      completedChallenges: completedChallenges,
-      avatar: '🎯',
-      isCurrentUser: true,
-      country: '🌍',
-      level: Math.floor(userPoints / 500),
-      weeklyPoints: Math.floor(userPoints * 0.1),
-      accuracy: 92,
-      fastestSolve: 120,
-      languagesLearned: 8,
-      rankChange: 'up',
-      rankChangeValue: 3
-    }
-
-    // Insert user at appropriate position
-    if (userRank <= 25) {
-      topUsers.splice(userRank - 1, 0, userEntry)
-      topUsers.splice(25, 1)
-    } else {
-      topUsers.splice(24, 1, userEntry)
-    }
-
-    // Recalculate ranks
-    topUsers.forEach((user, idx) => {
-      user.rank = idx + 1
-    })
-  }
-
-  return topUsers
-}
-
 export default function LeaderboardPage() {
   const { user } = useUser()
   const { totalPoints, streak, completedLessons, completedChallenges } = useProgressStore()
@@ -111,8 +32,29 @@ export default function LeaderboardPage() {
   const [category, setCategory] = useState<'global' | 'friends'>('global')
   const [sortBy, setSortBy] = useState<'points' | 'streak' | 'lessons' | 'accuracy'>('points')
   const [searchQuery, setSearchQuery] = useState('')
+  const [allUsers, setAllUsers] = useState<LeaderboardUser[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const allUsers = generateLeaderboard(user, totalPoints, streak, completedLessons.length, completedChallenges.length)
+  // Fetch real users from database
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch('/api/leaderboard')
+        const data = await response.json()
+        
+        if (data.users) {
+          setAllUsers(data.users)
+        }
+      } catch (error) {
+        console.error('Error fetching leaderboard:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchLeaderboard()
+  }, [])
   
   const topUsers = useMemo(() => {
     let filtered = [...allUsers]
@@ -202,6 +144,22 @@ export default function LeaderboardPage() {
             </p>
           </div>
 
+          {loading ? (
+            <div className="flex items-center justify-center py-20">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-500 mx-auto mb-4"></div>
+                <p className="text-gray-400">Loading leaderboard...</p>
+              </div>
+            </div>
+          ) : topUsers.length === 0 ? (
+            <div className="card-gradient border border-gray-700 rounded-xl p-12 text-center">
+              <Users className="h-16 w-16 text-gray-600 mx-auto mb-4" />
+              <h3 className="text-xl font-bold mb-2">No Users Yet</h3>
+              <p className="text-gray-400">Be the first to start learning and climb the leaderboard!</p>
+            </div>
+          ) : (
+            <>
+
           {/* Advanced Filters & Search */}
           <div className="mb-6 space-y-4">
             <div className="flex flex-wrap gap-3">
@@ -274,9 +232,18 @@ export default function LeaderboardPage() {
                 {/* 2nd Place */}
                 <div className="card-gradient border-2 border-gray-400/50 rounded-xl p-4 text-center h-48 flex flex-col justify-end">
                   <Medal className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                  <div className="text-4xl mb-2">{topUsers[1].avatar}</div>
+                  {topUsers[1].imageUrl ? (
+                    <img 
+                      src={topUsers[1].imageUrl} 
+                      alt={topUsers[1].name}
+                      className="w-16 h-16 rounded-full object-cover mx-auto mb-2 border-2 border-gray-400"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 rounded-full bg-gray-500 flex items-center justify-center text-white text-2xl font-bold mx-auto mb-2">
+                      {topUsers[1].name.charAt(0).toUpperCase()}
+                    </div>
+                  )}
                   <div className="font-bold text-lg mb-1">{topUsers[1].name}</div>
-                  <div className="text-gray-400 text-sm mb-1">{topUsers[1].country}</div>
                   <div className="text-primary-400 font-bold text-xl">{topUsers[1].points.toLocaleString()}</div>
                   <div className="text-xs text-gray-500">Level {topUsers[1].level}</div>
                 </div>
@@ -284,9 +251,18 @@ export default function LeaderboardPage() {
                 {/* 1st Place */}
                 <div className="card-gradient border-2 border-yellow-400/50 rounded-xl p-6 text-center h-64 flex flex-col justify-end bg-gradient-to-b from-yellow-900/20 to-transparent">
                   <Crown className="h-10 w-10 text-yellow-400 mx-auto mb-2 animate-pulse" />
-                  <div className="text-6xl mb-3">{topUsers[0].avatar}</div>
+                  {topUsers[0].imageUrl ? (
+                    <img 
+                      src={topUsers[0].imageUrl} 
+                      alt={topUsers[0].name}
+                      className="w-20 h-20 rounded-full object-cover mx-auto mb-3 border-4 border-yellow-400"
+                    />
+                  ) : (
+                    <div className="w-20 h-20 rounded-full bg-yellow-500 flex items-center justify-center text-white text-3xl font-bold mx-auto mb-3">
+                      {topUsers[0].name.charAt(0).toUpperCase()}
+                    </div>
+                  )}
                   <div className="font-bold text-2xl mb-1">{topUsers[0].name}</div>
-                  <div className="text-gray-400 text-sm mb-2">{topUsers[0].country}</div>
                   <div className="text-yellow-400 font-bold text-3xl">{topUsers[0].points.toLocaleString()}</div>
                   <div className="text-xs text-gray-500">Level {topUsers[0].level}</div>
                 </div>
@@ -294,9 +270,18 @@ export default function LeaderboardPage() {
                 {/* 3rd Place */}
                 <div className="card-gradient border-2 border-orange-600/50 rounded-xl p-4 text-center h-48 flex flex-col justify-end">
                   <Medal className="h-8 w-8 text-orange-600 mx-auto mb-2" />
-                  <div className="text-4xl mb-2">{topUsers[2].avatar}</div>
+                  {topUsers[2].imageUrl ? (
+                    <img 
+                      src={topUsers[2].imageUrl} 
+                      alt={topUsers[2].name}
+                      className="w-16 h-16 rounded-full object-cover mx-auto mb-2 border-2 border-orange-600"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 rounded-full bg-orange-600 flex items-center justify-center text-white text-2xl font-bold mx-auto mb-2">
+                      {topUsers[2].name.charAt(0).toUpperCase()}
+                    </div>
+                  )}
                   <div className="font-bold text-lg mb-1">{topUsers[2].name}</div>
-                  <div className="text-gray-400 text-sm mb-1">{topUsers[2].country}</div>
                   <div className="text-primary-400 font-bold text-xl">{topUsers[2].points.toLocaleString()}</div>
                   <div className="text-xs text-gray-500">Level {topUsers[2].level}</div>
                 </div>
@@ -321,7 +306,6 @@ export default function LeaderboardPage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-2xl font-bold">{currentUserData.name}</span>
-                      <span className="text-2xl">{currentUserData.country}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-400">
                       <span>Level {currentUserData.level}</span>
@@ -386,13 +370,22 @@ export default function LeaderboardPage() {
 
                       {/* Avatar & Name */}
                       <div className="flex items-center gap-3 flex-1 min-w-0">
-                        <div className="text-3xl">{player.avatar}</div>
+                        {player.imageUrl ? (
+                          <img 
+                            src={player.imageUrl} 
+                            alt={player.name}
+                            className="w-10 h-10 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center text-white font-bold">
+                            {player.name.charAt(0).toUpperCase()}
+                          </div>
+                        )}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
                             <span className={`font-bold truncate ${player.isCurrentUser ? 'text-primary-400' : ''}`}>
                               {player.name}
                             </span>
-                            <span className="text-xl">{player.country}</span>
                             {player.isCurrentUser && (
                               <span className="text-xs bg-primary-500 text-white px-2 py-0.5 rounded-full">You</span>
                             )}
@@ -467,8 +460,11 @@ export default function LeaderboardPage() {
               })}
             </div>
           </div>
+          </>
+          )}
 
           {/* Quick Stats Overview */}
+          {!loading && (
           <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="card-gradient border border-primary-500/30 rounded-xl p-4">
               <div className="flex items-center gap-3">
@@ -518,6 +514,7 @@ export default function LeaderboardPage() {
               </div>
             </div>
           </div>
+          )}
         </div>
       </main>
     </div>
