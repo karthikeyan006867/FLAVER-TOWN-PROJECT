@@ -290,7 +290,7 @@ export default function FriendsPage() {
               {friends.length === 0 ? (
                 <div className="text-center py-12">
                   <Users className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">You don't have any friends yet</p>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">You don&apos;t have any friends yet</p>
                   <button
                     onClick={() => setActiveTab('find')}
                     className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
