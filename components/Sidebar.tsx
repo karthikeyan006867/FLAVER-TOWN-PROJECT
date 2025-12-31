@@ -21,7 +21,6 @@ import {
   MessageSquare,
   Shield,
   Briefcase,
-  Sparkles,
   Award,
   GraduationCap
 } from 'lucide-react'
@@ -32,7 +31,6 @@ const navigation = [
   { name: 'Courses', href: '/courses', icon: BookOpen },
   { name: 'Challenges', href: '/challenges', icon: Target },
   { name: 'Daily Challenge', href: '/daily-challenge', icon: Calendar },
-  { name: 'AI Tutor', href: '/ai-tutor', icon: Sparkles },
   { name: 'Playground Pro', href: '/playground-pro', icon: Code2 },
   { name: 'Learning Paths', href: '/learning-paths', icon: Map },
   { name: 'Career Paths', href: '/career', icon: Briefcase },
