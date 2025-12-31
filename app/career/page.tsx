@@ -37,6 +37,7 @@ export default function CareerPage() {
       loadCareerPaths()
       loadUserSkills()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded, user])
 
   const loadCareerPaths = async () => {

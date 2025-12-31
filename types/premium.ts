@@ -1,5 +1,13 @@
 // Premium & Monetization Features
 
+export interface Review {
+  userId: string
+  userName: string
+  rating: number
+  comment: string
+  date: string
+}
+
 export interface Subscription {
   id: string
   userId: string

@@ -41,6 +41,7 @@ export default function FriendsPage() {
       loadSuggestions()
       loadPendingRequests()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded, user])
 
   const loadFriends = async () => {

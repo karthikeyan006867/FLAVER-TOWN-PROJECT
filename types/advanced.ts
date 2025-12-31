@@ -1,5 +1,12 @@
 // AI & Advanced Features Type Definitions
 
+export interface Prize {
+  position: number
+  title: string
+  value: string
+  description: string
+}
+
 export interface AICodeReview {
   id: string
   codeSnippet: string

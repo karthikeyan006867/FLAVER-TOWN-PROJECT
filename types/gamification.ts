@@ -1,5 +1,17 @@
 // Gamification System Type Definitions
 
+export interface Reward {
+  type: 'badge' | 'xp' | 'item' | 'feature'
+  value: string | number
+  description: string
+}
+
+export interface TestCase {
+  input: string
+  expectedOutput: string
+  passed?: boolean
+}
+
 export interface Badge {
   id: string
   name: string

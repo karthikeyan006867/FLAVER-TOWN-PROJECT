@@ -24,7 +24,7 @@ export default function AdvancedPlaygroundPage() {
     if (isLoaded && !user) {
       router.push('/sign-in')
     }
-  }, [isLoaded, user])
+  }, [isLoaded, user, router])
 
   const runCode = async () => {
     setIsRunning(true)
