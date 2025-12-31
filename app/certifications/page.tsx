@@ -345,12 +345,23 @@ export default function CertificationsPage() {
                     ))}
                   </div>
 
-                  <button 
-                    onClick={() => window.location.href = `/courses/${cert.courseId}`}
-                    className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-                  >
-                    Continue Learning ({cert.progress || 0}%)
-                  </button>
+                  <div className="flex gap-2">
+                    <button 
+                      onClick={() => window.location.href = `/courses/${cert.courseId}`}
+                      className="flex-1 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                    >
+                      Continue Learning ({cert.progress || 0}%)
+                    </button>
+                    
+                    {cert.allLessonsCompleted && cert.projectCompleted && (
+                      <button 
+                        onClick={() => window.location.href = `/test/${cert.id}`}
+                        className="flex-1 px-4 py-2 bg-gradient-to-r from-yellow-600 to-orange-600 text-white rounded hover:shadow-lg transition-colors font-semibold"
+                      >
+                        Take Final Test
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
