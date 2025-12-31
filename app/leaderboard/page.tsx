@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import { useUser } from '@clerk/nextjs'
+import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import { Trophy, TrendingUp, Users, Globe, Award, Medal, Crown, Star, Zap, Target, Flame, Brain, Code, ArrowUp, ArrowDown, Minus, Filter, Search } from 'lucide-react'
@@ -207,10 +208,12 @@ export default function LeaderboardPage() {
                 <div className="card-gradient border-2 border-gray-400/50 rounded-xl p-4 text-center h-48 flex flex-col justify-end">
                   <Medal className="h-8 w-8 text-gray-400 mx-auto mb-2" />
                   {topUsers[1].imageUrl ? (
-                    <img 
+                    <Image 
                       src={topUsers[1].imageUrl} 
                       alt={topUsers[1].name}
-                      className="w-16 h-16 rounded-full object-cover mx-auto mb-2 border-2 border-gray-400"
+                      width={64}
+                      height={64}
+                      className="rounded-full object-cover mx-auto mb-2 border-2 border-gray-400"
                     />
                   ) : (
                     <div className="w-16 h-16 rounded-full bg-gray-500 flex items-center justify-center text-white text-2xl font-bold mx-auto mb-2">
@@ -226,10 +229,12 @@ export default function LeaderboardPage() {
                 <div className="card-gradient border-2 border-yellow-400/50 rounded-xl p-6 text-center h-64 flex flex-col justify-end bg-gradient-to-b from-yellow-900/20 to-transparent">
                   <Crown className="h-10 w-10 text-yellow-400 mx-auto mb-2 animate-pulse" />
                   {topUsers[0].imageUrl ? (
-                    <img 
+                    <Image 
                       src={topUsers[0].imageUrl} 
                       alt={topUsers[0].name}
-                      className="w-20 h-20 rounded-full object-cover mx-auto mb-3 border-4 border-yellow-400"
+                      width={80}
+                      height={80}
+                      className="rounded-full object-cover mx-auto mb-3 border-4 border-yellow-400"
                     />
                   ) : (
                     <div className="w-20 h-20 rounded-full bg-yellow-500 flex items-center justify-center text-white text-3xl font-bold mx-auto mb-3">
@@ -245,10 +250,12 @@ export default function LeaderboardPage() {
                 <div className="card-gradient border-2 border-orange-600/50 rounded-xl p-4 text-center h-48 flex flex-col justify-end">
                   <Medal className="h-8 w-8 text-orange-600 mx-auto mb-2" />
                   {topUsers[2].imageUrl ? (
-                    <img 
+                    <Image 
                       src={topUsers[2].imageUrl} 
                       alt={topUsers[2].name}
-                      className="w-16 h-16 rounded-full object-cover mx-auto mb-2 border-2 border-orange-600"
+                      width={64}
+                      height={64}
+                      className="rounded-full object-cover mx-auto mb-2 border-2 border-orange-600"
                     />
                   ) : (
                     <div className="w-16 h-16 rounded-full bg-orange-600 flex items-center justify-center text-white text-2xl font-bold mx-auto mb-2">
@@ -345,10 +352,12 @@ export default function LeaderboardPage() {
                       {/* Avatar & Name */}
                       <div className="flex items-center gap-3 flex-1 min-w-0">
                         {player.imageUrl ? (
-                          <img 
+                          <Image 
                             src={player.imageUrl} 
                             alt={player.name}
-                            className="w-10 h-10 rounded-full object-cover"
+                            width={40}
+                            height={40}
+                            className="rounded-full object-cover"
                           />
                         ) : (
                           <div className="w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center text-white font-bold">

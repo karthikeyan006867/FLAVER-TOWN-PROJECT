@@ -21,6 +21,8 @@ interface Certificate {
   skills: string[]
   earned: boolean
   progress?: number
+  testPassed?: boolean
+  allLessonsCompleted?: boolean
 }
 
 export default function CertificationsPage() {
@@ -37,13 +39,24 @@ export default function CertificationsPage() {
     }
   }, [isLoaded, user, setUserId, loadProgressFromServer])
 
-  // Generate certificates based on actual course completion
+  // Generate certificates based on actual course completion + test pass
   const certificates: Certificate[] = useMemo(() => {
     if (!user) return []
     
     return courses.map(course => {
       const progress = courseProgress[course.id] || { completed: 0, total: course.lessons.length, percentage: 0 }
-      const isCompleted = progress.percentage === 100
+      
+      // Check if all lessons are completed
+      const allLessonsCompleted = progress.percentage === 100
+      
+      // Check if user passed the certification test
+      const userMetadata = user.publicMetadata as any || {}
+      const testAttempts = userMetadata.testAttempts || {}
+      const courseTest = testAttempts[course.id] || { passed: false }
+      const testPassed = courseTest.passed
+      
+      // Certificate is earned only if BOTH lessons AND test are completed
+      const isCompleted = allLessonsCompleted && testPassed
       
       // Generate credential ID
       const courseCode = course.id.toUpperCase().substring(0, 3)
@@ -64,7 +77,9 @@ export default function CertificationsPage() {
         verificationUrl: isCompleted ? `https://verify.codemaster.com/${credentialId}` : '',
         skills: skills,
         earned: isCompleted,
-        progress: progress.percentage
+        progress: progress.percentage,
+        testPassed,
+        allLessonsCompleted
       }
     })
   }, [courseProgress, user])
@@ -271,6 +286,30 @@ export default function CertificationsPage() {
                 </div>
                 <div className="p-6">
                   <p className="text-gray-600 dark:text-gray-400 mb-4">{cert.description}</p>
+                  
+                  {/* Requirements Checklist */}
+                  <div className="mb-4 space-y-2">
+                    <div className="flex items-center gap-2 text-sm">
+                      {cert.allLessonsCompleted ? (
+                        <CheckCircle className="w-5 h-5 text-green-500" />
+                      ) : (
+                        <div className="w-5 h-5 rounded-full border-2 border-gray-400" />
+                      )}
+                      <span className={cert.allLessonsCompleted ? 'text-green-600 font-semibold' : 'text-gray-600 dark:text-gray-400'}>
+                        Complete all {courses.find(c => c.id === cert.id)?.lessons.length} lessons
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      {cert.testPassed ? (
+                        <CheckCircle className="w-5 h-5 text-green-500" />
+                      ) : (
+                        <div className="w-5 h-5 rounded-full border-2 border-gray-400" />
+                      )}
+                      <span className={cert.testPassed ? 'text-green-600 font-semibold' : 'text-gray-600 dark:text-gray-400'}>
+                        Pass certification test (70%)
+                      </span>
+                    </div>
+                  </div>
                   
                   <div className="mb-4">
                     <div className="flex justify-between text-sm mb-2">

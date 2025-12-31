@@ -149,9 +149,111 @@ export default function CodeEditor({
           result = `// TypeScript code compiled successfully\n// Note: TypeScript features are simulated in this environment\n\n${code}\n\n✓ Type checking passed`
           setOutput(result)
         } else if (language.toLowerCase() === 'python' || language.toLowerCase() === 'py') {
-          // Simulate Python execution
-          result = `# Python Simulation\n# Your code would execute on a Python backend\n\n${code}\n\n✓ Code syntax validated`
-          setOutput(result)
+          // Simulate Python execution with basic interpreter
+          try {
+            const pythonOutput: string[] = []
+            
+            // Simple Python interpreter for basic operations
+            const lines = code.split('\n')
+            const variables: { [key: string]: any } = {}
+            
+            for (const line of lines) {
+              const trimmed = line.trim()
+              
+              // Skip comments and empty lines
+              if (!trimmed || trimmed.startsWith('#')) continue
+              
+              // Handle print statements
+              if (trimmed.startsWith('print(')) {
+                const printMatch = trimmed.match(/print\s*\((.*)\)/)
+                if (printMatch) {
+                  let content = printMatch[1].trim()
+                  
+                  // Handle f-strings
+                  if (content.startsWith('f"') || content.startsWith("f'")) {
+                    content = content.slice(2, -1)
+                    // Replace variables in f-string
+                    content = content.replace(/\{([^}]+)\}/g, (_, varName) => {
+                      const expr = varName.trim()
+                      try {
+                        // Handle simple expressions
+                        if (expr.includes('+') || expr.includes('-') || expr.includes('*') || expr.includes('/')) {
+                          return String(eval(expr.replace(/(\w+)/g, (match: string) => 
+                            variables[match] !== undefined ? String(variables[match]) : match
+                          )))
+                        }
+                        return String(variables[expr] !== undefined ? variables[expr] : expr)
+                      } catch {
+                        return expr
+                      }
+                    })
+                    pythonOutput.push(content)
+                  }
+                  // Handle regular strings
+                  else if (content.startsWith('"') || content.startsWith("'")) {
+                    pythonOutput.push(content.slice(1, -1))
+                  }
+                  // Handle variables
+                  else if (variables[content] !== undefined) {
+                    pythonOutput.push(String(variables[content]))
+                  }
+                  // Handle expressions with commas
+                  else if (content.includes(',')) {
+                    const parts = content.split(',').map(p => {
+                      p = p.trim()
+                      if (p.startsWith('"') || p.startsWith("'")) return p.slice(1, -1)
+                      if (variables[p] !== undefined) return String(variables[p])
+                      return p
+                    })
+                    pythonOutput.push(parts.join(' '))
+                  }
+                }
+              }
+              
+              // Handle variable assignments
+              else if (trimmed.includes('=') && !trimmed.includes('==')) {
+                const eqIndex = trimmed.indexOf('=')
+                const varName = trimmed.substring(0, eqIndex).trim()
+                let value = trimmed.substring(eqIndex + 1).trim()
+                
+                // Parse value
+                if (value.startsWith('"') || value.startsWith("'")) {
+                  variables[varName] = value.slice(1, -1)
+                } else if (!isNaN(Number(value))) {
+                  variables[varName] = Number(value)
+                } else if (value === 'True') {
+                  variables[varName] = true
+                } else if (value === 'False') {
+                  variables[varName] = false
+                } else if (value.startsWith('[') && value.endsWith(']')) {
+                  try {
+                    variables[varName] = JSON.parse(value.replace(/'/g, '"'))
+                  } catch {
+                    variables[varName] = value
+                  }
+                }
+                // Handle expressions
+                else if (value.match(/[\+\-\*\/]/)) {
+                  try {
+                    const evalValue = value.replace(/(\w+)/g, (match) => 
+                      variables[match] !== undefined ? String(variables[match]) : match
+                    )
+                    variables[varName] = eval(evalValue)
+                  } catch {
+                    variables[varName] = value
+                  }
+                }
+              }
+            }
+            
+            result = pythonOutput.length > 0 
+              ? pythonOutput.join('\n') 
+              : '# Code executed (no output)'
+            setOutput(result)
+          } catch (error: any) {
+            result = `Error: ${error.message}`
+            setOutput(result)
+          }
         } else if (language.toLowerCase() === 'ruby' || language.toLowerCase() === 'rb') {
           // Simulate Ruby execution
           result = `# Ruby Simulation\n# Your code would execute on a Ruby interpreter\n\n${code}\n\n✓ Ruby syntax validated`

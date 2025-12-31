@@ -299,7 +299,7 @@ export default function AdminDashboard() {
     if (!selectedCourse) return
     const course = courses.find(c => c.id === selectedCourse)
     if (course) {
-      const allLessonIds = course.lessons.map((_, idx) => `${selectedCourse}-lesson-${idx + 1}`)
+      const allLessonIds = course.lessons.map(lesson => lesson.id)
       setSelectedLessons(allLessonIds)
     }
   }
@@ -767,7 +767,7 @@ export default function AdminDashboard() {
 
                         <div className="max-h-96 overflow-y-auto space-y-2">
                           {selectedCourseData.lessons.map((lesson, idx) => {
-                            const lessonId = `${selectedCourse}-lesson-${idx + 1}`
+                            const lessonId = lesson.id
                             const isCompleted = selectedUserData?.completedLessons.includes(lessonId)
                             const isSelected = selectedLessons.includes(lessonId)
                             

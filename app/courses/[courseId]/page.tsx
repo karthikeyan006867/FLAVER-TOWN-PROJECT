@@ -8,7 +8,7 @@ import { courses } from '@/data/courses'
 import { useProgressStore } from '@/store/progressStore'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import { CheckCircle2, Clock, ArrowRight, BookOpen, Lock } from 'lucide-react'
+import { CheckCircle2, Clock, ArrowRight, BookOpen, Lock, Award } from 'lucide-react'
 
 export default function CoursePage({ params }: { params: { courseId: string } }) {
   const { user, isLoaded } = useUser()
@@ -58,6 +58,13 @@ export default function CoursePage({ params }: { params: { courseId: string } })
                     <Clock className="h-4 w-4" />
                     <span>{course.duration}</span>
                   </div>
+                  <Link 
+                    href={`/test/${course.id}`}
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-lg hover:shadow-lg transition"
+                  >
+                    <Award className="h-4 w-4" />
+                    <span className="font-semibold">Take Certification Test</span>
+                  </Link>
                 </div>
               </div>
             </div>
