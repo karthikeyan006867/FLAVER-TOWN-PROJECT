@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react'
 import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
+import Navbar from '@/components/Navbar'
+import Sidebar from '@/components/Sidebar'
 import { 
   Users, BarChart3, Award, Settings, Bell, Database, 
   Activity, TrendingUp, BookOpen, Shield, Download, 
@@ -246,10 +248,15 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen">
+      <Navbar />
+      <Sidebar />
+      
+      <main className="ml-0 md:ml-64 pt-16 pb-20 transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 rounded-lg mb-6">
+        <div className="px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Shield className="w-8 h-8 text-blue-500" />
@@ -926,6 +933,8 @@ export default function AdminPage() {
           </div>
         </div>
       )}
+        </div>
+      </main>
     </div>
   )
 }

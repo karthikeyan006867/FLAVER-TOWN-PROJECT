@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { useUser } from '@clerk/nextjs'
+import Navbar from '@/components/Navbar'
+import Sidebar from '@/components/Sidebar'
 import { Award, Download, Share2, Lock, CheckCircle, Calendar, TrendingUp } from 'lucide-react'
 
 interface Certificate {
@@ -117,8 +119,12 @@ export default function CertificationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto p-6">
+    <div className="min-h-screen">
+      <Navbar />
+      <Sidebar />
+      
+      <main className="ml-0 md:ml-64 pt-16 pb-20 transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg shadow-md p-8 mb-8 text-white">
           <div className="flex items-center justify-between">
@@ -267,7 +273,8 @@ export default function CertificationsPage() {
             ))}
           </div>
         </div>
-      </div>
+        </div>
+      </main>
     </div>
   )
 }
