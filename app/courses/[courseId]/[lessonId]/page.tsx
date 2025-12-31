@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { notFound, useRouter } from 'next/navigation'
+import { useUser } from '@clerk/nextjs'
 import Link from 'next/link'
 import { courses } from '@/data/courses'
 import { useProgressStore } from '@/store/progressStore'
@@ -17,15 +18,24 @@ export default function LessonPage({
 }: { 
   params: { courseId: string; lessonId: string } 
 }) {
+  const { user, isLoaded } = useUser()
   const course = courses.find(c => c.id === params.courseId)
   const lesson = course?.lessons.find(l => l.id === params.lessonId)
   
-  const { completeLesson, isLessonCompleted, isLessonUnlocked } = useProgressStore()
+  const { completeLesson, isLessonCompleted, isLessonUnlocked, setUserId, loadProgressFromClerk } = useProgressStore()
   const { settings } = useSettingsStore()
   const [showHints, setShowHints] = useState(settings.showHintsAutomatically)
   const [completed, setCompleted] = useState(false)
   const [isUnlocked, setIsUnlocked] = useState(true)
   const router = useRouter()
+
+  // Load user progress from Clerk when user is loaded
+  useEffect(() => {
+    if (isLoaded && user) {
+      setUserId(user.id)
+      loadProgressFromClerk(user)
+    }
+  }, [isLoaded, user, setUserId, loadProgressFromClerk])
 
   useEffect(() => {
     if (lesson) {

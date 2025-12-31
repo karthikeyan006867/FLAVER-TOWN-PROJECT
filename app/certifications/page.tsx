@@ -24,12 +24,22 @@ interface Certificate {
 }
 
 export default function CertificationsPage() {
-  const { user } = useUser()
+  const { user, isLoaded } = useUser()
   const [viewingCert, setViewingCert] = useState<Certificate | null>(null)
-  const { courseProgress } = useProgressStore()
+  const { courseProgress, setUserId, loadProgressFromClerk } = useProgressStore()
+
+  // Load user progress from Clerk when user is loaded
+  useEffect(() => {
+    if (isLoaded && user) {
+      setUserId(user.id)
+      loadProgressFromClerk(user)
+    }
+  }, [isLoaded, user, setUserId, loadProgressFromClerk])
 
   // Generate certificates based on actual course completion
   const certificates: Certificate[] = useMemo(() => {
+    if (!user) return []
+    
     return courses.map(course => {
       const progress = courseProgress[course.id] || { completed: 0, total: course.lessons.length, percentage: 0 }
       const isCompleted = progress.percentage === 100
@@ -56,7 +66,7 @@ export default function CertificationsPage() {
         progress: progress.percentage
       }
     })
-  }, [courseProgress, user?.id])
+  }, [courseProgress, user])
 
   const earnedCerts = certificates.filter(c => c.earned)
   const inProgressCerts = certificates.filter(c => !c.earned)

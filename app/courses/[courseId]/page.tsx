@@ -1,6 +1,8 @@
 'use client'
 
+import { useEffect } from 'react'
 import { notFound } from 'next/navigation'
+import { useUser } from '@clerk/nextjs'
 import Link from 'next/link'
 import { courses } from '@/data/courses'
 import { useProgressStore } from '@/store/progressStore'
@@ -9,8 +11,17 @@ import Sidebar from '@/components/Sidebar'
 import { CheckCircle2, Clock, ArrowRight, BookOpen, Lock } from 'lucide-react'
 
 export default function CoursePage({ params }: { params: { courseId: string } }) {
+  const { user, isLoaded } = useUser()
   const course = courses.find(c => c.id === params.courseId)
-  const { isLessonCompleted, isLessonUnlocked } = useProgressStore()
+  const { isLessonCompleted, isLessonUnlocked, setUserId, loadProgressFromClerk } = useProgressStore()
+
+  // Load user progress from Clerk when user is loaded
+  useEffect(() => {
+    if (isLoaded && user) {
+      setUserId(user.id)
+      loadProgressFromClerk(user)
+    }
+  }, [isLoaded, user, setUserId, loadProgressFromClerk])
 
   if (!course) {
     notFound()

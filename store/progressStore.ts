@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { persist, createJSONStorage } from 'zustand/middleware'
 import { courses } from '@/data/courses'
 
 interface CourseProgress {
@@ -9,6 +9,7 @@ interface CourseProgress {
 }
 
 interface ProgressState {
+  userId: string | null // Track which user this progress belongs to
   completedLessons: string[] // Array of lesson IDs
   completedChallenges: string[] // Array of challenge IDs
   unlockedAchievements: string[] // Array of achievement IDs
@@ -24,6 +25,8 @@ interface ProgressState {
   weeklyChallenges: number // challenges completed this week
   weeklyPoints: number // points earned this week
   
+  setUserId: (userId: string) => void
+  loadProgressFromClerk: (userData: any) => void
   completeLesson: (lessonId: string, courseId: string) => void
   completeChallenge: (challengeId: string) => void
   unlockAchievement: (achievementId: string) => void
@@ -34,6 +37,7 @@ interface ProgressState {
   isLessonCompleted: (lessonId: string) => boolean
   isLessonUnlocked: (lessonId: string, courseId: string) => boolean
   resetWeeklyTime: () => void
+  clearProgress: () => void
 }
 
 // Helper function to get start of week (Monday)
@@ -48,6 +52,7 @@ function getStartOfWeek(): string {
 export const useProgressStore = create<ProgressState>()(
   persist(
     (set, get) => ({
+      userId: null,
       completedLessons: [], // Start empty for new users
       completedChallenges: [], // Start empty for new users
       unlockedAchievements: [], // Start empty for new users
@@ -62,6 +67,57 @@ export const useProgressStore = create<ProgressState>()(
       weeklyLessons: 0,
       weeklyChallenges: 0,
       weeklyPoints: 0,
+
+      setUserId: (userId: string) => {
+        const currentUserId = get().userId
+        // If switching users, clear the progress
+        if (currentUserId && currentUserId !== userId) {
+          get().clearProgress()
+        }
+        set({ userId })
+      },
+
+      loadProgressFromClerk: (userData: any) => {
+        if (!userData) return
+        
+        const metadata = userData.publicMetadata || userData.unsafeMetadata || {}
+        
+        // Load progress from Clerk metadata
+        set({
+          completedLessons: metadata.completedLessons || [],
+          completedChallenges: metadata.completedChallenges || [],
+          unlockedAchievements: metadata.achievements || [],
+          totalPoints: metadata.points || 0,
+          streak: metadata.streak || 0,
+          longestStreak: metadata.longestStreak || 0,
+          timeSpent: metadata.timeSpent || 0,
+          lastStudyDate: metadata.lastStudyDate || '',
+        })
+        
+        // Recalculate all course progress
+        courses.forEach(course => {
+          get().updateCourseProgress(course.id)
+        })
+      },
+
+      clearProgress: () => {
+        set({
+          completedLessons: [],
+          completedChallenges: [],
+          unlockedAchievements: [],
+          courseProgress: {},
+          streak: 0,
+          longestStreak: 0,
+          totalPoints: 0,
+          lastStudyDate: '',
+          timeSpent: 0,
+          weeklyTime: 0,
+          weekStartDate: getStartOfWeek(),
+          weeklyLessons: 0,
+          weeklyChallenges: 0,
+          weeklyPoints: 0,
+        })
+      },
 
       unlockAchievement: (achievementId: string) => {
         const { unlockedAchievements } = get()
@@ -238,12 +294,24 @@ export const useProgressStore = create<ProgressState>()(
     }),
     {
       name: 'progress-storage',
-      onRehydrateStorage: () => (state) => {
-        // Sync to Clerk after rehydration
-        if (state) {
-          syncProgressToClerk(state)
-        }
-      },
+      storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({
+        userId: state.userId,
+        completedLessons: state.completedLessons,
+        completedChallenges: state.completedChallenges,
+        unlockedAchievements: state.unlockedAchievements,
+        courseProgress: state.courseProgress,
+        streak: state.streak,
+        longestStreak: state.longestStreak,
+        totalPoints: state.totalPoints,
+        lastStudyDate: state.lastStudyDate,
+        timeSpent: state.timeSpent,
+        weeklyTime: state.weeklyTime,
+        weekStartDate: state.weekStartDate,
+        weeklyLessons: state.weeklyLessons,
+        weeklyChallenges: state.weeklyChallenges,
+        weeklyPoints: state.weeklyPoints,
+      }),
     }
   )
 )
