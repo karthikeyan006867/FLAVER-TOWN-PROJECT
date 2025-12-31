@@ -6,8 +6,24 @@ import { useUser } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import { Clock, AlertTriangle, CheckCircle, XCircle, Award, Eye, EyeOff } from 'lucide-react'
-import { getCourseTest, CourseTest, TestQuestion } from '@/data/courseTests'
 import { courses } from '@/data/courses'
+
+// Define CourseTest type for client-side (without correctAnswer field)
+interface TestQuestion {
+  id: string
+  question: string
+  options: string[]
+  difficulty: 'Easy' | 'Medium' | 'Hard'
+}
+
+interface CourseTest {
+  courseId: string
+  courseName: string
+  passingScore: number
+  timeLimit: number
+  maxAttempts: number
+  questions: TestQuestion[]
+}
 
 export default function CertificationTestPage() {
   const params = useParams()
@@ -37,14 +53,25 @@ export default function CertificationTestPage() {
   // Load test data and user attempts
   useEffect(() => {
     const loadTestData = async () => {
-      const courseTest = getCourseTest(courseId)
-      if (!courseTest) {
+      // Fetch test questions from API (without correct answers)
+      let loadedTest: CourseTest | null = null
+      try {
+        const response = await fetch(`/api/test/${courseId}`)
+        const courseTest = await response.json()
+        
+        if (!courseTest || courseTest.error) {
+          router.push('/certifications')
+          return
+        }
+        
+        loadedTest = courseTest
+        setTest(courseTest)
+        setTimeRemaining(courseTest.timeLimit * 60) // Convert to seconds
+      } catch (error) {
+        console.error('Failed to load test:', error)
         router.push('/certifications')
         return
       }
-      
-      setTest(courseTest)
-      setTimeRemaining(courseTest.timeLimit * 60) // Convert to seconds
       
       // Check if user is admin and if all lessons are completed
       if (user) {
@@ -77,12 +104,14 @@ export default function CertificationTestPage() {
         }
 
         // Fetch user's attempt history
-        try {
-          const response = await fetch(`/api/test-attempts/${courseId}`)
-          const data = await response.json()
-          setAttemptsLeft(courseTest.maxAttempts - (data.attempts || 0))
-        } catch (error) {
-          console.error('Failed to load attempts:', error)
+        if (loadedTest) {
+          try {
+            const response = await fetch(`/api/test-attempts/${courseId}`)
+            const data = await response.json()
+            setAttemptsLeft(loadedTest.maxAttempts - (data.attempts || 0))
+          } catch (error) {
+            console.error('Failed to load attempts:', error)
+          }
         }
       }
       
@@ -104,28 +133,24 @@ export default function CertificationTestPage() {
     setTestCompleted(true)
     
     if (!failed && test) {
-      // Calculate score
-      let correct = 0
-      test.questions.forEach((q, idx) => {
-        if (answers[idx] === q.correctAnswer) correct++
-      })
-      
-      const finalScore = Math.round((correct / test.questions.length) * 100)
-      setScore(finalScore)
-      
-      // Save result to server
+      // Submit answers to server for validation
       try {
-        await fetch('/api/test-attempts/submit', {
+        const response = await fetch('/api/test-attempts/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             courseId,
-            score: finalScore,
-            passed: finalScore >= test.passingScore,
             answers,
             tabSwitches: tabSwitchCount
           })
         })
+        
+        const result = await response.json()
+        
+        if (result.success) {
+          setScore(result.score)
+          // Score is calculated server-side, no client-side calculation
+        }
       } catch (error) {
         console.error('Failed to save test result:', error)
       }
@@ -137,11 +162,10 @@ export default function CertificationTestPage() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             courseId,
-            score: 0,
-            passed: false,
             failed: true,
             failReason,
-            tabSwitches: tabSwitchCount
+            tabSwitches: tabSwitchCount,
+            answers: []
           })
         })
       } catch (error) {
@@ -461,28 +485,22 @@ export default function CertificationTestPage() {
 
               <div className="bg-gray-800 rounded-lg p-6 mb-8">
                 <h3 className="text-lg font-semibold text-white mb-4">Test Results:</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                   <div>
-                    <div className="text-gray-400">Correct</div>
+                    <div className="text-gray-400">Your Score</div>
+                    <div className="text-2xl font-bold text-blue-500">
+                      {score}%
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-gray-400">Questions Answered</div>
                     <div className="text-2xl font-bold text-green-500">
-                      {test.questions.filter((q, idx) => answers[idx] === q.correctAnswer).length}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-gray-400">Incorrect</div>
-                    <div className="text-2xl font-bold text-red-500">
-                      {test.questions.filter((q, idx) => answers[idx] !== -1 && answers[idx] !== q.correctAnswer).length}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-gray-400">Unanswered</div>
-                    <div className="text-2xl font-bold text-yellow-500">
-                      {answers.filter(a => a === -1).length}
+                      {answers.filter(a => a !== -1).length} / {test.questions.length}
                     </div>
                   </div>
                   <div>
                     <div className="text-gray-400">Attempts Left</div>
-                    <div className="text-2xl font-bold text-blue-500">{attemptsLeft - 1}</div>
+                    <div className="text-2xl font-bold text-yellow-500">{attemptsLeft - 1}</div>
                   </div>
                 </div>
               </div>
@@ -513,21 +531,15 @@ export default function CertificationTestPage() {
               </div>
             </div>
 
-            {/* Review Answers */}
+            {/* Review Answers - Simplified without correct answers */}
             <div className="mt-8 space-y-4">
-              <h2 className="text-2xl font-bold text-white mb-4">Answer Review</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">Your Answers</h2>
               {test.questions.map((question, idx) => {
                 const userAnswer = answers[idx]
-                const isCorrect = userAnswer === question.correctAnswer
                 
                 return (
-                  <div key={question.id} className={`card-gradient border ${isCorrect ? 'border-green-700' : 'border-red-700'} rounded-xl p-6`}>
+                  <div key={question.id} className="card-gradient border border-gray-700 rounded-xl p-6">
                     <div className="flex items-start gap-3 mb-4">
-                      {isCorrect ? (
-                        <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
-                      ) : (
-                        <XCircle className="h-6 w-6 text-red-500 flex-shrink-0" />
-                      )}
                       <div className="flex-1">
                         <h3 className="text-lg font-semibold text-white mb-3">
                           Question {idx + 1}: {question.question}
@@ -538,30 +550,24 @@ export default function CertificationTestPage() {
                             <div
                               key={optIdx}
                               className={`p-3 rounded-lg ${
-                                optIdx === question.correctAnswer
-                                  ? 'bg-green-900/30 border border-green-700'
-                                  : userAnswer === optIdx
-                                  ? 'bg-red-900/30 border border-red-700'
-                                  : 'bg-gray-800'
+                                userAnswer === optIdx
+                                  ? 'bg-blue-900/30 border border-blue-700'
+                                  : 'bg-gray-800/50 border border-gray-700'
                               }`}
                             >
-                              <div className="flex items-center gap-2">
-                                {optIdx === question.correctAnswer && (
-                                  <CheckCircle className="h-4 w-4 text-green-500" />
+                              <div className="flex items-center gap-3">
+                                {userAnswer === optIdx && (
+                                  <CheckCircle className="h-5 w-5 text-blue-400 flex-shrink-0" />
                                 )}
-                                {userAnswer === optIdx && optIdx !== question.correctAnswer && (
-                                  <XCircle className="h-4 w-4 text-red-500" />
-                                )}
-                                <span className="text-gray-300">{option}</span>
+                                <span className={userAnswer === optIdx ? 'text-blue-100' : 'text-gray-400'}>
+                                  {option}
+                                </span>
                               </div>
                             </div>
                           ))}
-                        </div>
-                        
-                        <div className="mt-4 p-3 bg-blue-900/30 border border-blue-700 rounded-lg">
-                          <div className="text-sm text-blue-300">
-                            <strong>Explanation:</strong> {question.explanation}
-                          </div>
+                          {userAnswer === -1 && (
+                            <div className="text-yellow-500 text-sm">Not answered</div>
+                          )}
                         </div>
                       </div>
                     </div>

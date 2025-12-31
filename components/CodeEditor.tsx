@@ -23,7 +23,7 @@ export default function CodeEditor({
 }: CodeEditorProps) {
   const { settings } = useSettingsStore()
   const [code, setCode] = useState(initialCode)
-  const [output, setOutput] = useState('')
+  const [output, setOutput] = useState('') // Empty initially - no output until code runs
   const [isRunning, setIsRunning] = useState(false)
   const [testPassed, setTestPassed] = useState<boolean | null>(null)
   const [testResults, setTestResults] = useState<{ name: string; passed: boolean; error?: string }[]>([])
@@ -135,8 +135,8 @@ export default function CodeEditor({
             executeCode(customConsole)
             
             result = logs.length > 0 
-              ? logs.join('\\n') 
-              : '✓ Code executed successfully (no console output)'
+              ? logs.join('\n') 
+              : '' // Empty if no console output
             setOutput(result)
           } catch (error: any) {
             setOutput(`Error: ${error.message}`)
@@ -145,11 +145,26 @@ export default function CodeEditor({
             return
           }
         } else if (language.toLowerCase() === 'typescript' || language.toLowerCase() === 'ts') {
-          // Simulate TypeScript execution (treat as JavaScript)
-          result = `// TypeScript code compiled successfully\n// Note: TypeScript features are simulated in this environment\n\n${code}\n\n✓ Type checking passed`
-          setOutput(result)
+          // Execute TypeScript as JavaScript
+          try {
+            const logs: string[] = []
+            const customConsole = {
+              log: (...args: any[]) => {
+                logs.push(args.map(arg => typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)).join(' '))
+              }
+            }
+            const executeCode = new Function('console', code)
+            executeCode(customConsole)
+            result = logs.join('\n')
+            setOutput(result)
+          } catch (error: any) {
+            setOutput(`Error: ${error.message}`)
+            setTestPassed(false)
+            setIsRunning(false)
+            return
+          }
         } else if (language.toLowerCase() === 'python' || language.toLowerCase() === 'py') {
-          // Simulate Python execution with basic interpreter
+          // Enhanced Python interpreter with proper output execution
           try {
             const pythonOutput: string[] = []
             
@@ -163,24 +178,25 @@ export default function CodeEditor({
               // Skip comments and empty lines
               if (!trimmed || trimmed.startsWith('#')) continue
               
-              // Handle print statements
+              // Handle print statements - OUTPUT ACTUAL RESULTS
               if (trimmed.startsWith('print(')) {
-                const printMatch = trimmed.match(/print\s*\((.*)\)/)
+                const printMatch = trimmed.match(/print\s*\((.*)\)$/)
                 if (printMatch) {
                   let content = printMatch[1].trim()
                   
                   // Handle f-strings
                   if (content.startsWith('f"') || content.startsWith("f'")) {
                     content = content.slice(2, -1)
-                    // Replace variables in f-string
+                    // Replace variables in f-string with actual values
                     content = content.replace(/\{([^}]+)\}/g, (_, varName) => {
                       const expr = varName.trim()
                       try {
-                        // Handle simple expressions
-                        if (expr.includes('+') || expr.includes('-') || expr.includes('*') || expr.includes('/')) {
-                          return String(eval(expr.replace(/(\w+)/g, (match: string) => 
+                        // Handle expressions in f-string
+                        if (expr.match(/[\+\-\*\/]/)) {
+                          const evalExpr = expr.replace(/(\w+)/g, (match: string) => 
                             variables[match] !== undefined ? String(variables[match]) : match
-                          )))
+                          )
+                          return String(eval(evalExpr))
                         }
                         return String(variables[expr] !== undefined ? variables[expr] : expr)
                       } catch {
@@ -193,25 +209,50 @@ export default function CodeEditor({
                   else if (content.startsWith('"') || content.startsWith("'")) {
                     pythonOutput.push(content.slice(1, -1))
                   }
-                  // Handle variables
+                  // Handle direct variable printing
                   else if (variables[content] !== undefined) {
                     pythonOutput.push(String(variables[content]))
                   }
-                  // Handle expressions with commas
+                  // Handle expressions with commas (multiple args)
                   else if (content.includes(',')) {
                     const parts = content.split(',').map(p => {
                       p = p.trim()
                       if (p.startsWith('"') || p.startsWith("'")) return p.slice(1, -1)
                       if (variables[p] !== undefined) return String(variables[p])
+                      // Evaluate expressions
+                      if (p.match(/[\+\-\*\/]/)) {
+                        try {
+                          const evalP = p.replace(/(\w+)/g, (match: string) => 
+                            variables[match] !== undefined ? String(variables[match]) : match
+                          )
+                          return String(eval(evalP))
+                        } catch {
+                          return p
+                        }
+                      }
                       return p
                     })
                     pythonOutput.push(parts.join(' '))
+                  }
+                  // Handle numeric expressions
+                  else if (content.match(/[\+\-\*\/]/)) {
+                    try {
+                      const evalContent = content.replace(/(\w+)/g, (match: string) => 
+                        variables[match] !== undefined ? String(variables[match]) : match
+                      )
+                      pythonOutput.push(String(eval(evalContent)))
+                    } catch {
+                      pythonOutput.push(content)
+                    }
+                  }
+                  else {
+                    pythonOutput.push(content)
                   }
                 }
               }
               
               // Handle variable assignments
-              else if (trimmed.includes('=') && !trimmed.includes('==')) {
+              else if (trimmed.includes('=') && !trimmed.includes('==') && !trimmed.includes('!=') && !trimmed.includes('<=') && !trimmed.includes('>=')) {
                 const eqIndex = trimmed.indexOf('=')
                 const varName = trimmed.substring(0, eqIndex).trim()
                 let value = trimmed.substring(eqIndex + 1).trim()
@@ -232,7 +273,7 @@ export default function CodeEditor({
                     variables[varName] = value
                   }
                 }
-                // Handle expressions
+                // Handle arithmetic expressions
                 else if (value.match(/[\+\-\*\/]/)) {
                   try {
                     const evalValue = value.replace(/(\w+)/g, (match) => 
@@ -248,7 +289,7 @@ export default function CodeEditor({
             
             result = pythonOutput.length > 0 
               ? pythonOutput.join('\n') 
-              : '# Code executed (no output)'
+              : '' // Empty output if no print statements
             setOutput(result)
           } catch (error: any) {
             result = `Error: ${error.message}`
@@ -342,7 +383,7 @@ export default function CodeEditor({
 
   const resetCode = () => {
     setCode(initialCode)
-    setOutput('')
+    setOutput('') // Clear console/output
     setTestPassed(null)
     setTestResults([])
     setAllTestsPassed(false)
