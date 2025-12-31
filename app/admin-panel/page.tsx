@@ -20,10 +20,6 @@ export default function AdminPage() {
   const [users, setUsers] = useState<any[]>([])
   const [selectedUser, setSelectedUser] = useState<any>(null)
 
-  useEffect(() => {
-    checkAdminStatus()
-  }, [isLoaded, user])
-
   const checkAdminStatus = async () => {
     if (!isLoaded || !user) {
       setLoading(false)
@@ -48,6 +44,11 @@ export default function AdminPage() {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    checkAdminStatus()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoaded, user])
 
   const loadStats = async () => {
     try {

@@ -17,8 +17,10 @@ export async function GET() {
       id: course.id,
       title: course.title,
       description: course.description,
-      totalLessons: course.totalLessons,
-      level: course.level,
+      totalLessons: course.lessons.length,
+      difficulty: course.difficulty,
+      category: course.category,
+      duration: course.duration,
       icon: course.icon,
       color: course.color
     }))
