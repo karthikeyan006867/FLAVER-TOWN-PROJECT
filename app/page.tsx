@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar'
 export default function HomePage() {
   const courses = [
     {
+      id: 'html',
       title: 'HTML Fundamentals',
       icon: '🌐',
       level: 'Beginner',
@@ -14,6 +15,7 @@ export default function HomePage() {
       color: 'from-orange-500 to-red-500'
     },
     {
+      id: 'css',
       title: 'CSS Mastery',
       icon: '🎨',
       level: 'Beginner to Advanced',
@@ -21,6 +23,7 @@ export default function HomePage() {
       color: 'from-blue-500 to-cyan-500'
     },
     {
+      id: 'javascript',
       title: 'JavaScript Pro',
       icon: '⚡',
       level: 'Beginner to Expert',
@@ -28,6 +31,7 @@ export default function HomePage() {
       color: 'from-yellow-500 to-orange-500'
     },
     {
+      id: 'python',
       title: 'Python Full Stack',
       icon: '🐍',
       level: 'All Levels',
@@ -128,7 +132,7 @@ export default function HomePage() {
             {courses.map((course, index) => (
               <Link
                 key={index}
-                href={`/courses/${course.title.toLowerCase().replace(/\s+/g, '-')}`}
+                href={`/courses/${course.id}`}
                 className="card-gradient p-6 rounded-2xl border border-gray-700 hover:border-gray-600 transition-all hover:scale-105 hover:glow group"
               >
                 <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${course.color} flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform`}>
