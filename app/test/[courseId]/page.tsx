@@ -27,6 +27,8 @@ export default function CertificationTestPage() {
   const [testFailed, setTestFailed] = useState(false)
   const [failReason, setFailReason] = useState('')
   const [loading, setLoading] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [allLessonsCompleted, setAllLessonsCompleted] = useState(false)
 
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const visibilityRef = useRef(true)
@@ -43,8 +45,27 @@ export default function CertificationTestPage() {
       setTest(courseTest)
       setTimeRemaining(courseTest.timeLimit * 60) // Convert to seconds
       
-      // Fetch user's attempt history
+      // Check if user is admin and if all lessons are completed
       if (user) {
+        // Check admin status
+        try {
+          const adminResponse = await fetch('/api/admin/check')
+          const adminData = await adminResponse.json()
+          setIsAdmin(adminData.isAdmin)
+        } catch (error) {
+          console.error('Failed to check admin status:', error)
+        }
+
+        // Check lesson completion
+        const course = courses.find(c => c.id === courseId)
+        if (course) {
+          const metadata = user.publicMetadata as any || {}
+          const completedLessons = metadata.completedLessons || []
+          const allCompleted = course.lessons.every(lesson => completedLessons.includes(lesson.id))
+          setAllLessonsCompleted(allCompleted)
+        }
+
+        // Fetch user's attempt history
         try {
           const response = await fetch(`/api/test-attempts/${courseId}`)
           const data = await response.json()
@@ -330,13 +351,42 @@ export default function CertificationTestPage() {
                 </div>
               </div>
 
+              {!allLessonsCompleted && !isAdmin && (
+                <div className="bg-red-900/30 border border-red-700 rounded-lg p-6 mb-6">
+                  <div className="flex items-start gap-3">
+                    <XCircle className="h-6 w-6 text-red-500 flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="font-bold text-lg text-red-100 mb-2">Test Locked</h3>
+                      <p className="text-red-100 text-sm">
+                        You must complete all {courses.find(c => c.id === courseId)?.lessons.length} lessons before taking the certification test.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {isAdmin && (
+                <div className="bg-purple-900/30 border border-purple-700 rounded-lg p-4 mb-6">
+                  <div className="flex items-center gap-2">
+                    <Award className="h-5 w-5 text-purple-400" />
+                    <span className="text-purple-100 text-sm font-semibold">Admin Mode: Unlimited Attempts</span>
+                  </div>
+                </div>
+              )}
+
               <div className="flex gap-4">
                 <button
                   onClick={startTest}
-                  disabled={attemptsLeft <= 0}
+                  disabled={(attemptsLeft <= 0 && !isAdmin) || (!allLessonsCompleted && !isAdmin)}
                   className="flex-1 px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg text-white font-bold text-lg hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {attemptsLeft > 0 ? 'Start Test' : 'No Attempts Remaining'}
+                  {!allLessonsCompleted && !isAdmin 
+                    ? 'Complete All Lessons First' 
+                    : isAdmin 
+                    ? 'Start Test (Admin)' 
+                    : attemptsLeft > 0 
+                    ? 'Start Test' 
+                    : 'No Attempts Remaining'}
                 </button>
                 <button
                   onClick={() => router.push(`/courses/${courseId}`)}

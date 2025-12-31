@@ -180,6 +180,39 @@ export default function AdminDashboard() {
     }
   }
 
+  const resetTestAttempts = async (userId: string, courseId?: string) => {
+    const message = courseId 
+      ? `Reset test attempts for ${courseId}?` 
+      : 'Reset ALL test attempts for this user?'
+    
+    if (!confirm(message)) {
+      return
+    }
+
+    try {
+      setLoading(true)
+      const response = await fetch('/api/admin/test-attempts/reset', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, courseId })
+      })
+
+      const data = await response.json()
+      
+      if (data.success) {
+        alert(`✅ ${data.message}!`)
+        fetchAllUsers()
+      } else {
+        alert(`❌ Error: ${data.error}`)
+      }
+    } catch (error) {
+      console.error('Failed to reset test attempts:', error)
+      alert('❌ Failed to reset test attempts')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const resetUserProgress = async (userId: string, resetType: 'all' | 'lessons' | 'achievements' | 'points') => {
     if (!confirm(`Reset ${resetType} for this user? This cannot be undone!`)) {
       return
@@ -830,6 +863,22 @@ export default function AdminDashboard() {
                   >
                     <Trash2 className="h-5 w-5" />
                     Remove {selectedLessons.length} Lesson{selectedLessons.length !== 1 ? 's' : ''} from User
+                  </button>
+                  <button
+                    onClick={() => selectedCourse && resetTestAttempts(selectedUser!, selectedCourse)}
+                    disabled={!selectedUser || !selectedCourse || loading}
+                    className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium"
+                  >
+                    <RefreshCw className="h-5 w-5" />
+                    Reset Test Attempts ({selectedCourse || 'Select Course'})
+                  </button>
+                  <button
+                    onClick={() => resetTestAttempts(selectedUser!, undefined)}
+                    disabled={!selectedUser || loading}
+                    className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium"
+                  >
+                    <RefreshCw className="h-5 w-5" />
+                    Reset ALL Test Attempts
                   </button>
                 </div>
               </div>
