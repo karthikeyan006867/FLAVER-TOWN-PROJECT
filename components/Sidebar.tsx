@@ -34,7 +34,6 @@ const navigation = [
   { name: 'Playground Pro', href: '/playground-pro', icon: Code2 },
   { name: 'Learning Paths', href: '/learning-paths', icon: Map },
   { name: 'Career Paths', href: '/career', icon: Briefcase },
-  { name: 'Friends', href: '/friends', icon: Users },
   { name: 'Certifications', href: '/certifications', icon: GraduationCap },
   { name: 'Snippets', href: '/snippets', icon: FileCode },
   { name: 'Leaderboard', href: '/leaderboard', icon: TrendingUp },
