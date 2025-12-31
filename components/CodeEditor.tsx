@@ -167,41 +167,152 @@ export default function CodeEditor({
           // Enhanced Python interpreter with proper output execution
           try {
             const pythonOutput: string[] = []
-            
-            // Simple Python interpreter for basic operations
             const lines = code.split('\n')
             const variables: { [key: string]: any } = {}
+            let inForLoop = false
+            let loopVariable = ''
+            let loopIterable: any[] = []
+            let loopBody: string[] = []
+            let loopIndent = 0
             
-            for (const line of lines) {
+            // Helper function to evaluate Python expressions
+            const evalPythonExpr = (expr: string): any => {
+              expr = expr.trim()
+              
+              // Handle len() function
+              if (expr.startsWith('len(') && expr.endsWith(')')) {
+                const arg = expr.slice(4, -1).trim()
+                const value = variables[arg]
+                if (Array.isArray(value)) return value.length
+                if (typeof value === 'string') return value.length
+                return 0
+              }
+              
+              // Handle list indexing: list[0]
+              const indexMatch = expr.match(/^(\w+)\[(\d+)\]$/)
+              if (indexMatch) {
+                const varName = indexMatch[1]
+                const index = parseInt(indexMatch[2])
+                if (Array.isArray(variables[varName])) {
+                  return variables[varName][index]
+                }
+              }
+              
+              // Handle range() function
+              if (expr.startsWith('range(') && expr.endsWith(')')) {
+                const args = expr.slice(6, -1).split(',').map(a => parseInt(a.trim()))
+                if (args.length === 1) {
+                  return Array.from({length: args[0]}, (_, i) => i)
+                } else if (args.length === 2) {
+                  return Array.from({length: args[1] - args[0]}, (_, i) => i + args[0])
+                }
+                return []
+              }
+              
+              // Handle variables
+              if (variables[expr] !== undefined) {
+                return variables[expr]
+              }
+              
+              // Handle arithmetic expressions
+              if (expr.match(/[\+\-\*\/\%]/)) {
+                try {
+                  const evalExpr = expr.replace(/(\w+)/g, (match: string) => {
+                    if (variables[match] !== undefined) {
+                      const val = variables[match]
+                      return Array.isArray(val) ? JSON.stringify(val) : String(val)
+                    }
+                    return match
+                  })
+                  return eval(evalExpr)
+                } catch {
+                  return expr
+                }
+              }
+              
+              return expr
+            }
+            
+            for (let i = 0; i < lines.length; i++) {
+              const line = lines[i]
               const trimmed = line.trim()
               
               // Skip comments and empty lines
               if (!trimmed || trimmed.startsWith('#')) continue
               
+              const indent = line.search(/\S/)
+              
+              // Check if we're exiting a for loop
+              if (inForLoop && indent <= loopIndent && trimmed) {
+                // Execute the loop
+                for (const item of loopIterable) {
+                  variables[loopVariable] = item
+                  for (const bodyLine of loopBody) {
+                    const bodyTrimmed = bodyLine.trim()
+                    if (bodyTrimmed.startsWith('print(')) {
+                      const printMatch = bodyTrimmed.match(/print\s*\((.*)\)/)
+                      if (printMatch) {
+                        let content = printMatch[1].trim()
+                        const output = evalPythonExpr(content)
+                        pythonOutput.push(String(output))
+                      }
+                    }
+                  }
+                }
+                inForLoop = false
+                loopBody = []
+              }
+              
+              // Handle for loops
+              if (trimmed.startsWith('for ') && trimmed.includes(' in ') && trimmed.endsWith(':')) {
+                const forMatch = trimmed.match(/for\s+(\w+)\s+in\s+(.+):/)
+                if (forMatch) {
+                  inForLoop = true
+                  loopVariable = forMatch[1]
+                  loopIterable = evalPythonExpr(forMatch[2])
+                  loopBody = []
+                  loopIndent = indent
+                  continue
+                }
+              }
+              
+              // Collect loop body
+              if (inForLoop && indent > loopIndent) {
+                loopBody.push(trimmed)
+                continue
+              }
+              
+              // Handle method calls on variables (e.g., list.append())
+              if (trimmed.match(/^\w+\.\w+\(/)) {
+                const methodMatch = trimmed.match(/^(\w+)\.(\w+)\((.*)\)/)
+                if (methodMatch) {
+                  const objName = methodMatch[1]
+                  const method = methodMatch[2]
+                  const args = methodMatch[3]
+                  
+                  if (method === 'append' && Array.isArray(variables[objName])) {
+                    let arg = args.trim()
+                    if (arg.startsWith('"') || arg.startsWith("'")) {
+                      arg = arg.slice(1, -1)
+                    }
+                    variables[objName].push(arg)
+                  }
+                }
+                continue
+              }
+              
               // Handle print statements - OUTPUT ACTUAL RESULTS
               if (trimmed.startsWith('print(')) {
-                const printMatch = trimmed.match(/print\s*\((.*)\)$/)
+                const printMatch = trimmed.match(/print\s*\((.*)\)/)
                 if (printMatch) {
                   let content = printMatch[1].trim()
                   
                   // Handle f-strings
                   if (content.startsWith('f"') || content.startsWith("f'")) {
                     content = content.slice(2, -1)
-                    // Replace variables in f-string with actual values
-                    content = content.replace(/\{([^}]+)\}/g, (_, varName) => {
-                      const expr = varName.trim()
-                      try {
-                        // Handle expressions in f-string
-                        if (expr.match(/[\+\-\*\/]/)) {
-                          const evalExpr = expr.replace(/(\w+)/g, (match: string) => 
-                            variables[match] !== undefined ? String(variables[match]) : match
-                          )
-                          return String(eval(evalExpr))
-                        }
-                        return String(variables[expr] !== undefined ? variables[expr] : expr)
-                      } catch {
-                        return expr
-                      }
+                    content = content.replace(/\{([^}]+)\}/g, (_, expr) => {
+                      const value = evalPythonExpr(expr.trim())
+                      return String(value)
                     })
                     pythonOutput.push(content)
                   }
@@ -209,44 +320,10 @@ export default function CodeEditor({
                   else if (content.startsWith('"') || content.startsWith("'")) {
                     pythonOutput.push(content.slice(1, -1))
                   }
-                  // Handle direct variable printing
-                  else if (variables[content] !== undefined) {
-                    pythonOutput.push(String(variables[content]))
-                  }
-                  // Handle expressions with commas (multiple args)
-                  else if (content.includes(',')) {
-                    const parts = content.split(',').map(p => {
-                      p = p.trim()
-                      if (p.startsWith('"') || p.startsWith("'")) return p.slice(1, -1)
-                      if (variables[p] !== undefined) return String(variables[p])
-                      // Evaluate expressions
-                      if (p.match(/[\+\-\*\/]/)) {
-                        try {
-                          const evalP = p.replace(/(\w+)/g, (match: string) => 
-                            variables[match] !== undefined ? String(variables[match]) : match
-                          )
-                          return String(eval(evalP))
-                        } catch {
-                          return p
-                        }
-                      }
-                      return p
-                    })
-                    pythonOutput.push(parts.join(' '))
-                  }
-                  // Handle numeric expressions
-                  else if (content.match(/[\+\-\*\/]/)) {
-                    try {
-                      const evalContent = content.replace(/(\w+)/g, (match: string) => 
-                        variables[match] !== undefined ? String(variables[match]) : match
-                      )
-                      pythonOutput.push(String(eval(evalContent)))
-                    } catch {
-                      pythonOutput.push(content)
-                    }
-                  }
+                  // Handle function calls, variables, expressions
                   else {
-                    pythonOutput.push(content)
+                    const output = evalPythonExpr(content)
+                    pythonOutput.push(String(output))
                   }
                 }
               }
@@ -270,18 +347,36 @@ export default function CodeEditor({
                   try {
                     variables[varName] = JSON.parse(value.replace(/'/g, '"'))
                   } catch {
-                    variables[varName] = value
+                    variables[varName] = []
                   }
-                }
-                // Handle arithmetic expressions
-                else if (value.match(/[\+\-\*\/]/)) {
+                } else if (value.startsWith('(') && value.endsWith(')')) {
+                  // Handle tuples
                   try {
-                    const evalValue = value.replace(/(\w+)/g, (match) => 
-                      variables[match] !== undefined ? String(variables[match]) : match
-                    )
-                    variables[varName] = eval(evalValue)
+                    const tupleContent = value.slice(1, -1)
+                    variables[varName] = JSON.parse('[' + tupleContent.replace(/'/g, '"') + ']')
                   } catch {
-                    variables[varName] = value
+                    variables[varName] = []
+                  }
+                } else {
+                  // Handle expressions
+                  variables[varName] = evalPythonExpr(value)
+                }
+              }
+            }
+            
+            // Execute any remaining loop
+            if (inForLoop && loopBody.length > 0) {
+              for (const item of loopIterable) {
+                variables[loopVariable] = item
+                for (const bodyLine of loopBody) {
+                  const bodyTrimmed = bodyLine.trim()
+                  if (bodyTrimmed.startsWith('print(')) {
+                    const printMatch = bodyTrimmed.match(/print\s*\((.*)\)/)
+                    if (printMatch) {
+                      let content = printMatch[1].trim()
+                      const output = evalPythonExpr(content)
+                      pythonOutput.push(String(output))
+                    }
                   }
                 }
               }
