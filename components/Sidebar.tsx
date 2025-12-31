@@ -19,7 +19,11 @@ import {
   FileCode,
   BarChart3,
   MessageSquare,
-  Shield
+  Shield,
+  Briefcase,
+  Sparkles,
+  Award,
+  GraduationCap
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -28,9 +32,12 @@ const navigation = [
   { name: 'Courses', href: '/courses', icon: BookOpen },
   { name: 'Challenges', href: '/challenges', icon: Target },
   { name: 'Daily Challenge', href: '/daily-challenge', icon: Calendar },
-  { name: 'Playground', href: '/playground', icon: Code2 },
+  { name: 'AI Tutor', href: '/ai-tutor', icon: Sparkles },
+  { name: 'Playground Pro', href: '/playground-pro', icon: Code2 },
   { name: 'Learning Paths', href: '/learning-paths', icon: Map },
+  { name: 'Career Paths', href: '/career', icon: Briefcase },
   { name: 'Friends', href: '/friends', icon: Users },
+  { name: 'Certifications', href: '/certifications', icon: GraduationCap },
   { name: 'Snippets', href: '/snippets', icon: FileCode },
   { name: 'Leaderboard', href: '/leaderboard', icon: TrendingUp },
   { name: 'Analytics', href: '/analytics', icon: BarChart3 },
