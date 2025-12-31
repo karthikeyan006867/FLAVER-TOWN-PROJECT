@@ -22,20 +22,19 @@ export default function LessonPage({
   const course = courses.find(c => c.id === params.courseId)
   const lesson = course?.lessons.find(l => l.id === params.lessonId)
   
-  const { completeLesson, isLessonCompleted, isLessonUnlocked, setUserId, loadProgressFromClerk } = useProgressStore()
+  const { completeLesson, isLessonCompleted, isLessonUnlocked, setUserId } = useProgressStore()
   const { settings } = useSettingsStore()
   const [showHints, setShowHints] = useState(settings.showHintsAutomatically)
   const [completed, setCompleted] = useState(false)
   const [isUnlocked, setIsUnlocked] = useState(true)
   const router = useRouter()
 
-  // Load user progress from Clerk when user is loaded
+  // Load user progress from server when user is loaded
   useEffect(() => {
     if (isLoaded && user) {
       setUserId(user.id)
-      loadProgressFromClerk(user)
     }
-  }, [isLoaded, user, setUserId, loadProgressFromClerk])
+  }, [isLoaded, user, setUserId])
 
   useEffect(() => {
     if (lesson) {

@@ -13,15 +13,14 @@ import { CheckCircle2, Clock, ArrowRight, BookOpen, Lock } from 'lucide-react'
 export default function CoursePage({ params }: { params: { courseId: string } }) {
   const { user, isLoaded } = useUser()
   const course = courses.find(c => c.id === params.courseId)
-  const { isLessonCompleted, isLessonUnlocked, setUserId, loadProgressFromClerk } = useProgressStore()
+  const { isLessonCompleted, isLessonUnlocked, setUserId } = useProgressStore()
 
-  // Load user progress from Clerk when user is loaded
+  // Load user progress from server when user is loaded
   useEffect(() => {
     if (isLoaded && user) {
       setUserId(user.id)
-      loadProgressFromClerk(user)
     }
-  }, [isLoaded, user, setUserId, loadProgressFromClerk])
+  }, [isLoaded, user, setUserId])
 
   if (!course) {
     notFound()

@@ -26,7 +26,8 @@ interface ProgressState {
   weeklyPoints: number // points earned this week
   
   setUserId: (userId: string) => void
-  loadProgressFromClerk: (userData: any) => void
+  loadProgressFromServer: () => Promise<void>
+  loadProgressFromClerk: (userData: any) => void // Deprecated, kept for compatibility
   completeLesson: (lessonId: string, courseId: string) => void
   completeChallenge: (challengeId: string) => void
   unlockAchievement: (achievementId: string) => void
@@ -70,34 +71,48 @@ export const useProgressStore = create<ProgressState>()(
 
       setUserId: (userId: string) => {
         const currentUserId = get().userId
-        // If switching users, clear the progress
+        // If switching users, clear the progress and load from server
         if (currentUserId && currentUserId !== userId) {
           get().clearProgress()
         }
         set({ userId })
+        // Load fresh data from server
+        get().loadProgressFromServer()
+      },
+
+      loadProgressFromServer: async () => {
+        try {
+          const response = await fetch('/api/sync-progress/get')
+          if (response.ok) {
+            const data = await response.json()
+            if (data.success && data.progress) {
+              const progress = data.progress
+              set({
+                completedLessons: progress.completedLessons || [],
+                completedChallenges: progress.completedChallenges || [],
+                unlockedAchievements: progress.achievements || [],
+                totalPoints: progress.points || 0,
+                streak: progress.streak || 0,
+                longestStreak: progress.longestStreak || 0,
+                timeSpent: progress.timeSpent || 0,
+                lastStudyDate: progress.lastStudyDate || '',
+              })
+              
+              // Recalculate all course progress
+              courses.forEach(course => {
+                get().updateCourseProgress(course.id)
+              })
+            }
+          }
+        } catch (error) {
+          console.error('Failed to load progress from server:', error)
+        }
       },
 
       loadProgressFromClerk: (userData: any) => {
-        if (!userData) return
-        
-        const metadata = userData.publicMetadata || userData.unsafeMetadata || {}
-        
-        // Load progress from Clerk metadata
-        set({
-          completedLessons: metadata.completedLessons || [],
-          completedChallenges: metadata.completedChallenges || [],
-          unlockedAchievements: metadata.achievements || [],
-          totalPoints: metadata.points || 0,
-          streak: metadata.streak || 0,
-          longestStreak: metadata.longestStreak || 0,
-          timeSpent: metadata.timeSpent || 0,
-          lastStudyDate: metadata.lastStudyDate || '',
-        })
-        
-        // Recalculate all course progress
-        courses.forEach(course => {
-          get().updateCourseProgress(course.id)
-        })
+        // Deprecated - now loads from server via loadProgressFromServer
+        // Keeping for backward compatibility but does nothing
+        console.log('loadProgressFromClerk called - using server sync instead')
       },
 
       clearProgress: () => {
@@ -324,9 +339,13 @@ async function syncProgressToClerk(state: ProgressState) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         completedLessons: state.completedLessons,
+        completedChallenges: state.completedChallenges,
         achievements: state.unlockedAchievements,
         points: state.totalPoints,
-        streak: state.streak
+        streak: state.streak,
+        longestStreak: state.longestStreak,
+        timeSpent: state.timeSpent,
+        lastStudyDate: state.lastStudyDate
       })
     })
   } catch (error) {

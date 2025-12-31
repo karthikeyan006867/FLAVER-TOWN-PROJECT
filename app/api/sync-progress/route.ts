@@ -10,15 +10,28 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json()
-    const { completedLessons, achievements, points, streak } = body
+    const { 
+      completedLessons, 
+      completedChallenges,
+      achievements, 
+      points, 
+      streak,
+      longestStreak,
+      timeSpent,
+      lastStudyDate 
+    } = body
 
     // Update user's public metadata in Clerk
     await clerkClient.users.updateUserMetadata(userId, {
       publicMetadata: {
         completedLessons: completedLessons || [],
+        completedChallenges: completedChallenges || [],
         achievements: achievements || [],
         points: points || 0,
         streak: streak || 0,
+        longestStreak: longestStreak || 0,
+        timeSpent: timeSpent || 0,
+        lastStudyDate: lastStudyDate || '',
         lastUpdated: new Date().toISOString()
       }
     })
