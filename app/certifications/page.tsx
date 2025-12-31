@@ -26,14 +26,16 @@ interface Certificate {
 export default function CertificationsPage() {
   const { user, isLoaded } = useUser()
   const [viewingCert, setViewingCert] = useState<Certificate | null>(null)
-  const { courseProgress, setUserId } = useProgressStore()
+  const { courseProgress, setUserId, loadProgressFromServer } = useProgressStore()
 
   // Load user progress from server when user is loaded
   useEffect(() => {
     if (isLoaded && user) {
       setUserId(user.id)
+      // Always fetch fresh data from server on page load
+      loadProgressFromServer()
     }
-  }, [isLoaded, user, setUserId])
+  }, [isLoaded, user, setUserId, loadProgressFromServer])
 
   // Generate certificates based on actual course completion
   const certificates: Certificate[] = useMemo(() => {

@@ -22,7 +22,7 @@ export default function LessonPage({
   const course = courses.find(c => c.id === params.courseId)
   const lesson = course?.lessons.find(l => l.id === params.lessonId)
   
-  const { completeLesson, isLessonCompleted, isLessonUnlocked, setUserId } = useProgressStore()
+  const { completeLesson, isLessonCompleted, isLessonUnlocked, setUserId, loadProgressFromServer } = useProgressStore()
   const { settings } = useSettingsStore()
   const [showHints, setShowHints] = useState(settings.showHintsAutomatically)
   const [completed, setCompleted] = useState(false)
@@ -33,8 +33,10 @@ export default function LessonPage({
   useEffect(() => {
     if (isLoaded && user) {
       setUserId(user.id)
+      // Always fetch fresh data from server on page load
+      loadProgressFromServer()
     }
-  }, [isLoaded, user, setUserId])
+  }, [isLoaded, user, setUserId, loadProgressFromServer])
 
   useEffect(() => {
     if (lesson) {

@@ -71,18 +71,21 @@ export const useProgressStore = create<ProgressState>()(
 
       setUserId: (userId: string) => {
         const currentUserId = get().userId
-        // If switching users, clear the progress and load from server
+        // If switching users, clear the progress
         if (currentUserId && currentUserId !== userId) {
           get().clearProgress()
         }
         set({ userId })
-        // Load fresh data from server
-        get().loadProgressFromServer()
       },
 
       loadProgressFromServer: async () => {
         try {
-          const response = await fetch('/api/sync-progress/get')
+          const response = await fetch('/api/sync-progress/get', {
+            cache: 'no-store', // Force fresh data on every request
+            headers: {
+              'Cache-Control': 'no-cache',
+            }
+          })
           if (response.ok) {
             const data = await response.json()
             if (data.success && data.progress) {

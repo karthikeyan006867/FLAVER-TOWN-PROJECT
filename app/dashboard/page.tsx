@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useUser } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
@@ -10,7 +11,7 @@ import { useProgressStore } from '@/store/progressStore'
 import { useSettingsStore } from '@/store/settingsStore'
 
 export default function DashboardPage() {
-  const { user } = useUser()
+  const { user, isLoaded } = useUser()
   const { settings } = useSettingsStore()
   const { 
     completedLessons, 
@@ -23,8 +24,19 @@ export default function DashboardPage() {
     weeklyLessons,
     weeklyChallenges,
     weeklyPoints,
-    courseProgress 
+    courseProgress,
+    setUserId,
+    loadProgressFromServer
   } = useProgressStore()
+
+  // Load user progress from server on page load
+  useEffect(() => {
+    if (isLoaded && user) {
+      setUserId(user.id)
+      // Always fetch fresh data from server on page load
+      loadProgressFromServer()
+    }
+  }, [isLoaded, user, setUserId, loadProgressFromServer])
 
   // Calculate stats from actual progress
   const stats = {
