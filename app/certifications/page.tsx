@@ -1,11 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useUser } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import Certificate from '@/components/Certificate'
 import { Award, Download, Share2, Lock, CheckCircle, Calendar, TrendingUp, ArrowLeft } from 'lucide-react'
+import { useProgressStore } from '@/store/progressStore'
+import { courses } from '@/data/courses'
 
 interface Certificate {
   id: string
@@ -23,84 +25,41 @@ interface Certificate {
 
 export default function CertificationsPage() {
   const { user } = useUser()
-  const [selectedCert, setSelectedCert] = useState<Certificate | null>(null)
+  const [viewingCert, setViewingCert] = useState<Certificate | null>(null)
+  const { courseProgress } = useProgressStore()
 
-  const certificates: Certificate[] = [
-    {
-      id: '1',
-      title: 'JavaScript Fundamentals',
-      description: 'Master the core concepts of JavaScript programming',
-      courseId: 'javascript',
-      issueDate: '2024-01-15',
-      credentialId: 'CERT-JS-001-2024',
-      verificationUrl: 'https://verify.flavertown.com/CERT-JS-001-2024',
-      skills: ['Variables', 'Functions', 'Arrays', 'Objects', 'ES6'],
-      earned: true
-    },
-    {
-      id: '2',
-      title: 'React Developer',
-      description: 'Build modern web applications with React',
-      courseId: 'react',
-      issueDate: '',
-      credentialId: '',
-      verificationUrl: '',
-      skills: ['Components', 'Hooks', 'State Management', 'Routing'],
-      earned: false,
-      progress: 65
-    },
-    {
-      id: '3',
-      title: 'Full-Stack Web Development',
-      description: 'Complete certification covering frontend and backend',
-      courseId: 'fullstack',
-      issueDate: '',
-      credentialId: '',
-      verificationUrl: '',
-      skills: ['HTML/CSS', 'JavaScript', 'Node.js', 'Databases', 'Deployment'],
-      earned: false,
-      progress: 40
-    },
-    {
-      id: '4',
-      title: 'Python Programming',
-      description: 'Comprehensive Python programming certification',
-      courseId: 'python',
-      issueDate: '2024-02-20',
-      credentialId: 'CERT-PY-002-2024',
-      verificationUrl: 'https://verify.flavertown.com/CERT-PY-002-2024',
-      skills: ['Python Basics', 'OOP', 'Data Structures', 'File Handling'],
-      earned: true
-    },
-    {
-      id: '5',
-      title: 'Advanced Algorithms',
-      description: 'Master data structures and algorithms',
-      courseId: 'algorithms',
-      issueDate: '',
-      credentialId: '',
-      verificationUrl: '',
-      skills: ['Sorting', 'Searching', 'Trees', 'Graphs', 'Dynamic Programming'],
-      earned: false,
-      progress: 25
-    },
-    {
-      id: '6',
-      title: 'Cloud Computing (AWS)',
-      description: 'AWS Cloud Practitioner level certification',
-      courseId: 'aws',
-      issueDate: '',
-      credentialId: '',
-      verificationUrl: '',
-      skills: ['EC2', 'S3', 'Lambda', 'CloudFormation', 'Security'],
-      earned: false,
-      progress: 15
-    }
-  ]
+  // Generate certificates based on actual course completion
+  const certificates: Certificate[] = useMemo(() => {
+    return courses.map(course => {
+      const progress = courseProgress[course.id] || { completed: 0, total: course.lessons.length, percentage: 0 }
+      const isCompleted = progress.percentage === 100
+      
+      // Generate credential ID
+      const courseCode = course.id.toUpperCase().substring(0, 3)
+      const credentialId = isCompleted 
+        ? `CERT-${courseCode}-${user?.id?.substring(0, 6) || '000'}-${new Date().getFullYear()}`
+        : ''
+      
+      // Extract skills from course lessons (first 5 lesson titles as skills)
+      const skills = course.lessons.slice(0, 5).map(lesson => lesson.title)
+      
+      return {
+        id: course.id,
+        title: course.title,
+        description: course.description,
+        courseId: course.id,
+        issueDate: isCompleted ? new Date().toISOString() : '',
+        credentialId: credentialId,
+        verificationUrl: isCompleted ? `https://verify.codemaster.com/${credentialId}` : '',
+        skills: skills,
+        earned: isCompleted,
+        progress: progress.percentage
+      }
+    })
+  }, [courseProgress, user?.id])
 
   const earnedCerts = certificates.filter(c => c.earned)
   const inProgressCerts = certificates.filter(c => !c.earned)
-  const [viewingCert, setViewingCert] = useState<Certificate | null>(null)
 
   const downloadCertificate = (cert: Certificate) => {
     // Download is handled by the Certificate component itself
@@ -211,10 +170,11 @@ export default function CertificationsPage() {
         </div>
 
         {/* Earned Certificates */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Earned Certificates</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {earnedCerts.map((cert) => (
+        {earnedCerts.length > 0 && (
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Earned Certifications</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {earnedCerts.map((cert) => (
               <div key={cert.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="bg-gradient-to-r from-yellow-400 to-orange-400 p-4">
                   <div className="flex items-center gap-3 text-white">
@@ -271,11 +231,25 @@ export default function CertificationsPage() {
             ))}
           </div>
         </div>
+        )}
+
+        {/* No Earned Certificates Message */}
+        {earnedCerts.length === 0 && (
+          <div className="mb-12 text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+            <Award className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              No Certificates Earned Yet
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              Complete courses to earn certificates and showcase your skills!
+            </p>
+          </div>
+        )}
 
         {/* In Progress */}
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Available Certifications</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {inProgressCerts.map((cert) => (
               <div key={cert.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
                 <div className="bg-gray-100 dark:bg-gray-700 p-4">
@@ -289,13 +263,13 @@ export default function CertificationsPage() {
                   
                   <div className="mb-4">
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-gray-600 dark:text-gray-400">Progress</span>
-                      <span className="font-semibold text-gray-900 dark:text-white">{cert.progress}%</span>
+                      <span className="text-gray-600 dark:text-gray-400">Course Progress</span>
+                      <span className="font-semibold text-gray-900 dark:text-white">{cert.progress || 0}%</span>
                     </div>
                     <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                       <div
                         className="bg-blue-500 h-2 rounded-full transition-all"
-                        style={{ width: `${cert.progress}%` }}
+                        style={{ width: `${cert.progress || 0}%` }}
                       ></div>
                     </div>
                   </div>
@@ -308,8 +282,11 @@ export default function CertificationsPage() {
                     ))}
                   </div>
 
-                  <button className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-                    Continue Learning
+                  <button 
+                    onClick={() => window.location.href = `/courses/${cert.courseId}`}
+                    className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                  >
+                    Continue Learning ({cert.progress || 0}%)
                   </button>
                 </div>
               </div>

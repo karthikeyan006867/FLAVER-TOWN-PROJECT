@@ -212,7 +212,7 @@ export default function Certificate({
                 <div className="absolute inset-1 bg-slate-900 rounded-full"></div>
                 <Award className="relative z-10 h-12 w-12 text-yellow-400" />
                 <div className="absolute -bottom-2 bg-yellow-500 text-slate-900 text-xs font-bold px-3 py-1 rounded-full">
-                  2025
+                  {new Date().getFullYear()}
                 </div>
               </div>
             </div>
