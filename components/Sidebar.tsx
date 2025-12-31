@@ -30,6 +30,7 @@ const navigation = [
   { name: 'Daily Challenge', href: '/daily-challenge', icon: Calendar },
   { name: 'Playground', href: '/playground', icon: Code2 },
   { name: 'Learning Paths', href: '/learning-paths', icon: Map },
+  { name: 'Friends', href: '/friends', icon: Users },
   { name: 'Snippets', href: '/snippets', icon: FileCode },
   { name: 'Leaderboard', href: '/leaderboard', icon: TrendingUp },
   { name: 'Analytics', href: '/analytics', icon: BarChart3 },
