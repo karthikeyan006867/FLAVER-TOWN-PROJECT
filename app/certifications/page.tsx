@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { useUser } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import { Award, Download, Share2, Lock, CheckCircle, Calendar, TrendingUp } from 'lucide-react'
+import Certificate from '@/components/Certificate'
+import { Award, Download, Share2, Lock, CheckCircle, Calendar, TrendingUp, ArrowLeft } from 'lucide-react'
 
 interface Certificate {
   id: string
@@ -99,23 +100,60 @@ export default function CertificationsPage() {
 
   const earnedCerts = certificates.filter(c => c.earned)
   const inProgressCerts = certificates.filter(c => !c.earned)
+  const [viewingCert, setViewingCert] = useState<Certificate | null>(null)
 
   const downloadCertificate = (cert: Certificate) => {
-    // In real app, generate PDF
-    alert(`Downloading certificate: ${cert.title}`)
+    // Download is handled by the Certificate component itself
+    console.log('Certificate download triggered:', cert.title)
   }
 
   const shareCertificate = (cert: Certificate) => {
     if (navigator.share) {
       navigator.share({
         title: cert.title,
-        text: `I earned ${cert.title} certification on Flaver Town!`,
+        text: `I earned ${cert.title} certification on CodeMaster!`,
         url: cert.verificationUrl
-      })
+      }).catch(err => console.log('Share failed:', err))
     } else {
       navigator.clipboard.writeText(cert.verificationUrl)
       alert('Certificate link copied to clipboard!')
     }
+  }
+
+  // If viewing a certificate, show the full certificate view
+  if (viewingCert) {
+    return (
+      <div className="min-h-screen">
+        <Navbar />
+        <Sidebar />
+        
+        <main className="ml-0 md:ml-64 pt-16 pb-20 transition-all duration-300">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <button
+              onClick={() => setViewingCert(null)}
+              className="flex items-center gap-2 text-gray-400 hover:text-white mb-6 transition-colors"
+            >
+              <ArrowLeft className="h-5 w-5" />
+              Back to Certifications
+            </button>
+            
+            <Certificate
+              userName={user?.fullName || user?.firstName || 'Student Name'}
+              courseName={viewingCert.title}
+              completionDate={new Date(viewingCert.issueDate).toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })}
+              credentialId={viewingCert.credentialId}
+              skills={viewingCert.skills}
+              onDownload={() => downloadCertificate(viewingCert)}
+              onShare={() => shareCertificate(viewingCert)}
+            />
+          </div>
+        </main>
+      </div>
+    )
   }
 
   return (
@@ -209,18 +247,23 @@ export default function CertificationsPage() {
 
                   <div className="flex gap-2">
                     <button
+                      onClick={() => setViewingCert(cert)}
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors"
+                    >
+                      <CheckCircle className="w-4 h-4" />
+                      View Certificate
+                    </button>
+                    <button
                       onClick={() => downloadCertificate(cert)}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                      className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
                     >
                       <Download className="w-4 h-4" />
-                      Download
                     </button>
                     <button
                       onClick={() => shareCertificate(cert)}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+                      className="flex items-center justify-center gap-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
                     >
                       <Share2 className="w-4 h-4" />
-                      Share
                     </button>
                   </div>
                 </div>
