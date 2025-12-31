@@ -564,7 +564,8 @@ export const courseTests: Record<string, CourseTest> = {
   scala: createGenericTest('scala', 'Scala'),
   dart: createGenericTest('dart', 'Dart'),
   r: createGenericTest('r', 'R'),
-  integration: createGenericTest('integration', 'Full Stack Integration')
+  integration: createGenericTest('integration', 'Full Stack Integration'),
+  cybersecurity: createGenericTest('cybersecurity', 'Cybersecurity Basics')
 }
 
 // Helper function to get test for a course
