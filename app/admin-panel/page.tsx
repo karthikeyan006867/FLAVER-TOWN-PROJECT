@@ -15,6 +15,7 @@ export default function AdminPage() {
   const router = useRouter()
   const [isAdmin, setIsAdmin] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState('overview')
   const [stats, setStats] = useState<any>(null)
   const [users, setUsers] = useState<any[]>([])
@@ -23,23 +24,33 @@ export default function AdminPage() {
   const checkAdminStatus = async () => {
     if (!isLoaded || !user) {
       setLoading(false)
+      if (isLoaded && !user) {
+        router.push('/sign-in')
+      }
       return
     }
 
     try {
+      const userEmail = user.emailAddresses[0]?.emailAddress
+      console.log('Checking admin access for:', userEmail)
+      
       const res = await fetch('/api/admin/check')
       const data = await res.json()
+      
+      console.log('Admin check response:', data)
       
       if (data.isAdmin) {
         setIsAdmin(true)
         loadStats()
         loadUsers()
       } else {
-        router.push('/dashboard')
+        setError(`Access denied. Your email (${userEmail}) is not authorized as admin.`)
+        setTimeout(() => router.push('/dashboard'), 3000)
       }
     } catch (error) {
       console.error('Error checking admin status:', error)
-      router.push('/dashboard')
+      setError('Failed to verify admin access. Please try again.')
+      setTimeout(() => router.push('/dashboard'), 3000)
     } finally {
       setLoading(false)
     }
@@ -197,6 +208,26 @@ export default function AdminPage() {
         <div className="text-center">
           <RefreshCw className="w-12 h-12 animate-spin mx-auto mb-4 text-blue-500" />
           <p className="text-gray-600 dark:text-gray-400">Verifying admin access...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center max-w-md p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+          <AlertCircle className="w-16 h-16 mx-auto mb-4 text-red-500" />
+          <h1 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Access Error</h1>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
+          <div className="text-sm text-gray-500">
+            Authorized admin emails:
+            <div className="mt-2 font-mono text-xs bg-gray-100 dark:bg-gray-700 p-2 rounded">
+              kaarthii009.g@gmail.com<br/>
+              karthii009.g@gmail.com
+            </div>
+          </div>
+          <p className="text-sm text-gray-500 mt-4">Redirecting to dashboard...</p>
         </div>
       </div>
     )
