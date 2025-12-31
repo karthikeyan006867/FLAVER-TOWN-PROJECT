@@ -23,6 +23,8 @@ interface Certificate {
   progress?: number
   testPassed?: boolean
   allLessonsCompleted?: boolean
+  projectCompleted?: boolean
+  testScore?: number
 }
 
 export default function CertificationsPage() {
@@ -39,24 +41,34 @@ export default function CertificationsPage() {
     }
   }, [isLoaded, user, setUserId, loadProgressFromServer])
 
-  // Generate certificates based on actual course completion + test pass
+  // Generate certificates based on actual course completion + project + test pass
   const certificates: Certificate[] = useMemo(() => {
     if (!user) return []
     
     return courses.map(course => {
       const progress = courseProgress[course.id] || { completed: 0, total: course.lessons.length, percentage: 0 }
       
-      // Check if all lessons are completed
+      const userMetadata = user.publicMetadata as any || {}
+      const completedLessons = userMetadata.completedLessons || []
+      
+      // Separate project lessons from regular lessons
+      const regularLessons = course.lessons.filter(l => !l.isProject)
+      const projectLessons = course.lessons.filter(l => l.isProject)
+      
+      // Check if all lessons are completed (100% includes projects)
       const allLessonsCompleted = progress.percentage === 100
       
-      // Check if user passed the certification test
-      const userMetadata = user.publicMetadata as any || {}
-      const testAttempts = userMetadata.testAttempts || {}
-      const courseTest = testAttempts[course.id] || { passed: false }
-      const testPassed = courseTest.passed
+      // Check if project is completed specifically
+      const projectCompleted = projectLessons.length === 0 || projectLessons.every(lesson => completedLessons.includes(lesson.id))
       
-      // Certificate is earned only if BOTH lessons AND test are completed
-      const isCompleted = allLessonsCompleted && testPassed
+      // Check if user passed the certification test
+      const testAttempts = userMetadata.testAttempts || {}
+      const courseTest = testAttempts[course.id] || { passed: false, bestScore: 0 }
+      const testPassed = courseTest.passed
+      const testScore = courseTest.bestScore || 0
+      
+      // Certificate is earned only if lessons AND project AND test are completed
+      const isCompleted = allLessonsCompleted && projectCompleted && testPassed
       
       // Generate credential ID
       const courseCode = course.id.toUpperCase().substring(0, 3)
@@ -79,7 +91,9 @@ export default function CertificationsPage() {
         earned: isCompleted,
         progress: progress.percentage,
         testPassed,
-        allLessonsCompleted
+        allLessonsCompleted,
+        projectCompleted,
+        testScore
       }
     })
   }, [courseProgress, user])
@@ -131,8 +145,7 @@ export default function CertificationsPage() {
                 day: 'numeric' 
               })}
               credentialId={viewingCert.credentialId}
-              skills={viewingCert.skills}
-              onDownload={() => downloadCertificate(viewingCert)}
+              skills={viewingCert.skills}              testScore={viewingCert.testScore}              onDownload={() => downloadCertificate(viewingCert)}
               onShare={() => shareCertificate(viewingCert)}
             />
           </div>

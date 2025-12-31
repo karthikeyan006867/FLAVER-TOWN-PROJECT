@@ -29,6 +29,7 @@ export default function CertificationTestPage() {
   const [loading, setLoading] = useState(true)
   const [isAdmin, setIsAdmin] = useState(false)
   const [allLessonsCompleted, setAllLessonsCompleted] = useState(false)
+  const [projectCompleted, setProjectCompleted] = useState(false)
 
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const visibilityRef = useRef(true)
@@ -56,13 +57,23 @@ export default function CertificationTestPage() {
           console.error('Failed to check admin status:', error)
         }
 
-        // Check lesson completion
+        // Check lesson and project completion
         const course = courses.find(c => c.id === courseId)
         if (course) {
           const metadata = user.publicMetadata as any || {}
           const completedLessons = metadata.completedLessons || []
-          const allCompleted = course.lessons.every(lesson => completedLessons.includes(lesson.id))
-          setAllLessonsCompleted(allCompleted)
+          
+          // Separate project lessons from regular lessons
+          const regularLessons = course.lessons.filter(l => !l.isProject)
+          const projectLessons = course.lessons.filter(l => l.isProject)
+          
+          // Check if all regular lessons are completed
+          const allRegularCompleted = regularLessons.every(lesson => completedLessons.includes(lesson.id))
+          setAllLessonsCompleted(allRegularCompleted)
+          
+          // Check if project is completed
+          const projectComplete = projectLessons.length === 0 || projectLessons.every(lesson => completedLessons.includes(lesson.id))
+          setProjectCompleted(projectComplete)
         }
 
         // Fetch user's attempt history
@@ -356,9 +367,23 @@ export default function CertificationTestPage() {
                   <div className="flex items-start gap-3">
                     <XCircle className="h-6 w-6 text-red-500 flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="font-bold text-lg text-red-100 mb-2">Test Locked</h3>
+                      <h3 className="font-bold text-lg text-red-100 mb-2">Step 1: Complete All Lessons</h3>
                       <p className="text-red-100 text-sm">
-                        You must complete all {courses.find(c => c.id === courseId)?.lessons.length} lessons before taking the certification test.
+                        You must complete all regular lessons before taking the final project.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {allLessonsCompleted && !projectCompleted && !isAdmin && (
+                <div className="bg-orange-900/30 border border-orange-700 rounded-lg p-6 mb-6">
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="h-6 w-6 text-orange-500 flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="font-bold text-lg text-orange-100 mb-2">Step 2: Complete Final Project</h3>
+                      <p className="text-orange-100 text-sm">
+                        Complete the final project before taking the certification test.
                       </p>
                     </div>
                   </div>
@@ -377,11 +402,13 @@ export default function CertificationTestPage() {
               <div className="flex gap-4">
                 <button
                   onClick={startTest}
-                  disabled={(attemptsLeft <= 0 && !isAdmin) || (!allLessonsCompleted && !isAdmin)}
+                  disabled={(attemptsLeft <= 0 && !isAdmin) || (!allLessonsCompleted && !isAdmin) || (!projectCompleted && !isAdmin)}
                   className="flex-1 px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg text-white font-bold text-lg hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {!allLessonsCompleted && !isAdmin 
                     ? 'Complete All Lessons First' 
+                    : !projectCompleted && !isAdmin
+                    ? 'Complete Final Project First'
                     : isAdmin 
                     ? 'Start Test (Admin)' 
                     : attemptsLeft > 0 

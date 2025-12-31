@@ -9,6 +9,7 @@ interface CertificateProps {
   completionDate: string
   credentialId: string
   skills: string[]
+  testScore?: number
   onDownload?: () => void
   onShare?: () => void
 }
@@ -19,6 +20,7 @@ export default function Certificate({
   completionDate, 
   credentialId,
   skills,
+  testScore,
   onShare 
 }: CertificateProps) {
   const certificateRef = useRef<HTMLDivElement>(null)
@@ -194,6 +196,16 @@ export default function Certificate({
               ))}
             </div>
           </div>
+
+          {/* Test Score Badge */}
+          {testScore !== undefined && testScore > 0 && (
+            <div className="mb-8">
+              <div className="inline-block bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-3 rounded-lg shadow-lg">
+                <p className="text-white text-sm uppercase tracking-wider mb-1">Final Test Score</p>
+                <p className="text-white text-3xl font-bold">{testScore}%</p>
+              </div>
+            </div>
+          )}
 
           {/* Badge and Signatures */}
           <div className="flex items-center justify-between max-w-3xl mx-auto mt-12 pt-8 border-t border-gray-700">
