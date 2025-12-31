@@ -7,7 +7,7 @@ import {
   Users, BarChart3, Award, Settings, Bell, Database, 
   Activity, TrendingUp, BookOpen, Shield, Download, 
   Upload, Mail, Tag, Lock, Trash2, RefreshCw, Search,
-  UserPlus, UserMinus, CheckCircle, XCircle, AlertCircle
+  UserPlus, UserMinus, CheckCircle, XCircle, AlertCircle, Archive
 } from 'lucide-react'
 
 export default function AdminPage() {
@@ -414,19 +414,198 @@ export default function AdminPage() {
                 </div>
               )}
 
+              {activeTab === 'analytics' && (
+                <div className="space-y-6">
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">Platform Analytics</h2>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-3">User Engagement</h3>
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600 dark:text-gray-400">Total Users</span>
+                          <span className="font-bold text-gray-900 dark:text-white">{stats.totalUsers}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600 dark:text-gray-400">Active Users</span>
+                          <span className="font-bold text-gray-900 dark:text-white">{stats.activeUsers}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600 dark:text-gray-400">Engagement Rate</span>
+                          <span className="font-bold text-green-600">
+                            {stats.totalUsers > 0 ? Math.round((stats.activeUsers / stats.totalUsers) * 100) : 0}%
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Learning Metrics</h3>
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600 dark:text-gray-400">Total Lessons Completed</span>
+                          <span className="font-bold text-gray-900 dark:text-white">{stats.totalLessonsCompleted}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600 dark:text-gray-400">Avg Lessons/User</span>
+                          <span className="font-bold text-gray-900 dark:text-white">{stats.averageLessonsPerUser}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600 dark:text-gray-400">Total Points Awarded</span>
+                          <span className="font-bold text-gray-900 dark:text-white">{stats.totalPoints.toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600 dark:text-gray-400">Avg Points/User</span>
+                          <span className="font-bold text-gray-900 dark:text-white">{stats.averagePointsPerUser}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Quick Actions</h3>
+                    <div className="flex flex-wrap gap-3">
+                      <button
+                        onClick={exportData}
+                        className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-sm"
+                      >
+                        <Download className="w-4 h-4 inline mr-1" />
+                        Export User Data
+                      </button>
+                      <button
+                        onClick={async () => {
+                          const res = await fetch('/api/admin/analytics/engagement')
+                          const data = await res.json()
+                          alert(`Engagement Report:\n${JSON.stringify(data, null, 2)}`)
+                        }}
+                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm"
+                      >
+                        <TrendingUp className="w-4 h-4 inline mr-1" />
+                        View Engagement Report
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {activeTab === 'notifications' && (
-                <div>
-                  <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Send Notifications</h2>
-                  <button
-                    onClick={() => {
-                      const msg = prompt('Enter broadcast message:')
-                      if (msg) broadcastNotification(msg)
-                    }}
-                    className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-medium"
-                  >
-                    <Bell className="w-4 h-4 inline mr-2" />
-                    Broadcast to All Users
-                  </button>
+                <div className="space-y-6">
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">Send Notifications</h2>
+                  
+                  <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Broadcast Message</h3>
+                    <div className="space-y-3">
+                      <textarea
+                        id="broadcast-message"
+                        placeholder="Enter your broadcast message here..."
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white min-h-[100px]"
+                      />
+                      <button
+                        onClick={() => {
+                          const textarea = document.getElementById('broadcast-message') as HTMLTextAreaElement
+                          if (textarea.value) {
+                            broadcastNotification(textarea.value)
+                            textarea.value = ''
+                          }
+                        }}
+                        className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-medium"
+                      >
+                        <Bell className="w-4 h-4 inline mr-2" />
+                        Send to All Users ({stats.totalUsers})
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Targeted Notification</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                      Click on any user in the User Management tab to send them a personalized notification.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'system' && (
+                <div className="space-y-6">
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">System Management</h2>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                        <Database className="w-5 h-5" />
+                        Database Operations
+                      </h3>
+                      <div className="space-y-2">
+                        <button
+                          onClick={exportData}
+                          className="w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-sm text-left"
+                        >
+                          <Download className="w-4 h-4 inline mr-2" />
+                          Export All User Data
+                        </button>
+                        <button
+                          onClick={async () => {
+                            if (confirm('This will backup all user progress. Continue?')) {
+                              const res = await fetch('/api/admin/export/progress?format=json')
+                              const data = await res.json()
+                              const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+                              const url = URL.createObjectURL(blob)
+                              const a = document.createElement('a')
+                              a.href = url
+                              a.download = `progress-backup-${Date.now()}.json`
+                              a.click()
+                            }
+                          }}
+                          className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm text-left"
+                        >
+                          <Archive className="w-4 h-4 inline mr-2" />
+                          Backup Progress Data
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                        <Shield className="w-5 h-5" />
+                        Admin Settings
+                      </h3>
+                      <div className="space-y-2">
+                        <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">Authorized Admins</p>
+                          <p className="font-mono text-xs text-gray-800 dark:text-gray-300 mt-1">
+                            kaarthii009.g@gmail.com
+                          </p>
+                          <p className="font-mono text-xs text-gray-800 dark:text-gray-300">
+                            karthii009.g@gmail.com
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="border border-red-200 dark:border-red-800 rounded-lg p-4 bg-red-50 dark:bg-red-900/10">
+                    <h3 className="font-semibold text-red-900 dark:text-red-100 mb-3 flex items-center gap-2">
+                      <AlertCircle className="w-5 h-5" />
+                      Danger Zone
+                    </h3>
+                    <p className="text-sm text-red-700 dark:text-red-300 mb-3">
+                      These actions cannot be undone. Use with extreme caution.
+                    </p>
+                    <button
+                      onClick={() => {
+                        if (confirm('⚠️ This will reset ALL user progress. This CANNOT be undone!\n\nType "RESET" to confirm.')) {
+                          const confirmation = prompt('Type RESET to confirm:')
+                          if (confirmation === 'RESET') {
+                            alert('Mass reset functionality requires additional authentication. Contact system administrator.')
+                          }
+                        }
+                      }}
+                      className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm"
+                    >
+                      <Trash2 className="w-4 h-4 inline mr-2" />
+                      Reset All User Progress
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
@@ -437,72 +616,281 @@ export default function AdminPage() {
       {/* User Detail Modal */}
       {selectedUser && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6">
-            <div className="flex justify-between items-start mb-4">
+          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6">
+            <div className="flex justify-between items-start mb-6">
               <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
                   {selectedUser.firstName} {selectedUser.lastName}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400">{selectedUser.email}</p>
+                <p className="text-sm text-gray-500 mt-1">User ID: {selectedUser.id}</p>
               </div>
               <button
                 onClick={() => setSelectedUser(null)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
               >
                 <XCircle className="w-6 h-6" />
               </button>
             </div>
 
-            <div className="space-y-4">
-              <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Completed Lessons</p>
+            {/* User Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                <p className="text-sm text-blue-600 dark:text-blue-400">Lessons</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {selectedUser.metadata?.completedLessons?.length || 0}
                 </p>
               </div>
-
-              <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <button
-                  onClick={() => {
-                    const lessons = prompt('Enter lesson IDs (comma-separated):')
-                    if (lessons) unlockLessons(selectedUser.id, lessons.split(',').map(l => l.trim()))
-                  }}
-                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-sm"
-                >
-                  <UserPlus className="w-4 h-4 inline mr-1" />
-                  Add Lessons
-                </button>
-
-                <button
-                  onClick={() => {
-                    const lessons = prompt('Enter lesson IDs to remove (comma-separated):')
-                    if (lessons) removeLessons(selectedUser.id, lessons.split(',').map(l => l.trim()))
-                  }}
-                  className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 text-sm"
-                >
-                  <UserMinus className="w-4 h-4 inline mr-1" />
-                  Remove Lessons
-                </button>
-
-                <button
-                  onClick={() => {
-                    const points = prompt('Enter points amount:')
-                    if (points) updatePoints(selectedUser.id, parseInt(points))
-                  }}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm"
-                >
-                  <Award className="w-4 h-4 inline mr-1" />
-                  Set Points
-                </button>
-
-                <button
-                  onClick={() => resetProgress(selectedUser.id, 'all')}
-                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 text-sm"
-                >
-                  <Trash2 className="w-4 h-4 inline mr-1" />
-                  Reset All
-                </button>
+              <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                <p className="text-sm text-green-600 dark:text-green-400">Points</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {selectedUser.metadata?.points || 0}
+                </p>
               </div>
+              <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+                <p className="text-sm text-purple-600 dark:text-purple-400">Streak</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {selectedUser.metadata?.streak || 0}
+                </p>
+              </div>
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg">
+                <p className="text-sm text-yellow-600 dark:text-yellow-400">Achievements</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {selectedUser.metadata?.achievements?.length || 0}
+                </p>
+              </div>
+            </div>
+
+            {/* Action Sections */}
+            <div className="space-y-6">
+              {/* Lesson Management */}
+              <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                  <BookOpen className="w-5 h-5" />
+                  Manage Lessons
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      Add Lessons (comma-separated)
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        id={`add-lessons-${selectedUser.id}`}
+                        placeholder="html-1, html-2, css-1"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                      />
+                      <button
+                        onClick={() => {
+                          const input = document.getElementById(`add-lessons-${selectedUser.id}`) as HTMLInputElement
+                          const lessons = input.value
+                          if (lessons) {
+                            unlockLessons(selectedUser.id, lessons.split(',').map(l => l.trim()))
+                            input.value = ''
+                          }
+                        }}
+                        className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-sm whitespace-nowrap"
+                      >
+                        <UserPlus className="w-4 h-4 inline mr-1" />
+                        Add
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      Remove Lessons (comma-separated)
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        id={`remove-lessons-${selectedUser.id}`}
+                        placeholder="html-1, html-2"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                      />
+                      <button
+                        onClick={() => {
+                          const input = document.getElementById(`remove-lessons-${selectedUser.id}`) as HTMLInputElement
+                          const lessons = input.value
+                          if (lessons) {
+                            removeLessons(selectedUser.id, lessons.split(',').map(l => l.trim()))
+                            input.value = ''
+                          }
+                        }}
+                        className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 text-sm whitespace-nowrap"
+                      >
+                        <UserMinus className="w-4 h-4 inline mr-1" />
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Points Management */}
+              <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                  <Award className="w-5 h-5" />
+                  Manage Points
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      Set Points
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="number"
+                        id={`set-points-${selectedUser.id}`}
+                        placeholder="1000"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                      />
+                      <button
+                        onClick={() => {
+                          const input = document.getElementById(`set-points-${selectedUser.id}`) as HTMLInputElement
+                          const points = input.value
+                          if (points) {
+                            updatePoints(selectedUser.id, parseInt(points), 'set')
+                            input.value = ''
+                          }
+                        }}
+                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm"
+                      >
+                        Set
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      Add Points
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="number"
+                        id={`add-points-${selectedUser.id}`}
+                        placeholder="500"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                      />
+                      <button
+                        onClick={() => {
+                          const input = document.getElementById(`add-points-${selectedUser.id}`) as HTMLInputElement
+                          const points = input.value
+                          if (points) {
+                            updatePoints(selectedUser.id, parseInt(points), 'add')
+                            input.value = ''
+                          }
+                        }}
+                        className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-sm"
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      Subtract Points
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="number"
+                        id={`sub-points-${selectedUser.id}`}
+                        placeholder="100"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                      />
+                      <button
+                        onClick={() => {
+                          const input = document.getElementById(`sub-points-${selectedUser.id}`) as HTMLInputElement
+                          const points = input.value
+                          if (points) {
+                            updatePoints(selectedUser.id, parseInt(points), 'subtract')
+                            input.value = ''
+                          }
+                        }}
+                        className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 text-sm"
+                      >
+                        Subtract
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Other Actions */}
+              <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                  <Settings className="w-5 h-5" />
+                  Other Actions
+                </h4>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <button
+                    onClick={() => {
+                      const streak = prompt('Enter new streak value:', selectedUser.metadata?.streak?.toString() || '0')
+                      if (streak !== null) {
+                        fetch('/api/admin/users/update-streak', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ userId: selectedUser.id, streak: parseInt(streak) })
+                        }).then(() => {
+                          alert('Streak updated!')
+                          loadUsers()
+                        })
+                      }
+                    }}
+                    className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 text-sm"
+                  >
+                    Set Streak
+                  </button>
+                  <button
+                    onClick={() => {
+                      const msg = prompt('Enter notification message:')
+                      if (msg) sendNotification(selectedUser.id, msg)
+                    }}
+                    className="px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 text-sm"
+                  >
+                    <Bell className="w-4 h-4 inline mr-1" />
+                    Notify
+                  </button>
+                  <button
+                    onClick={() => resetProgress(selectedUser.id, 'lessons')}
+                    className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 text-sm"
+                  >
+                    Reset Lessons
+                  </button>
+                  <button
+                    onClick={() => resetProgress(selectedUser.id, 'all')}
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 text-sm"
+                  >
+                    <Trash2 className="w-4 h-4 inline mr-1" />
+                    Reset All
+                  </button>
+                </div>
+              </div>
+
+              {/* Current Lessons Display */}
+              {selectedUser.metadata?.completedLessons && selectedUser.metadata.completedLessons.length > 0 && (
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                    Current Lessons ({selectedUser.metadata.completedLessons.length})
+                  </h4>
+                  <div className="max-h-40 overflow-y-auto">
+                    <div className="flex flex-wrap gap-2">
+                      {selectedUser.metadata.completedLessons.slice(0, 50).map((lesson: string) => (
+                        <span
+                          key={lesson}
+                          className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded text-xs"
+                        >
+                          {lesson}
+                        </span>
+                      ))}
+                      {selectedUser.metadata.completedLessons.length > 50 && (
+                        <span className="px-2 py-1 text-gray-500 text-xs">
+                          +{selectedUser.metadata.completedLessons.length - 50} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

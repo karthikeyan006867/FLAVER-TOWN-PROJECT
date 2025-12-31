@@ -113,16 +113,16 @@ export default function Sidebar() {
         <div className="p-4 border-t border-gray-800 space-y-2">
           {isAdmin && (
             <Link
-              href="/admin"
+              href="/admin-panel"
               onClick={() => setMobileOpen(false)}
               className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all group ${
-                pathname === '/admin' || pathname?.startsWith('/admin/')
+                pathname === '/admin-panel' || pathname?.startsWith('/admin-panel/')
                   ? 'bg-gradient-to-r from-red-500/20 to-orange-500/20 text-white border border-red-500/30'
                   : 'text-gray-400 hover:bg-gray-800 hover:text-white'
               }`}
               title={collapsed ? 'Admin Dashboard' : ''}
             >
-              <Shield className={`h-5 w-5 ${pathname === '/admin' ? 'text-red-400' : 'group-hover:text-red-400'}`} />
+              <Shield className={`h-5 w-5 ${pathname === '/admin-panel' ? 'text-red-400' : 'group-hover:text-red-400'}`} />
               {!collapsed && <span className="font-medium">Admin Dashboard</span>}
             </Link>
           )}
