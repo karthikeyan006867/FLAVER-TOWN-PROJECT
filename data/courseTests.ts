@@ -360,12 +360,211 @@ export const htmlTest: CourseTest = {
   ]
 }
 
+// CSS Test
+export const cssTest: CourseTest = {
+  courseId: 'css',
+  courseName: 'CSS Styling',
+  passingScore: 70,
+  timeLimit: 20,
+  maxAttempts: 3,
+  questions: [
+    {
+      id: 'css-1',
+      question: 'Which CSS property is used to change the text color of an element?',
+      options: ['text-color', 'color', 'font-color', 'text-style'],
+      correctAnswer: 1,
+      explanation: 'The "color" property is used to set the text color in CSS.',
+      difficulty: 'Easy'
+    },
+    {
+      id: 'css-2',
+      question: 'What does the CSS box model consist of?',
+      options: ['Content, Padding, Border, Margin', 'Content, Border, Outline', 'Padding, Border, Shadow', 'Margin, Padding, Width'],
+      correctAnswer: 0,
+      explanation: 'The CSS box model consists of Content, Padding, Border, and Margin from inside to outside.',
+      difficulty: 'Medium'
+    },
+    {
+      id: 'css-3',
+      question: 'Which property is used to make text bold?',
+      options: ['text-style: bold', 'font-weight: bold', 'text-weight: bold', 'font-style: bold'],
+      correctAnswer: 1,
+      explanation: 'font-weight: bold is the correct property to make text bold.',
+      difficulty: 'Easy'
+    },
+    {
+      id: 'css-4',
+      question: 'What is the default position value of an HTML element?',
+      options: ['relative', 'absolute', 'static', 'fixed'],
+      correctAnswer: 2,
+      explanation: 'The default position value is "static", which means elements are positioned according to the normal flow.',
+      difficulty: 'Medium'
+    },
+    {
+      id: 'css-5',
+      question: 'Which CSS property controls the space between elements?',
+      options: ['padding', 'margin', 'spacing', 'border-spacing'],
+      correctAnswer: 1,
+      explanation: 'Margin controls the space outside an element, between elements.',
+      difficulty: 'Easy'
+    },
+    {
+      id: 'css-6',
+      question: 'How do you make a list not display bullet points?',
+      options: ['list-style: none', 'list-type: none', 'bullet-style: none', 'display: none'],
+      correctAnswer: 0,
+      explanation: 'list-style: none removes bullet points from lists.',
+      difficulty: 'Medium'
+    },
+    {
+      id: 'css-7',
+      question: 'Which property is used to create rounded corners?',
+      options: ['corner-radius', 'border-radius', 'round-corner', 'corner-style'],
+      correctAnswer: 1,
+      explanation: 'border-radius is used to create rounded corners on elements.',
+      difficulty: 'Easy'
+    },
+    {
+      id: 'css-8',
+      question: 'What does "display: flex" do?',
+      options: ['Makes element flexible in size', 'Creates a flexbox container', 'Makes element disappear', 'Creates flexible margins'],
+      correctAnswer: 1,
+      explanation: 'display: flex creates a flexbox container for flexible layouts.',
+      difficulty: 'Medium'
+    },
+    {
+      id: 'css-9',
+      question: 'Which property changes the background color?',
+      options: ['bgcolor', 'background-color', 'color-background', 'bg-color'],
+      correctAnswer: 1,
+      explanation: 'background-color is the property to change an element\'s background color.',
+      difficulty: 'Easy'
+    },
+    {
+      id: 'css-10',
+      question: 'What is the correct CSS syntax to select all <p> elements?',
+      options: ['p {}', '.p {}', '#p {}', '*p {}'],
+      correctAnswer: 0,
+      explanation: 'p {} selects all paragraph elements. . is for classes, # is for IDs.',
+      difficulty: 'Easy'
+    }
+  ]
+}
+
+// Generic test template for courses without specific tests
+function createGenericTest(courseId: string, courseName: string): CourseTest {
+  return {
+    courseId,
+    courseName,
+    passingScore: 70,
+    timeLimit: 20,
+    maxAttempts: 3,
+    questions: [
+      {
+        id: `${courseId}-1`,
+        question: `What is ${courseName} primarily used for?`,
+        options: ['Web Development', 'Data Analysis', 'System Programming', 'All of the above'],
+        correctAnswer: 3,
+        explanation: `${courseName} has various applications across different domains.`,
+        difficulty: 'Easy'
+      },
+      {
+        id: `${courseId}-2`,
+        question: `Which of the following is a key feature of ${courseName}?`,
+        options: ['Type Safety', 'Performance', 'Easy Syntax', 'All of the above'],
+        correctAnswer: 3,
+        explanation: `${courseName} combines multiple important features.`,
+        difficulty: 'Medium'
+      },
+      {
+        id: `${courseId}-3`,
+        question: `What is a common use case for ${courseName}?`,
+        options: ['Building Applications', 'Data Processing', 'Automation', 'All of the above'],
+        correctAnswer: 3,
+        explanation: `${courseName} can be used for various programming tasks.`,
+        difficulty: 'Easy'
+      },
+      {
+        id: `${courseId}-4`,
+        question: `Which concept is important in ${courseName}?`,
+        options: ['Variables', 'Functions', 'Control Flow', 'All of the above'],
+        correctAnswer: 3,
+        explanation: 'All programming languages use these fundamental concepts.',
+        difficulty: 'Medium'
+      },
+      {
+        id: `${courseId}-5`,
+        question: `What is a best practice when coding in ${courseName}?`,
+        options: ['Write clean code', 'Use comments', 'Follow conventions', 'All of the above'],
+        correctAnswer: 3,
+        explanation: 'Good coding practices apply to all programming languages.',
+        difficulty: 'Easy'
+      },
+      {
+        id: `${courseId}-6`,
+        question: `How do you typically handle errors in ${courseName}?`,
+        options: ['Try-Catch', 'Error Handling', 'Exceptions', 'All of the above'],
+        correctAnswer: 3,
+        explanation: 'Most languages provide error handling mechanisms.',
+        difficulty: 'Medium'
+      },
+      {
+        id: `${courseId}-7`,
+        question: `What is important for ${courseName} performance?`,
+        options: ['Algorithm Efficiency', 'Memory Management', 'Code Optimization', 'All of the above'],
+        correctAnswer: 3,
+        explanation: 'Performance depends on multiple factors.',
+        difficulty: 'Hard'
+      },
+      {
+        id: `${courseId}-8`,
+        question: `Which tool is commonly used with ${courseName}?`,
+        options: ['IDE', 'Compiler/Interpreter', 'Debugger', 'All of the above'],
+        correctAnswer: 3,
+        explanation: 'Modern development uses various tools.',
+        difficulty: 'Easy'
+      },
+      {
+        id: `${courseId}-9`,
+        question: `What should you learn to master ${courseName}?`,
+        options: ['Syntax', 'Libraries/Frameworks', 'Best Practices', 'All of the above'],
+        correctAnswer: 3,
+        explanation: 'Mastering a language requires comprehensive knowledge.',
+        difficulty: 'Medium'
+      },
+      {
+        id: `${courseId}-10`,
+        question: `Why is ${courseName} popular in the industry?`,
+        options: ['Large Community', 'Good Documentation', 'Wide Adoption', 'All of the above'],
+        correctAnswer: 3,
+        explanation: 'Popular languages have strong ecosystem support.',
+        difficulty: 'Easy'
+      }
+    ]
+  }
+}
+
 // Export all tests
 export const courseTests: Record<string, CourseTest> = {
   python: pythonTest,
   javascript: javaScriptTest,
-  html: htmlTest
-  // Tests for remaining courses will be added
+  html: htmlTest,
+  css: cssTest,
+  typescript: createGenericTest('typescript', 'TypeScript'),
+  react: createGenericTest('react', 'React'),
+  nodejs: createGenericTest('nodejs', 'Node.js'),
+  ruby: createGenericTest('ruby', 'Ruby'),
+  php: createGenericTest('php', 'PHP'),
+  java: createGenericTest('java', 'Java'),
+  csharp: createGenericTest('csharp', 'C#'),
+  go: createGenericTest('go', 'Go'),
+  rust: createGenericTest('rust', 'Rust'),
+  swift: createGenericTest('swift', 'Swift'),
+  kotlin: createGenericTest('kotlin', 'Kotlin'),
+  scala: createGenericTest('scala', 'Scala'),
+  dart: createGenericTest('dart', 'Dart'),
+  r: createGenericTest('r', 'R'),
+  integration: createGenericTest('integration', 'Full Stack Integration')
 }
 
 // Helper function to get test for a course
