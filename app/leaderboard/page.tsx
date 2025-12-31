@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { useUser } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import { Trophy, TrendingUp, Users, Globe, Award, Medal, Crown, Star, Zap, Target, Flame, Brain, Code, ArrowUp, ArrowDown, Minus, Filter, Search, UserPlus, Check, X, Clock } from 'lucide-react'
+import { Trophy, TrendingUp, Users, Globe, Award, Medal, Crown, Star, Zap, Target, Flame, Brain, Code, ArrowUp, ArrowDown, Minus, Filter, Search } from 'lucide-react'
 import { useProgressStore } from '@/store/progressStore'
 
 interface LeaderboardUser {
@@ -23,22 +23,18 @@ interface LeaderboardUser {
   languagesLearned: number
   rankChange: 'up' | 'down' | 'same'
   rankChangeValue: number
-  userId?: string
-  friendStatus?: 'none' | 'friend' | 'pending' | 'requested'
 }
 
 export default function LeaderboardPage() {
   const { user } = useUser()
   const { totalPoints, streak, completedLessons, completedChallenges } = useProgressStore()
   const [timeframe, setTimeframe] = useState<'daily' | 'weekly' | 'monthly' | 'alltime'>('alltime')
-  const [category, setCategory] = useState<'global' | 'friends'>('global')
   const [sortBy, setSortBy] = useState<'points' | 'streak' | 'lessons' | 'accuracy'>('points')
   const [searchQuery, setSearchQuery] = useState('')
   const [allUsers, setAllUsers] = useState<LeaderboardUser[]>([])
   const [loading, setLoading] = useState(true)
-  const [sendingRequest, setSendingRequest] = useState<string | null>(null)
 
-  // Fetch real users from database and friend statuses
+  // Fetch real users from database
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
@@ -47,29 +43,7 @@ export default function LeaderboardPage() {
         const data = await response.json()
         
         if (data.users) {
-          // Fetch friend statuses for all users
-          const friendsResponse = await fetch('/api/social/friends/list')
-          const friendsData = await friendsResponse.json()
-          const friendIds = friendsData.friends?.map((f: any) => f.userId) || []
-          
-          const requestsResponse = await fetch('/api/social/friends/requests')
-          const requestsData = await requestsResponse.json()
-          const requestIds = requestsData.requests?.map((r: any) => r.userId) || []
-
-          // Get user metadata to check pending requests
-          const userMetadata = user?.publicMetadata as any
-          const pendingIds = userMetadata?.pendingFriendRequests || []
-          
-          // Update users with friend status
-          const usersWithStatus = data.users.map((u: LeaderboardUser) => ({
-            ...u,
-            friendStatus: u.isCurrentUser ? 'none' : 
-                         friendIds.includes(u.userId) ? 'friend' :
-                         requestIds.includes(u.userId) ? 'requested' :
-                         pendingIds.includes(u.userId) ? 'pending' : 'none'
-          }))
-          
-          setAllUsers(usersWithStatus)
+          setAllUsers(data.users)
         }
       } catch (error) {
         console.error('Error fetching leaderboard:', error)
@@ -78,10 +52,8 @@ export default function LeaderboardPage() {
       }
     }
 
-    if (user) {
-      fetchLeaderboard()
-    }
-  }, [user])
+    fetchLeaderboard()
+  }, [])
   
   const topUsers = useMemo(() => {
     let filtered = [...allUsers]
@@ -153,78 +125,6 @@ export default function LeaderboardPage() {
     return { pointsDiff, streakDiff, lessonsDiff }
   }
 
-  const handleAddFriend = async (friendId: string) => {
-    try {
-      setSendingRequest(friendId)
-      const response = await fetch('/api/social/friends/request', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ friendId })
-      })
-
-      if (response.ok) {
-        // Update local state
-        setAllUsers(prev => prev.map(u => 
-          u.userId === friendId ? { ...u, friendStatus: 'pending' as const } : u
-        ))
-      }
-    } catch (error) {
-      console.error('Error sending friend request:', error)
-    } finally {
-      setSendingRequest(null)
-    }
-  }
-
-  const getFriendButton = (player: LeaderboardUser) => {
-    if (player.isCurrentUser || !player.userId) return null
-
-    const isLoading = sendingRequest === player.userId
-
-    switch (player.friendStatus) {
-      case 'friend':
-        return (
-          <button
-            disabled
-            className="flex items-center gap-1 px-3 py-1.5 bg-green-500/20 text-green-400 rounded-lg text-xs border border-green-500/30"
-          >
-            <Check className="h-3 w-3" />
-            Friends
-          </button>
-        )
-      case 'pending':
-        return (
-          <button
-            disabled
-            className="flex items-center gap-1 px-3 py-1.5 bg-yellow-500/20 text-yellow-400 rounded-lg text-xs border border-yellow-500/30"
-          >
-            <Clock className="h-3 w-3" />
-            Pending
-          </button>
-        )
-      case 'requested':
-        return (
-          <button
-            disabled
-            className="flex items-center gap-1 px-3 py-1.5 bg-blue-500/20 text-blue-400 rounded-lg text-xs border border-blue-500/30"
-          >
-            <UserPlus className="h-3 w-3" />
-            Requested
-          </button>
-        )
-      default:
-        return (
-          <button
-            onClick={() => handleAddFriend(player.userId!)}
-            disabled={isLoading}
-            className="flex items-center gap-1 px-3 py-1.5 bg-primary-500/20 text-primary-400 hover:bg-primary-500/30 rounded-lg text-xs border border-primary-500/30 transition-colors disabled:opacity-50"
-          >
-            <UserPlus className="h-3 w-3" />
-            {isLoading ? 'Sending...' : 'Add Friend'}
-          </button>
-        )
-    }
-  }
-
   return (
     <div className="min-h-screen bg-gray-950">
       <Navbar />
@@ -262,31 +162,6 @@ export default function LeaderboardPage() {
           {/* Advanced Filters & Search */}
           <div className="mb-6 space-y-4">
             <div className="flex flex-wrap gap-3">
-              <div className="flex gap-2 bg-gray-800/50 p-1 rounded-lg">
-                <button
-                  onClick={() => setCategory('global')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-md transition-all ${
-                    category === 'global'
-                      ? 'bg-primary-500 text-white'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  <Globe className="h-4 w-4" />
-                  Global
-                </button>
-                <button
-                  onClick={() => setCategory('friends')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-md transition-all ${
-                    category === 'friends'
-                      ? 'bg-primary-500 text-white'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  <Users className="h-4 w-4" />
-                  Friends
-                </button>
-              </div>
-
               <select
                 value={timeframe}
                 onChange={(e) => setTimeframe(e.target.value as any)}
@@ -526,18 +401,12 @@ export default function LeaderboardPage() {
                           <div className="text-xs text-gray-400 mb-1">Accuracy</div>
                           <div className="font-bold text-blue-400">{player.accuracy}%</div>
                         </div>
-                        
-                        {/* Add Friend Button */}
-                        {getFriendButton(player)}
                       </div>
 
                       {/* Points - Mobile */}
-                      <div className="lg:hidden">
-                        <div className="text-right mb-2">
-                          <div className="font-bold text-primary-400 text-lg">{player.points.toLocaleString()}</div>
-                          <div className="text-xs text-gray-400">points</div>
-                        </div>
-                        {getFriendButton(player)}
+                      <div className="lg:hidden text-right">
+                        <div className="font-bold text-primary-400 text-lg">{player.points.toLocaleString()}</div>
+                        <div className="text-xs text-gray-400">points</div>
                       </div>
                     </div>
 
