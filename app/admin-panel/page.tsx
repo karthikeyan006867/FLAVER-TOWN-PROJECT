@@ -38,6 +38,8 @@ export default function AdminDashboard() {
   const [selectedUser, setSelectedUser] = useState<string | null>(null)
   const [selectedCourse, setSelectedCourse] = useState<string>('')
   const [selectedLessons, setSelectedLessons] = useState<string[]>([])
+  const [pointsAmount, setPointsAmount] = useState<number>(0)
+  const [pointsOperation, setPointsOperation] = useState<'set' | 'add' | 'subtract'>('set')
   
   const [stats, setStats] = useState({
     totalUsers: 0,
@@ -178,8 +180,8 @@ export default function AdminDashboard() {
     }
   }
 
-  const resetUserProgress = async (userId: string, type: 'all' | 'lessons' | 'achievements' | 'points') => {
-    if (!confirm(`Reset ${type} for this user? This cannot be undone!`)) {
+  const resetUserProgress = async (userId: string, resetType: 'all' | 'lessons' | 'achievements' | 'points') => {
+    if (!confirm(`Reset ${resetType} for this user? This cannot be undone!`)) {
       return
     }
 
@@ -188,13 +190,13 @@ export default function AdminDashboard() {
       const response = await fetch('/api/admin/users/reset-progress', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId, type })
+        body: JSON.stringify({ userId, resetType })
       })
 
       const data = await response.json()
       
       if (data.success) {
-        alert(`✅ Successfully reset ${type}!`)
+        alert(`✅ Successfully reset ${resetType}!`)
         fetchAllUsers()
       } else {
         alert(`❌ Error: ${data.error}`)
@@ -202,6 +204,31 @@ export default function AdminDashboard() {
     } catch (error) {
       console.error('Failed to reset progress:', error)
       alert('❌ Failed to reset progress')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const updateUserPoints = async (userId: string, points: number, operation: 'set' | 'add' | 'subtract') => {
+    try {
+      setLoading(true)
+      const response = await fetch('/api/admin/users/update-points', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, points, operation })
+      })
+
+      const data = await response.json()
+      
+      if (data.success) {
+        alert(`✅ Points updated! Previous: ${data.previousPoints}, New: ${data.newPoints}`)
+        fetchAllUsers()
+      } else {
+        alert(`❌ Error: ${data.error}`)
+      }
+    } catch (error) {
+      console.error('Failed to update points:', error)
+      alert('❌ Failed to update points')
     } finally {
       setLoading(false)
     }
@@ -613,7 +640,7 @@ export default function AdminDashboard() {
                           </div>
                         </div>
                         
-                        <div className="pt-3 border-t border-gray-700 space-y-2">
+                        <div className="pt-3 border-t border-gray-700 space-y-3">
                           <h3 className="text-sm font-semibold text-gray-300">Quick Actions:</h3>
                           <div className="grid grid-cols-2 gap-2">
                             <button
@@ -640,6 +667,42 @@ export default function AdminDashboard() {
                             >
                               Reset All
                             </button>
+                          </div>
+                          
+                          <div className="pt-2 border-t border-gray-700">
+                            <h3 className="text-sm font-semibold text-gray-300 mb-2">Adjust Points:</h3>
+                            <div className="space-y-2">
+                              <div className="flex gap-2">
+                                <input
+                                  type="number"
+                                  value={pointsAmount}
+                                  onChange={(e) => setPointsAmount(Number(e.target.value))}
+                                  placeholder="Points amount"
+                                  className="flex-1 px-3 py-2 text-sm bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-purple-500 text-white"
+                                />
+                                <select
+                                  value={pointsOperation}
+                                  onChange={(e) => setPointsOperation(e.target.value as any)}
+                                  className="px-3 py-2 text-sm bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-purple-500 text-white"
+                                >
+                                  <option value="set">Set</option>
+                                  <option value="add">Add</option>
+                                  <option value="subtract">Subtract</option>
+                                </select>
+                              </div>
+                              <button
+                                onClick={() => {
+                                  if (pointsAmount !== 0 || pointsOperation === 'set') {
+                                    updateUserPoints(selectedUserData.userId, pointsAmount, pointsOperation)
+                                  } else {
+                                    alert('Please enter a points amount')
+                                  }
+                                }}
+                                className="w-full px-3 py-2 text-xs bg-purple-600 hover:bg-purple-700 rounded transition text-white font-medium"
+                              >
+                                Update Points
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
