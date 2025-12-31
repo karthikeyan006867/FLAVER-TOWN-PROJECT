@@ -177,8 +177,8 @@ export default function Certificate({
               {userName}
             </h2>
             <p className="text-gray-400 text-sm uppercase tracking-wider mb-3">has successfully completed</p>
-            <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-6">
-              {courseName}
+            <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-6" style={{ minHeight: '2.5rem' }}>
+              {courseName || 'Course Name'}
             </h3>
           </div>
 
