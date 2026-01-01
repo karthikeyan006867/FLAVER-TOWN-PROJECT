@@ -272,18 +272,46 @@ export default function CodeEditor({
                 return []
               }
               
-              // Handle function calls like square(5)
-              const funcCallMatch = expr.match(/^(\w+)\((.+)\)$/)
-              if (funcCallMatch && !expr.startsWith('len(') && !expr.startsWith('range(')) {
+              // Handle function calls like square(5) or Cat("name")
+              const funcCallMatch = expr.match(/^(\w+)\((.*)\)$/)
+              if (funcCallMatch && !expr.startsWith('len(') && !expr.startsWith('range(') && !expr.startsWith('sum(') && !expr.startsWith('min(') && !expr.startsWith('max(') && !expr.startsWith('sorted(')) {
                 const funcName = funcCallMatch[1]
                 const argStr = funcCallMatch[2].trim()
                 
-                // Recursively evaluate the argument
-                const argValue = evalPythonExpr(argStr)
-                
                 // If function is defined (as variable), call it
                 if (typeof variables[funcName] === 'function') {
-                  return variables[funcName](argValue)
+                  if (argStr) {
+                    // Evaluate arguments - handle multiple args separated by commas
+                    const args: any[] = []
+                    let currentArg = ''
+                    let depth = 0
+                    
+                    for (let i = 0; i < argStr.length; i++) {
+                      const char = argStr[i]
+                      if (char === '(' || char === '[' || char === '{') {
+                        depth++
+                        currentArg += char
+                      } else if (char === ')' || char === ']' || char === '}') {
+                        depth--
+                        currentArg += char
+                      } else if (char === ',' && depth === 0) {
+                        args.push(evalPythonExpr(currentArg.trim()))
+                        currentArg = ''
+                      } else {
+                        currentArg += char
+                      }
+                    }
+                    
+                    if (currentArg.trim()) {
+                      args.push(evalPythonExpr(currentArg.trim()))
+                    }
+                    
+                    // Call with multiple arguments
+                    return variables[funcName](...args)
+                  } else {
+                    // No arguments
+                    return variables[funcName]()
+                  }
                 }
                 // Return the expression as-is if we can't evaluate
                 return expr
@@ -956,7 +984,7 @@ export default function CodeEditor({
                 continue
               }
               
-              // Handle method calls on variables (e.g., list.append())
+              // Handle method calls on variables (e.g., list.append(), obj.method())
               if (trimmed.match(/^\w+\.\w+\(/)) {
                 const methodMatch = trimmed.match(/^(\w+)\.(\w+)\((.*)\)/)
                 if (methodMatch) {
@@ -964,12 +992,20 @@ export default function CodeEditor({
                   const method = methodMatch[2]
                   const args = methodMatch[3]
                   
+                  // Handle list methods
                   if (method === 'append' && Array.isArray(variables[objName])) {
                     let arg = args.trim()
                     if (arg.startsWith('"') || arg.startsWith("'")) {
                       arg = arg.slice(1, -1)
                     }
                     variables[objName].push(arg)
+                    continue
+                  }
+                  
+                  // Handle object methods (from classes)
+                  if (variables[objName] && typeof variables[objName] === 'object' && typeof variables[objName][method] === 'function') {
+                    variables[objName][method]()
+                    continue
                   }
                 }
                 continue
