@@ -208,6 +208,10 @@ export default function CodeEditor({
             let loopIterable: any[] = []
             let loopBody: string[] = []
             let loopIndent = 0
+            let inWhileLoop = false
+            let whileCondition = ''
+            let whileBody: string[] = []
+            let whileIndent = 0
             let inDictDef = false
             let dictName = ''
             let dictContent: string[] = []
@@ -230,6 +234,90 @@ export default function CodeEditor({
             // Helper function to evaluate Python expressions
             const evalPythonExpr = (expr: string): any => {
               expr = expr.trim()
+              
+              // Handle string slicing: text[start:end] or text[:end] or text[start:]
+              const stringSliceMatch = expr.match(/^(\w+)\[(-?\d+)?:(-?\d+)?\]$/)
+              if (stringSliceMatch) {
+                const varName = stringSliceMatch[1]
+                const start = stringSliceMatch[2] ? parseInt(stringSliceMatch[2]) : 0
+                const end = stringSliceMatch[3] ? parseInt(stringSliceMatch[3]) : undefined
+                
+                if (variables[varName] !== undefined) {
+                  const value = variables[varName]
+                  if (typeof value === 'string' || Array.isArray(value)) {
+                    return end !== undefined ? value.slice(start, end) : value.slice(start)
+                  }
+                }
+              }
+              
+              // Handle tuple creation in comprehensions: (x, y) for x, y in zip(...)
+              if (expr.startsWith('(') && expr.endsWith(')') && !expr.includes(' for ')) {
+                const tupleContent = expr.slice(1, -1)
+                // If it contains commas but no operators, it's a tuple
+                if (tupleContent.includes(',') && !tupleContent.match(/[+\-*/<>=]/)) {
+                  const parts = tupleContent.split(',').map(p => evalPythonExpr(p.trim()))
+                  return parts
+                }
+              }
+              
+              // Handle set literals: {1, 2, 3}
+              if (expr.startsWith('{') && expr.endsWith('}') && !expr.includes(':')) {
+                try {
+                  const setContent = expr.slice(1, -1)
+                  const elements = setContent.split(',').map(e => {
+                    e = e.trim()
+                    if (e.startsWith('"') || e.startsWith("'")) {
+                      return e.slice(1, -1)
+                    } else if (!isNaN(Number(e))) {
+                      return Number(e)
+                    }
+                    return evalPythonExpr(e)
+                  })
+                  // Return unique values (set behavior) - use Array.from instead of spread
+                  return Array.from(new Set(elements))
+                } catch {
+                  return []
+                }
+              }
+              
+              // Handle dictionary comprehension: {key: value for item in list}
+              const dictCompMatch = expr.match(/^\{(.+?):(.+?)\s+for\s+(\w+)\s+in\s+(\w+)(?:\s+if\s+(.+?))?\}$/)
+              if (dictCompMatch) {
+                const keyExpr = dictCompMatch[1].trim()
+                const valueExpr = dictCompMatch[2].trim()
+                const loopVar = dictCompMatch[3]
+                const iterableName = dictCompMatch[4]
+                const condition = dictCompMatch[5]
+                
+                const iterable = variables[iterableName]
+                if (Array.isArray(iterable)) {
+                  const result: { [key: string]: any } = {}
+                  for (const item of iterable) {
+                    const savedVar = variables[loopVar]
+                    variables[loopVar] = item
+                    
+                    let includeItem = true
+                    if (condition) {
+                      const conditionResult = evalPythonExpr(condition)
+                      includeItem = Boolean(conditionResult)
+                    }
+                    
+                    if (includeItem) {
+                      const key = evalPythonExpr(keyExpr)
+                      const value = evalPythonExpr(valueExpr)
+                      result[key] = value
+                    }
+                    
+                    if (savedVar !== undefined) {
+                      variables[loopVar] = savedVar
+                    } else {
+                      delete variables[loopVar]
+                    }
+                  }
+                  return result
+                }
+                return {}
+              }
               
               // Handle list comprehensions: [expr for var in iterable if condition]
               // Use greedy match for expression, non-greedy for condition to avoid consuming ]
@@ -342,6 +430,28 @@ export default function CodeEditor({
                     case 'title': return value.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')
                     case 'capitalize': return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
                     case 'strip': return value.trim()
+                  }
+                }
+              }
+              
+              // Handle set methods: set1.union(set2), set1.intersection(set2)
+              const setMethodMatch = expr.match(/^(\w+)\.(union|intersection|difference)\((\w+)\)$/)
+              if (setMethodMatch) {
+                const set1Name = setMethodMatch[1]
+                const method = setMethodMatch[2]
+                const set2Name = setMethodMatch[3]
+                
+                const set1 = variables[set1Name]
+                const set2 = variables[set2Name]
+                
+                if (Array.isArray(set1) && Array.isArray(set2)) {
+                  switch (method) {
+                    case 'union':
+                      return Array.from(new Set(set1.concat(set2)))
+                    case 'intersection':
+                      return set1.filter(item => set2.includes(item))
+                    case 'difference':
+                      return set1.filter(item => !set2.includes(item))
                   }
                 }
               }
@@ -1008,6 +1118,83 @@ export default function CodeEditor({
                 }
               }
               
+              // Handle while loops
+              if (trimmed.startsWith('while ') && trimmed.endsWith(':')) {
+                const whileMatch = trimmed.match(/while\s+(.+):/)
+                if (whileMatch) {
+                  inWhileLoop = true
+                  whileCondition = whileMatch[1].trim()
+                  whileBody = []
+                  whileIndent = indent
+                  continue
+                }
+              }
+              
+              // Check if we're exiting a while loop
+              if (inWhileLoop && indent <= whileIndent && trimmed) {
+                // Execute the while loop
+                let iterations = 0
+                const maxIterations = 1000 // Prevent infinite loops
+                
+                while (iterations < maxIterations) {
+                  // Evaluate condition
+                  const conditionResult = evalPythonExpr(whileCondition)
+                  if (!conditionResult) break
+                  
+                  // Execute loop body
+                  for (const bodyLine of whileBody) {
+                    const bodyTrimmed = bodyLine.trim()
+                    
+                    // Handle print statements
+                    if (bodyTrimmed.startsWith('print(')) {
+                      const printMatch = bodyTrimmed.match(/print\s*\((.*)\)/)
+                      if (printMatch) {
+                        let content = printMatch[1].trim()
+                        
+                        if (content.startsWith('f"') || content.startsWith("f'")) {
+                          content = content.slice(2, -1)
+                          content = content.replace(/\{([^}]+)\}/g, (_, expr) => {
+                            const value = evalPythonExpr(expr.trim())
+                            if (Array.isArray(value)) {
+                              return '[' + value.join(', ') + ']'
+                            }
+                            return String(value)
+                          })
+                          pythonOutput.push(content)
+                        } else if (content.startsWith('"') || content.startsWith("'")) {
+                          pythonOutput.push(content.slice(1, -1))
+                        } else {
+                          const output = evalPythonExpr(content)
+                          if (Array.isArray(output)) {
+                            pythonOutput.push('[' + output.join(', ') + ']')
+                          } else {
+                            pythonOutput.push(String(output))
+                          }
+                        }
+                      }
+                    }
+                    // Handle variable assignments and updates
+                    else if (bodyTrimmed.includes('=') && !bodyTrimmed.includes('==') && !bodyTrimmed.includes('!=')) {
+                      const eqIndex = bodyTrimmed.indexOf('=')
+                      const varName = bodyTrimmed.substring(0, eqIndex).trim()
+                      const value = bodyTrimmed.substring(eqIndex + 1).trim()
+                      variables[varName] = evalPythonExpr(value)
+                    }
+                  }
+                  
+                  iterations++
+                }
+                
+                inWhileLoop = false
+                whileBody = []
+              }
+              
+              // Collect while loop body
+              if (inWhileLoop && indent > whileIndent) {
+                whileBody.push(trimmed)
+                continue
+              }
+              
               // Collect loop body
               if (inForLoop && indent > loopIndent) {
                 loopBody.push(trimmed)
@@ -1067,6 +1254,43 @@ export default function CodeEditor({
                   // Handle regular strings
                   else if (content.startsWith('"') || content.startsWith("'")) {
                     pythonOutput.push(content.slice(1, -1))
+                  }
+                  // Handle multiple comma-separated values: print(x, y, z)
+                  else if (content.includes(',')) {
+                    const parts: string[] = []
+                    let current = ''
+                    let depth = 0
+                    
+                    for (let i = 0; i < content.length; i++) {
+                      const char = content[i]
+                      if (char === '(' || char === '[' || char === '{') {
+                        depth++
+                        current += char
+                      } else if (char === ')' || char === ']' || char === '}') {
+                        depth--
+                        current += char
+                      } else if (char === ',' && depth === 0) {
+                        parts.push(current.trim())
+                        current = ''
+                      } else {
+                        current += char
+                      }
+                    }
+                    
+                    if (current.trim()) {
+                      parts.push(current.trim())
+                    }
+                    
+                    // Evaluate each part and join with space
+                    const outputs = parts.map(part => {
+                      const value = evalPythonExpr(part)
+                      if (Array.isArray(value)) {
+                        return '[' + value.join(', ') + ']'
+                      }
+                      if (value === null || value === undefined) return ''
+                      return String(value)
+                    })
+                    pythonOutput.push(outputs.join(' '))
                   }
                   // Handle function calls, variables, expressions
                   else {
