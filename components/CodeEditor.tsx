@@ -640,6 +640,9 @@ export default function CodeEditor({
                             content = content.slice(2, -1)
                             content = content.replace(/\{([^}]+)\}/g, (_, expr) => {
                               const value = evalPythonExpr(expr.trim())
+                              if (Array.isArray(value)) {
+                                return '[' + value.join(', ') + ']'
+                              }
                               return String(value)
                             })
                             pythonOutput.push(content)
@@ -651,7 +654,11 @@ export default function CodeEditor({
                           // Handle expressions
                           else {
                             const output = evalPythonExpr(content)
-                            pythonOutput.push(String(output))
+                            if (Array.isArray(output)) {
+                              pythonOutput.push('[' + output.join(', ') + ']')
+                            } else {
+                              pythonOutput.push(String(output))
+                            }
                           }
                         }
                       }
@@ -897,6 +904,9 @@ export default function CodeEditor({
                           content = content.slice(2, -1)
                           content = content.replace(/\{([^}]+)\}/g, (_, expr) => {
                             const value = evalPythonExpr(expr.trim())
+                            if (Array.isArray(value)) {
+                              return '[' + value.join(', ') + ']'
+                            }
                             return String(value)
                           })
                           pythonOutput.push(content)
@@ -904,7 +914,11 @@ export default function CodeEditor({
                           pythonOutput.push(content.slice(1, -1))
                         } else {
                           const output = evalPythonExpr(content)
-                          pythonOutput.push(String(output))
+                          if (Array.isArray(output)) {
+                            pythonOutput.push('[' + output.join(', ') + ']')
+                          } else {
+                            pythonOutput.push(String(output))
+                          }
                         }
                       }
                     }
@@ -1022,6 +1036,14 @@ export default function CodeEditor({
                     content = content.slice(2, -1)
                     content = content.replace(/\{([^}]+)\}/g, (_, expr) => {
                       const value = evalPythonExpr(expr.trim())
+                      // Format arrays as Python lists
+                      if (Array.isArray(value)) {
+                        return '[' + value.join(', ') + ']'
+                      }
+                      // Format objects as Python dicts
+                      if (value && typeof value === 'object' && value.constructor === Object) {
+                        return JSON.stringify(value)
+                      }
                       return String(value)
                     })
                     pythonOutput.push(content)
@@ -1033,7 +1055,12 @@ export default function CodeEditor({
                   // Handle function calls, variables, expressions
                   else {
                     const output = evalPythonExpr(content)
-                    pythonOutput.push(String(output))
+                    // Format arrays as Python lists
+                    if (Array.isArray(output)) {
+                      pythonOutput.push('[' + output.join(', ') + ']')
+                    } else {
+                      pythonOutput.push(String(output))
+                    }
                   }
                 }
               }
@@ -1113,6 +1140,9 @@ export default function CodeEditor({
                         content = content.slice(2, -1)
                         content = content.replace(/\{([^}]+)\}/g, (_, expr) => {
                           const value = evalPythonExpr(expr.trim())
+                          if (Array.isArray(value)) {
+                            return '[' + value.join(', ') + ']'
+                          }
                           return String(value)
                         })
                         pythonOutput.push(content)
@@ -1124,7 +1154,11 @@ export default function CodeEditor({
                       // Handle expressions
                       else {
                         const output = evalPythonExpr(content)
-                        pythonOutput.push(String(output))
+                        if (Array.isArray(output)) {
+                          pythonOutput.push('[' + output.join(', ') + ']')
+                        } else {
+                          pythonOutput.push(String(output))
+                        }
                       }
                     }
                   }
