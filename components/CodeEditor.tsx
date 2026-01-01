@@ -84,6 +84,35 @@ export default function CodeEditor({
         return 'javascript'
     }
   }
+  
+  // Helper function to split map/filter arguments (handles nested parentheses)
+  const splitMapFilterArgs = (argsStr: string): string[] => {
+    const parts: string[] = []
+    let current = ''
+    let depth = 0
+    
+    for (let i = 0; i < argsStr.length; i++) {
+      const char = argsStr[i]
+      if (char === '(' || char === '[') {
+        depth++
+        current += char
+      } else if (char === ')' || char === ']') {
+        depth--
+        current += char
+      } else if (char === ',' && depth === 0) {
+        parts.push(current.trim())
+        current = ''
+      } else {
+        current += char
+      }
+    }
+    
+    if (current.trim()) {
+      parts.push(current.trim())
+    }
+    
+    return parts
+  }
 
   const runCode = async () => {
     setIsRunning(true)
@@ -192,6 +221,47 @@ export default function CodeEditor({
             // Helper function to evaluate Python expressions
             const evalPythonExpr = (expr: string): any => {
               expr = expr.trim()
+              
+              // Handle list comprehensions: [expr for var in iterable if condition]
+              const listCompMatch = expr.match(/^\[(.+?)\s+for\s+(\w+)\s+in\s+(\w+)(?:\s+if\s+(.+))?\]$/)
+              if (listCompMatch) {
+                const itemExpr = listCompMatch[1].trim()
+                const loopVar = listCompMatch[2]
+                const iterableName = listCompMatch[3]
+                const condition = listCompMatch[4]
+                
+                const iterable = variables[iterableName]
+                if (Array.isArray(iterable)) {
+                  const result: any[] = []
+                  for (const item of iterable) {
+                    // Set loop variable
+                    const savedVar = variables[loopVar]
+                    variables[loopVar] = item
+                    
+                    // Check condition if exists
+                    let includeItem = true
+                    if (condition) {
+                      const conditionResult = evalPythonExpr(condition)
+                      includeItem = Boolean(conditionResult)
+                    }
+                    
+                    // Evaluate expression if condition passes
+                    if (includeItem) {
+                      const value = evalPythonExpr(itemExpr)
+                      result.push(value)
+                    }
+                    
+                    // Restore loop variable
+                    if (savedVar !== undefined) {
+                      variables[loopVar] = savedVar
+                    } else {
+                      delete variables[loopVar]
+                    }
+                  }
+                  return result
+                }
+                return []
+              }
               
               // Handle function calls like square(5)
               const funcCallMatch = expr.match(/^(\w+)\((.+)\)$/)
@@ -303,13 +373,141 @@ export default function CodeEditor({
                 return []
               }
               
+              // Handle sum() function
+              if (expr.startsWith('sum(') && expr.endsWith(')')) {
+                const arg = expr.slice(4, -1).trim()
+                const arr = variables[arg] || evalPythonExpr(arg)
+                if (Array.isArray(arr)) {
+                  return arr.reduce((a, b) => a + b, 0)
+                }
+                return 0
+              }
+              
+              // Handle min() function
+              if (expr.startsWith('min(') && expr.endsWith(')')) {
+                const arg = expr.slice(4, -1).trim()
+                const arr = variables[arg] || evalPythonExpr(arg)
+                if (Array.isArray(arr) && arr.length > 0) {
+                  return Math.min(...arr)
+                }
+                return 0
+              }
+              
+              // Handle max() function
+              if (expr.startsWith('max(') && expr.endsWith(')')) {
+                const arg = expr.slice(4, -1).trim()
+                const arr = variables[arg] || evalPythonExpr(arg)
+                if (Array.isArray(arr) && arr.length > 0) {
+                  return Math.max(...arr)
+                }
+                return 0
+              }
+              
+              // Handle sorted() function
+              if (expr.startsWith('sorted(') && expr.endsWith(')')) {
+                const argsStr = expr.slice(7, -1)
+                // Simple case: sorted(list)
+                const commaPos = argsStr.indexOf(',')
+                if (commaPos === -1) {
+                  const arr = variables[argsStr.trim()] || evalPythonExpr(argsStr.trim())
+                  if (Array.isArray(arr)) {
+                    return [...arr].sort((a, b) => {
+                      if (typeof a === 'number' && typeof b === 'number') return a - b
+                      return String(a).localeCompare(String(b))
+                    })
+                  }
+                } else {
+                  // sorted(list, key=len) - sort by length
+                  const listPart = argsStr.substring(0, commaPos).trim()
+                  const arr = variables[listPart] || evalPythonExpr(listPart)
+                  if (Array.isArray(arr) && argsStr.includes('key=len')) {
+                    return [...arr].sort((a, b) => {
+                      const lenA = typeof a === 'string' ? a.length : 0
+                      const lenB = typeof b === 'string' ? b.length : 0
+                      return lenA - lenB
+                    })
+                  }
+                }
+                return []
+              }
+              
+              // Handle lambda functions: lambda x: x * 2
+              const lambdaMatch = expr.match(/^lambda\s+(\w+)\s*:\s*(.+)$/)
+              if (lambdaMatch) {
+                const param = lambdaMatch[1]
+                const body = lambdaMatch[2].trim()
+                // Return a function that evaluates the lambda body
+                return (argValue: any) => {
+                  const savedParam = variables[param]
+                  variables[param] = argValue
+                  const result = evalPythonExpr(body)
+                  if (savedParam !== undefined) {
+                    variables[param] = savedParam
+                  } else {
+                    delete variables[param]
+                  }
+                  return result
+                }
+              }
+              
+              // Handle map() function: list(map(lambda x: x*2, numbers))
+              if (expr.startsWith('list(map(') && expr.endsWith('))')) {
+                const innerArgs = expr.slice(9, -2) // Remove "list(map(" and "))"
+                // Extract lambda and array parts
+                const parts = splitMapFilterArgs(innerArgs)
+                if (parts.length === 2) {
+                  const lambdaExpr = parts[0].trim()
+                  const arrName = parts[1].trim()
+                  const arr = variables[arrName] || evalPythonExpr(arrName)
+                  const lambdaFunc = evalPythonExpr(lambdaExpr)
+                  
+                  if (Array.isArray(arr) && typeof lambdaFunc === 'function') {
+                    return arr.map(item => lambdaFunc(item))
+                  }
+                }
+                return []
+              }
+              
+              // Handle filter() function: list(filter(lambda x: x > 15, numbers))
+              if (expr.startsWith('list(filter(') && expr.endsWith('))')) {
+                const innerArgs = expr.slice(12, -2) // Remove "list(filter(" and "))"
+                const parts = splitMapFilterArgs(innerArgs)
+                if (parts.length === 2) {
+                  const lambdaExpr = parts[0].trim()
+                  const arrName = parts[1].trim()
+                  const arr = variables[arrName] || evalPythonExpr(arrName)
+                  const lambdaFunc = evalPythonExpr(lambdaExpr)
+                  
+                  if (Array.isArray(arr) && typeof lambdaFunc === 'function') {
+                    return arr.filter(item => lambdaFunc(item))
+                  }
+                }
+                return []
+              }
+              
+              // Handle zip() function in for loops (handled in loop section, but add basic support)
+              if (expr.startsWith('zip(') && expr.endsWith(')')) {
+                const argsStr = expr.slice(4, -1)
+                const argNames = argsStr.split(',').map(a => a.trim())
+                const arrays = argNames.map(name => variables[name] || [])
+                if (arrays.length >= 2 && arrays.every(a => Array.isArray(a))) {
+                  const minLen = Math.min(...arrays.map(a => a.length))
+                  const result: any[][] = []
+                  for (let i = 0; i < minLen; i++) {
+                    result.push(arrays.map(arr => arr[i]))
+                  }
+                  return result
+                }
+                return []
+              }
+              
               // Handle variables
               if (variables[expr] !== undefined) {
                 return variables[expr]
               }
               
-              // Handle arithmetic expressions (including ** power operator and // floor division)
-              if (expr.match(/[\+\-\*\/\%]|\*\*|\/\//)) {
+              // Handle comparison and arithmetic expressions
+              if (expr.match(/[\+\-\*\/\%]|\*\*|\/\/|==|!=|<=|>=|<|>/)) {
                 try {
                   const evalExpr = expr.replace(/(\w+)/g, (match: string) => {
                     if (variables[match] !== undefined) {
