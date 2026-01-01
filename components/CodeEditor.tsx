@@ -657,6 +657,8 @@ export default function CodeEditor({
                             const output = evalPythonExpr(content)
                             if (Array.isArray(output)) {
                               pythonOutput.push('[' + output.join(', ') + ']')
+                            } else if (output === null || output === undefined) {
+                              pythonOutput.push('')
                             } else {
                               pythonOutput.push(String(output))
                             }
@@ -833,15 +835,28 @@ export default function CodeEditor({
                                     // Handle self.property
                                     if (expr.startsWith('self.')) {
                                       const prop = expr.substring(5)
-                                      return String(instance[prop] || '')
+                                      const value = instance[prop]
+                                      if (value === null || value === undefined) return ''
+                                      return String(value)
                                     }
-                                    return String(expr)
+                                    // Handle other expressions in f-strings
+                                    const value = evalPythonExpr(expr)
+                                    if (Array.isArray(value)) {
+                                      return '[' + value.join(', ') + ']'
+                                    }
+                                    if (value === null || value === undefined) return ''
+                                    return String(value)
                                   })
                                   pythonOutput.push(content)
                                 } else if (content.startsWith('"') || content.startsWith("'")) {
                                   pythonOutput.push(content.slice(1, -1))
                                 } else {
-                                  pythonOutput.push(String(content))
+                                  const output = evalPythonExpr(content)
+                                  if (output === null || output === undefined) {
+                                    pythonOutput.push('')
+                                  } else {
+                                    pythonOutput.push(String(output))
+                                  }
                                 }
                               }
                             }
@@ -1059,6 +1074,8 @@ export default function CodeEditor({
                     // Format arrays as Python lists
                     if (Array.isArray(output)) {
                       pythonOutput.push('[' + output.join(', ') + ']')
+                    } else if (output === null || output === undefined) {
+                      pythonOutput.push('')
                     } else {
                       pythonOutput.push(String(output))
                     }
@@ -1163,6 +1180,8 @@ export default function CodeEditor({
                         const output = evalPythonExpr(content)
                         if (Array.isArray(output)) {
                           pythonOutput.push('[' + output.join(', ') + ']')
+                        } else if (output === null || output === undefined) {
+                          pythonOutput.push('')
                         } else {
                           pythonOutput.push(String(output))
                         }

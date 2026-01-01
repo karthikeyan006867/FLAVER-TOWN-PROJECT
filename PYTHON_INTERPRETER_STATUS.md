@@ -82,19 +82,6 @@
 - ✅ `filter()` - Filter items: `list(filter(lambda x: x>5, numbers))`
 - ✅ `zip()` - Combine lists: `for a, b in zip(list1, list2):`
 
-### Object-Oriented Programming (NEW!)
-- ✅ Classes (`class ClassName:`)
-- ✅ `__init__` constructor with parameters
-- ✅ `self` parameter for instance variables
-- ✅ Object methods
-- ✅ Instance creation and method calls
-
-### Exception Handling (NEW!)
-- ✅ Try/except blocks
-- ✅ Error catching and handling
-- ✅ Code execution in try block
-- ✅ Fallback to except block on errors
-
 ### Loop Features
 - ✅ Variable assignments inside loops
 - ✅ Function calls inside loops
