@@ -11,8 +11,6 @@ import { useProgressStore } from '@/store/progressStore'
 export default function ChallengesPage() {
   const [selectedChallenge, setSelectedChallenge] = useState<ChallengeType | null>(null)
   const [selectedLanguage, setSelectedLanguage] = useState<string>('javascript')
-  const [code, setCode] = useState('')
-  const [output, setOutput] = useState('')
   const [filter, setFilter] = useState<'all' | 'easy' | 'medium' | 'hard' | 'expert'>('all')
   const { completedChallenges, completeChallenge } = useProgressStore()
 
@@ -36,26 +34,9 @@ export default function ChallengesPage() {
   const totalPoints = completedChallenges.length * 100
   const completedCount = completedChallenges.length
 
-  const handleRunCode = () => {
-    try {
-      const logs: string[] = []
-      const originalLog = console.log
-      console.log = (...args: any[]) => {
-        logs.push(args.join(' '))
-      }
-      
-      eval(code)
-      console.log = originalLog
-      setOutput(logs.join('\n'))
-    } catch (error: any) {
-      setOutput(`Error: ${error.message}`)
-    }
-  }
-
   const handleSubmit = () => {
     if (!selectedChallenge) return
     
-    handleRunCode()
     // Mark as completed
     completeChallenge(selectedChallenge.id)
   }
@@ -202,39 +183,11 @@ export default function ChallengesPage() {
                     <div>
                       <h3 className="text-lg font-bold mb-3">Your Solution</h3>
                       <CodeEditor
-                        code={code}
-                        onChange={setCode}
                         language={selectedLanguage}
-                        height="400px"
+                        initialCode={selectedChallenge.starterCode[selectedLanguage]}
+                        testCases={selectedLanguage === 'javascript' || selectedLanguage === 'typescript' ? selectedChallenge.testCases : undefined}
+                        onSuccess={() => completeChallenge(selectedChallenge.id)}
                       />
-                    </div>
-
-                    {/* Output Display */}
-                    {output && (
-                      <div>
-                        <h3 className="text-lg font-bold mb-2">Output</h3>
-                        <div className="bg-gray-950 border border-gray-700 rounded-lg p-4 font-mono text-sm">
-                          <pre className="text-green-400 whitespace-pre-wrap">{output}</pre>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Action Buttons */}
-                    <div className="flex gap-3">
-                      <button
-                        onClick={handleRunCode}
-                        className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors"
-                      >
-                        <Code2 className="h-5 w-5" />
-                        Run Code
-                      </button>
-                      <button
-                        onClick={handleSubmit}
-                        className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-accent-500 hover:opacity-90 rounded-lg font-semibold transition-all"
-                      >
-                        <Trophy className="h-5 w-5" />
-                        Submit Solution
-                      </button>
                     </div>
                   </div>
 
