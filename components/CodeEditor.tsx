@@ -232,7 +232,8 @@ export default function CodeEditor({
               expr = expr.trim()
               
               // Handle list comprehensions: [expr for var in iterable if condition]
-              const listCompMatch = expr.match(/^\[(.+?)\s+for\s+(\w+)\s+in\s+(\w+)(?:\s+if\s+(.+))?\]$/)
+              // Use greedy match for expression, non-greedy for condition to avoid consuming ]
+              const listCompMatch = expr.match(/^\[(.+)\s+for\s+(\w+)\s+in\s+(\w+)(?:\s+if\s+(.+?))?\]$/)
               if (listCompMatch) {
                 const itemExpr = listCompMatch[1].trim()
                 const loopVar = listCompMatch[2]
