@@ -124,7 +124,7 @@ export default function PlaygroundPage() {
             <ul className="space-y-2 text-gray-300">
               <li className="flex items-start gap-2">
                 <span className="text-primary-400 mt-1">•</span>
-                <span>Click "Run Code" to see your output</span>
+                <span>Click &quot;Run Code&quot; to see your output</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary-400 mt-1">•</span>
