@@ -36,7 +36,6 @@ Complete the coding challenge below to test your knowledge.`,
     language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 120,
-    isProject: true,
     content: `# Fullstack Capstone Project - Todo Application 📝
 
 ## Project Overview
