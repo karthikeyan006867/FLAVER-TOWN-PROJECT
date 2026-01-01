@@ -40,7 +40,6 @@ print(f"Hello, I'm {name} and I'm {age} years old")
     solution: `name = "Alice"
 age = 25
 print(f"Hello, I'm {name} and I'm {age} years old")`,
-    expectedOutput: "Hello, I'm",
     hints: ['Use f"..." for f-strings', 'Variables don\'t need quotes for numbers'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
@@ -84,7 +83,6 @@ result3 = 8 * 7
 print(f"Addition: {result1}")
 print(f"Subtraction: {result2}")
 print(f"Multiplication: {result3}")`,
-    expectedOutput: "75",
     hints: ['Use +, -, * for operations', 'Print each result'],
     testCases: [
       { name: 'Shows 75', test: (code: string, output: string) => output.includes('75'), errorMessage: 'Should show 50 + 25 = 75' },
@@ -126,7 +124,6 @@ if age >= 18:
     print("Can vote")
 else:
     print("Too young")`,
-    expectedOutput: "Can vote",
     hints: ['Use if age >= 18:', 'Remember indentation!'],
     testCases: [
       { name: 'Has if statement', test: (code: string, output: string) => code.includes('if'), errorMessage: 'Use if statement' },
@@ -166,7 +163,6 @@ print(f"Total fruits: {len(fruits)}")
 fruits.append("mango")
 print(f"First fruit: {fruits[0]}")
 print(f"Total fruits: {len(fruits)}")`,
-    expectedOutput: "4",
     hints: ['Use .append() to add', 'Access with [0]', 'len() for count'],
     testCases: [
       { name: 'Creates list', test: (code: string, output: string) => code.includes('[') && code.includes(']'), errorMessage: 'Create a list with []' },
@@ -204,7 +200,6 @@ for num in numbers:
     solution: `numbers = [1, 2, 3, 4, 5]
 for num in numbers:
     print(num * 2)`,
-    expectedOutput: "2",
     hints: ['Use for num in list:', 'Multiply with num * 2'],
     testCases: [
       { name: 'Has for loop', test: (code: string, output: string) => code.includes('for '), errorMessage: 'Use a for loop' },
@@ -217,122 +212,231 @@ for num in numbers:
   // Lessons 6-50: Comprehensive topics with proper validation
     {
     id: 'python-6',
-    title: 'Functions',
-    description: 'Master functions in Python',
+    title: 'Functions - Reusable Code',
+    description: 'Create and use functions to organize code',
     language: 'python' as const,
     difficulty: 'Beginner',
-    estimatedTime: 30,
-    content: `# Functions
+    estimatedTime: 35,
+    content: `# Functions 🔧
 
-Learn and practice functions.
+Functions let you reuse code!
 
-## Examples
-Practice the concepts covered in this lesson.
+## Creating Functions
+\`\`\`python
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("Alice"))  # Hello, Alice!
+\`\`\`
+
+## Function with Return
+\`\`\`python
+def add(a, b):
+    return a + b
+
+result = add(5, 3)
+print(result)  # 8
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Functions
-# Write your code here
+Create a function \`square(n)\` that returns n squared. Test it with numbers 1-5.`,
+    initialCode: `# Create function that squares a number
+def square(n):
+    # Your code here
+    pass
 
+# Test your function
+for i in range(1, 6):
+    print(f"{i} squared = {square(i)}")
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `def square(n):
+    return n ** 2
+
+for i in range(1, 6):
+    print(f"{i} squared = {square(i)}")`,
+    hints: ['Use def to define function', 'Return n ** 2 or n * n', 'Call function inside loop'],
     testCases: [
-      { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Has function', test: (code: string, output: string) => code.includes('def '), errorMessage: 'Must define a function with def' },
+      { name: 'Returns value', test: (code: string, output: string) => code.includes('return'), errorMessage: 'Function should return a value' },
+      { name: 'Shows squares', test: (code: string, output: string) => output.includes('1') && output.includes('25'), errorMessage: 'Should show 1 squared and 5 squared (25)' },
+      { name: 'Multiple outputs', test: (code: string, output: string) => output.split('\n').length >= 5, errorMessage: 'Should print 5 results' }
     ]
   },
   {
     id: 'python-7',
-    title: 'Dictionaries',
-    description: 'Master dictionaries in Python',
+    title: 'Dictionaries - Key-Value Pairs',
+    description: 'Store and access data with dictionaries',
     language: 'python' as const,
     difficulty: 'Beginner',
-    estimatedTime: 30,
-    content: `# Dictionaries
+    estimatedTime: 35,
+    content: `# Dictionaries 📚
 
-Learn and practice dictionaries.
+Dictionaries store key-value pairs.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Creating Dictionaries
+\`\`\`python
+person = {
+    "name": "Alice",
+    "age": 25,
+    "city": "NYC"
+}
+
+print(person["name"])  # Alice
+print(person["age"])   # 25
+\`\`\`
+
+## Adding and Modifying
+\`\`\`python
+person["job"] = "Developer"  # Add new key
+person["age"] = 26           # Update value
+print(person)
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Dictionaries
-# Write your code here
+Create a dictionary for a book with title, author, year, and pages. Print each value.`,
+    initialCode: `# Create a book dictionary
+book = {
+    "title": "",
+    "author": "",
+    "year": 0,
+    "pages": 0
+}
 
+# Print each value
+print(f"Title: {book['title']}")
+print(f"Author: {book['author']}")
+print(f"Year: {book['year']}")
+print(f"Pages: {book['pages']}")
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `book = {
+    "title": "Python Guide",
+    "author": "John Doe",
+    "year": 2024,
+    "pages": 350
+}
+
+print(f"Title: {book['title']}")
+print(f"Author: {book['author']}")
+print(f"Year: {book['year']}")
+print(f"Pages: {book['pages']}")`,
+    hints: ['Use curly braces {} for dictionaries', 'Access with ["key"]', 'Strings need quotes, numbers don\'t'],
     testCases: [
-      { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Has dictionary', test: (code: string, output: string) => code.includes('{') && code.includes('}'), errorMessage: 'Must create a dictionary with {}' },
+      { name: 'Has keys', test: (code: string, output: string) => code.includes('"title"') || code.includes("'title'"), errorMessage: 'Dictionary should have keys like "title"' },
+      { name: 'Shows output', test: (code: string, output: string) => output.trim().length > 20, errorMessage: 'Should print dictionary values' },
+      { name: 'Multiple lines', test: (code: string, output: string) => output.split('\n').length >= 4, errorMessage: 'Should print at least 4 values' }
     ]
   },
   {
     id: 'python-8',
-    title: 'String Methods',
-    description: 'Master string methods in Python',
+    title: 'String Methods - Text Manipulation',
+    description: 'Transform and manipulate strings',
     language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
-    content: `# String Methods
+    content: `# String Methods 📝
 
-Learn and practice string methods.
+Python has many built-in string methods.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Common Methods
+\`\`\`python
+text = "  Hello World  "
+
+print(text.upper())      # HELLO WORLD
+print(text.lower())      # hello world
+print(text.strip())      # Hello World (removes spaces)
+print(text.replace("World", "Python"))  # Hello Python
+\`\`\`
+
+## Checking Strings
+\`\`\`python
+text = "hello"
+print(text.startswith("he"))  # True
+print(text.endswith("lo"))    # True
+print("123".isdigit())         # True
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# String Methods
-# Write your code here
+Create a name variable, then print it in uppercase, lowercase, and capitalized.`,
+    initialCode: `# String manipulation
+name = "python programming"
 
+# Print in different cases
+print(f"Uppercase: {name.upper()}")
+print(f"Lowercase: {name.lower()}")
+print(f"Title Case: {name.title()}")
+print(f"Length: {len(name)}")
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `name = "python programming"
+
+print(f"Uppercase: {name.upper()}")
+print(f"Lowercase: {name.lower()}")
+print(f"Title Case: {name.title()}")
+print(f"Length: {len(name)}")`,
+    hints: ['Use .upper() for uppercase', 'Use .lower() for lowercase', 'Use .title() for title case', 'len() gets string length'],
     testCases: [
-      { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Uses string methods', test: (code: string, output: string) => code.includes('.upper') || code.includes('.lower') || code.includes('.title'), errorMessage: 'Must use string methods like .upper() or .lower()' },
+      { name: 'Shows uppercase', test: (code: string, output: string) => /[A-Z]{5,}/.test(output), errorMessage: 'Should show uppercase text' },
+      { name: 'Multiple outputs', test: (code: string, output: string) => output.split('\n').length >= 3, errorMessage: 'Should print multiple transformations' }
     ]
   },
   {
     id: 'python-9',
-    title: 'List Comprehensions',
-    description: 'Master list comprehensions in Python',
+    title: 'List Comprehensions - Elegant Lists',
+    description: 'Create lists in a single line of code',
     language: 'python' as const,
-    difficulty: 'Beginner',
-    estimatedTime: 30,
-    content: `# List Comprehensions
+    difficulty: 'Intermediate',
+    estimatedTime: 40,
+    content: `# List Comprehensions ⚡
 
-Learn and practice list comprehensions.
+Create lists in a concise, elegant way.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Basic Syntax
+\`\`\`python
+# Traditional way
+squares = []
+for i in range(5):
+    squares.append(i ** 2)
+print(squares)  # [0, 1, 4, 9, 16]
+
+# List comprehension way
+squares = [i ** 2 for i in range(5)]
+print(squares)  # [0, 1, 4, 9, 16]
+\`\`\`
+
+## With Conditions
+\`\`\`python
+# Only even numbers
+evens = [i for i in range(10) if i % 2 == 0]
+print(evens)  # [0, 2, 4, 6, 8]
+
+# Only positive numbers
+numbers = [-2, -1, 0, 1, 2]
+positive = [n for n in numbers if n > 0]
+print(positive)  # [1, 2]
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# List Comprehensions
-# Write your code here
+Create a list of cubes (n³) for numbers 1-10 that are divisible by 3.`,
+    initialCode: `# List comprehension for cubes divisible by 3
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+# Create list of cubes for numbers divisible by 3
+cubes = [n ** 3 for n in numbers if n % 3 == 0]
+
+print(f"Numbers divisible by 3: {[n for n in numbers if n % 3 == 0]}")
+print(f"Their cubes: {cubes}")
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+cubes = [n ** 3 for n in numbers if n % 3 == 0]
+print(f"Numbers divisible by 3: {[n for n in numbers if n % 3 == 0]}")
+print(f"Their cubes: {cubes}")`,
+    hints: ['Format: [expression for item in list if condition]', 'Use n ** 3 for cubes', 'Use if n % 3 == 0 to check divisibility', 'Should give [27, 216, 729]'],
     testCases: [
-      { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Uses list comprehension', test: (code: string, output: string) => /\[.+for.+in.+\]/.test(code), errorMessage: 'Must use list comprehension [x for x in ...]' },
+      { name: 'Has condition', test: (code: string, output: string) => code.includes('if'), errorMessage: 'Should filter with if condition' },
+      { name: 'Shows 27', test: (code: string, output: string) => output.includes('27'), errorMessage: 'Should include 27 (3³)' },
+      { name: 'Shows 216', test: (code: string, output: string) => output.includes('216'), errorMessage: 'Should include 216 (6³)' }
     ]
   },
   {
