@@ -1865,41 +1865,251 @@ Practice implementing web components!`,
   },
   {
     id: 'html-50',
-    title: 'Final Project - Complete Website',
-    description: 'Master full website in HTML',
+    title: 'Fullstack Capstone - Portfolio Website',
+    description: 'Build a complete professional portfolio website using semantic HTML5',
     language: 'html' as const,
     difficulty: 'Advanced',
     estimatedTime: 120,
     isProject: true,
-    content: `# Final Project - Complete Website
+    content: `# Fullstack Capstone Project - Portfolio Website 🌐
 
-Learn about full website in HTML.
+## Project Overview
+Create a complete, professional portfolio website showcasing all HTML skills!
 
-## Key Concepts:
-- Understanding full website
-- Best practices
-- Real-world examples
+## Requirements
 
-Practice implementing full website!`,
+### 1. Page Structure
+- Proper DOCTYPE and HTML5 structure
+- Semantic header with navigation
+- Multiple content sections (About, Skills, Projects, Contact)
+- Semantic footer with copyright
+
+### 2. Navigation
+- Nav menu with internal links (#about, #skills, etc.)
+- Skip to content link for accessibility
+- Proper heading hierarchy (h1 → h6)
+
+### 3. Content Sections
+- **About**: Bio with heading, paragraphs, profile image
+- **Skills**: Unordered list of technical skills
+- **Projects**: Cards with images, headings, descriptions, links
+- **Contact**: Form with name, email, message fields
+
+### 4. Multimedia
+- At least 2 images with alt text
+- Embedded video (iframe or video tag)
+- Audio element (optional)
+
+### 5. Accessibility
+- Semantic HTML elements (header, nav, main, section, footer)
+- ARIA labels where needed
+- Proper form labels
+- Alt text for all images
+
+## Example Structure
+\`\`\`html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>John Doe - Web Developer</title>
+</head>
+<body>
+  <header>
+    <h1>John Doe</h1>
+    <nav>Links...</nav>
+  </header>
+  <main>
+    <section id="about">...</section>
+    <section id="skills">...</section>
+    <section id="projects">...</section>
+    <section id="contact">...</section>
+  </main>
+  <footer>...</footer>
+</body>
+</html>
+\`\`\`
+
+## Testing Criteria
+1. Valid HTML5 structure
+2. Semantic elements used correctly
+3. Navigation with working anchor links
+4. Form with proper labels and inputs
+5. Images with alt attributes
+6. At least 4 major sections
+7. Accessibility features included`,
     initialCode: `<!DOCTYPE html>
-<html>
-  <head>
-    <title>Final Project - Complete Website</title>
-  </head>
-  <body>
-    <!-- Implement full website here -->
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio - Your Name</title>
+</head>
+<body>
+  <!-- TODO: Build your portfolio website -->
+  
+  <!-- Header with navigation -->
+  <header>
+    <h1>Your Name</h1>
+    <nav>
+      <!-- TODO: Add navigation links -->
+    </nav>
+  </header>
+  
+  <!-- Main content -->
+  <main>
+    <!-- About section -->
+    <section id="about">
+      <h2>About Me</h2>
+      <!-- TODO: Add bio and image -->
+    </section>
+    
+    <!-- Skills section -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <!-- TODO: Add skills list -->
+    </section>
+    
+    <!-- Projects section -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <!-- TODO: Add project cards -->
+    </section>
+    
+    <!-- Contact section -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <!-- TODO: Add contact form -->
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Your Name. All rights reserved.</p>
+  </footer>
+</body>
 </html>`,
     solution: `<!DOCTYPE html>
-<html>
-  <head>
-    <title>Final Project - Complete Website</title>
-  </head>
-  <body>
-    <h1>Final Project - Complete Website</h1>
-    <p>Implementation of full website</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>John Doe - Web Developer Portfolio</title>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  
+  <header>
+    <h1>John Doe</h1>
+    <p>Full Stack Web Developer</p>
+    <nav aria-label="Primary navigation">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main id="main">
+    <section id="about">
+      <h2>About Me</h2>
+      <img src="profile.jpg" alt="John Doe headshot photo">
+      <p>I'm a passionate web developer with expertise in modern technologies.</p>
+      <p>I love building accessible, user-friendly web applications.</p>
+    </section>
+    
+    <section id="skills">
+      <h2>My Skills</h2>
+      <ul>
+        <li>HTML5 & Semantic Web</li>
+        <li>CSS3 & Responsive Design</li>
+        <li>JavaScript & TypeScript</li>
+        <li>React & Next.js</li>
+        <li>Node.js & Express</li>
+      </ul>
+    </section>
+    
+    <section id="projects">
+      <h2>Featured Projects</h2>
+      
+      <article class="project-card">
+        <h3>E-commerce Platform</h3>
+        <img src="project1.jpg" alt="Screenshot of e-commerce website">
+        <p>Full-featured online store with cart and checkout.</p>
+        <a href="https://example.com/project1" target="_blank">View Project</a>
+      </article>
+      
+      <article class="project-card">
+        <h3>Task Manager App</h3>
+        <img src="project2.jpg" alt="Screenshot of task management application">
+        <p>Productivity app with drag-and-drop functionality.</p>
+        <a href="https://example.com/project2" target="_blank">View Project</a>
+      </article>
+      
+      <article class="project-card">
+        <h3>Weather Dashboard</h3>
+        <img src="project3.jpg" alt="Screenshot of weather forecast dashboard">
+        <p>Real-time weather data visualization.</p>
+        <a href="https://example.com/project3" target="_blank">View Project</a>
+      </article>
+    </section>
+    
+    <section id="contact">
+      <h2>Get In Touch</h2>
+      <form action="/submit" method="POST">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div>
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2024 John Doe. All rights reserved.</p>
+    <nav aria-label="Social media links">
+      <a href="https://github.com/johndoe" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/johndoe" target="_blank">LinkedIn</a>
+      <a href="https://twitter.com/johndoe" target="_blank">Twitter</a>
+    </nav>
+  </footer>
+</body>
 </html>`,
-    hints: ['Follow HTML5 standards', 'Use semantic elements', 'Test accessibility']
-  }
+    hints: [
+      'Start with proper DOCTYPE html and lang attribute',
+      'Use semantic elements: header, nav, main, section, article, footer',
+      'Every form input needs a corresponding label with matching "for" attribute',
+      'All images must have descriptive alt text for accessibility',
+      'Create navigation with ul > li > a structure',
+      'Use heading hierarchy: h1 for page title, h2 for sections, h3 for subsections',
+      'Include aria-label on nav elements for screen readers',
+      'Form should have name, email (type="email"), and textarea fields',
+      'Remember to include meta viewport tag for mobile responsiveness'
+    ],
+    testCases: [
+      { name: 'Valid HTML structure', test: (code: string, output: string) => code.includes('<!DOCTYPE html>') && code.includes('<html') && code.includes('</html>'), errorMessage: 'Must have valid HTML5 structure' },
+      { name: 'Has semantic header', test: (code: string, output: string) => code.includes('<header>') && code.includes('</header>'), errorMessage: 'Must include semantic header element' },
+      { name: 'Has navigation', test: (code: string, output: string) => code.includes('<nav') && code.includes('</nav>'), errorMessage: 'Must include nav element' },
+      { name: 'Has main content area', test: (code: string, output: string) => code.includes('<main') && code.includes('</main>'), errorMessage: 'Must include main element for primary content' },
+      { name: 'Has multiple sections', test: (code: string, output: string) => (code.match(/<section/g) || []).length >= 3, errorMessage: 'Must have at least 3 section elements' },
+      { name: 'Includes images', test: (code: string, output: string) => code.includes('<img') && code.includes('alt='), errorMessage: 'Must include images with alt attributes' },
+      { name: 'Has contact form', test: (code: string, output: string) => code.includes('<form') && code.includes('<input') && code.includes('type="email"'), errorMessage: 'Must include contact form with email input' },
+      { name: 'Form has labels', test: (code: string, output: string) => code.includes('<label') && code.includes('for='), errorMessage: 'Form inputs must have associated labels' },
+      { name: 'Has footer', test: (code: string, output: string) => code.includes('<footer>') && code.includes('</footer>'), errorMessage: 'Must include semantic footer element' },
+      { name: 'Uses heading hierarchy', test: (code: string, output: string) => code.includes('<h1>') && code.includes('<h2>'), errorMessage: 'Must use proper heading hierarchy (h1, h2, etc.)' },
+      { name: 'Substantial content', test: (code: string, output: string) => code.length > 1000, errorMessage: 'Portfolio must have substantial content (1000+ characters)' }
+    ]  }
 ]

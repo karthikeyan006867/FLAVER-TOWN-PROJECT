@@ -2110,46 +2110,375 @@ Practice implementing compatibility!`,
   },
   {
     id: 'css-50',
-    title: 'Final Project - Styled Website',
-    description: 'Master complete project in CSS',
+    title: 'Fullstack Capstone - Responsive Dashboard',
+    description: 'Build a fully responsive admin dashboard with modern CSS',
     language: 'html' as const,
     difficulty: 'Advanced',
     estimatedTime: 120,
     isProject: true,
-    content: `# Final Project - Styled Website
+    content: `# Fullstack Capstone Project - Responsive Dashboard 🎨
 
-Learn about complete project in CSS.
+## Project Overview
+Create a professional, fully responsive admin dashboard using advanced CSS!
 
-## Key Concepts:
-- Understanding complete project
-- Best practices
-- Real-world examples
+## Requirements
 
-Practice implementing complete project!`,
+### 1. Layout
+- CSS Grid for main layout (sidebar + content area)
+- Flexbox for component layouts
+- Responsive breakpoints (mobile, tablet, desktop)
+- Mobile-first design approach
+
+### 2. Components
+- **Header**: Logo, navigation, user profile
+- **Sidebar**: Menu with icons and labels
+- **Cards**: Stats cards with hover effects
+- **Tables**: Styled data table with alternating rows
+- **Forms**: Styled inputs with validation states
+- **Buttons**: Primary, secondary, danger variants
+
+### 3. Advanced CSS
+- CSS Variables for theming
+- Animations and transitions
+- Box shadows and gradients
+- Custom scrollbar styling
+- Transform effects on hover
+
+### 4. Responsiveness
+- Mobile menu (hamburger)
+- Collapsible sidebar
+- Responsive grid (1 col → 2 col → 3 col)
+- Touch-friendly buttons (min 44px)
+
+### 5. Accessibility
+- Focus states
+- Sufficient color contrast
+- Visible focus indicators
+- Semantic selectors
+
+## Testing Criteria
+1. CSS Grid and Flexbox used
+2. CSS Variables defined
+3. Responsive design (min 2 breakpoints)
+4. Smooth transitions
+5. Hover effects
+6. Card components
+7. Sidebar navigation
+8. Professional color scheme`,
     initialCode: `<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
   <style>
-    /* Add your CSS for complete project */
+    /* TODO: CSS Variables for theming */
+    :root {
+      --primary: #3b82f6;
+      --secondary: #10b981;
+      --danger: #ef4444;
+      --bg: #f3f4f6;
+      --card: #ffffff;
+      --text: #1f2937;
+    }
+    
+    /* TODO: Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* TODO: Grid layout for dashboard */
+    
+    /* TODO: Sidebar styles */
+    
+    /* TODO: Header styles */
+    
+    /* TODO: Card components */
+    
+    /* TODO: Responsive design */
+    
   </style>
 </head>
 <body>
-  <div>Content here</div>
+  <!-- TODO: Build dashboard structure -->
+  <div class="dashboard">
+    <aside class="sidebar">
+      <!-- Sidebar menu -->
+    </aside>
+    
+    <main class="main-content">
+      <header class="header">
+        <!-- Header -->
+      </header>
+      
+      <div class="content">
+        <!-- Stats cards -->
+        <!-- Charts/tables -->
+      </div>
+    </main>
+  </div>
 </body>
 </html>`,
     solution: `<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
   <style>
-    div {
-      /* Implementation of complete project */
+    :root {
+      --primary: #3b82f6;
+      --secondary: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --bg: #f3f4f6;
+      --card: #ffffff;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --border: #e5e7eb;
+      --shadow: 0 1px 3px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    
+    .dashboard {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: 100vh;
+    }
+    
+    .sidebar {
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    
+    .sidebar h2 {
+      color: var(--primary);
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+    }
+    
+    .sidebar nav ul {
+      list-style: none;
+    }
+    
+    .sidebar nav a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 0.5rem;
+      transition: all 0.3s;
+      margin-bottom: 0.5rem;
+    }
+    
+    .sidebar nav a:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateX(5px);
+    }
+    
+    .main-content {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .header {
+      background: var(--card);
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .header h1 {
+      font-size: 1.5rem;
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .avatar {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+    
+    .content {
+      padding: 2rem;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .stat-card {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+    }
+    
+    .stat-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+    }
+    
+    .stat-card h3 {
+      color: var(--text-light);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-card .value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--text);
+    }
+    
+    .stat-card .change {
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+    
+    .stat-card.positive .change {
+      color: var(--secondary);
+    }
+    
+    .stat-card.negative .change {
+      color: var(--danger);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        position: fixed;
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+        z-index: 1000;
+      }
+      
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <div>Styled content</div>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2>Dashboard</h2>
+      <nav>
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#analytics">Analytics</a></li>
+          <li><a href="#users">Users</a></li>
+          <li><a href="#settings">Settings</a></li>
+        </ul>
+      </nav>
+    </aside>
+    
+    <main class="main-content">
+      <header class="header">
+        <h1>Analytics Overview</h1>
+        <div class="user-info">
+          <span>Admin User</span>
+          <div class="avatar">AU</div>
+        </div>
+      </header>
+      
+      <div class="content">
+        <div class="stats-grid">
+          <div class="stat-card positive">
+            <h3>Total Users</h3>
+            <div class="value">12,543</div>
+            <div class="change">↑ 12% from last month</div>
+          </div>
+          
+          <div class="stat-card positive">
+            <h3>Revenue</h3>
+            <div class="value">$45,231</div>
+            <div class="change">↑ 8% from last month</div>
+          </div>
+          
+          <div class="stat-card negative">
+            <h3>Active Sessions</h3>
+            <div class="value">2,341</div>
+            <div class="change">↓ 3% from last month</div>
+          </div>
+          
+          <div class="stat-card positive">
+            <h3>Conversion Rate</h3>
+            <div class="value">3.24%</div>
+            <div class="change">↑ 1.2% from last month</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </body>
 </html>`,
-    hints: ['Follow CSS best practices', 'Test in browsers', 'Use developer tools']
-  }
+    hints: [
+      'Use CSS Grid for dashboard layout: grid-template-columns: 250px 1fr',
+      'Define CSS variables in :root for consistent theming',
+      'Use Flexbox inside Grid for component layouts',
+      'Add transitions to make hover effects smooth',
+      'Use transform: translateY(-5px) for card hover lift effect',
+      'Media query @media (max-width: 768px) for mobile responsiveness',
+      'Box-shadow creates depth: 0 1px 3px rgba(0,0,0,0.1)',
+      'Use grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) for responsive cards',
+      'Add :hover pseudo-class for interactive elements'
+    ],
+    testCases: [
+      { name: 'Uses CSS Grid', test: (code: string, output: string) => code.includes('display: grid') || code.includes('display:grid'), errorMessage: 'Must use CSS Grid for layout' },
+      { name: 'Uses Flexbox', test: (code: string, output: string) => code.includes('display: flex') || code.includes('display:flex'), errorMessage: 'Must use Flexbox for components' },
+      { name: 'Has CSS Variables', test: (code: string, output: string) => code.includes(':root') && code.includes('--'), errorMessage: 'Must define CSS variables in :root' },
+      { name: 'Has media queries', test: (code: string, output: string) => code.includes('@media'), errorMessage: 'Must include responsive media queries' },
+      { name: 'Uses transitions', test: (code: string, output: string) => code.includes('transition'), errorMessage: 'Must use transitions for smooth effects' },
+      { name: 'Has hover effects', test: (code: string, output: string) => code.includes(':hover'), errorMessage: 'Must include hover states' },
+      { name: 'Has sidebar', test: (code: string, output: string) => code.includes('sidebar') || code.includes('aside'), errorMessage: 'Must have sidebar navigation' },
+      { name: 'Has cards', test: (code: string, output: string) => code.includes('card'), errorMessage: 'Must include card components' },
+      { name: 'Uses box-shadow', test: (code: string, output: string) => code.includes('box-shadow'), errorMessage: 'Must use box-shadow for depth' },
+      { name: 'Has transform effects', test: (code: string, output: string) => code.includes('transform'), errorMessage: 'Must use transform for animations' },
+      { name: 'Substantial CSS', test: (code: string, output: string) => (code.match(/[^{}]+\{[^}]+\}/g) || []).length >= 15, errorMessage: 'Must have at least 15 CSS rule sets' }
+    ]  }
 ]

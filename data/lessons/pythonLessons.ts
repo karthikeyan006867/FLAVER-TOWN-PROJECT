@@ -1902,6 +1902,302 @@ print("Average:", analysis["avg"])`,
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
       { name: 'Shows analysis', test: (code: string, output: string) => output.includes('Min') || output.includes('78'), errorMessage: 'Should show data analysis' }
     ]
+  },
+  {
+    id: 'python-51',
+    title: 'Fullstack Capstone Project - Task Manager API',
+    description: 'Build a complete task management system with backend logic, data handling, and API simulation',
+    language: 'python' as const,
+    difficulty: 'Advanced',
+    estimatedTime: 90,
+    content: `# Fullstack Capstone Project 🚀
+
+## Project Overview
+Build a **Task Manager System** that demonstrates all your Python skills!
+
+## Requirements
+
+### 1. Task Class (OOP)
+Create a Task class with:
+- Properties: id, title, description, completed, priority
+- Methods: mark_complete(), to_dict()
+
+### 2. TaskManager Class
+Implement CRUD operations:
+- \`create_task(title, description, priority)\` - Add new task
+- \`get_all_tasks()\` - Return all tasks
+- \`get_task(task_id)\` - Find specific task
+- \`update_task(task_id, ...)\` - Modify task
+- \`delete_task(task_id)\` - Remove task
+- \`filter_by_priority(priority)\` - Filter tasks
+
+### 3. Data Validation
+- Validate input (no empty titles)
+- Handle errors gracefully
+- Check task existence before operations
+
+### 4. Statistics Function
+Create \`get_statistics()\` that returns:
+- Total tasks count
+- Completed tasks count
+- Pending tasks count
+- Tasks by priority
+
+## Example Output
+\`\`\`
+Task Manager System v1.0
+======================
+Created task #1: Complete Python Course
+Created task #2: Build Portfolio Project
+Task #1 marked as complete
+Statistics:
+  Total: 2 tasks
+  Completed: 1
+  Pending: 1
+  High Priority: 1
+\`\`\`
+
+## Testing Criteria
+Your code will be tested for:
+1. Task class implementation
+2. TaskManager CRUD operations
+3. Statistics calculation
+4. Error handling
+5. Output formatting`,
+    initialCode: `# Fullstack Capstone Project - Task Manager System
+
+class Task:
+    """Represents a single task"""
+    def __init__(self, task_id, title, description, priority="Medium"):
+        # TODO: Initialize task properties
+        pass
+    
+    def mark_complete(self):
+        # TODO: Mark task as completed
+        pass
+    
+    def to_dict(self):
+        # TODO: Return task as dictionary
+        pass
+
+
+class TaskManager:
+    """Manages collection of tasks"""
+    def __init__(self):
+        self.tasks = []
+        self.next_id = 1
+    
+    def create_task(self, title, description, priority="Medium"):
+        # TODO: Create and add new task
+        pass
+    
+    def get_all_tasks(self):
+        # TODO: Return all tasks
+        pass
+    
+    def get_task(self, task_id):
+        # TODO: Find task by ID
+        pass
+    
+    def update_task(self, task_id, title=None, description=None):
+        # TODO: Update task properties
+        pass
+    
+    def delete_task(self, task_id):
+        # TODO: Remove task
+        pass
+    
+    def filter_by_priority(self, priority):
+        # TODO: Return tasks matching priority
+        pass
+    
+    def get_statistics(self):
+        # TODO: Calculate and return stats
+        pass
+
+
+# Test your implementation
+manager = TaskManager()
+print("Task Manager System v1.0")
+print("=" * 22)
+
+# Create tasks
+manager.create_task("Complete Python Course", "Finish all 51 lessons", "High")
+manager.create_task("Build Portfolio", "Create 3 projects", "High")
+manager.create_task("Practice Daily", "Code for 30 minutes", "Medium")
+
+# TODO: Implement functionality and test it
+`,
+    solution: `# Fullstack Capstone Project - Task Manager System
+
+class Task:
+    """Represents a single task"""
+    def __init__(self, task_id, title, description, priority="Medium"):
+        self.id = task_id
+        self.title = title
+        self.description = description
+        self.priority = priority
+        self.completed = False
+    
+    def mark_complete(self):
+        self.completed = True
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "priority": self.priority,
+            "completed": self.completed
+        }
+
+
+class TaskManager:
+    """Manages collection of tasks"""
+    def __init__(self):
+        self.tasks = []
+        self.next_id = 1
+    
+    def create_task(self, title, description, priority="Medium"):
+        if not title:
+            raise ValueError("Title cannot be empty")
+        task = Task(self.next_id, title, description, priority)
+        self.tasks.append(task)
+        print(f"Created task #{self.next_id}: {title}")
+        self.next_id += 1
+        return task
+    
+    def get_all_tasks(self):
+        return self.tasks
+    
+    def get_task(self, task_id):
+        for task in self.tasks:
+            if task.id == task_id:
+                return task
+        return None
+    
+    def update_task(self, task_id, title=None, description=None):
+        task = self.get_task(task_id)
+        if task:
+            if title:
+                task.title = title
+            if description:
+                task.description = description
+            print(f"Updated task #{task_id}")
+        else:
+            print(f"Task #{task_id} not found")
+    
+    def delete_task(self, task_id):
+        task = self.get_task(task_id)
+        if task:
+            self.tasks.remove(task)
+            print(f"Deleted task #{task_id}")
+        else:
+            print(f"Task #{task_id} not found")
+    
+    def filter_by_priority(self, priority):
+        return [task for task in self.tasks if task.priority == priority]
+    
+    def get_statistics(self):
+        total = len(self.tasks)
+        completed = len([t for t in self.tasks if t.completed])
+        pending = total - completed
+        high_priority = len([t for t in self.tasks if t.priority == "High"])
+        
+        return {
+            "total": total,
+            "completed": completed,
+            "pending": pending,
+            "high_priority": high_priority
+        }
+
+
+# Test implementation
+manager = TaskManager()
+print("Task Manager System v1.0")
+print("=" * 22)
+
+# Create tasks
+manager.create_task("Complete Python Course", "Finish all 51 lessons", "High")
+manager.create_task("Build Portfolio", "Create 3 projects", "High")
+manager.create_task("Practice Daily", "Code for 30 minutes", "Medium")
+
+# Mark first task complete
+task1 = manager.get_task(1)
+if task1:
+    task1.mark_complete()
+    print(f"Task #{task1.id} marked as complete")
+
+# Show statistics
+stats = manager.get_statistics()
+print(f"\\nStatistics:")
+print(f"  Total: {stats['total']} tasks")
+print(f"  Completed: {stats['completed']}")
+print(f"  Pending: {stats['pending']}")
+print(f"  High Priority: {stats['high_priority']}")
+`,
+    hints: [
+      'Start by implementing the Task class with all properties',
+      'In TaskManager, create_task should instantiate a Task and append to self.tasks',
+      'Use list comprehension for filter_by_priority: [task for task in self.tasks if ...]',
+      'get_task can use a for loop to find matching task.id',
+      'mark_complete() simply sets self.completed = True',
+      'For statistics, count tasks using len() and list comprehensions',
+      'to_dict() should return a dictionary with all task properties',
+      'Remember to increment self.next_id after creating each task'
+    ],
+    testCases: [
+      { 
+        name: 'Has Task class', 
+        test: (code: string, output: string) => code.includes('class Task'), 
+        errorMessage: 'Must define Task class' 
+      },
+      { 
+        name: 'Has TaskManager class', 
+        test: (code: string, output: string) => code.includes('class TaskManager'), 
+        errorMessage: 'Must define TaskManager class' 
+      },
+      { 
+        name: 'Implements create_task', 
+        test: (code: string, output: string) => code.includes('def create_task'), 
+        errorMessage: 'TaskManager must have create_task method' 
+      },
+      { 
+        name: 'Implements get_statistics', 
+        test: (code: string, output: string) => code.includes('def get_statistics'), 
+        errorMessage: 'TaskManager must have get_statistics method' 
+      },
+      { 
+        name: 'Creates tasks successfully', 
+        test: (code: string, output: string) => output.includes('Created task') || output.includes('Task #'), 
+        errorMessage: 'Should create and show task creation' 
+      },
+      { 
+        name: 'Shows statistics', 
+        test: (code: string, output: string) => output.includes('Statistics') || (output.includes('Total') && output.includes('Completed')), 
+        errorMessage: 'Should display task statistics' 
+      },
+      { 
+        name: 'Has substantial implementation', 
+        test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 30, 
+        errorMessage: 'Project requires substantial code (at least 30 lines)' 
+      },
+      { 
+        name: 'Uses OOP concepts', 
+        test: (code: string, output: string) => code.includes('self.') && code.includes('__init__'), 
+        errorMessage: 'Must use object-oriented programming with self and __init__' 
+      },
+      { 
+        name: 'Handles task completion', 
+        test: (code: string, output: string) => output.toLowerCase().includes('complete'), 
+        errorMessage: 'Should demonstrate task completion functionality' 
+      },
+      { 
+        name: 'Shows numerical results', 
+        test: (code: string, output: string) => /\d+/.test(output), 
+        errorMessage: 'Output should include numerical statistics' 
+      }
+    ]
   }
 ];
 
