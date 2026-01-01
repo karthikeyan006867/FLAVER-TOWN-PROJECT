@@ -197,6 +197,47 @@ export default function ChallengesPage() {
                     <p className="text-gray-300">{selectedChallenge.prompt}</p>
                   </div>
 
+                  {/* Code Editor and Output */}
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-lg font-bold mb-3">Your Solution</h3>
+                      <CodeEditor
+                        code={code}
+                        onChange={setCode}
+                        language={selectedLanguage}
+                        height="400px"
+                      />
+                    </div>
+
+                    {/* Output Display */}
+                    {output && (
+                      <div>
+                        <h3 className="text-lg font-bold mb-2">Output</h3>
+                        <div className="bg-gray-950 border border-gray-700 rounded-lg p-4 font-mono text-sm">
+                          <pre className="text-green-400 whitespace-pre-wrap">{output}</pre>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-3">
+                      <button
+                        onClick={handleRunCode}
+                        className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors"
+                      >
+                        <Code2 className="h-5 w-5" />
+                        Run Code
+                      </button>
+                      <button
+                        onClick={handleSubmit}
+                        className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-accent-500 hover:opacity-90 rounded-lg font-semibold transition-all"
+                      >
+                        <Trophy className="h-5 w-5" />
+                        Submit Solution
+                      </button>
+                    </div>
+                  </div>
+
                   <div>
                     <h3 className="text-lg font-bold mb-2">Requirements</h3>
                     <div className="flex items-center gap-6 text-sm text-gray-400">

@@ -67,8 +67,12 @@ export default function CertificationsPage() {
       const testPassed = courseTest.passed
       const testScore = courseTest.bestScore || 0
       
-      // Certificate is earned only if lessons AND project AND test are completed
-      const isCompleted = allLessonsCompleted && projectCompleted && testPassed
+      // Certificate is earned if:
+      // - 90%+ lessons completed OR all lessons complete
+      // - Project completed (if exists)
+      // - Test passed with 90%+ score
+      const highProgress = progress.percentage >= 90
+      const isCompleted = highProgress && projectCompleted && (testPassed || testScore >= 90)
       
       // Generate credential ID
       const courseCode = course.id.toUpperCase().substring(0, 3)

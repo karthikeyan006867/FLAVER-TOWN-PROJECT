@@ -67,6 +67,8 @@ const dailyChallenge = {
 export default function DailyChallengePage() {
   const [language, setLanguage] = useState<'javascript' | 'python' | 'typescript'>('javascript')
   const [completed, setCompleted] = useState(false)
+  const [code, setCode] = useState(dailyChallenge.starterCode.javascript)
+  const [output, setOutput] = useState('')
   const { streak, totalPoints, completeChallenge, completedChallenges } = useProgressStore()
 
   useEffect(() => {
@@ -75,6 +77,28 @@ export default function DailyChallengePage() {
       setCompleted(true)
     }
   }, [completedChallenges])
+
+  useEffect(() => {
+    // Update code when language changes
+    setCode(dailyChallenge.starterCode[language])
+    setOutput('')
+  }, [language])
+
+  const handleRunCode = () => {
+    try {
+      const logs: string[] = []
+      const originalLog = console.log
+      console.log = (...args: any[]) => {
+        logs.push(args.join(' '))
+      }
+      
+      eval(code)
+      console.log = originalLog
+      setOutput(logs.join('\n'))
+    } catch (error: any) {
+      setOutput(`Error: ${error.message}`)
+    }
+  }
 
   const handleSuccess = () => {
     if (!completed && !completedChallenges.includes(dailyChallenge.id)) {
@@ -214,10 +238,48 @@ export default function DailyChallengePage() {
               <div className="card-gradient border border-gray-700 rounded-xl p-4">
                 <CodeEditor
                   language={language}
+                  value={code}
+                  onChange={setCode}
                   initialCode={dailyChallenge.starterCode[language]}
                   testCases={language === 'javascript' || language === 'typescript' ? dailyChallenge.testCases : undefined}
                   onSuccess={handleSuccess}
                 />
+              </div>
+
+              {/* Output Display */}
+              {output && (
+                <div className="card-gradient border border-gray-700 rounded-xl p-4">
+                  <h3 className="font-semibold mb-2">Output</h3>
+                  <pre className="bg-gray-900 rounded-lg p-4 text-green-400 font-mono text-sm overflow-x-auto">
+                    {output}
+                  </pre>
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div className="flex gap-3">
+                <button
+                  onClick={handleRunCode}
+                  className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                >
+                  Run Code
+                </button>
+                <button
+                  onClick={() => {
+                    const editor = document.querySelector('[data-monaco-editor]') as any
+                    if (editor && editor.submit) {
+                      editor.submit()
+                    }
+                  }}
+                  disabled={completed}
+                  className={`flex-1 font-semibold py-3 px-6 rounded-lg transition-colors ${
+                    completed
+                      ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-primary-500 to-purple-600 hover:from-primary-600 hover:to-purple-700 text-white'
+                  }`}
+                >
+                  {completed ? 'Completed' : 'Submit Solution'}
+                </button>
               </div>
             </div>
           </div>

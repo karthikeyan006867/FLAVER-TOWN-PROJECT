@@ -32,17 +32,26 @@ export default function Certificate({
       // Dynamically import html2canvas
       const html2canvas = (await import('html2canvas')).default
       
+      // Get dimensions and prepare for capture
+      const element = certificateRef.current
+      const width = element.offsetWidth
+      const height = element.offsetHeight
+      
       // Capture the certificate as canvas with better settings
-      const canvas = await html2canvas(certificateRef.current, {
-        scale: 3, // Higher quality
+      const canvas = await html2canvas(element, {
+        scale: 2, // Good quality without being too large
         backgroundColor: '#0f172a', // Match slate-900 background
         logging: false,
         useCORS: true,
         allowTaint: true,
-        width: certificateRef.current.scrollWidth,
-        height: certificateRef.current.scrollHeight,
-        windowWidth: certificateRef.current.scrollWidth,
-        windowHeight: certificateRef.current.scrollHeight
+        width: width,
+        height: height,
+        windowWidth: width,
+        windowHeight: height,
+        scrollX: 0,
+        scrollY: 0,
+        x: 0,
+        y: 0
       })
 
       // Convert canvas to blob and download
