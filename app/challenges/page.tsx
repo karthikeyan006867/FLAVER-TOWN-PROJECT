@@ -221,28 +221,6 @@ export default function ChallengesPage() {
                     </div>
                   </div>
 
-                  <div>
-                    <h3 className="text-lg font-bold mb-3">Code Editor</h3>
-                    <CodeEditor
-                      language={selectedLanguage}
-                      initialCode={code}
-                      expectedOutput={selectedChallenge.expectedOutput || ''}
-                      onSuccess={() => {
-                        handleSubmit()
-                        alert('Challenge completed! 🎉')
-                      }}
-                    />
-                  </div>
-
-                  {output && (
-                    <div>
-                      <h3 className="text-lg font-bold mb-2">Output</h3>
-                      <pre className="bg-gray-950 p-4 rounded-lg text-green-400 font-mono text-sm">
-                        {output}
-                      </pre>
-                    </div>
-                  )}
-
                   {selectedChallenge.hints && (
                     <div>
                       <h3 className="text-lg font-bold mb-2">Hints</h3>
