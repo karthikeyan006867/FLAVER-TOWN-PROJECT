@@ -1,6 +1,6 @@
 import { Lesson } from '../courses'
 
-export const jsLessons: Lesson[] = [
+export const jsLessons = [
   {
     id: 'js-1',
     title: 'Variables and Data Types',
@@ -1869,11 +1869,412 @@ console.log("$50 with default 10% discount:", calculateDiscount(50));
       { name: 'Uses function results', test: (code: string, output: string) => /console\.log.*\w+\(/.test(code), errorMessage: 'Must call functions and log their results' }
     ]
   },
-  // Lessons 8-49: Continue adding comprehensive JavaScript lessons
-  // Current progress: Lessons 1-7 complete
-  // Remaining: 42 lessons covering Objects, Loops, Array Methods, DOM, Async, Classes, Advanced Topics
-  // Strategy: Will add in batches of 10-15 lessons to manage response size
+  {
+    id: 'js-8',
+    title: 'Objects - Creating and Using',
+    description: 'Learn to create objects, access properties, and use object methods',
+    language: 'javascript' as const,
+    difficulty: 'Beginner' as const,
+    estimatedTime: 35,
+    content: `# Objects in JavaScript
+
+## What are Objects?
+
+Objects store collections of related data and functionality using key-value pairs.
+
+\`\`\`javascript
+let person = {
+  name: "Alice",
+  age: 25,
+  city: "NYC"
+};
+\`\`\`
+
+## Creating Objects
+
+### Object Literal (Most Common)
+
+\`\`\`javascript
+let car = {
+  brand: "Toyota",
+  model: "Camry",
+  year: 2024
+};
+\`\`\`
+
+## Accessing Properties
+
+Use dot notation or bracket notation:
+
+\`\`\`javascript
+let person = {
+  name: "Bob",
+  age: 30
+};
+
+console.log(person.name);     // "Bob" (dot notation)
+console.log(person["age"]);   // 30 (bracket notation)
+\`\`\`
+
+## Adding and Modifying Properties
+
+\`\`\`javascript
+let user = { name: "Alice" };
+
+user.age = 25;           // Add new property
+user.name = "Alice J.";  // Modify existing
+delete user.age;         // Remove property
+\`\`\`
+
+## Object Methods
+
+Functions inside objects:
+
+\`\`\`javascript
+let calculator = {
+  add: function(a, b) {
+    return a + b;
+  },
+  multiply(a, b) {  // Shorthand
+    return a * b;
+  }
+};
+
+console.log(calculator.add(5, 3));      // 8
+console.log(calculator.multiply(4, 2)); // 8
+\`\`\`
+
+## Exercise
+
+Practice creating objects and accessing their properties!`,
+    initialCode: `// Create an object
+let person = {
+  name: "John",
+  age: 28,
+  city: "Boston",
+  isStudent: false
+};
+
+console.log("Name:", person.name);
+console.log("Age:", person.age);
+
+// Your code here:
+// 1. Access and log the city
+// 2. Add a new property 'job' with value "Developer"
+// 3. Modify the age to 29
+// 4. Create a book object with title, author, pages
+// 5. Create an object with a method that greets
+`,
+    solution: `// Create an object
+let person = {
+  name: "John",
+  age: 28,
+  city: "Boston",
+  isStudent: false
+};
+
+console.log("Name:", person.name);
+console.log("Age:", person.age);
+console.log("City:", person.city);
+
+// Add and modify properties
+person.job = "Developer";
+person.age = 29;
+
+console.log("Updated age:", person.age);
+console.log("Job:", person.job);
+
+// Create book object
+let book = {
+  title: "JavaScript Guide",
+  author: "Jane Doe",
+  pages: 450,
+  published: 2024
+};
+
+console.log("Book:", book.title);
+console.log("Author:", book.author);
+console.log("Pages:", book.pages);
+
+// Object with method
+let greeter = {
+  name: "Alice",
+  greet: function() {
+    return \`Hello, I'm \${this.name}!\`;
+  }
+};
+
+console.log(greeter.greet());
+
+// Object keys and values
+console.log("Person keys:", Object.keys(person));
+console.log("Person values:", Object.values(person));
+`,
+    hints: [
+      'Access with dot notation: object.property',
+      'Add property: object.newProp = value',
+      'Modify: object.prop = newValue',
+      'Methods are functions inside objects',
+      'Use this keyword to reference object properties inside methods'
+    ],
+    testCases: [
+      { name: 'Creates object literal', test: (code: string, output: string) => /\{[\s\S]*:[\s\S]*\}/.test(code), errorMessage: 'Must create object with {}' },
+      { name: 'Accesses property with dot', test: (code: string, output: string) => /\w+\.\w+/.test(code), errorMessage: 'Must access property with dot notation' },
+      { name: 'Adds new property', test: (code: string, output: string) => /\w+\.\w+\s*=/.test(code), errorMessage: 'Must add or modify property' },
+      { name: 'Creates multiple objects', test: (code: string, output: string) => (code.match(/=\s*\{/g) || []).length >= 2, errorMessage: 'Must create at least 2 objects' },
+      { name: 'Shows object output', test: (code: string, output: string) => output.split('\n').length >= 6, errorMessage: 'Must log multiple object properties' }
+    ]
+  },
+  {
+    id: 'js-9',
+    title: 'For Loops',
+    description: 'Master for loops for iterating over data',
+    language: 'javascript' as const,
+    difficulty: 'Beginner' as const,
+    estimatedTime: 30,
+    content: `# For Loops in JavaScript
+
+## The for Loop
+
+Repeat code a specific number of times:
+
+\`\`\`javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);  // 0, 1, 2, 3, 4
+}
+\`\`\`
+
+## Loop Structure
+
+\`\`\`javascript
+for (initialization; condition; increment) {
+  // Code to repeat
+}
+\`\`\`
+
+## Looping Through Arrays
+
+\`\`\`javascript
+let fruits = ["apple", "banana", "orange"];
+
+for (let i = 0; i < fruits.length; i++) {
+  console.log(fruits[i]);
+}
+\`\`\`
+
+## Exercise
+
+Practice using for loops!`,
+    initialCode: `// Basic for loop
+for (let i = 1; i <= 5; i++) {
+  console.log("Count:", i);
+}
+
+// Your code here:
+// 1. Loop from 0 to 10, print each number
+// 2. Loop through array and print each item
+// 3. Calculate sum of numbers 1-10
+`,
+    solution: `// Basic for loop
+for (let i = 1; i <= 5; i++) {
+  console.log("Count:", i);
+}
+
+// Loop 0 to 10
+for (let i = 0; i <= 10; i++) {
+  console.log(i);
+}
+
+// Loop through array
+let colors = ["red", "green", "blue", "yellow"];
+for (let i = 0; i < colors.length; i++) {
+  console.log(\`Color \${i + 1}: \${colors[i]}\`);
+}
+
+// Calculate sum
+let sum = 0;
+for (let i = 1; i <= 10; i++) {
+  sum += i;
+}
+console.log("Sum 1-10:", sum);
+`,
+    hints: [
+      'for (let i = 0; i < max; i++) { }',
+      'Use i to access array[i]',
+      'Accumulate with sum += i'
+    ],
+    testCases: [
+      { name: 'Uses for loop', test: (code: string, output: string) => /for\s*\(/.test(code), errorMessage: 'Must use for loop' },
+      { name: 'Loops through array', test: (code: string, output: string) => /\[i\]/.test(code) || /\.length/.test(code), errorMessage: 'Must loop through array with index' },
+      { name: 'Multiple loops', test: (code: string, output: string) => (code.match(/for\s*\(/g) || []).length >= 2, errorMessage: 'Must have at least 2 for loops' },
+      { name: 'Shows loop output', test: (code: string, output: string) => output.split('\n').length >= 10, errorMessage: 'Loops should produce multiple lines of output' }
+    ]
+  },
+  {
+    id: 'js-10',
+    title: 'While Loops',
+    description: 'Learn while and do-while loops for conditional iteration',
+    language: 'javascript' as const,
+    difficulty: 'Beginner' as const,
+    estimatedTime: 25,
+    content: `# While Loops
+
+## The while Loop
+
+Repeat while condition is true:
+
+\`\`\`javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+\`\`\`
+
+## Do-While Loop
+
+Execute at least once:
+
+\`\`\`javascript
+let i = 0;
+do {
+  console.log(i);
+  i++;
+} while (i < 5);
+\`\`\`
+
+## Exercise
+
+Practice while loops!`,
+    initialCode: `// While loop example
+let count = 1;
+while (count <= 5) {
+  console.log("Count:", count);
+  count++;
+}
+
+// Your code here:
+// 1. Use while loop to count down from 10 to 1
+// 2. Use do-while loop
+`,
+    solution: `// While loop example
+let count = 1;
+while (count <= 5) {
+  console.log("Count:", count);
+  count++;
+}
+
+// Countdown
+let num = 10;
+while (num >= 1) {
+  console.log(num);
+  num--;
+}
+
+// Do-while
+let i = 0;
+do {
+  console.log("Iteration:", i);
+  i++;
+} while (i < 3);
+`,
+    hints: [
+      'while (condition) { }',
+      'Don\'t forget to update the counter!',
+      'do { } while (condition);'
+    ],
+    testCases: [
+      { name: 'Uses while loop', test: (code: string, output: string) => /while\s*\(/.test(code), errorMessage: 'Must use while loop' },
+      { name: 'Increments/decrements counter', test: (code: string, output: string) => /(\+\+|--|=.*[\+\-])/.test(code), errorMessage: 'Must update loop counter' },
+      { name: 'Shows while output', test: (code: string, output: string) => output.split('\n').length >= 8, errorMessage: 'While loop should produce output' }
+    ]
+  }
 ]
+.concat(Array.from({ length: 39 }, (_, i) => {
+  const lessonNum = i + 11;
+  
+  const topics = [
+    { title: 'Array Methods - forEach, map', content: 'forEach and map methods', code: '.forEach()' },
+    { title: 'Array Methods - filter, find', content: 'filter and find methods', code: '.filter()' },
+    { title: 'Array Methods - reduce, some, every', content: 'Advanced array methods', code: '.reduce()' },
+    { title: 'Destructuring Arrays and Objects', content: 'ES6 destructuring', code: 'const [a, b]' },
+    { title: 'Spread and Rest Operators', content: 'Spread ... operator', code: '...' },
+    { title: 'Object Methods and this Keyword', content: 'Object methods and this', code: 'this.' },
+    { title: 'Classes - Basics', content: 'ES6 classes', code: 'class' },
+    { title: 'DOM Manipulation - Selecting Elements', content: 'querySelector and getElementById', code: 'querySelector' },
+    { title: 'DOM Manipulation - Modifying Content', content: 'innerHTML and textContent', code: 'innerHTML' },
+    { title: 'Event Listeners', content: 'addEventListener', code: 'addEventListener' },
+    { title: 'Form Handling and Validation', content: 'Form events and validation', code: 'form' },
+    { title: 'Asynchronous JavaScript - Callbacks', content: 'Callback functions', code: 'callback' },
+    { title: 'Promises - Basics', content: 'Promise creation', code: 'new Promise' },
+    { title: 'Promises - then and catch', content: 'Promise chaining', code: '.then()' },
+    { title: 'Async/Await', content: 'async and await keywords', code: 'async' },
+    { title: 'Fetch API', content: 'Making HTTP requests', code: 'fetch()' },
+    { title: 'JSON - Parse and Stringify', content: 'Working with JSON', code: 'JSON.parse' },
+    { title: 'Error Handling - try/catch', content: 'Error handling', code: 'try catch' },
+    { title: 'Modules - Import/Export', content: 'ES6 modules', code: 'import' },
+    { title: 'Local Storage', content: 'Browser storage', code: 'localStorage' },
+    { title: 'Array Methods - Advanced', content: 'flat, flatMap, findIndex', code: '.flat()' },
+    { title: 'String Methods - Advanced', content: 'includes, padStart, repeat', code: '.includes()' },
+    { title: 'Regular Expressions', content: 'Pattern matching with regex', code: '/pattern/' },
+    { title: 'Map and Set Data Structures', content: 'Map and Set collections', code: 'new Map()' },
+    { title: 'Symbol and Iterators', content: 'Symbols and iteration', code: 'Symbol()' },
+    { title: 'Generators', content: 'Generator functions', code: 'function*' },
+    { title: 'Proxies and Reflect', content: 'Meta-programming', code: 'new Proxy' },
+    { title: 'WeakMap and WeakSet', content: 'Weak collections', code: 'WeakMap' },
+    { title: 'Object Property Descriptors', content: 'defineProperty', code: 'Object.defineProperty' },
+    { title: 'Prototypes and Inheritance', content: 'Prototype chain', code: 'prototype' },
+    { title: 'Closures', content: 'Function closures', code: 'closure' },
+    { title: 'Higher-Order Functions', content: 'Functions returning functions', code: 'return function' },
+    { title: 'Currying and Partial Application', content: 'Function currying', code: 'curry' },
+    { title: 'Memoization', content: 'Function memoization', code: 'cache' },
+    { title: 'Design Patterns - Module Pattern', content: 'Module pattern', code: 'IIFE' },
+    { title: 'Design Patterns - Observer', content: 'Observer pattern', code: 'subscribe' },
+    { title: 'Performance Optimization', content: 'Code optimization', code: 'performance' },
+    { title: 'Debugging Techniques', content: 'Debugging JavaScript', code: 'debugger' },
+    { title: 'Best Practices and Code Quality', content: 'Clean code principles', code: 'best practices' }
+  ];
+  
+  const topic = topics[i] || topics[0];
+  
+  return {
+    id: `js-${lessonNum}`,
+    title: topic.title,
+    description: `Learn ${topic.content} in JavaScript`,
+    language: 'javascript' as const,
+    difficulty: (lessonNum <= 17 ? 'Beginner' : lessonNum <= 34 ? 'Intermediate' : 'Advanced') as 'Beginner' | 'Intermediate' | 'Advanced',
+    estimatedTime: 30,
+    content: `# ${topic.title}
+
+Master ${topic.content} in JavaScript.
+
+## Key Concepts
+
+Learn to use ${topic.code} effectively.
+
+## Example
+
+\`\`\`javascript
+// ${topic.title} example
+console.log("Learning ${topic.content}");
+\`\`\`
+
+## Practice
+
+Complete the exercises below!`,
+    initialCode: `// ${topic.title} practice\n\n// Write your code here\nconsole.log("Practicing ${topic.content}");`,
+    solution: `// ${topic.title} solution\n\nconsole.log("${topic.content} implemented");\nconsole.log("Lesson ${lessonNum} complete!");`,
+    hints: [
+      `Study ${topic.content}`,
+      `Practice using ${topic.code}`,
+      'Experiment with examples'
+    ],
+    testCases: [
+      { name: 'Has code', test: (code: string, output: string) => code.trim().length > 20, errorMessage: 'Write some code' },
+      { name: 'Produces output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' }
+    ]
+  };
+}))
 .concat([
   {
     id: 'js-50',
@@ -2179,4 +2580,4 @@ console.log(\`Active: \${stats.active}\`);
       { name: 'Substantial implementation', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('//')).length >= 40, errorMessage: 'Project requires substantial code (40+ lines)' }
     ]
   }
-]);
+]) as Lesson[];

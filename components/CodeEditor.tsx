@@ -284,8 +284,8 @@ export default function CodeEditor({
                 return variables[expr]
               }
               
-              // Handle arithmetic expressions
-              if (expr.match(/[\+\-\*\/\%]/)) {
+              // Handle arithmetic expressions (including ** power operator and // floor division)
+              if (expr.match(/[\+\-\*\/\%]|\*\*|\/\//)) {
                 try {
                   const evalExpr = expr.replace(/(\w+)/g, (match: string) => {
                     if (variables[match] !== undefined) {
@@ -294,7 +294,13 @@ export default function CodeEditor({
                     }
                     return match
                   })
-                  return eval(evalExpr)
+                  // Convert Python ** to JavaScript **
+                  const jsExpr = evalExpr.replace(/\*\*/g, '**')
+                  // Convert Python // to Math.floor division
+                  const finalExpr = jsExpr.replace(/\/\//g, '/')
+                  const result = eval(finalExpr)
+                  // Floor the result if original expression had //
+                  return expr.includes('//') ? Math.floor(result) : result
                 } catch {
                   return expr
                 }
@@ -546,8 +552,25 @@ export default function CodeEditor({
                     const printMatch = bodyTrimmed.match(/print\s*\((.*)\)/)
                     if (printMatch) {
                       let content = printMatch[1].trim()
-                      const output = evalPythonExpr(content)
-                      pythonOutput.push(String(output))
+                      
+                      // Handle f-strings inside loops
+                      if (content.startsWith('f"') || content.startsWith("f'")) {
+                        content = content.slice(2, -1)
+                        content = content.replace(/\{([^}]+)\}/g, (_, expr) => {
+                          const value = evalPythonExpr(expr.trim())
+                          return String(value)
+                        })
+                        pythonOutput.push(content)
+                      }
+                      // Handle regular strings
+                      else if (content.startsWith('"') || content.startsWith("'")) {
+                        pythonOutput.push(content.slice(1, -1))
+                      }
+                      // Handle expressions
+                      else {
+                        const output = evalPythonExpr(content)
+                        pythonOutput.push(String(output))
+                      }
                     }
                   }
                 }
