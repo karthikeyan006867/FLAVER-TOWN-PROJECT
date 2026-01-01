@@ -31,7 +31,7 @@ const navigation = [
   { name: 'Courses', href: '/courses', icon: BookOpen },
   { name: 'Challenges', href: '/challenges', icon: Target },
   { name: 'Daily Challenge', href: '/daily-challenge', icon: Calendar },
-  { name: 'Playground Pro', href: '/playground-pro', icon: Code2 },
+  { name: 'Playground', href: '/playground', icon: Code2 },
   { name: 'Learning Paths', href: '/learning-paths', icon: Map },
   { name: 'Career Paths', href: '/career', icon: Briefcase },
   { name: 'Certifications', href: '/certifications', icon: GraduationCap },
