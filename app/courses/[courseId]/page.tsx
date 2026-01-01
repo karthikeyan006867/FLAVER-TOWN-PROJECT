@@ -13,7 +13,7 @@ import { CheckCircle2, Clock, ArrowRight, BookOpen, Lock, Award } from 'lucide-r
 export default function CoursePage({ params }: { params: { courseId: string } }) {
   const { user, isLoaded } = useUser()
   const course = courses.find(c => c.id === params.courseId)
-  const { isLessonCompleted, isLessonUnlocked, setUserId, loadProgressFromServer } = useProgressStore()
+  const { isLessonCompleted, isLessonUnlocked, setUserId, loadProgressFromServer, completedLessons } = useProgressStore()
 
   // Load user progress from server when user is loaded
   useEffect(() => {

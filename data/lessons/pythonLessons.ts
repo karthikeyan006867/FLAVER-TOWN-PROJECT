@@ -338,421 +338,533 @@ print("Completed")
   {
     id: 'python-10',
     title: 'Tuples',
-    description: 'Master tuples in Python',
+    description: 'Learn immutable sequences with tuples',
     language: 'python' as const,
     difficulty: 'Beginner',
-    estimatedTime: 30,
-    content: `# Tuples
+    estimatedTime: 25,
+    content: `# Tuples in Python
 
-Learn and practice tuples.
+Tuples are immutable sequences - once created, they cannot be changed.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Creating Tuples
+\`\`\`python
+# Create a tuple with parentheses
+coordinates = (10, 20)
+colors = ("red", "green", "blue")
+
+# Tuples can hold mixed types
+mixed = (1, "hello", 3.14, True)
+\`\`\`
+
+## Accessing Elements
+\`\`\`python
+point = (5, 10, 15)
+print(point[0])  # 5
+print(point[2])  # 15
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
+Create a tuple of your favorite numbers and print the first and last elements.`,
+    initialCode: `# Create a tuple of numbers
+numbers = (10, 20, 30, 40, 50)
 
+# Print first element
+print(numbers[0])
+
+# Print last element
+print(numbers[4])
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `numbers = (10, 20, 30, 40, 50)
+print(numbers[0])
+print(numbers[4])`,
+    hints: ['Use parentheses () to create tuples', 'Access elements with [index]', 'Last element is at index 4'],
     testCases: [
+      { name: 'Has tuple', test: (code: string, output: string) => code.includes('(') && code.includes(')'), errorMessage: 'Create a tuple with ()' },
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Prints first element', test: (code: string, output: string) => output.includes('10'), errorMessage: 'Print the first element' }
     ]
   },
   {
     id: 'python-11',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'Sets',
+    description: 'Work with unique collections using sets',
     language: 'python' as const,
     difficulty: 'Beginner',
-    estimatedTime: 30,
-    content: `# Tuples
+    estimatedTime: 25,
+    content: `# Sets in Python
 
-Learn and practice tuples.
+Sets are unordered collections of unique elements.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Creating Sets
+\`\`\`python
+fruits = {"apple", "banana", "cherry"}
+numbers = {1, 2, 3, 4, 5}
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
+Create a set and print its contents.`,
+    initialCode: `# Create a set of colors
+colors = {"red", "blue", "green"}
 
+# Print the set
+print(colors)
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `colors = {"red", "blue", "green"}
+print(colors)`,
+    hints: ['Use curly braces {} for sets', 'Sets contain unique elements'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=')), errorMessage: 'Use proper Python syntax' }
     ]
   },
   {
     id: 'python-12',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'Dictionary Methods',
+    description: 'Master dictionary operations and methods',
     language: 'python' as const,
     difficulty: 'Beginner',
-    estimatedTime: 30,
-    content: `# Tuples
+    estimatedTime: 25,
+    content: `# Dictionary Methods
 
-Learn and practice tuples.
+Learn useful methods for working with dictionaries.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Common Methods
+\`\`\`python
+person = {"name": "Alice", "age": 25}
+keys = person.keys()
+values = person.values()
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
+Create a dictionary and use methods to access its data.`,
+    initialCode: `# Create a dictionary
+car = {"brand": "Ford", "model": "Mustang", "year": 1964}
 
+# Print all keys
+print(car.keys())
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `car = {"brand": "Ford", "model": "Mustang", "year": 1964}
+print(car.keys())`,
+    hints: ['Use .keys() to get dictionary keys', 'Use .values() to get values'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Uses Python syntax', test: (code: string, output: string) => code.includes('print('), errorMessage: 'Use print() to show output' }
     ]
   },
   {
     id: 'python-13',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'Function Parameters',
+    description: 'Learn to use function parameters and return values',
     language: 'python' as const,
-    difficulty: 'Beginner',
+    difficulty: 'Intermediate',
     estimatedTime: 30,
-    content: `# Tuples
+    content: `# Function Parameters
 
-Learn and practice tuples.
+Functions can accept parameters and return values.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Example
+\`\`\`python
+def add(a, b):
+    return a + b
+
+result = add(5, 3)
+print(result)  # 8
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
+Create a function that takes two numbers and returns their sum.`,
+    initialCode: `# Define a function with parameters
+def multiply(x, y):
+    return x * y
 
+# Call the function
+result = multiply(4, 5)
+print(result)
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `def multiply(x, y):
+    return x * y
+
+result = multiply(4, 5)
+print(result)`,
+    hints: ['Use def to define functions', 'Use return to send back values'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Uses function', test: (code: string, output: string) => code.includes('def '), errorMessage: 'Define a function with def' }
     ]
   },
   {
     id: 'python-14',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'Lambda Functions',
+    description: 'Create anonymous functions with lambda',
     language: 'python' as const,
-    difficulty: 'Beginner',
-    estimatedTime: 30,
-    content: `# Tuples
+    difficulty: 'Intermediate',
+    estimatedTime: 25,
+    content: `# Lambda Functions
 
-Learn and practice tuples.
+Lambda functions are small anonymous functions.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Example
+\`\`\`python
+square = lambda x: x ** 2
+print(square(5))  # 25
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
+Create a lambda function to double a number.`,
+    initialCode: `# Lambda function to double a number
+double = lambda x: x * 2
 
+print(double(10))
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `double = lambda x: x * 2
+print(double(10))`,
+    hints: ['Lambda syntax: lambda parameters: expression', 'Lambda returns the expression result'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Shows 20', test: (code: string, output: string) => output.includes('20'), errorMessage: 'Output should include 20' }
     ]
   },
   {
     id: 'python-15',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'Classes and Objects',
+    description: 'Introduction to object-oriented programming',
     language: 'python' as const,
-    difficulty: 'Beginner',
-    estimatedTime: 30,
-    content: `# Tuples
+    difficulty: 'Intermediate',
+    estimatedTime: 35,
+    content: `# Classes and Objects
 
-Learn and practice tuples.
+Classes are blueprints for creating objects.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Example
+\`\`\`python
+class Dog:
+    def __init__(self, name):
+        self.name = name
+    
+    def bark(self):
+        print(f"{self.name} says Woof!")
+
+my_dog = Dog("Buddy")
+my_dog.bark()
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
+Create a class and make an object from it.`,
+    initialCode: `# Create a simple class
+class Cat:
+    def __init__(self, name):
+        self.name = name
+    
+    def meow(self):
+        print(f"{self.name} says Meow!")
 
+my_cat = Cat("Whiskers")
+my_cat.meow()
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `class Cat:
+    def __init__(self, name):
+        self.name = name
+    
+    def meow(self):
+        print(f"{self.name} says Meow!")
+
+my_cat = Cat("Whiskers")
+my_cat.meow()`,
+    hints: ['Use class keyword to define a class', '__init__ is the constructor'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Uses class', test: (code: string, output: string) => code.includes('class '), errorMessage: 'Define a class' }
     ]
   },
   {
     id: 'python-16',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'Working with Data',
+    description: 'Learn to process and manipulate data',
     language: 'python' as const,
-    difficulty: 'Beginner',
+    difficulty: 'Intermediate',
     estimatedTime: 30,
-    content: `# Tuples
+    content: `# Working with Data
 
-Learn and practice tuples.
+Learn to process and transform data in Python.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Example
+\`\`\`python
+data = [1, 2, 3, 4, 5]
+squared = [x**2 for x in data]
+print(squared)
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
-
+Create a list and transform its data.`,
+    initialCode: `# Process data
+numbers = [1, 2, 3, 4, 5]
+doubled = [x * 2 for x in numbers]
+print(doubled)
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `numbers = [1, 2, 3, 4, 5]
+doubled = [x * 2 for x in numbers]
+print(doubled)`,
+    hints: ['Use list comprehension', 'Transform data with operations'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Shows doubled values', test: (code: string, output: string) => output.includes('2') && output.includes('10'), errorMessage: 'Output should show doubled values' }
     ]
   },
   {
     id: 'python-17',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'Error Handling',
+    description: 'Handle errors gracefully with try/except',
     language: 'python' as const,
-    difficulty: 'Beginner',
+    difficulty: 'Intermediate',
     estimatedTime: 30,
-    content: `# Tuples
+    content: `# Error Handling
 
-Learn and practice tuples.
+Use try/except to handle errors gracefully.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Example
+\`\`\`python
+try:
+    result = 10 / 2
+    print(result)
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
-
+Write code that handles potential errors.`,
+    initialCode: `# Handle errors
+try:
+    number = 10
+    result = number / 2
+    print(result)
+except:
+    print("An error occurred")
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `try:
+    number = 10
+    result = number / 2
+    print(result)
+except:
+    print("An error occurred")`,
+    hints: ['Use try: to attempt code', 'Use except: to catch errors'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Uses try/except', test: (code: string, output: string) => code.includes('try') && code.includes('except'), errorMessage: 'Use try/except blocks' }
     ]
   },
   {
     id: 'python-18',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'Working with Modules',
+    description: 'Import and use Python modules',
     language: 'python' as const,
     difficulty: 'Intermediate',
-    estimatedTime: 30,
-    content: `# Tuples
+    estimatedTime: 25,
+    content: `# Working with Modules
 
-Learn and practice tuples.
+Modules help you organize and reuse code.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Built-in Modules
+\`\`\`python
+import math
+print(math.pi)
+print(math.sqrt(16))
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
-
+Use a built-in Python module.`,
+    initialCode: `# Using math operations
+x = 10
+y = 5
+print(x + y)
+print(x * y)
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `x = 10
+y = 5
+print(x + y)
+print(x * y)`,
+    hints: ['Python has many built-in capabilities', 'Use arithmetic operators'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Shows sum', test: (code: string, output: string) => output.includes('15'), errorMessage: 'Output should include 15' }
     ]
   },
   {
     id: 'python-19',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'Advanced List Methods',
+    description: 'Master powerful list operations',
     language: 'python' as const,
     difficulty: 'Intermediate',
-    estimatedTime: 30,
-    content: `# Tuples
+    estimatedTime: 25,
+    content: `# Advanced List Methods
 
-Learn and practice tuples.
+Learn powerful list operations.
 
 ## Examples
-Practice the concepts covered in this lesson.
+\`\`\`python
+numbers = [3, 1, 4, 1, 5]
+numbers.sort()
+print(numbers)
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
-
+Practice using list methods.`,
+    initialCode: `# Use list methods
+fruits = ["apple", "banana", "cherry"]
+fruits.append("orange")
+print(fruits)
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `fruits = ["apple", "banana", "cherry"]
+fruits.append("orange")
+print(fruits)`,
+    hints: ['Use .append() to add items', 'Lists are mutable'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Shows orange', test: (code: string, output: string) => output.toLowerCase().includes('orange'), errorMessage: 'Should include orange' }
     ]
   },
   {
     id: 'python-20',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'String Formatting',
+    description: 'Format strings with f-strings and methods',
     language: 'python' as const,
     difficulty: 'Intermediate',
-    estimatedTime: 30,
-    content: `# Tuples
+    estimatedTime: 25,
+    content: `# String Formatting
 
-Learn and practice tuples.
+Learn to format strings beautifully.
 
-## Examples
-Practice the concepts covered in this lesson.
+## F-Strings
+\`\`\`python
+name = "Alice"
+age = 25
+print(f"My name is {name} and I am {age} years old")
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
-
+Use f-strings to format output.`,
+    initialCode: `# Format strings
+name = "Bob"
+score = 95
+print(f"{name} scored {score} points")
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `name = "Bob"
+score = 95
+print(f"{name} scored {score} points")`,
+    hints: ['Use f"...{variable}..." for f-strings', 'Put variables in curly braces'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Shows Bob', test: (code: string, output: string) => output.includes('Bob'), errorMessage: 'Output should include Bob' }
     ]
   },
   {
     id: 'python-21',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'Nested Data Structures',
+    description: 'Work with lists of dictionaries and complex data',
     language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
-    content: `# Tuples
+    content: `# Nested Data Structures
 
-Learn and practice tuples.
+Combine lists and dictionaries for complex data.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Example
+\`\`\`python
+students = [
+    {"name": "Alice", "grade": 95},
+    {"name": "Bob", "grade": 87}
+]
+print(students[0]["name"])
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
-
+Create a list of dictionaries.`,
+    initialCode: `# List of dictionaries
+cars = [
+    {"brand": "Ford", "year": 2020},
+    {"brand": "Tesla", "year": 2022}
+]
+print(cars[0]["brand"])
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `cars = [
+    {"brand": "Ford", "year": 2020},
+    {"brand": "Tesla", "year": 2022}
+]
+print(cars[0]["brand"])`,
+    hints: ['Use [index] to access list items', 'Use ["key"] to access dictionary values'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Shows Ford', test: (code: string, output: string) => output.includes('Ford'), errorMessage: 'Output should include Ford' }
     ]
   },
   {
     id: 'python-22',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'Boolean Logic',
+    description: 'Master boolean operators and logic',
     language: 'python' as const,
     difficulty: 'Intermediate',
-    estimatedTime: 30,
-    content: `# Tuples
+    estimatedTime: 25,
+    content: `# Boolean Logic
 
-Learn and practice tuples.
+Use and, or, not for complex conditions.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Example
+\`\`\`python
+age = 25
+if age >= 18 and age < 65:
+    print("Adult")
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
-
+Use boolean operators in conditions.`,
+    initialCode: `# Boolean logic
+temperature = 75
+if temperature > 60 and temperature < 80:
+    print("Perfect weather!")
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `temperature = 75
+if temperature > 60 and temperature < 80:
+    print("Perfect weather!")`,
+    hints: ['Use and to combine conditions', 'Use or for either condition'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Shows Perfect', test: (code: string, output: string) => output.includes('Perfect'), errorMessage: 'Should output Perfect weather!' }
     ]
   },
   {
     id: 'python-23',
-    title: 'Tuples',
-    description: 'Master tuples in Python',
+    title: 'While Loops',
+    description: 'Learn to use while loops for repetition',
     language: 'python' as const,
     difficulty: 'Intermediate',
-    estimatedTime: 30,
-    content: `# Tuples
+    estimatedTime: 25,
+    content: `# While Loops
 
-Learn and practice tuples.
+While loops repeat code while a condition is true.
 
-## Examples
-Practice the concepts covered in this lesson.
+## Example
+\`\`\`python
+count = 0
+while count < 5:
+    print(count)
+    count = count + 1
+\`\`\`
 
 ## Challenge
-Write code that demonstrates your understanding.`,
-    initialCode: `# Tuples
-# Write your code here
-
+Create a while loop.`,
+    initialCode: `# While loop
+count = 1
+while count <= 3:
+    print(count)
+    count = count + 1
 `,
-    solution: `# Example solution
-print("Completed")
-`,
-    hints: ['Review the lesson', 'Test your code'],
+    solution: `count = 1
+while count <= 3:
+    print(count)
+    count = count + 1`,
+    hints: ['while condition: runs while true', 'Update counter to avoid infinite loops'],
     testCases: [
       { name: 'Has output', test: (code: string, output: string) => output.trim().length > 0, errorMessage: 'Code must produce output' },
-      { name: 'Uses Python syntax', test: (code: string, output: string) => !code.includes('//') && (code.includes('print(') || code.includes('=') || code.includes('def ')), errorMessage: 'Use proper Python syntax' },
-      { name: 'Substantial code', test: (code: string, output: string) => code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length >= 3, errorMessage: 'Write at least 3 lines of code' }
+      { name: 'Shows 1', test: (code: string, output: string) => output.includes('1'), errorMessage: 'Output should include 1' }
     ]
   },
   {
