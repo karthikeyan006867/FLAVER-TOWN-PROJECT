@@ -217,6 +217,15 @@ export default function CodeEditor({
             let functionParams: string[] = []
             let functionBody: string[] = []
             let functionIndent = 0
+            let inClassDef = false
+            let className = ''
+            let classBody: string[] = []
+            let classIndent = 0
+            let inTryBlock = false
+            let tryBody: string[] = []
+            let exceptBody: string[] = []
+            let tryIndent = 0
+            let inExceptBlock = false
             
             // Helper function to evaluate Python expressions
             const evalPythonExpr = (expr: string): any => {
@@ -672,6 +681,247 @@ export default function CodeEditor({
                 }
                 inForLoop = false
                 loopBody = []
+              }
+              
+              // Handle class definitions
+              if (trimmed.startsWith('class ') && trimmed.endsWith(':')) {
+                const classMatch = trimmed.match(/class\s+(\w+)(?:\([^)]*\))?\s*:/)
+                if (classMatch) {
+                  inClassDef = true
+                  className = classMatch[1]
+                  classBody = []
+                  classIndent = indent
+                  continue
+                }
+              }
+              
+              // Collect class body
+              if (inClassDef) {
+                if (indent <= classIndent && trimmed) {
+                  // End of class - create the class
+                  const classCode = classBody.join('\n')
+                  
+                  // Create a class factory
+                  variables[className] = function(...args: any[]) {
+                    const instance: any = {}
+                    let initParams: string[] = []
+                    const methods: { [key: string]: string[] } = {}
+                    let currentMethod = ''
+                    let methodIndent = 0
+                    
+                    // Parse class body
+                    for (const line of classBody) {
+                      const lineIndent = line.search(/\S/)
+                      const lineTrimmed = line.trim()
+                      
+                      // Find __init__ method
+                      if (lineTrimmed.startsWith('def __init__(self')) {
+                        const initMatch = lineTrimmed.match(/def\s+__init__\s*\(self(?:,\s*([^)]+))?\)\s*:/)
+                        if (initMatch && initMatch[1]) {
+                          initParams = initMatch[1].split(',').map(p => p.trim())
+                        }
+                        currentMethod = '__init__'
+                        methods[currentMethod] = []
+                        methodIndent = lineIndent
+                        continue
+                      }
+                      
+                      // Find other methods
+                      if (lineTrimmed.startsWith('def ') && lineTrimmed.includes('(self')) {
+                        const methodMatch = lineTrimmed.match(/def\s+(\w+)\s*\(self(?:,\s*([^)]+))?\)\s*:/)
+                        if (methodMatch) {
+                          currentMethod = methodMatch[1]
+                          methods[currentMethod] = []
+                          methodIndent = lineIndent
+                        }
+                        continue
+                      }
+                      
+                      // Collect method body
+                      if (currentMethod && lineIndent > methodIndent) {
+                        methods[currentMethod].push(line.substring(methodIndent + 2))
+                      }
+                    }
+                    
+                    // Execute __init__ if exists
+                    if (methods['__init__']) {
+                      for (let i = 0; i < initParams.length && i < args.length; i++) {
+                        instance[initParams[i]] = args[i]
+                      }
+                      
+                      // Process __init__ body
+                      for (const bodyLine of methods['__init__']) {
+                        const bodyTrimmed = bodyLine.trim()
+                        
+                        // Handle self.property = value
+                        if (bodyTrimmed.startsWith('self.') && bodyTrimmed.includes('=')) {
+                          const assignMatch = bodyTrimmed.match(/self\.(\w+)\s*=\s*(.+)/)
+                          if (assignMatch) {
+                            const prop = assignMatch[1]
+                            let value = assignMatch[2].trim()
+                            
+                            // Check if it's a parameter reference
+                            if (initParams.includes(value)) {
+                              instance[prop] = instance[value]
+                            } else if (value.startsWith('"') || value.startsWith("'")) {
+                              instance[prop] = value.slice(1, -1)
+                            } else if (!isNaN(Number(value))) {
+                              instance[prop] = Number(value)
+                            } else {
+                              instance[prop] = value
+                            }
+                          }
+                        }
+                      }
+                    }
+                    
+                    // Add methods to instance
+                    Object.keys(methods).forEach(methodName => {
+                      if (methodName !== '__init__') {
+                        instance[methodName] = function() {
+                          const methodBody = methods[methodName]
+                          for (const bodyLine of methodBody) {
+                            const bodyTrimmed = bodyLine.trim()
+                            
+                            // Handle print statements in methods
+                            if (bodyTrimmed.startsWith('print(')) {
+                              const printMatch = bodyTrimmed.match(/print\s*\((.*)\)/)
+                              if (printMatch) {
+                                let content = printMatch[1].trim()
+                                
+                                // Handle f-strings with self references
+                                if (content.startsWith('f"') || content.startsWith("f'")) {
+                                  content = content.slice(2, -1)
+                                  content = content.replace(/\{([^}]+)\}/g, (_, expr) => {
+                                    expr = expr.trim()
+                                    // Handle self.property
+                                    if (expr.startsWith('self.')) {
+                                      const prop = expr.substring(5)
+                                      return String(instance[prop] || '')
+                                    }
+                                    return String(expr)
+                                  })
+                                  pythonOutput.push(content)
+                                } else if (content.startsWith('"') || content.startsWith("'")) {
+                                  pythonOutput.push(content.slice(1, -1))
+                                } else {
+                                  pythonOutput.push(String(content))
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    })
+                    
+                    return instance
+                  }
+                  
+                  inClassDef = false
+                  classBody = []
+                } else {
+                  classBody.push(line)
+                  continue
+                }
+              }
+              
+              // Handle try/except blocks
+              if (trimmed === 'try:') {
+                inTryBlock = true
+                tryBody = []
+                exceptBody = []
+                tryIndent = indent
+                inExceptBlock = false
+                continue
+              }
+              
+              // Handle except block start
+              if (inTryBlock && trimmed.startsWith('except')) {
+                inExceptBlock = true
+                inTryBlock = false
+                continue
+              }
+              
+              // Collect try/except body
+              if ((inTryBlock || inExceptBlock) && indent > tryIndent) {
+                if (inExceptBlock) {
+                  exceptBody.push(trimmed)
+                } else {
+                  tryBody.push(trimmed)
+                }
+                continue
+              }
+              
+              // Execute try/except when block ends
+              if ((inTryBlock || inExceptBlock) && indent <= tryIndent && trimmed) {
+                // Execute try block
+                let tryFailed = false
+                try {
+                  for (const tryLine of tryBody) {
+                    const tryTrimmed = tryLine.trim()
+                    
+                    // Handle print in try block
+                    if (tryTrimmed.startsWith('print(')) {
+                      const printMatch = tryTrimmed.match(/print\s*\((.*)\)/)
+                      if (printMatch) {
+                        let content = printMatch[1].trim()
+                        if (content.startsWith('f"') || content.startsWith("f'")) {
+                          content = content.slice(2, -1)
+                          content = content.replace(/\{([^}]+)\}/g, (_, expr) => {
+                            const value = evalPythonExpr(expr.trim())
+                            return String(value)
+                          })
+                          pythonOutput.push(content)
+                        } else if (content.startsWith('"') || content.startsWith("'")) {
+                          pythonOutput.push(content.slice(1, -1))
+                        } else {
+                          const output = evalPythonExpr(content)
+                          pythonOutput.push(String(output))
+                        }
+                      }
+                    }
+                    // Handle variable assignments in try
+                    else if (tryTrimmed.includes('=') && !tryTrimmed.includes('==')) {
+                      const eqIndex = tryTrimmed.indexOf('=')
+                      const varName = tryTrimmed.substring(0, eqIndex).trim()
+                      let value = tryTrimmed.substring(eqIndex + 1).trim()
+                      
+                      if (value.startsWith('"') || value.startsWith("'")) {
+                        variables[varName] = value.slice(1, -1)
+                      } else if (!isNaN(Number(value))) {
+                        variables[varName] = Number(value)
+                      } else {
+                        variables[varName] = evalPythonExpr(value)
+                      }
+                    }
+                  }
+                } catch (error) {
+                  tryFailed = true
+                }
+                
+                // Execute except block if try failed
+                if (tryFailed) {
+                  for (const exceptLine of exceptBody) {
+                    const exceptTrimmed = exceptLine.trim()
+                    
+                    if (exceptTrimmed.startsWith('print(')) {
+                      const printMatch = exceptTrimmed.match(/print\s*\((.*)\)/)
+                      if (printMatch) {
+                        let content = printMatch[1].trim()
+                        if (content.startsWith('"') || content.startsWith("'")) {
+                          pythonOutput.push(content.slice(1, -1))
+                        } else {
+                          pythonOutput.push(String(content))
+                        }
+                      }
+                    }
+                  }
+                }
+                
+                inTryBlock = false
+                inExceptBlock = false
+                tryBody = []
+                exceptBody = []
               }
               
               // Handle function definitions
