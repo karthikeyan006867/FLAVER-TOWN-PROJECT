@@ -180,7 +180,7 @@ export default function ChallengesPage() {
                       <h3 className="text-lg font-bold mb-3">Your Solution</h3>
                       <CodeEditor
                         language={selectedLanguage}
-                        initialCode={selectedChallenge.starterCode[selectedLanguage]}
+                        initialCode={selectedChallenge.initialCode}
                         testCases={selectedLanguage === 'javascript' || selectedLanguage === 'typescript' ? selectedChallenge.testCases : undefined}
                         onSuccess={() => completeChallenge(selectedChallenge.id)}
                       />
