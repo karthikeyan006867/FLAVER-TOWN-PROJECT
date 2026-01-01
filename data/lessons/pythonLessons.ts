@@ -242,8 +242,7 @@ print(result)  # 8
 Create a function \`square(n)\` that returns n squared. Test it with numbers 1-5.`,
     initialCode: `# Create function that squares a number
 def square(n):
-    # Your code here
-    pass
+    return n ** 2
 
 # Test your function
 for i in range(1, 6):
@@ -296,10 +295,10 @@ print(person)
 Create a dictionary for a book with title, author, year, and pages. Print each value.`,
     initialCode: `# Create a book dictionary
 book = {
-    "title": "",
-    "author": "",
-    "year": 0,
-    "pages": 0
+    "title": "Python Guide",
+    "author": "John Doe",
+    "year": 2024,
+    "pages": 350
 }
 
 # Print each value
