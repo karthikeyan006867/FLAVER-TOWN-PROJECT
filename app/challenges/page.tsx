@@ -112,11 +112,7 @@ export default function ChallengesPage() {
                 <div
                   key={challenge.id}
                   className="card-gradient p-6 rounded-xl border border-gray-700 hover:border-gray-600 transition-all cursor-pointer group"
-                  onClick={() => {
-                    setSelectedChallenge(challenge)
-                    setCode(challenge.initialCode)
-                    setOutput('')
-                  }}
+                  onClick={() => setSelectedChallenge(challenge)}
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className={`px-3 py-1 rounded-full text-xs font-semibold border ${getDifficultyColor(challenge.difficulty)}`}>
