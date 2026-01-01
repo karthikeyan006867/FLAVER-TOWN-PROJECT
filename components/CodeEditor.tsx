@@ -1090,10 +1090,16 @@ export default function CodeEditor({
                 } else if (value === 'False') {
                   variables[varName] = false
                 } else if (value.startsWith('[') && value.endsWith(']')) {
-                  try {
-                    variables[varName] = JSON.parse(value.replace(/'/g, '"'))
-                  } catch {
-                    variables[varName] = []
+                  // Check if it's a list comprehension (contains "for" keyword)
+                  if (value.includes(' for ')) {
+                    variables[varName] = evalPythonExpr(value)
+                  } else {
+                    // Regular list - parse as JSON
+                    try {
+                      variables[varName] = JSON.parse(value.replace(/'/g, '"'))
+                    } catch {
+                      variables[varName] = []
+                    }
                   }
                 } else if (value.startsWith('{') && value.endsWith('}')) {
                   // Single-line dictionary
