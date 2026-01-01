@@ -238,6 +238,30 @@ export default function CodeEditor({
                 }
               }
               
+              // Handle list element methods: list[0].upper(), list[i].lower()
+              const listElementMethodMatch = expr.match(/^(\w+)\[(\w+|\d+)\]\.(upper|lower|title|capitalize|strip)\(\)$/)
+              if (listElementMethodMatch) {
+                const listName = listElementMethodMatch[1]
+                const indexExpr = listElementMethodMatch[2]
+                const method = listElementMethodMatch[3]
+                
+                if (Array.isArray(variables[listName])) {
+                  // Evaluate index (could be variable or number)
+                  const index = isNaN(Number(indexExpr)) ? variables[indexExpr] : Number(indexExpr)
+                  const value = variables[listName][index]
+                  
+                  if (typeof value === 'string') {
+                    switch (method) {
+                      case 'upper': return value.toUpperCase()
+                      case 'lower': return value.toLowerCase()
+                      case 'title': return value.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')
+                      case 'capitalize': return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+                      case 'strip': return value.trim()
+                    }
+                  }
+                }
+              }
+              
               // Handle len() function
               if (expr.startsWith('len(') && expr.endsWith(')')) {
                 const arg = expr.slice(4, -1).trim()
@@ -368,10 +392,21 @@ export default function CodeEditor({
                         const returnExpr = bodyTrimmed.substring(7).trim()
                         
                         // Evaluate return expression with local variables
-                        const tempVars = variables
-                        Object.assign(variables, localVars)
+                        // Save original variables
+                        const savedVars = { ...variables }
+                        // Apply local scope
+                        Object.keys(localVars).forEach(key => {
+                          variables[key] = localVars[key]
+                        })
                         returnValue = evalPythonExpr(returnExpr)
-                        Object.assign(variables, tempVars)
+                        // Restore original variables
+                        Object.keys(variables).forEach(key => {
+                          if (savedVars.hasOwnProperty(key)) {
+                            variables[key] = savedVars[key]
+                          } else {
+                            delete variables[key]
+                          }
+                        })
                         break
                       }
                     }
