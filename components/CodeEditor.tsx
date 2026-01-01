@@ -387,17 +387,42 @@ export default function CodeEditor({
                     for (const bodyLine of functionBody) {
                       const bodyTrimmed = bodyLine.trim()
                       
+                      // Save original variables for local scope
+                      const savedVars = { ...variables }
+                      // Apply local scope
+                      Object.keys(localVars).forEach(key => {
+                        variables[key] = localVars[key]
+                      })
+                      
+                      // Handle print statements inside functions
+                      if (bodyTrimmed.startsWith('print(')) {
+                        const printMatch = bodyTrimmed.match(/print\s*\((.*)\)/)
+                        if (printMatch) {
+                          let content = printMatch[1].trim()
+                          
+                          // Handle f-strings
+                          if (content.startsWith('f"') || content.startsWith("f'")) {
+                            content = content.slice(2, -1)
+                            content = content.replace(/\{([^}]+)\}/g, (_, expr) => {
+                              const value = evalPythonExpr(expr.trim())
+                              return String(value)
+                            })
+                            pythonOutput.push(content)
+                          }
+                          // Handle regular strings
+                          else if (content.startsWith('"') || content.startsWith("'")) {
+                            pythonOutput.push(content.slice(1, -1))
+                          }
+                          // Handle expressions
+                          else {
+                            const output = evalPythonExpr(content)
+                            pythonOutput.push(String(output))
+                          }
+                        }
+                      }
                       // Handle return statements
-                      if (bodyTrimmed.startsWith('return ')) {
+                      else if (bodyTrimmed.startsWith('return ')) {
                         const returnExpr = bodyTrimmed.substring(7).trim()
-                        
-                        // Evaluate return expression with local variables
-                        // Save original variables
-                        const savedVars = { ...variables }
-                        // Apply local scope
-                        Object.keys(localVars).forEach(key => {
-                          variables[key] = localVars[key]
-                        })
                         returnValue = evalPythonExpr(returnExpr)
                         // Restore original variables
                         Object.keys(variables).forEach(key => {
@@ -409,6 +434,15 @@ export default function CodeEditor({
                         })
                         break
                       }
+                      
+                      // Restore original variables after each line
+                      Object.keys(variables).forEach(key => {
+                        if (savedVars.hasOwnProperty(key)) {
+                          variables[key] = savedVars[key]
+                        } else {
+                          delete variables[key]
+                        }
+                      })
                     }
                     return returnValue
                   }
@@ -583,6 +617,8 @@ export default function CodeEditor({
                 variables[loopVariable] = item
                 for (const bodyLine of loopBody) {
                   const bodyTrimmed = bodyLine.trim()
+                  
+                  // Handle print statements
                   if (bodyTrimmed.startsWith('print(')) {
                     const printMatch = bodyTrimmed.match(/print\s*\((.*)\)/)
                     if (printMatch) {
@@ -607,6 +643,17 @@ export default function CodeEditor({
                         pythonOutput.push(String(output))
                       }
                     }
+                  }
+                  // Handle variable assignments inside loops
+                  else if (bodyTrimmed.includes('=') && !bodyTrimmed.includes('==') && !bodyTrimmed.includes('!=')) {
+                    const eqIndex = bodyTrimmed.indexOf('=')
+                    const varName = bodyTrimmed.substring(0, eqIndex).trim()
+                    const value = bodyTrimmed.substring(eqIndex + 1).trim()
+                    variables[varName] = evalPythonExpr(value)
+                  }
+                  // Handle function calls (without assignment)
+                  else if (bodyTrimmed.match(/^\w+\(/)) {
+                    evalPythonExpr(bodyTrimmed)
                   }
                 }
               }
