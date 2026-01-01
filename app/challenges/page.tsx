@@ -181,7 +181,6 @@ export default function ChallengesPage() {
                       <CodeEditor
                         language={selectedLanguage}
                         initialCode={selectedChallenge.initialCode}
-                        testCases={selectedLanguage === 'javascript' || selectedLanguage === 'typescript' ? selectedChallenge.testCases : undefined}
                         onSuccess={() => completeChallenge(selectedChallenge.id)}
                       />
                     </div>
