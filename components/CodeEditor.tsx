@@ -179,17 +179,82 @@ export default function CodeEditor({
             let loopIterable: any[] = []
             let loopBody: string[] = []
             let loopIndent = 0
+            let inDictDef = false
+            let dictName = ''
+            let dictContent: string[] = []
+            let dictIndent = 0
+            let inFunctionDef = false
+            let functionName = ''
+            let functionParams: string[] = []
+            let functionBody: string[] = []
+            let functionIndent = 0
             
             // Helper function to evaluate Python expressions
             const evalPythonExpr = (expr: string): any => {
               expr = expr.trim()
               
+              // Handle function calls like square(5)
+              const funcCallMatch = expr.match(/^(\w+)\((.+)\)$/)
+              if (funcCallMatch && !expr.startsWith('len(') && !expr.startsWith('range(')) {
+                const funcName = funcCallMatch[1]
+                const argStr = funcCallMatch[2].trim()
+                
+                // Recursively evaluate the argument
+                const argValue = evalPythonExpr(argStr)
+                
+                // If function is defined (as variable), call it
+                if (typeof variables[funcName] === 'function') {
+                  return variables[funcName](argValue)
+                }
+                // Return the expression as-is if we can't evaluate
+                return expr
+              }
+              
+              // Handle dictionary/list access with string keys: book['title'] or book["title"]
+              const dictAccessMatch = expr.match(/^(\w+)\[['"]([^'"]+)['"]\]$/)
+              if (dictAccessMatch) {
+                const varName = dictAccessMatch[1]
+                const key = dictAccessMatch[2]
+                if (variables[varName] && typeof variables[varName] === 'object') {
+                  return variables[varName][key]
+                }
+              }
+              
+              // Handle string methods: name.upper(), name.lower(), name.title()
+              const stringMethodMatch = expr.match(/^(\w+)\.(upper|lower|title|capitalize|strip)\(\)$/)
+              if (stringMethodMatch) {
+                const varName = stringMethodMatch[1]
+                const method = stringMethodMatch[2]
+                const value = variables[varName]
+                
+                if (typeof value === 'string') {
+                  switch (method) {
+                    case 'upper': return value.toUpperCase()
+                    case 'lower': return value.toLowerCase()
+                    case 'title': return value.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')
+                    case 'capitalize': return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+                    case 'strip': return value.trim()
+                  }
+                }
+              }
+              
               // Handle len() function
               if (expr.startsWith('len(') && expr.endsWith(')')) {
                 const arg = expr.slice(4, -1).trim()
-                const value = variables[arg]
-                if (Array.isArray(value)) return value.length
-                if (typeof value === 'string') return value.length
+                
+                // Handle len(varname)
+                if (variables[arg] !== undefined) {
+                  const value = variables[arg]
+                  if (Array.isArray(value)) return value.length
+                  if (typeof value === 'string') return value.length
+                  if (typeof value === 'object') return Object.keys(value).length
+                  return 0
+                }
+                
+                // Handle len(expression) - recursively evaluate
+                const innerValue = evalPythonExpr(arg)
+                if (Array.isArray(innerValue)) return innerValue.length
+                if (typeof innerValue === 'string') return innerValue.length
                 return 0
               }
               
@@ -247,6 +312,74 @@ export default function CodeEditor({
               
               const indent = line.search(/\S/)
               
+              // Handle dictionary definition collection
+              if (inDictDef) {
+                if (trimmed === '}' || (indent <= dictIndent && trimmed && !trimmed.endsWith(','))) {
+                  // End of dictionary
+                  const dictStr = '{' + dictContent.join('') + '}'
+                  try {
+                    // Convert Python dict to JavaScript object
+                    const jsDict = dictStr
+                      .replace(/'/g, '"')
+                      .replace(/True/g, 'true')
+                      .replace(/False/g, 'false')
+                      .replace(/None/g, 'null')
+                    variables[dictName] = JSON.parse(jsDict)
+                  } catch {
+                    variables[dictName] = {}
+                  }
+                  inDictDef = false
+                  dictContent = []
+                  if (trimmed !== '}') {
+                    // Process this line normally
+                  } else {
+                    continue
+                  }
+                } else {
+                  dictContent.push(trimmed)
+                  continue
+                }
+              }
+              
+              // Handle function definition collection
+              if (inFunctionDef) {
+                if (indent <= functionIndent && trimmed) {
+                  // End of function - store it
+                  variables[functionName] = (...args: any[]) => {
+                    // Create local scope with parameters
+                    const localVars = { ...variables }
+                    functionParams.forEach((param, idx) => {
+                      localVars[param] = args[idx]
+                    })
+                    
+                    // Execute function body
+                    let returnValue: any = null
+                    for (const bodyLine of functionBody) {
+                      const bodyTrimmed = bodyLine.trim()
+                      
+                      // Handle return statements
+                      if (bodyTrimmed.startsWith('return ')) {
+                        const returnExpr = bodyTrimmed.substring(7).trim()
+                        
+                        // Evaluate return expression with local variables
+                        const tempVars = variables
+                        Object.assign(variables, localVars)
+                        returnValue = evalPythonExpr(returnExpr)
+                        Object.assign(variables, tempVars)
+                        break
+                      }
+                    }
+                    return returnValue
+                  }
+                  inFunctionDef = false
+                  functionBody = []
+                  // Process current line normally if it's not empty
+                } else {
+                  functionBody.push(trimmed)
+                  continue
+                }
+              }
+              
               // Check if we're exiting a for loop
               if (inForLoop && indent <= loopIndent && trimmed) {
                 // Execute the loop
@@ -266,6 +399,19 @@ export default function CodeEditor({
                 }
                 inForLoop = false
                 loopBody = []
+              }
+              
+              // Handle function definitions
+              if (trimmed.startsWith('def ') && trimmed.includes('(') && trimmed.endsWith(':')) {
+                const defMatch = trimmed.match(/def\s+(\w+)\s*\(([^)]*)\)\s*:/)
+                if (defMatch) {
+                  inFunctionDef = true
+                  functionName = defMatch[1]
+                  functionParams = defMatch[2] ? defMatch[2].split(',').map(p => p.trim().split('=')[0].trim()).filter(p => p) : []
+                  functionBody = []
+                  functionIndent = indent
+                  continue
+                }
               }
               
               // Handle for loops
@@ -339,6 +485,15 @@ export default function CodeEditor({
                 const varName = trimmed.substring(0, eqIndex).trim()
                 let value = trimmed.substring(eqIndex + 1).trim()
                 
+                // Check for multi-line dictionary
+                if (value === '{' || value.startsWith('{') && !value.endsWith('}')) {
+                  inDictDef = true
+                  dictName = varName
+                  dictContent = value === '{' ? [] : [value.substring(1)]
+                  dictIndent = indent
+                  continue
+                }
+                
                 // Parse value
                 if (value.startsWith('"') || value.startsWith("'")) {
                   variables[varName] = value.slice(1, -1)
@@ -353,6 +508,18 @@ export default function CodeEditor({
                     variables[varName] = JSON.parse(value.replace(/'/g, '"'))
                   } catch {
                     variables[varName] = []
+                  }
+                } else if (value.startsWith('{') && value.endsWith('}')) {
+                  // Single-line dictionary
+                  try {
+                    const jsDict = value
+                      .replace(/'/g, '"')
+                      .replace(/True/g, 'true')
+                      .replace(/False/g, 'false')
+                      .replace(/None/g, 'null')
+                    variables[varName] = JSON.parse(jsDict)
+                  } catch {
+                    variables[varName] = {}
                   }
                 } else if (value.startsWith('(') && value.endsWith(')')) {
                   // Handle tuples
