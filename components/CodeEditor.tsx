@@ -121,17 +121,20 @@ export default function CodeEditor({
     setTestResults([])
     setAllTestsPassed(false)
 
-    setTimeout(() => {
-      try {
-        let result = ''
-        
-        if (language.toLowerCase() === 'html') {
-          // Extract text content from HTML for display
-          const parser = new DOMParser()
-          const doc = parser.parseFromString(code, 'text/html')
-          const textContent = doc.body.textContent || doc.body.innerText || ''
-          result = textContent.trim()
-          setOutput(result || '✓ HTML structure created')
+    // Use setTimeout to prevent UI blocking, but ensure it completes
+    const executeWithTimeout = () => {
+      return new Promise<void>((resolve) => {
+        setTimeout(() => {
+          try {
+            let result = ''
+            
+            if (language.toLowerCase() === 'html') {
+              // Extract text content from HTML for display
+              const parser = new DOMParser()
+              const doc = parser.parseFromString(code, 'text/html')
+              const textContent = doc.body.textContent || doc.body.innerText || ''
+              result = textContent.trim()
+              setOutput(result || '✓ HTML structure created')
         } else if (language.toLowerCase() === 'css') {
           // For CSS, show a success message instead of code
           result = '✓ CSS styles applied'
@@ -1473,12 +1476,25 @@ export default function CodeEditor({
           checkOutput(result)
         }
       } catch (error: any) {
-        setOutput(`Error: ${error.message}`)
+        console.error('Code execution error:', error)
+        setOutput(`Error: ${error.message || 'Unknown error occurred'}`)
         setTestPassed(false)
       } finally {
         setIsRunning(false)
       }
-    }, 500)
+      resolve()
+        }, 100) // Reduced timeout from 500ms to 100ms for faster response
+      })
+    }
+
+    try {
+      await executeWithTimeout()
+    } catch (error: any) {
+      console.error('Execution wrapper error:', error)
+      setOutput(`Error: ${error.message || 'Execution failed'}`)
+      setTestPassed(false)
+      setIsRunning(false)
+    }
   }
 
   const runTestCases = (userCode: string, executionOutput: string) => {

@@ -37,8 +37,13 @@ export default function ChallengesPage() {
   const handleSubmit = () => {
     if (!selectedChallenge) return
     
-    // Mark as completed
-    completeChallenge(selectedChallenge.id)
+    try {
+      // Mark as completed
+      completeChallenge(selectedChallenge.id)
+      alert('Challenge completed! 🎉')
+    } catch (error) {
+      console.error('Error completing challenge:', error)
+    }
   }
 
   const getDifficultyColor = (difficulty: string) => {

@@ -18,11 +18,15 @@ const dailyChallenge = {
       name: 'Test Case 1: sum(5, 3)', 
       test: (code: string) => {
         try {
-          eval(code)
-          // @ts-ignore
-          const result = typeof sum === 'function' ? sum(5, 3) : null
-          return result === 8
-        } catch {
+          // Create isolated scope for eval
+          const func = new Function(code + '; return typeof sum !== "undefined" ? sum : null;')
+          const sum = func()
+          if (typeof sum === 'function') {
+            return sum(5, 3) === 8
+          }
+          return false
+        } catch (error) {
+          console.error('Test error:', error)
           return false
         }
       },
@@ -32,11 +36,14 @@ const dailyChallenge = {
       name: 'Test Case 2: sum(-1, 1)', 
       test: (code: string) => {
         try {
-          eval(code)
-          // @ts-ignore
-          const result = typeof sum === 'function' ? sum(-1, 1) : null
-          return result === 0
-        } catch {
+          const func = new Function(code + '; return typeof sum !== "undefined" ? sum : null;')
+          const sum = func()
+          if (typeof sum === 'function') {
+            return sum(-1, 1) === 0
+          }
+          return false
+        } catch (error) {
+          console.error('Test error:', error)
           return false
         }
       },
@@ -46,11 +53,14 @@ const dailyChallenge = {
       name: 'Test Case 3: sum(100, 200)', 
       test: (code: string) => {
         try {
-          eval(code)
-          // @ts-ignore
-          const result = typeof sum === 'function' ? sum(100, 200) : null
-          return result === 300
-        } catch {
+          const func = new Function(code + '; return typeof sum !== "undefined" ? sum : null;')
+          const sum = func()
+          if (typeof sum === 'function') {
+            return sum(100, 200) === 300
+          }
+          return false
+        } catch (error) {
+          console.error('Test error:', error)
           return false
         }
       },
