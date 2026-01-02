@@ -30,6 +30,7 @@ const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Courses', href: '/courses', icon: BookOpen },
   { name: 'Challenges', href: '/challenges', icon: Target },
+  { name: 'Advanced Challenges', href: '/advanced-challenges', icon: Award },
   { name: 'Daily Challenge', href: '/daily-challenge', icon: Calendar },
   { name: 'Playground', href: '/playground', icon: Code2 },
   { name: 'Learning Paths', href: '/learning-paths', icon: Map },

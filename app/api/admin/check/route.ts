@@ -1,25 +1,31 @@
-import { auth, currentUser } from '@clerk/nextjs/server'
-import { NextResponse } from 'next/server'
+import { currentUser } from '@clerk/nextjs/server'
+import { withApiSecurity, createSuccessResponse, createErrorResponse } from '@/lib/apiSecurity'
 import { isAdmin } from '@/lib/admin'
 
-export async function GET() {
-  try {
-    const user = await currentUser()
-    
-    if (!user) {
-      return NextResponse.json({ isAdmin: false }, { status: 401 })
+export const GET = withApiSecurity(
+  async () => {
+    try {
+      const user = await currentUser()
+      
+      if (!user) {
+        return createErrorResponse('Unauthorized', 401, { isAdmin: false })
+      }
+
+      const email = user.emailAddresses[0]?.emailAddress
+      const adminStatus = isAdmin(email)
+
+      return createSuccessResponse({ 
+        isAdmin: adminStatus,
+        email: email,
+        userId: user.id
+      })
+    } catch (error) {
+      console.error('Error checking admin status:', error)
+      return createErrorResponse('Failed to check admin status', 500, { isAdmin: false })
     }
-
-    const email = user.emailAddresses[0]?.emailAddress
-    const adminStatus = isAdmin(email)
-
-    return NextResponse.json({ 
-      isAdmin: adminStatus,
-      email: email,
-      userId: user.id
-    })
-  } catch (error) {
-    console.error('Error checking admin status:', error)
-    return NextResponse.json({ isAdmin: false, error: 'Failed to check admin status' }, { status: 500 })
+  },
+  {
+    requireAuth: true,
+    rateLimit: { maxRequests: 60, windowMs: 60000 }, // 60 requests per minute
   }
-}
+)

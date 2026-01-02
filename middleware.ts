@@ -1,12 +1,50 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
 const isPublicRoute = createRouteMatcher([
   '/',
   '/sign-in(.*)',
   '/sign-up(.*)',
+  '/api/webhook(.*)', // Allow webhooks
 ])
 
-export default clerkMiddleware()
+const isAdminRoute = createRouteMatcher([
+  '/admin(.*)',
+  '/api/admin(.*)',
+])
+
+export default clerkMiddleware(async (auth, req: NextRequest) => {
+  const { userId, sessionClaims } = await auth()
+  
+  // Check if route is protected and user is not authenticated
+  if (!isPublicRoute(req) && !userId) {
+    const signInUrl = new URL('/sign-in', req.url)
+    signInUrl.searchParams.set('redirect_url', req.url)
+    return NextResponse.redirect(signInUrl)
+  }
+  
+  // Check admin routes
+  if (isAdminRoute(req)) {
+    const metadata = sessionClaims?.metadata as { role?: string } | undefined
+    const isAdmin = metadata?.role === 'admin'
+    
+    if (!isAdmin) {
+      // Redirect non-admins trying to access admin routes
+      return NextResponse.redirect(new URL('/dashboard', req.url))
+    }
+  }
+  
+  // Add security headers
+  const response = NextResponse.next()
+  
+  // Add additional runtime security headers
+  response.headers.set('X-Content-Type-Options', 'nosniff')
+  response.headers.set('X-Frame-Options', 'SAMEORIGIN')
+  response.headers.set('X-XSS-Protection', '1; mode=block')
+  
+  return response
+})
 
 export const config = {
   matcher: [
@@ -15,4 +53,4 @@ export const config = {
     // Always run for API routes
     '/(api|trpc)(.*)',
   ],
-};
+}

@@ -1,12 +1,375 @@
 import { Lesson } from '../courses'
 
-export const rubyLessons: Lesson[] = Array.from({ length: 60 }, (_, i) => {
-  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 20 ? 'Beginner' : i < 45 ? 'Intermediate' : 'Advanced'
+// Detailed Ruby lessons with comprehensive educational content
+const detailedRubyLessons: Lesson[] = [
+  // Lesson 1: Ruby Basics & Puts
+  {
+    id: 'ruby-1',
+    title: 'Introduction to Ruby - Your First Program',
+    description: 'Learn Ruby basics and how to display output using puts, print, and p',
+    content: `# Introduction to Ruby - Your First Program
+
+## What is Ruby?
+
+Ruby is a dynamic, elegant programming language focused on simplicity and productivity. Created by Yukihiro Matsumoto (Matz) in 1995, Ruby emphasizes human-friendly syntax that reads almost like English.
+
+**Why Learn Ruby?**
+- **Readable & Expressive**: Code that reads like natural language
+- **Productive**: Build applications faster with less code
+- **Web Development**: Powers Ruby on Rails, one of the most popular web frameworks
+- **Strong Community**: Gems (libraries) for almost everything
+
+## Displaying Output in Ruby
+
+Ruby provides three main methods for displaying output:
+
+### 1. puts (Put String)
+Adds a newline after output - most commonly used
+
+\`\`\`ruby
+puts "Hello, Ruby!"
+puts "Welcome to programming"
+# Output:
+# Hello, Ruby!
+# Welcome to programming
+\`\`\`
+
+### 2. print
+No automatic newline - continues on same line
+
+\`\`\`ruby
+print "Hello "
+print "World"
+# Output: Hello World
+\`\`\`
+
+### 3. p
+Shows the inspect representation - useful for debugging
+
+\`\`\`ruby
+p "Hello"
+# Output: "Hello" (with quotes)
+
+p 123
+# Output: 123
+\`\`\`
+
+## String Interpolation
+
+Insert variables directly into strings using #{variable}
+
+\`\`\`ruby
+name = "Alice"
+age = 25
+
+puts "My name is #{name}"
+puts "I am #{age} years old"
+puts "Next year I'll be #{age + 1}"
+
+# Output:
+# My name is Alice
+# I am 25 years old
+# Next year I'll be 26
+\`\`\`
+
+## Comments in Ruby
+
+\`\`\`ruby
+# Single-line comment (most common)
+
+=begin
+Multi-line comment
+Less commonly used
+=end
+
+puts "Hello" # Comment after code
+\`\`\`
+
+## Real-World Use Case
+
+Every Ruby application, from simple scripts to complex web apps, uses puts for logging, debugging, and user interaction.`,
+    language: 'ruby',
+    difficulty: 'Beginner',
+    estimatedTime: 20,
+    initialCode: `# Welcome to Ruby!
+# Create a program that displays a personalized greeting
+
+# TODO: Create a variable called 'name' with your name
+# TODO: Create a variable called 'language' with "Ruby"
+# TODO: Use puts to display: "Hello, my name is [name] and I'm learning [language]!"
+
+`,
+    solution: `# Welcome to Ruby!
+# Create a program that displays a personalized greeting
+
+# Create variables
+name = "Alice"
+language = "Ruby"
+
+# Display personalized greeting using string interpolation
+puts "Hello, my name is #{name} and I'm learning #{language}!"
+
+# You can also do calculations inside interpolation
+years_to_master = 2
+puts "In #{years_to_master} years, I'll be a Ruby expert!"
+
+# Using different output methods
+print "Ruby is "
+print "awesome!"
+puts "" # Add newline
+
+# Using p for debugging
+p name # Shows: "Alice" with quotes`,
+    expectedOutput: `Hello, my name is Alice and I'm learning Ruby!
+In 2 years, I'll be a Ruby expert!
+Ruby is awesome!
+"Alice"`,
+    hints: [
+      "Create variables using the format: variable_name = value",
+      "Use puts with string interpolation: puts \"Text #{variable} more text\"",
+      "String interpolation uses #{} to embed variables in strings"
+    ],
+    testCases: [
+      {
+        name: 'Code contains puts statement',
+        test: (code) => code.includes('puts'),
+        errorMessage: 'Use puts to display output'
+      },
+      {
+        name: 'Code uses string interpolation',
+        test: (code) => code.includes('#{') && code.includes('}'),
+        errorMessage: 'Use #{} for string interpolation'
+      },
+      {
+        name: 'Code creates at least one variable',
+        test: (code) => code.includes('=') && !code.match(/^[\s]*#/m),
+        errorMessage: 'Create a variable to store your name'
+      }
+    ]
+  },
+
+  // Lesson 2: Variables
+  {
+    id: 'ruby-2',
+    title: 'Variables in Ruby - Storing Data',
+    description: 'Master the different types of variables in Ruby: local, instance, class, and global',
+    content: `# Variables in Ruby - Storing Data
+
+## What are Variables?
+
+Variables are containers that store data in your program. Think of them as labeled boxes where you can keep information and retrieve it later.
+
+**Why Variables Matter:**
+- **Store Information**: Keep data to use throughout your program
+- **Make Code Readable**: Give meaningful names instead of using raw values
+- **Enable Calculations**: Work with changing values
+- **Reduce Repetition**: Use the same value in multiple places
+
+## Types of Variables in Ruby
+
+### 1. Local Variables (Most Common)
+Lowercase or underscore - available only in current scope
+
+\`\`\`ruby
+name = "John"
+age = 30
+user_count = 100
+is_active = true
+
+puts name  # Output: John
+\`\`\`
+
+**Naming Rules:**
+- Start with lowercase letter or underscore
+- Use snake_case for multiple words
+- Be descriptive: \`user_name\` not \`un\`
+
+### 2. Instance Variables
+Start with @ - belong to object instances
+
+\`\`\`ruby
+class Person
+  def initialize(name)
+    @name = name  # Instance variable
+  end
+  
+  def greet
+    puts "Hi, I'm #{@name}"
+  end
+end
+
+person = Person.new("Alice")
+person.greet  # Output: Hi, I'm Alice
+\`\`\`
+
+### 3. Class Variables
+Start with @@ - shared across all instances
+
+\`\`\`ruby
+class Counter
+  @@count = 0  # Class variable
+  
+  def self.increment
+    @@count += 1
+  end
+  
+  def self.total
+    @@count
+  end
+end
+
+Counter.increment
+Counter.increment
+puts Counter.total  # Output: 2
+\`\`\`
+
+### 4. Global Variables
+Start with $ - available everywhere (use sparingly!)
+
+\`\`\`ruby
+$app_name = "MyApp"
+$debug_mode = true
+
+def show_app_name
+  puts $app_name  # Can access anywhere
+end
+
+show_app_name  # Output: MyApp
+\`\`\`
+
+## Variable Assignment
+
+\`\`\`ruby
+# Simple assignment
+x = 10
+
+# Multiple assignment
+a, b, c = 1, 2, 3
+
+# Swap values
+x, y = 5, 10
+x, y = y, x  # Now x=10, y=5
+
+# Parallel assignment
+name, age = "John", 30
+\`\`\`
+
+## Dynamic Typing
+
+Ruby is dynamically typed - variables can change types
+
+\`\`\`ruby
+value = 42        # Integer
+puts value
+
+value = "Hello"   # Now a String
+puts value
+
+value = true      # Now a Boolean
+puts value
+\`\`\`
+
+## Real-World Example
+
+\`\`\`ruby
+# E-commerce shopping cart
+product_name = "Laptop"
+product_price = 999.99
+quantity = 2
+tax_rate = 0.08
+
+subtotal = product_price * quantity
+tax = subtotal * tax_rate
+total = subtotal + tax
+
+puts "Product: #{product_name}"
+puts "Price: $#{product_price}"
+puts "Quantity: #{quantity}"
+puts "Subtotal: $#{subtotal}"
+puts "Tax: $#{tax.round(2)}"
+puts "Total: $#{total.round(2)}"
+\`\`\``,
+    language: 'ruby',
+    difficulty: 'Beginner',
+    estimatedTime: 25,
+    initialCode: `# Shopping Cart Calculator
+# Create variables to calculate a purchase total
+
+# TODO: Create a variable 'item' with product name
+# TODO: Create a variable 'price' with the price (use a decimal number)
+# TODO: Create a variable 'quantity' with how many items
+# TODO: Calculate total_cost = price * quantity
+# TODO: Display all information using puts
+
+`,
+    solution: `# Shopping Cart Calculator
+# Create variables to calculate a purchase total
+
+# Product information
+item = "Wireless Mouse"
+price = 29.99
+quantity = 3
+
+# Calculate total
+total_cost = price * quantity
+
+# Display purchase details
+puts "Shopping Cart Summary"
+puts "=" * 25
+puts "Item: #{item}"
+puts "Price per item: $#{price}"
+puts "Quantity: #{quantity}"
+puts "Total Cost: $#{total_cost}"
+
+# Additional example: Apply a discount
+discount_rate = 0.10  # 10% off
+discount_amount = total_cost * discount_rate
+final_price = total_cost - discount_amount
+
+puts "\\nWith 10% Discount:"
+puts "Discount: -$#{discount_amount.round(2)}"
+puts "Final Price: $#{final_price.round(2)}"`,
+    expectedOutput: `Shopping Cart Summary
+=========================
+Item: Wireless Mouse
+Price per item: $29.99
+Quantity: 3
+Total Cost: 89.97
+
+With 10% Discount:
+Discount: -$9.0
+Final Price: $80.97`,
+    hints: [
+      "Create variables like this: item = \"Product Name\"",
+      "For numbers, don't use quotes: price = 29.99",
+      "Multiply using the * operator: total = price * quantity",
+      "Use .round(2) to round decimals to 2 places"
+    ],
+    testCases: [
+      {
+        name: 'Code creates variables',
+        test: (code) => code.includes('=') && code.split('=').length >= 4,
+        errorMessage: 'Create at least 3 variables (item, price, quantity)'
+      },
+      {
+        name: 'Code performs calculation',
+        test: (code) => code.includes('*') || code.includes('+') || code.includes('-'),
+        errorMessage: 'Calculate the total cost by multiplying price * quantity'
+      },
+      {
+        name: 'Code uses puts for output',
+        test: (code) => code.includes('puts'),
+        errorMessage: 'Use puts to display the results'
+      }
+    ]
+  }
+]
+
+const generatedRubyLessons: Lesson[] = Array.from({ length: 58 }, (_, i) => {
+  const lessonNum = i + 3 // Start from lesson 3
+  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = lessonNum <= 20 ? 'Beginner' : lessonNum <= 45 ? 'Intermediate' : 'Advanced'
   
   const topics = [
-    // Beginner (0-19)
-    { title: 'Ruby Basics & Puts', desc: 'output and syntax', content: 'puts, print, p, Comments', code: 'puts "Hello, Ruby!"\\nname = "World"\\nputs "Hello, #{name}"', hint: 'Use #{} for string interpolation' },
-    { title: 'Variables', desc: 'local, instance, class', content: 'Local Variables, @instance, @@class, $global', code: 'name = "John"\\n@age = 25\\n@@count = 0\\n$debug = true', hint: 'No type declarations needed' },
     { title: 'Data Types', desc: 'strings, numbers, symbols', content: 'String, Integer, Float, Symbol, Boolean, nil', code: 'str = "Ruby"\\nnum = 42\\nfloat = 3.14\\nsym = :name\\nflag = true', hint: 'Symbols are immutable strings' },
     { title: 'String Operations', desc: 'manipulation methods', content: 'Concatenation, length, upcase, downcase, reverse', code: 'text = "hello"\\nputs text.upcase\\nputs text.length\\nputs text.reverse', hint: 'Strings are mutable in Ruby' },
     { title: 'Arrays', desc: 'ordered collections', content: 'Array creation, [], push, pop, length', code: 'numbers = [1, 2, 3, 4, 5]\\nnumbers.push(6)\\nputs numbers[0]', hint: 'Arrays can hold mixed types' },
@@ -104,3 +467,7 @@ export const rubyLessons: Lesson[] = Array.from({ length: 60 }, (_, i) => {
     ]
   }
 })
+
+// Export the lessons array
+export { detailedRubyLessons as rubyLessons }
+
