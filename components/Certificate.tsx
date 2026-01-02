@@ -39,7 +39,7 @@ export default function Certificate({
       
       // Capture the certificate as canvas with better settings
       const canvas = await html2canvas(element, {
-        scale: 2, // Good quality without being too large
+        scale: 3, // Higher quality for better download
         backgroundColor: '#0f172a', // Match slate-900 background
         logging: false,
         useCORS: true,
@@ -49,12 +49,13 @@ export default function Certificate({
         windowWidth: width,
         windowHeight: height,
         scrollX: 0,
-        scrollY: 0,
+        scrollY: -window.scrollY,
         x: 0,
-        y: 0
+        y: 0,
+        foreignObjectRendering: false
       })
 
-      // Convert canvas to blob and download
+      // Convert canvas to blob and download as PNG for better quality
       canvas.toBlob((blob) => {
         if (!blob) {
           alert('Failed to generate certificate image')
@@ -64,7 +65,7 @@ export default function Certificate({
         // Create download link
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
-        const fileName = `Certificate_${courseName.replace(/[^a-zA-Z0-9]/g, '_')}_${credentialId}.jpg`
+        const fileName = `Certificate_${courseName.replace(/[^a-zA-Z0-9]/g, '_')}_${credentialId}.png`
         link.href = url
         link.download = fileName
         document.body.appendChild(link)
@@ -75,7 +76,7 @@ export default function Certificate({
           document.body.removeChild(link)
           URL.revokeObjectURL(url)
         }, 100)
-      }, 'image/jpeg', 0.95)
+      }, 'image/png', 1.0)
     } catch (error) {
       console.error('Error downloading certificate:', error)
       alert('Failed to download certificate. Please try again.')
@@ -98,7 +99,7 @@ export default function Certificate({
           className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
         >
           <Download className="h-4 w-4" />
-          Download JPG
+          Download PNG
         </button>
       </div>
 
@@ -185,9 +186,9 @@ export default function Certificate({
             <h2 className="text-4xl md:text-5xl font-serif text-white mb-6 tracking-wide" style={{ fontFamily: 'Brush Script MT, cursive' }}>
               {userName}
             </h2>
-            <p className="text-gray-400 text-sm uppercase tracking-wider mb-3">has successfully completed</p>
+            <p className="text-gray-400 text-sm uppercase tracking-wider mb-3">has successfully completed the</p>
             <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-6" style={{ minHeight: '2.5rem' }}>
-              {courseName || 'Course Name'}
+              {courseName || 'Course Name'} Course
             </h3>
           </div>
 
