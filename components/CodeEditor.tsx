@@ -116,7 +116,7 @@ export default function CodeEditor({
 
   const runCode = async () => {
     setIsRunning(true)
-    setOutput('')
+    setOutput('Running code...') // Show immediate feedback
     setTestPassed(null)
     setTestResults([])
     setAllTestsPassed(false)
@@ -173,7 +173,7 @@ export default function CodeEditor({
             
             result = logs.length > 0 
               ? logs.join('\n') 
-              : '' // Empty if no console output
+              : '✓ Code executed successfully (no console output)'
             setOutput(result)
           } catch (error: any) {
             setOutput(`Error: ${error.message}`)
@@ -192,7 +192,7 @@ export default function CodeEditor({
             }
             const executeCode = new Function('console', code)
             executeCode(customConsole)
-            result = logs.join('\n')
+            result = logs.length > 0 ? logs.join('\n') : '✓ Code executed successfully (no console output)'
             setOutput(result)
           } catch (error: any) {
             setOutput(`Error: ${error.message}`)
@@ -1620,13 +1620,16 @@ export default function CodeEditor({
             )}
           </div>
           <div className="bg-gray-900 p-4">
-            <pre className="text-sm text-gray-300 whitespace-pre-wrap font-mono">
-              {language.toLowerCase() === 'html' ? (
-                <div dangerouslySetInnerHTML={{ __html: code }} />
-              ) : (
-                output
-              )}
-            </pre>
+            {language.toLowerCase() === 'html' ? (
+              <div 
+                className="html-preview border border-gray-700 rounded p-4 bg-white text-black min-h-[200px]"
+                dangerouslySetInnerHTML={{ __html: code }}
+              />
+            ) : (
+              <pre className="text-sm text-gray-300 whitespace-pre-wrap font-mono">
+                {output}
+              </pre>
+            )}
           </div>
         </div>
       )}
