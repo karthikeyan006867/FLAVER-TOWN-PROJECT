@@ -23,7 +23,7 @@ export default function CodeEditor({
 }: CodeEditorProps) {
   const { settings } = useSettingsStore()
   const [code, setCode] = useState(initialCode)
-  const [output, setOutput] = useState('') // Empty initially - no output until code runs
+  const [output, setOutput] = useState('Click "Run" to execute your code') // Show instruction initially
   const [isRunning, setIsRunning] = useState(false)
   const [testPassed, setTestPassed] = useState<boolean | null>(null)
   const [testResults, setTestResults] = useState<{ name: string; passed: boolean; error?: string }[]>([])
@@ -135,74 +135,70 @@ export default function CodeEditor({
               const textContent = doc.body.textContent || doc.body.innerText || ''
               result = textContent.trim()
               setOutput(result || '✓ HTML structure created')
-        } else if (language.toLowerCase() === 'css') {
-          // For CSS, show a success message instead of code
-          result = '✓ CSS styles applied'
-          setOutput(result)
-        } else if (language.toLowerCase() === 'javascript' || language.toLowerCase() === 'js' || language.toLowerCase() === 'react' || language.toLowerCase() === 'nodejs' || language.toLowerCase() === 'node') {
-          // Execute JavaScript/React/Node code
-          try {
-            const logs: string[] = []
-            
-            // Create custom console for capturing output
-            const customConsole = {
-              log: (...args: any[]) => {
-                const formatted = args.map(arg => {
-                  if (typeof arg === 'object' && arg !== null) {
-                    try {
-                      return JSON.stringify(arg, null, 2)
-                    } catch {
+            } else if (language.toLowerCase() === 'css') {
+              // For CSS, show a success message instead of code
+              result = '✓ CSS styles applied'
+              setOutput(result)
+                } else if (language.toLowerCase() === 'javascript' || language.toLowerCase() === 'js' || language.toLowerCase() === 'react' || language.toLowerCase() === 'nodejs' || language.toLowerCase() === 'node') {
+              // Execute JavaScript/React/Node code
+              try {
+                const logs: string[] = []
+                
+                // Create custom console for capturing output
+                const customConsole = {
+                  log: (...args: any[]) => {
+                    const formatted = args.map(arg => {
+                      if (typeof arg === 'object' && arg !== null) {
+                        try {
+                          return JSON.stringify(arg, null, 2)
+                        } catch {
+                          return String(arg)
+                        }
+                      }
                       return String(arg)
-                    }
+                    }).join(' ')
+                    logs.push(formatted)
+                  },
+                  error: (...args: any[]) => {
+                    logs.push('ERROR: ' + args.join(' '))
+                  },
+                  warn: (...args: any[]) => {
+                    logs.push('WARNING: ' + args.join(' '))
                   }
-                  return String(arg)
-                }).join(' ')
-                logs.push(formatted)
-              },
-              error: (...args: any[]) => {
-                logs.push('ERROR: ' + args.join(' '))
-              },
-              warn: (...args: any[]) => {
-                logs.push('WARNING: ' + args.join(' '))
-              }
-            }
+                }
 
-            // Create safe execution environment
-            const executeCode = new Function('console', code)
-            executeCode(customConsole)
-            
-            result = logs.length > 0 
-              ? logs.join('\n') 
-              : '✓ Code executed successfully (no console output)'
-            setOutput(result)
-          } catch (error: any) {
-            setOutput(`Error: ${error.message}`)
-            setTestPassed(false)
-            setIsRunning(false)
-            return
-          }
-        } else if (language.toLowerCase() === 'typescript' || language.toLowerCase() === 'ts') {
-          // Execute TypeScript as JavaScript
-          try {
-            const logs: string[] = []
-            const customConsole = {
-              log: (...args: any[]) => {
-                logs.push(args.map(arg => typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)).join(' '))
+                // Create safe execution environment
+                const executeCode = new Function('console', code)
+                executeCode(customConsole)
+                
+                result = logs.length > 0 
+                  ? logs.join('\n') 
+                  : '✓ Code executed successfully (no console output)'
+                setOutput(result)
+              } catch (error: any) {
+                result = `Error: ${error.message}`
+                setOutput(result)
               }
-            }
-            const executeCode = new Function('console', code)
-            executeCode(customConsole)
-            result = logs.length > 0 ? logs.join('\n') : '✓ Code executed successfully (no console output)'
-            setOutput(result)
-          } catch (error: any) {
-            setOutput(`Error: ${error.message}`)
-            setTestPassed(false)
-            setIsRunning(false)
-            return
-          }
-        } else if (language.toLowerCase() === 'python' || language.toLowerCase() === 'py') {
-          // Enhanced Python interpreter with proper output execution
-          try {
+                } else if (language.toLowerCase() === 'typescript' || language.toLowerCase() === 'ts') {
+              // Execute TypeScript as JavaScript
+              try {
+                const logs: string[] = []
+                const customConsole = {
+                  log: (...args: any[]) => {
+                    logs.push(args.map(arg => typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)).join(' '))
+                  }
+                }
+                const executeCode = new Function('console', code)
+                executeCode(customConsole)
+                result = logs.length > 0 ? logs.join('\n') : '✓ Code executed successfully (no console output)'
+                setOutput(result)
+              } catch (error: any) {
+                result = `Error: ${error.message}`
+                setOutput(result)
+              }
+                } else if (language.toLowerCase() === 'python' || language.toLowerCase() === 'py') {
+              // Enhanced Python interpreter with proper output execution
+              try {
             const pythonOutput: string[] = []
             const lines = code.split('\n')
             const variables: { [key: string]: any } = {}
@@ -1432,57 +1428,57 @@ export default function CodeEditor({
             
             result = pythonOutput.length > 0 
               ? pythonOutput.join('\n') 
-              : '' // Empty output if no print statements
+              : '✓ Code executed successfully (no print statements)'
             setOutput(result)
           } catch (error: any) {
             result = `Error: ${error.message}`
-            setOutput(result)
+                setOutput(result)
+              }
+            } else if (language.toLowerCase() === 'ruby' || language.toLowerCase() === 'rb') {
+              // Simulate Ruby execution
+              result = '✓ Ruby code executed successfully'
+              setOutput(result)
+            } else if (language.toLowerCase() === 'php') {
+              // Simulate PHP execution
+              result = '✓ PHP code executed successfully'
+              setOutput(result)
+            } else if (language.toLowerCase() === 'java') {
+              // Simulate Java execution
+              result = '✓ Compiled successfully\n✓ Execution completed'
+              setOutput(result)
+            } else if (language.toLowerCase() === 'csharp' || language.toLowerCase() === 'cs' || language.toLowerCase() === 'c#') {
+              // Simulate C# execution
+              result = '✓ Built successfully\n✓ Execution completed'
+              setOutput(result)
+            } else if (language.toLowerCase() === 'go' || language.toLowerCase() === 'golang') {
+              // Simulate Go execution
+              result = '✓ Build successful\n✓ Program executed'
+              setOutput(result)
+            } else if (language.toLowerCase() === 'rust' || language.toLowerCase() === 'rs') {
+              // Simulate Rust execution
+              result = '✓ Compiling successful\n✓ Binary executed'
+              setOutput(result)
+            } else if (language.toLowerCase() === 'swift') {
+              // Simulate Swift execution
+              result = '✓ Compilation successful\n✓ Program executed'
+              setOutput(result)
+            }
+            
+            // Run test cases if provided
+            if (testCases && testCases.length > 0) {
+              runTestCases(code, result)
+            } else {
+              // Fallback to simple expectedOutput check
+              checkOutput(result)
+            }
+          } catch (error: any) {
+            console.error('Code execution error:', error)
+            setOutput(`Error: ${error.message || 'Unknown error occurred'}`)
+            setTestPassed(false)
+          } finally {
+            setIsRunning(false)
           }
-        } else if (language.toLowerCase() === 'ruby' || language.toLowerCase() === 'rb') {
-          // Simulate Ruby execution
-          result = '✓ Ruby code executed successfully'
-          setOutput(result)
-        } else if (language.toLowerCase() === 'php') {
-          // Simulate PHP execution
-          result = '✓ PHP code executed successfully'
-          setOutput(result)
-        } else if (language.toLowerCase() === 'java') {
-          // Simulate Java execution
-          result = '✓ Compiled successfully\n✓ Execution completed'
-          setOutput(result)
-        } else if (language.toLowerCase() === 'csharp' || language.toLowerCase() === 'cs' || language.toLowerCase() === 'c#') {
-          // Simulate C# execution
-          result = '✓ Built successfully\n✓ Execution completed'
-          setOutput(result)
-        } else if (language.toLowerCase() === 'go' || language.toLowerCase() === 'golang') {
-          // Simulate Go execution
-          result = '✓ Build successful\n✓ Program executed'
-          setOutput(result)
-        } else if (language.toLowerCase() === 'rust' || language.toLowerCase() === 'rs') {
-          // Simulate Rust execution
-          result = '✓ Compiling successful\n✓ Binary executed'
-          setOutput(result)
-        } else if (language.toLowerCase() === 'swift') {
-          // Simulate Swift execution
-          result = '✓ Compilation successful\n✓ Program executed'
-          setOutput(result)
-        }
-        
-        // Run test cases if provided
-        if (testCases && testCases.length > 0) {
-          runTestCases(code, result)
-        } else {
-          // Fallback to simple expectedOutput check
-          checkOutput(result)
-        }
-      } catch (error: any) {
-        console.error('Code execution error:', error)
-        setOutput(`Error: ${error.message || 'Unknown error occurred'}`)
-        setTestPassed(false)
-      } finally {
-        setIsRunning(false)
-      }
-      resolve()
+          resolve()
         }, 100) // Reduced timeout from 500ms to 100ms for faster response
       })
     }
@@ -1539,7 +1535,7 @@ export default function CodeEditor({
 
   const resetCode = () => {
     setCode(initialCode)
-    setOutput('') // Clear console/output
+    setOutput('Click "Run" to execute your code') // Reset to instruction
     setTestPassed(null)
     setTestResults([])
     setAllTestsPassed(false)
@@ -1598,11 +1594,10 @@ export default function CodeEditor({
         />
       </div>
 
-      {/* Output */}
-      {output && (
-        <div className="border border-gray-700 rounded-lg overflow-hidden">
-          <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
-            <span className="text-sm text-gray-400">Output</span>
+      {/* Output - Always visible */}
+      <div className="border border-gray-700 rounded-lg overflow-hidden">
+        <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
+          <span className="text-sm text-gray-400">Output</span>
             {testPassed !== null && (
               <div className={`flex items-center space-x-1 text-sm ${testPassed ? 'text-green-400' : 'text-red-400'}`}>
                 {testPassed ? (
@@ -1619,20 +1614,26 @@ export default function CodeEditor({
               </div>
             )}
           </div>
-          <div className="bg-gray-900 p-4">
-            {language.toLowerCase() === 'html' ? (
-              <div 
-                className="html-preview border border-gray-700 rounded p-4 bg-white text-black min-h-[200px]"
-                dangerouslySetInnerHTML={{ __html: code }}
-              />
-            ) : (
-              <pre className="text-sm text-gray-300 whitespace-pre-wrap font-mono">
-                {output}
-              </pre>
-            )}
-          </div>
+        <div className="bg-gray-900 p-4">
+          {isRunning ? (
+            <div className="flex items-center justify-center min-h-[200px]">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+                <p className="text-gray-400">Running code...</p>
+              </div>
+            </div>
+          ) : language.toLowerCase() === 'html' ? (
+            <div 
+              className="html-preview border border-gray-700 rounded p-4 bg-white text-black min-h-[200px]"
+              dangerouslySetInnerHTML={{ __html: code }}
+            />
+          ) : (
+            <pre className="text-sm text-gray-300 whitespace-pre-wrap font-mono min-h-[100px]">
+              {output || 'No output'}
+            </pre>
+          )}
         </div>
-      )}
+      </div>
 
       {/* Test Results */}
       {testResults.length > 0 && (
