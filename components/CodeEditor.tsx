@@ -139,7 +139,7 @@ export default function CodeEditor({
               // For CSS, show a success message instead of code
               result = '✓ CSS styles applied'
               setOutput(result)
-                } else if (language.toLowerCase() === 'javascript' || language.toLowerCase() === 'js' || language.toLowerCase() === 'react' || language.toLowerCase() === 'nodejs' || language.toLowerCase() === 'node') {
+            } else if (language.toLowerCase() === 'javascript' || language.toLowerCase() === 'js' || language.toLowerCase() === 'react' || language.toLowerCase() === 'nodejs' || language.toLowerCase() === 'node') {
               // Execute JavaScript/React/Node code
               try {
                 const logs: string[] = []
