@@ -299,14 +299,20 @@ export function withApiSecurity(
  */
 export async function isAdmin(req: NextRequest): Promise<boolean> {
   try {
-    const { sessionClaims } = await auth()
-    const publicMetadata = sessionClaims?.public_metadata as { role?: string } | undefined
-    const email = sessionClaims?.email as string | undefined
+    const { currentUser } = await import('@clerk/nextjs/server')
+    const user = await currentUser()
+    
+    if (!user) return false
     
     // Check admin emails list
     const adminEmails = ['kaarthii009.g@gmail.com', 'karthii009.g@gmail.com']
+    const publicMetadata = user.publicMetadata as { role?: string } | undefined
+    const userEmail = user.emailAddresses?.[0]?.emailAddress
+    
     const isAdminByRole = publicMetadata?.role === 'admin'
-    const isAdminByEmail = email ? adminEmails.includes(email.toLowerCase()) : false
+    const isAdminByEmail = userEmail 
+      ? adminEmails.some(adminEmail => userEmail.toLowerCase() === adminEmail.toLowerCase())
+      : false
     
     return isAdminByRole || isAdminByEmail
   } catch {

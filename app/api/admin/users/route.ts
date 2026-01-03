@@ -9,8 +9,9 @@ export const GET = withApiSecurity(
       const adminError = await requireAdmin(request)
       if (adminError) return adminError
 
-      // Fetch all users from Clerk
-      const { data: clerkUsers } = await clerkClient.users.getUserList({
+      // Fetch all users from Clerk using the function call (not singleton)
+      const client = clerkClient()
+      const { data: clerkUsers } = await client.users.getUserList({
         limit: 500
       })
 

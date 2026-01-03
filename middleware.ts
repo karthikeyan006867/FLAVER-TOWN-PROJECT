@@ -1,4 +1,4 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { clerkMiddleware, createRouteMatcher, currentUser } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
@@ -15,7 +15,7 @@ const isAdminRoute = createRouteMatcher([
 ])
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {
-  const { userId, sessionClaims } = await auth()
+  const { userId } = await auth()
   
   // Check if route is protected and user is not authenticated
   if (!isPublicRoute(req) && !userId) {
@@ -25,46 +25,34 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
   }
   
   // Check admin routes
-  if (isAdminRoute(req)) {
-    // TEMPORARY: Allow all authenticated users to access admin
-    // TODO: Re-enable proper admin checking once we verify email/metadata
-    if (!userId) {
-      return NextResponse.redirect(new URL('/sign-in', req.url))
+  if (isAdminRoute(req) && userId) {
+    // Get full user data to access email and public metadata
+    const user = await currentUser()
+    
+    if (!user) {
+      return NextResponse.redirect(new URL('/dashboard', req.url))
     }
-    
-    // Check public metadata for admin role OR email-based admin check
-    const publicMetadata = sessionClaims?.public_metadata as { role?: string } | undefined
-    const email = sessionClaims?.email as string | undefined
-    const primaryEmail = sessionClaims?.primaryEmailAddress as string | undefined
-    
-    // Debug logging
-    console.log('🔐 Admin Route Check:', {
-      path: req.nextUrl.pathname,
-      userId,
-      email,
-      primaryEmail,
-      publicMetadata,
-      sessionClaimsKeys: Object.keys(sessionClaims || {})
-    })
     
     // Admin emails list
     const adminEmails = ['kaarthii009.g@gmail.com', 'karthii009.g@gmail.com']
+    
+    // Check admin by role in public metadata
+    const publicMetadata = user.publicMetadata as { role?: string } | undefined
     const isAdminByRole = publicMetadata?.role === 'admin'
-    const isAdminByEmail = (email && adminEmails.includes(email.toLowerCase())) || 
-                           (primaryEmail && adminEmails.includes(primaryEmail.toLowerCase()))
     
-    console.log('✓ Admin Check Result:', { isAdminByRole, isAdminByEmail, allowed: true })
+    // Check admin by email
+    const userEmail = user.emailAddresses?.[0]?.emailAddress
+    const isAdminByEmail = userEmail 
+      ? adminEmails.some(adminEmail => userEmail.toLowerCase() === adminEmail.toLowerCase())
+      : false
     
-    // TEMPORARILY DISABLED - Allow everyone in for debugging
-    /*
+    // Must be admin by role OR email
     if (!isAdminByRole && !isAdminByEmail) {
-      // Redirect non-admins trying to access admin routes
-      console.log('❌ Access Denied - Redirecting to /dashboard')
+      console.log('❌ Admin Access Denied:', { userId, email: userEmail })
       return NextResponse.redirect(new URL('/dashboard', req.url))
     }
-    */
     
-    console.log('✅ Admin Access Granted (TEMPORARY - ALL USERS ALLOWED)')
+    console.log('✅ Admin Access Granted:', { userId, isAdminByRole, isAdminByEmail })
   }
   
   // Add security headers
