@@ -48,9 +48,28 @@ export default function AdminDashboard() {
     activeToday: 0
   })
 
-  // Admin email check
+  // Admin email check - using same logic as middleware
   const adminEmails = ['kaarthii009.g@gmail.com', 'karthii009.g@gmail.com']
-  const isAdmin = user?.emailAddresses[0]?.emailAddress && adminEmails.includes(user.emailAddresses[0].emailAddress)
+  const userEmail = user?.emailAddresses?.[0]?.emailAddress?.toLowerCase()
+  const publicMetadata = user?.publicMetadata as { role?: string } | undefined
+  
+  // Check both role and email (same as middleware)
+  const isAdminByRole = publicMetadata?.role === 'admin'
+  const isAdminByEmail = userEmail && adminEmails.includes(userEmail)
+  const isAdmin = isAdminByRole || isAdminByEmail
+  
+  // Debug logging
+  useEffect(() => {
+    if (isLoaded && user) {
+      console.log('Admin check:', {
+        userEmail,
+        publicMetadata,
+        isAdminByRole,
+        isAdminByEmail,
+        isAdmin
+      })
+    }
+  }, [isLoaded, user, userEmail, publicMetadata, isAdminByRole, isAdminByEmail, isAdmin])
 
   useEffect(() => {
     if (isLoaded && isAdmin) {
