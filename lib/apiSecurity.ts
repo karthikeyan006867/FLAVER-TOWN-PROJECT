@@ -193,16 +193,34 @@ export function validateProgressData(data: any): ValidationResult {
     return { valid: false, errors }
   }
   
-  if (!isValidCourseId(data.courseId)) {
-    errors.push('Invalid course ID format')
+  // Validate arrays
+  if (data.completedLessons && !Array.isArray(data.completedLessons)) {
+    errors.push('completedLessons must be an array')
   }
   
-  if (!isValidLessonId(data.lessonId)) {
-    errors.push('Invalid lesson ID format')
+  if (data.completedChallenges && !Array.isArray(data.completedChallenges)) {
+    errors.push('completedChallenges must be an array')
   }
   
-  if (typeof data.completed !== 'boolean') {
-    errors.push('Completed field must be a boolean')
+  if (data.achievements && !Array.isArray(data.achievements)) {
+    errors.push('achievements must be an array')
+  }
+  
+  // Validate numeric fields
+  if (data.points !== undefined && (typeof data.points !== 'number' || data.points < 0 || data.points > 1000000)) {
+    errors.push('points must be a number between 0 and 1,000,000')
+  }
+  
+  if (data.streak !== undefined && (typeof data.streak !== 'number' || data.streak < 0 || data.streak > 3650)) {
+    errors.push('streak must be a number between 0 and 3650')
+  }
+  
+  if (data.longestStreak !== undefined && (typeof data.longestStreak !== 'number' || data.longestStreak < 0 || data.longestStreak > 3650)) {
+    errors.push('longestStreak must be a number between 0 and 3650')
+  }
+  
+  if (data.timeSpent !== undefined && (typeof data.timeSpent !== 'number' || data.timeSpent < 0 || data.timeSpent > 100000000)) {
+    errors.push('timeSpent must be a number between 0 and 100,000,000')
   }
   
   if (errors.length > 0) {
@@ -212,12 +230,7 @@ export function validateProgressData(data: any): ValidationResult {
   return {
     valid: true,
     errors: [],
-    data: {
-      courseId: sanitizeInput(data.courseId),
-      lessonId: sanitizeInput(data.lessonId),
-      completed: data.completed,
-      timestamp: Date.now(),
-    }
+    data
   }
 }
 
