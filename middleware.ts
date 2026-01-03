@@ -29,16 +29,32 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
     // Check public metadata for admin role OR email-based admin check
     const publicMetadata = sessionClaims?.public_metadata as { role?: string } | undefined
     const email = sessionClaims?.email as string | undefined
+    const primaryEmail = sessionClaims?.primaryEmailAddress as string | undefined
+    
+    // Debug logging
+    console.log('🔐 Admin Route Check:', {
+      path: req.nextUrl.pathname,
+      email,
+      primaryEmail,
+      publicMetadata,
+      hasRole: publicMetadata?.role === 'admin'
+    })
     
     // Admin emails list
     const adminEmails = ['kaarthii009.g@gmail.com', 'karthii009.g@gmail.com']
     const isAdminByRole = publicMetadata?.role === 'admin'
-    const isAdminByEmail = email && adminEmails.includes(email.toLowerCase())
+    const isAdminByEmail = (email && adminEmails.includes(email.toLowerCase())) || 
+                           (primaryEmail && adminEmails.includes(primaryEmail.toLowerCase()))
+    
+    console.log('✓ Admin Check Result:', { isAdminByRole, isAdminByEmail, allowed: isAdminByRole || isAdminByEmail })
     
     if (!isAdminByRole && !isAdminByEmail) {
       // Redirect non-admins trying to access admin routes
+      console.log('❌ Access Denied - Redirecting to /dashboard')
       return NextResponse.redirect(new URL('/dashboard', req.url))
     }
+    
+    console.log('✅ Admin Access Granted')
   }
   
   // Add security headers
