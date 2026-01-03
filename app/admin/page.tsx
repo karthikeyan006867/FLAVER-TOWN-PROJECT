@@ -68,6 +68,11 @@ export default function AdminDashboard() {
         isAdminByEmail,
         isAdmin
       })
+      
+      // Redirect non-admin users to dashboard
+      if (!isAdmin) {
+        window.location.href = '/dashboard'
+      }
     }
   }, [isLoaded, user, userEmail, publicMetadata, isAdminByRole, isAdminByEmail, isAdmin])
 

@@ -51,9 +51,13 @@ export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
+  // Admin check - must match middleware logic
   const adminEmails = ['kaarthii009.g@gmail.com', 'karthii009.g@gmail.com']
   const userEmail = user?.emailAddresses[0]?.emailAddress?.toLowerCase()
-  const isAdmin = userEmail && adminEmails.includes(userEmail)
+  const publicMetadata = user?.publicMetadata as { role?: string } | undefined
+  const isAdminByRole = publicMetadata?.role === 'admin'
+  const isAdminByEmail = userEmail && adminEmails.includes(userEmail)
+  const isAdmin = isAdminByRole || isAdminByEmail
 
   return (
     <>
@@ -92,6 +96,21 @@ export default function Sidebar() {
       {/* Navigation */}
       <div className="flex flex-col h-full">
         <nav className="p-4 space-y-2 flex-1 overflow-y-auto">
+          {/* Admin Dashboard - Only visible to admins */}
+          {isAdmin && (
+            <Link
+              href="/admin"
+              className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-all ${
+                pathname === '/admin'
+                  ? 'bg-gradient-to-r from-primary-600 to-accent-600 text-white shadow-lg'
+                  : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+              } ${collapsed ? 'justify-center' : ''}`}
+            >
+              <Shield className="h-5 w-5 flex-shrink-0" />
+              {!collapsed && <span className="font-medium">Admin Panel</span>}
+            </Link>
+          )}
+          
           {navigation.map((item) => {
             const Icon = item.icon
             const isActive = pathname === item.href || pathname?.startsWith(item.href + '/')

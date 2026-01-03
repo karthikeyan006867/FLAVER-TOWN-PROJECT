@@ -1,4 +1,4 @@
-import { clerkMiddleware, createRouteMatcher, currentUser } from '@clerk/nextjs/server'
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
@@ -7,11 +7,6 @@ const isPublicRoute = createRouteMatcher([
   '/sign-in(.*)',
   '/sign-up(.*)',
   '/api/webhook(.*)', // Allow webhooks
-])
-
-const isAdminRoute = createRouteMatcher([
-  '/admin(.*)',
-  '/api/admin(.*)',
 ])
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {
@@ -24,36 +19,8 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
     return NextResponse.redirect(signInUrl)
   }
   
-  // Check admin routes
-  if (isAdminRoute(req) && userId) {
-    // Get full user data to access email and public metadata
-    const user = await currentUser()
-    
-    if (!user) {
-      return NextResponse.redirect(new URL('/dashboard', req.url))
-    }
-    
-    // Admin emails list
-    const adminEmails = ['kaarthii009.g@gmail.com', 'karthii009.g@gmail.com']
-    
-    // Check admin by role in public metadata
-    const publicMetadata = user.publicMetadata as { role?: string } | undefined
-    const isAdminByRole = publicMetadata?.role === 'admin'
-    
-    // Check admin by email
-    const userEmail = user.emailAddresses?.[0]?.emailAddress
-    const isAdminByEmail = userEmail 
-      ? adminEmails.some(adminEmail => userEmail.toLowerCase() === adminEmail.toLowerCase())
-      : false
-    
-    // Must be admin by role OR email
-    if (!isAdminByRole && !isAdminByEmail) {
-      console.log('❌ Admin Access Denied:', { userId, email: userEmail })
-      return NextResponse.redirect(new URL('/dashboard', req.url))
-    }
-    
-    console.log('✅ Admin Access Granted:', { userId, isAdminByRole, isAdminByEmail })
-  }
+  // Note: Admin authorization is handled at the page/API route level
+  // This allows us to use currentUser() which is not available in Edge runtime
   
   // Add security headers
   const response = NextResponse.next()
