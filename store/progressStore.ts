@@ -80,6 +80,7 @@ export const useProgressStore = create<ProgressState>()(
 
       loadProgressFromServer: async () => {
         try {
+          console.log('Loading progress from server...')
           const response = await fetch('/api/sync-progress/get', {
             cache: 'no-store', // Force fresh data on every request
             headers: {
@@ -88,6 +89,7 @@ export const useProgressStore = create<ProgressState>()(
           })
           if (response.ok) {
             const data = await response.json()
+            console.log('Progress loaded from server:', data)
             if (data.success && data.progress) {
               const progress = data.progress
               set({
@@ -101,11 +103,15 @@ export const useProgressStore = create<ProgressState>()(
                 lastStudyDate: progress.lastStudyDate || '',
               })
               
+              console.log('State updated with server data')
+              
               // Recalculate all course progress
               courses.forEach(course => {
                 get().updateCourseProgress(course.id)
               })
             }
+          } else {
+            console.error('Failed to load progress:', response.status)
           }
         } catch (error) {
           console.error('Failed to load progress from server:', error)
@@ -152,6 +158,8 @@ export const useProgressStore = create<ProgressState>()(
         const { completedLessons, totalPoints, weeklyLessons, weeklyPoints, weekStartDate } = get()
         const currentWeekStart = getStartOfWeek()
         
+        console.log('Completing lesson:', lessonId, 'Already completed:', completedLessons.includes(lessonId))
+        
         if (!completedLessons.includes(lessonId)) {
           // Check if new week and reset weekly stats
           const isNewWeek = weekStartDate !== currentWeekStart
@@ -165,6 +173,8 @@ export const useProgressStore = create<ProgressState>()(
             weeklyChallenges: isNewWeek ? 0 : get().weeklyChallenges
           })
           
+          console.log('Lesson completed! New total:', totalPoints + 100, 'Total lessons:', completedLessons.length + 1)
+          
           // Update course progress
           get().updateCourseProgress(courseId)
           
@@ -175,13 +185,18 @@ export const useProgressStore = create<ProgressState>()(
           get().addStudyTime(10)
           
           // Sync to Clerk AFTER all state updates
-          setTimeout(() => syncProgressToClerk(get()), 500)
+          setTimeout(() => {
+            console.log('Starting sync after lesson completion...')
+            syncProgressToClerk(get())
+          }, 500)
         }
       },
 
       completeChallenge: (challengeId: string) => {
         const { completedChallenges, totalPoints, weeklyChallenges, weeklyPoints, weekStartDate } = get()
         const currentWeekStart = getStartOfWeek()
+        
+        console.log('Completing challenge:', challengeId, 'Already completed:', completedChallenges.includes(challengeId))
         
         if (!completedChallenges.includes(challengeId)) {
           // Award points based on challenge type
@@ -202,6 +217,8 @@ export const useProgressStore = create<ProgressState>()(
             weekStartDate: currentWeekStart,
           })
           
+          console.log('Challenge completed! Points:', points, 'New total:', totalPoints + points)
+          
           // Update streak
           get().updateStreak()
           
@@ -209,7 +226,10 @@ export const useProgressStore = create<ProgressState>()(
           get().addStudyTime(15)
           
           // Sync to Clerk AFTER all state updates
-          setTimeout(() => syncProgressToClerk(get()), 500)
+          setTimeout(() => {
+            console.log('Starting sync after challenge completion...')
+            syncProgressToClerk(get())
+          }, 500)
         }
       },
 
@@ -344,7 +364,13 @@ export const useProgressStore = create<ProgressState>()(
 // Helper function to sync progress to Clerk
 async function syncProgressToClerk(state: ProgressState) {
   try {
-    await fetch('/api/sync-progress', {
+    console.log('Syncing progress to server...', {
+      completedLessons: state.completedLessons.length,
+      completedChallenges: state.completedChallenges.length,
+      points: state.totalPoints
+    })
+    
+    const response = await fetch('/api/sync-progress', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -358,7 +384,18 @@ async function syncProgressToClerk(state: ProgressState) {
         lastStudyDate: state.lastStudyDate
       })
     })
+    
+    if (!response.ok) {
+      const errorText = await response.text()
+      console.error('Sync failed with status:', response.status, errorText)
+      throw new Error(`Sync failed: ${response.status}`)
+    }
+    
+    const result = await response.json()
+    console.log('Progress synced successfully:', result)
+    return result
   } catch (error) {
     console.error('Failed to sync progress to Clerk:', error)
+    throw error
   }
 }
