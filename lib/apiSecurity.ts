@@ -300,8 +300,15 @@ export function withApiSecurity(
 export async function isAdmin(req: NextRequest): Promise<boolean> {
   try {
     const { sessionClaims } = await auth()
-    const metadata = sessionClaims?.metadata as { role?: string } | undefined
-    return metadata?.role === 'admin'
+    const publicMetadata = sessionClaims?.public_metadata as { role?: string } | undefined
+    const email = sessionClaims?.email as string | undefined
+    
+    // Check admin emails list
+    const adminEmails = ['kaarthii009.g@gmail.com', 'karthii009.g@gmail.com']
+    const isAdminByRole = publicMetadata?.role === 'admin'
+    const isAdminByEmail = email && adminEmails.includes(email.toLowerCase())
+    
+    return isAdminByRole || isAdminByEmail
   } catch {
     return false
   }

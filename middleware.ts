@@ -26,10 +26,16 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
   
   // Check admin routes
   if (isAdminRoute(req)) {
-    const metadata = sessionClaims?.metadata as { role?: string } | undefined
-    const isAdmin = metadata?.role === 'admin'
+    // Check public metadata for admin role OR email-based admin check
+    const publicMetadata = sessionClaims?.public_metadata as { role?: string } | undefined
+    const email = sessionClaims?.email as string | undefined
     
-    if (!isAdmin) {
+    // Admin emails list
+    const adminEmails = ['kaarthii009.g@gmail.com', 'karthii009.g@gmail.com']
+    const isAdminByRole = publicMetadata?.role === 'admin'
+    const isAdminByEmail = email && adminEmails.includes(email.toLowerCase())
+    
+    if (!isAdminByRole && !isAdminByEmail) {
       // Redirect non-admins trying to access admin routes
       return NextResponse.redirect(new URL('/dashboard', req.url))
     }
