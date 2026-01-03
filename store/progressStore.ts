@@ -174,13 +174,14 @@ export const useProgressStore = create<ProgressState>()(
           // Add study time (estimate 10 mins per lesson)
           get().addStudyTime(10)
           
-          // Immediately sync to Clerk
-          setTimeout(() => syncProgressToClerk(get()), 100)
+          // Sync to Clerk AFTER all state updates
+          setTimeout(() => syncProgressToClerk(get()), 500)
         }
       },
 
       completeChallenge: (challengeId: string) => {
-        const { completedChallenges, totalPoints } = get()
+        const { completedChallenges, totalPoints, weeklyChallenges, weeklyPoints, weekStartDate } = get()
+        const currentWeekStart = getStartOfWeek()
         
         if (!completedChallenges.includes(challengeId)) {
           // Award points based on challenge type
@@ -190,12 +191,15 @@ export const useProgressStore = create<ProgressState>()(
           else if (challengeId.includes('medium')) points = 100
           else if (challengeId.includes('easy')) points = 50
           
-          // Immediately sync to Clerk after update
-          setTimeout(() => syncProgressToClerk(get()), 100)
+          // Check if new week and reset weekly stats
+          const isNewWeek = weekStartDate !== currentWeekStart
           
           set({
             completedChallenges: [...completedChallenges, challengeId],
             totalPoints: totalPoints + points,
+            weeklyChallenges: isNewWeek ? 1 : weeklyChallenges + 1,
+            weeklyPoints: isNewWeek ? points : weeklyPoints + points,
+            weekStartDate: currentWeekStart,
           })
           
           // Update streak
@@ -203,6 +207,9 @@ export const useProgressStore = create<ProgressState>()(
           
           // Add study time (estimate 15 mins per challenge)
           get().addStudyTime(15)
+          
+          // Sync to Clerk AFTER all state updates
+          setTimeout(() => syncProgressToClerk(get()), 500)
         }
       },
 
@@ -355,8 +362,3 @@ async function syncProgressToClerk(state: ProgressState) {
     console.error('Failed to sync progress to Clerk:', error)
   }
 }
-
-// Subscribe to store changes and sync
-useProgressStore.subscribe((state) => {
-  syncProgressToClerk(state)
-})
