@@ -19,10 +19,11 @@ export default function CoursePage({ params }: { params: { courseId: string } })
   useEffect(() => {
     if (isLoaded && user) {
       setUserId(user.id)
-      // Always fetch fresh data from server on page load
+      // Load progress from server only once when user loads
       loadProgressFromServer()
     }
-  }, [isLoaded, user, setUserId, loadProgressFromServer])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoaded, user])
 
   if (!course) {
     notFound()
