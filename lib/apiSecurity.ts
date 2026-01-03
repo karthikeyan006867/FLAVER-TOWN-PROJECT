@@ -306,7 +306,7 @@ export async function isAdmin(req: NextRequest): Promise<boolean> {
     // Check admin emails list
     const adminEmails = ['kaarthii009.g@gmail.com', 'karthii009.g@gmail.com']
     const isAdminByRole = publicMetadata?.role === 'admin'
-    const isAdminByEmail = email && adminEmails.includes(email.toLowerCase())
+    const isAdminByEmail = email ? adminEmails.includes(email.toLowerCase()) : false
     
     return isAdminByRole || isAdminByEmail
   } catch {

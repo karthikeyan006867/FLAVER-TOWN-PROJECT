@@ -129,7 +129,7 @@ println("Hello, $name!")  // Hello, Alice!
 ## Expressions in Templates
 \`\`\`kotlin
 val age = 25
-println("Next year I'll be ${age + 1}")
+println("Next year I'll be \${age + 1}")
 \`\`\`
 
 ## Your Task
@@ -184,8 +184,8 @@ Welcome to lesson ${i} of the Kotlin course!
 
 ## Practice Exercise
 Write a simple Kotlin program to complete this lesson.`,
-    initialCode: 'fun main() {\n    // Write your Kotlin code here\n    println("Lesson ${i}")\n}',
-    solution: 'fun main() {\n    println("Completed lesson ${i}!")\n}',
+    initialCode: `fun main() {\n    // Write your Kotlin code here\n    println("Lesson ${i}")\n}`,
+    solution: `fun main() {\n    println("Completed lesson ${i}!")\n}`,
     hints: [
       'Start with fun main()',
       'Use println() to print output',
