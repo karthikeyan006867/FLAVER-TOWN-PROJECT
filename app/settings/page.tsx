@@ -88,24 +88,24 @@ export default function SettingsPage() {
       <Navbar />
       <Sidebar />
       
-      <main className="ml-0 md:ml-64 pt-16 pb-20 transition-all duration-300">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-12">
+      <main className="ml-0 md:ml-64 pt-16 pb-24 md:pb-20 transition-all duration-300">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-4 md:py-12">
           {/* Header */}
-          <div className="mb-6 md:mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+          <div className="mb-4 md:mb-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
               <span className="text-gradient">Settings</span>
             </h1>
-            <p className="text-gray-400 text-base md:text-lg">
+            <p className="text-gray-400 text-sm sm:text-base md:text-lg">
               Customize your learning experience
             </p>
           </div>
 
           {/* Mobile Tab Selector */}
-          <div className="md:hidden mb-6">
+          <div className="md:hidden mb-4">
             <select
               value={activeTab}
               onChange={(e) => setActiveTab(e.target.value as SettingTab)}
-              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-primary-500 text-base font-medium shadow-lg"
             >
               {tabs.map(tab => (
                 <option key={tab.id} value={tab.id}>{tab.label}</option>
@@ -113,10 +113,10 @@ export default function SettingsPage() {
             </select>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-6">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6">
             {/* Desktop Sidebar */}
             <div className="hidden md:block w-64 flex-shrink-0">
-              <div className="card-gradient rounded-xl border border-gray-700 p-2 sticky top-20">
+              <div className="card-gradient rounded-xl border border-gray-700 p-2 sticky top-20 shadow-xl">
                 {tabs.map((tab) => {
                   const Icon = tab.icon
                   return (
@@ -142,7 +142,7 @@ export default function SettingsPage() {
 
             {/* Settings Content */}
             <div className="flex-1">
-              <div className="card-gradient rounded-xl border border-gray-700 p-4 md:p-8">
+              <div className="card-gradient rounded-xl border border-gray-700 p-4 sm:p-6 md:p-8 shadow-xl">
                 
                 {/* Appearance Settings */}
                 {activeTab === 'appearance' && (
