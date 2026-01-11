@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useUser } from '@clerk/nextjs'
+import { useUser, useClerk } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import { useSettingsStore } from '@/store/settingsStore'
@@ -9,13 +9,14 @@ import { useProgressStore } from '@/store/progressStore'
 import { 
   User, Bell, Moon, Globe, Shield, Code, Save, Check, 
   Eye, Keyboard, Smartphone, Palette, Type, Zap, Target,
-  Volume2, ChevronRight, RotateCcw, Download, Upload, Sun, Trash2
+  Volume2, ChevronRight, RotateCcw, Download, Upload, Sun, Trash2, LogOut
 } from 'lucide-react'
 
 type SettingTab = 'appearance' | 'editor' | 'learning' | 'notifications' | 'privacy' | 'accessibility' | 'account'
 
 export default function SettingsPage() {
   const { user } = useUser()
+  const { signOut } = useClerk()
   const { settings, updateSettings, resetSettings } = useSettingsStore()
   const progressStore = useProgressStore()
   const [activeTab, setActiveTab] = useState<SettingTab>('appearance')
@@ -40,6 +41,34 @@ export default function SettingsPage() {
         localStorage.removeItem('progress-storage')
         // Reload the page to reset the store
         window.location.reload()
+      }
+    }
+  }
+
+  const handleSignOut = async () => {
+    if (confirm('Are you sure you want to sign out?')) {
+      await signOut()
+      window.location.href = '/'
+    }
+  }
+
+  const handleDeleteAccount = async () => {
+    if (confirm('⚠️ CRITICAL WARNING: This will PERMANENTLY delete your account and ALL associated data.\n\nThis includes:\n- Your profile\n- All progress and achievements\n- All saved data\n\nThis action CANNOT be undone!\n\nAre you absolutely sure?')) {
+      if (confirm('Final confirmation: Type DELETE in the next dialog to confirm account deletion.')) {
+        const confirmation = prompt('Type DELETE to confirm account deletion:')
+        if (confirmation === 'DELETE') {
+          try {
+            // Delete the user account through Clerk
+            await user?.delete()
+            alert('Account deleted successfully. Redirecting to home page...')
+            window.location.href = '/'
+          } catch (error) {
+            console.error('Error deleting account:', error)
+            alert('Failed to delete account. Please try again or contact support.')
+          }
+        } else {
+          alert('Account deletion cancelled.')
+        }
       }
     }
   }
@@ -671,6 +700,17 @@ export default function SettingsPage() {
                         </button>
 
                         <div className="border-t border-gray-700 pt-3 mt-3">
+                          <button 
+                            onClick={handleSignOut}
+                            className="w-full flex items-center justify-between p-4 bg-blue-900/30 border border-blue-700 text-blue-400 rounded-lg hover:bg-blue-900/50 transition-colors mb-3"
+                          >
+                            <div className="text-left">
+                              <div className="font-semibold">Sign Out</div>
+                              <div className="text-xs text-blue-300 mt-0.5">Log out of your account</div>
+                            </div>
+                            <LogOut className="h-5 w-5" />
+                          </button>
+
                           <div className="p-4 bg-red-900/20 border border-red-700/50 rounded-lg mb-3">
                             <div className="flex items-start gap-3">
                               <div className="text-red-400 mt-0.5">⚠️</div>
@@ -683,13 +723,24 @@ export default function SettingsPage() {
                           
                           <button 
                             onClick={handleResetProgress}
-                            className="w-full flex items-center justify-between p-4 bg-red-900/30 border border-red-700 text-red-400 rounded-lg hover:bg-red-900/50 transition-colors"
+                            className="w-full flex items-center justify-between p-4 bg-red-900/30 border border-red-700 text-red-400 rounded-lg hover:bg-red-900/50 transition-colors mb-3"
                           >
                             <div className="text-left">
                               <div className="font-semibold">Reset All Progress</div>
                               <div className="text-xs text-red-300 mt-0.5">Delete all lessons, points, and achievements</div>
                             </div>
                             <Trash2 className="h-5 w-5" />
+                          </button>
+
+                          <button 
+                            onClick={handleDeleteAccount}
+                            className="w-full flex items-center justify-between p-4 bg-red-950 border-2 border-red-600 text-red-500 rounded-lg hover:bg-red-900 transition-colors"
+                          >
+                            <div className="text-left">
+                              <div className="font-bold">Delete Account</div>
+                              <div className="text-xs text-red-400 mt-0.5">Permanently delete your account and all data</div>
+                            </div>
+                            <Trash2 className="h-6 w-6" />
                           </button>
                         </div>
                       </div>
