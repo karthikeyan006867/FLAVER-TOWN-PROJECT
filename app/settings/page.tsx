@@ -58,10 +58,23 @@ export default function SettingsPage() {
         const confirmation = prompt('Type DELETE to confirm account deletion:')
         if (confirmation === 'DELETE') {
           try {
-            // Delete the user account through Clerk
-            await user?.delete()
-            alert('Account deleted successfully. Redirecting to home page...')
-            window.location.href = '/'
+            // Delete the user account through API
+            const response = await fetch('/api/user/delete', {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+
+            if (response.ok) {
+              alert('Account deleted successfully. Redirecting to home page...')
+              // Sign out and redirect
+              await signOut()
+              window.location.href = '/'
+            } else {
+              const error = await response.json()
+              throw new Error(error.message || 'Failed to delete account')
+            }
           } catch (error) {
             console.error('Error deleting account:', error)
             alert('Failed to delete account. Please try again or contact support.')

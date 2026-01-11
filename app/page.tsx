@@ -173,16 +173,16 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center card-gradient p-12 rounded-2xl border border-gray-700">
-          <h2 className="text-4xl font-bold mb-4">
+        <div className="max-w-4xl mx-auto text-center bg-white p-12 rounded-2xl border-2 border-gray-200 shadow-2xl">
+          <h2 className="text-4xl font-bold mb-4 text-gray-900">
             Ready to Start Your Journey?
           </h2>
-          <p className="text-gray-400 mb-8 text-lg">
+          <p className="text-gray-600 mb-8 text-lg">
             Join thousands of developers learning to code. It&apos;s completely free!
           </p>
           <Link
             href="/sign-up"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-500 to-accent-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-all hover:scale-105 group"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-500 to-accent-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-all hover:scale-105 group shadow-lg"
           >
             Get Started Now
             <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
