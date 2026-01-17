@@ -6,7 +6,7 @@ export const dockerLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
     id: `docker-${i + 1}`,
     title: `Docker - Lesson ${i + 1}`,
     description: `Learn Docker - Part ${i + 1}`,
-    language: 'bash' as const,
+    language: 'javascript' as const,
     difficulty,
     estimatedTime: 30,
     content: `# Docker Lesson ${i + 1}
@@ -17,12 +17,8 @@ Master Docker programming and concepts.
 ## Practice
 Complete the exercise to test your knowledge.
 `,
-    initialCode: `// Write your Docker code here
-
-`,
-    solution: `// Solution for Docker lesson ${i + 1}
-
-`,
+    initialCode: `// Write your Docker code here\n\n`,
+    solution: `// Solution for Docker lesson ${i + 1}\n\n`,
     hints: ['Study the documentation', 'Practice regularly', 'Test your code'],
     testCases: [
       { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },

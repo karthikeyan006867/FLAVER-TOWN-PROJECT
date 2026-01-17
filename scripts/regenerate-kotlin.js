@@ -1,19 +1,22 @@
-import { Lesson } from '../courses'
+const fs = require('fs');
+const path = require('path');
+
+const content = `import { Lesson } from '../courses'
 
 export const kotlinLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
   const lessonNum = i + 1;
   const difficulty = lessonNum <= 17 ? 'Beginner' : lessonNum <= 34 ? 'Intermediate' : 'Advanced';
   
   return {
-    id: `kotlin-${lessonNum}`,
-    title: `Kotlin Lesson ${lessonNum}`,
-    description: `Master Kotlin programming concepts - Lesson ${lessonNum}`,
+    id: \`kotlin-\${lessonNum}\`,
+    title: \`Kotlin Lesson \${lessonNum}\`,
+    description: \`Master Kotlin programming concepts - Lesson \${lessonNum}\`,
     language: 'kotlin' as const,
     difficulty,
     estimatedTime: 30,
-    content: `# Kotlin Lesson ${lessonNum}
+    content: \`# Kotlin Lesson \${lessonNum}
 
-Welcome to lesson ${lessonNum} of the Kotlin course!
+Welcome to lesson \${lessonNum} of the Kotlin course!
 
 ## Learning Objectives
 - Understand core Kotlin concepts
@@ -21,14 +24,14 @@ Welcome to lesson ${lessonNum} of the Kotlin course!
 - Build practical skills
 
 ## Practice Exercise
-Write a simple Kotlin program to complete this lesson.`,
-    initialCode: `fun main() {
+Write a simple Kotlin program to complete this lesson.\`,
+    initialCode: \`fun main() {
     // Write your Kotlin code here
-    println("Lesson ${lessonNum}")
-}`,
-    solution: `fun main() {
-    println("Completed lesson ${lessonNum}")
-}`,
+    println("Lesson \${lessonNum}")
+}\`,
+    solution: \`fun main() {
+    println("Completed lesson \${lessonNum}")
+}\`,
     hints: [
       'Start with fun main()',
       'Use println() to print output',
@@ -53,3 +56,7 @@ Write a simple Kotlin program to complete this lesson.`,
     ]
   };
 });
+`;
+
+fs.writeFileSync(path.join(__dirname, '../data/lessons/kotlinLessons.ts'), content);
+console.log('✅ Generated kotlinLessons.ts with 50 lessons');

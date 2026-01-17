@@ -6,7 +6,7 @@ export const gitLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
     id: `git-${i + 1}`,
     title: `Git - Lesson ${i + 1}`,
     description: `Learn Git - Part ${i + 1}`,
-    language: 'bash' as const,
+    language: 'javascript' as const,
     difficulty,
     estimatedTime: 30,
     content: `# Git Lesson ${i + 1}
@@ -17,12 +17,8 @@ Master Git programming and concepts.
 ## Practice
 Complete the exercise to test your knowledge.
 `,
-    initialCode: `// Write your Git code here
-
-`,
-    solution: `// Solution for Git lesson ${i + 1}
-
-`,
+    initialCode: `// Write your Git code here\n\n`,
+    solution: `// Solution for Git lesson ${i + 1}\n\n`,
     hints: ['Study the documentation', 'Practice regularly', 'Test your code'],
     testCases: [
       { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
