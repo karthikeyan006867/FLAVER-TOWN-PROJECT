@@ -1,28 +1,54 @@
 import { Lesson } from '../courses'
 
 export const rustLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
-  const difficulty: 'Beginner' | 'Intermediate' | 'Advanced' = i < 17 ? 'Beginner' : i < 34 ? 'Intermediate' : 'Advanced';
+  const lessonNum = i + 1;
+  const difficulty = lessonNum <= 17 ? 'Beginner' : lessonNum <= 34 ? 'Intermediate' : 'Advanced';
+  
   return {
-    id: `rust-${i + 1}`,
-    title: `Rust - Lesson ${i + 1}`,
-    description: `Learn Rust - Part ${i + 1}`,
+    id: `rust-${lessonNum}`,
+    title: `Rust Lesson ${lessonNum}`,
+    description: `Master Rust programming - Lesson ${lessonNum}`,
     language: 'rust' as const,
     difficulty,
     estimatedTime: 30,
-    content: `# Rust Lesson ${i + 1}
+    content: `# Rust Lesson ${lessonNum}
 
-## Overview
-Master Rust programming and concepts.
+Welcome to lesson ${lessonNum} of the Rust course!
 
-## Practice
-Complete the exercise to test your knowledge.
+## Learning Objectives
+- Understand core concepts
+- Apply programming fundamentals
+- Build practical skills
+
+## Practice Exercise
+Write code to complete this lesson.`,
+    initialCode: `// Write your rust code here
+// Lesson ${lessonNum}
 `,
-    initialCode: `// Write your Rust code here\n\n`,
-    solution: `// Solution for Rust lesson ${i + 1}\n\n`,
-    hints: ['Study the documentation', 'Practice regularly', 'Test your code'],
+    solution: `// Solution for Lesson ${lessonNum}
+// Complete implementation
+`,
+    hints: [
+      'Review the documentation',
+      'Test your code',
+      'Practice regularly'
+    ],
     testCases: [
-      { name: 'Code is not empty', test: (code) => code.trim().length > 0, errorMessage: 'Please write some code' },
-      { name: 'Code meets requirements', test: (code) => code.trim().length >= 10, errorMessage: 'Code should be longer' }
+      { 
+        name: 'Code is not empty', 
+        test: (code) => code.trim().length > 0,
+        errorMessage: 'Please write some code'
+      },
+      { 
+        name: 'Code has content', 
+        test: (code) => code.trim().length > 10,
+        errorMessage: 'Write more code'
+      },
+      { 
+        name: 'Code looks valid',
+        test: (code) => code.includes('//') || code.trim().length > 20,
+        errorMessage: 'Add more code or comments'
+      }
     ]
   };
 });
