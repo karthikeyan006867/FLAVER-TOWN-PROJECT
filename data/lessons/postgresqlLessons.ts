@@ -5,7 +5,7 @@ export const postgresqlLessons: Lesson[] = [
     id: 'postgresql-1',
     title: 'Postgresql Lesson 1',
     description: 'Learn postgresql programming - Part 1',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Postgresql Lesson 1
@@ -73,7 +73,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-2',
     title: 'Postgresql Lesson 2',
     description: 'Learn postgresql programming - Part 2',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Postgresql Lesson 2
@@ -141,7 +141,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-3',
     title: 'Postgresql Lesson 3',
     description: 'Learn postgresql programming - Part 3',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Postgresql Lesson 3
@@ -209,7 +209,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-4',
     title: 'Postgresql Lesson 4',
     description: 'Learn postgresql programming - Part 4',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Postgresql Lesson 4
@@ -277,7 +277,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-5',
     title: 'Postgresql Lesson 5',
     description: 'Learn postgresql programming - Part 5',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Postgresql Lesson 5
@@ -345,7 +345,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-6',
     title: 'Postgresql Lesson 6',
     description: 'Learn postgresql programming - Part 6',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Postgresql Lesson 6
@@ -413,7 +413,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-7',
     title: 'Postgresql Lesson 7',
     description: 'Learn postgresql programming - Part 7',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Postgresql Lesson 7
@@ -481,7 +481,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-8',
     title: 'Postgresql Lesson 8',
     description: 'Learn postgresql programming - Part 8',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Postgresql Lesson 8
@@ -549,7 +549,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-9',
     title: 'Postgresql Lesson 9',
     description: 'Learn postgresql programming - Part 9',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Postgresql Lesson 9
@@ -617,7 +617,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-10',
     title: 'Postgresql Lesson 10',
     description: 'Learn postgresql programming - Part 10',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Postgresql Lesson 10
@@ -685,7 +685,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-11',
     title: 'Postgresql Lesson 11',
     description: 'Learn postgresql programming - Part 11',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Postgresql Lesson 11
@@ -753,7 +753,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-12',
     title: 'Postgresql Lesson 12',
     description: 'Learn postgresql programming - Part 12',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Postgresql Lesson 12
@@ -821,7 +821,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-13',
     title: 'Postgresql Lesson 13',
     description: 'Learn postgresql programming - Part 13',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Postgresql Lesson 13
@@ -889,7 +889,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-14',
     title: 'Postgresql Lesson 14',
     description: 'Learn postgresql programming - Part 14',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Postgresql Lesson 14
@@ -957,7 +957,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-15',
     title: 'Postgresql Lesson 15',
     description: 'Learn postgresql programming - Part 15',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Postgresql Lesson 15
@@ -1025,7 +1025,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-16',
     title: 'Postgresql Lesson 16',
     description: 'Learn postgresql programming - Part 16',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Postgresql Lesson 16
@@ -1093,7 +1093,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-17',
     title: 'Postgresql Lesson 17',
     description: 'Learn postgresql programming - Part 17',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Postgresql Lesson 17
@@ -1161,7 +1161,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-18',
     title: 'Postgresql Lesson 18',
     description: 'Learn postgresql programming - Part 18',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Postgresql Lesson 18
@@ -1229,7 +1229,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-19',
     title: 'Postgresql Lesson 19',
     description: 'Learn postgresql programming - Part 19',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Postgresql Lesson 19
@@ -1297,7 +1297,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-20',
     title: 'Postgresql Lesson 20',
     description: 'Learn postgresql programming - Part 20',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Postgresql Lesson 20
@@ -1365,7 +1365,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-21',
     title: 'Postgresql Lesson 21',
     description: 'Learn postgresql programming - Part 21',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Postgresql Lesson 21
@@ -1433,7 +1433,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-22',
     title: 'Postgresql Lesson 22',
     description: 'Learn postgresql programming - Part 22',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Postgresql Lesson 22
@@ -1501,7 +1501,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-23',
     title: 'Postgresql Lesson 23',
     description: 'Learn postgresql programming - Part 23',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Postgresql Lesson 23
@@ -1569,7 +1569,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-24',
     title: 'Postgresql Lesson 24',
     description: 'Learn postgresql programming - Part 24',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Postgresql Lesson 24
@@ -1637,7 +1637,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-25',
     title: 'Postgresql Lesson 25',
     description: 'Learn postgresql programming - Part 25',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Postgresql Lesson 25
@@ -1705,7 +1705,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-26',
     title: 'Postgresql Lesson 26',
     description: 'Learn postgresql programming - Part 26',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Postgresql Lesson 26
@@ -1773,7 +1773,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-27',
     title: 'Postgresql Lesson 27',
     description: 'Learn postgresql programming - Part 27',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Postgresql Lesson 27
@@ -1841,7 +1841,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-28',
     title: 'Postgresql Lesson 28',
     description: 'Learn postgresql programming - Part 28',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Postgresql Lesson 28
@@ -1909,7 +1909,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-29',
     title: 'Postgresql Lesson 29',
     description: 'Learn postgresql programming - Part 29',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Postgresql Lesson 29
@@ -1977,7 +1977,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-30',
     title: 'Postgresql Lesson 30',
     description: 'Learn postgresql programming - Part 30',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Postgresql Lesson 30
@@ -2045,7 +2045,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-31',
     title: 'Postgresql Lesson 31',
     description: 'Learn postgresql programming - Part 31',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Postgresql Lesson 31
@@ -2113,7 +2113,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-32',
     title: 'Postgresql Lesson 32',
     description: 'Learn postgresql programming - Part 32',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Postgresql Lesson 32
@@ -2181,7 +2181,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-33',
     title: 'Postgresql Lesson 33',
     description: 'Learn postgresql programming - Part 33',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Postgresql Lesson 33
@@ -2249,7 +2249,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-34',
     title: 'Postgresql Lesson 34',
     description: 'Learn postgresql programming - Part 34',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Postgresql Lesson 34
@@ -2317,7 +2317,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-35',
     title: 'Postgresql Lesson 35',
     description: 'Learn postgresql programming - Part 35',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Postgresql Lesson 35
@@ -2385,7 +2385,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-36',
     title: 'Postgresql Lesson 36',
     description: 'Learn postgresql programming - Part 36',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Postgresql Lesson 36
@@ -2453,7 +2453,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-37',
     title: 'Postgresql Lesson 37',
     description: 'Learn postgresql programming - Part 37',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Postgresql Lesson 37
@@ -2521,7 +2521,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-38',
     title: 'Postgresql Lesson 38',
     description: 'Learn postgresql programming - Part 38',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Postgresql Lesson 38
@@ -2589,7 +2589,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-39',
     title: 'Postgresql Lesson 39',
     description: 'Learn postgresql programming - Part 39',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Postgresql Lesson 39
@@ -2657,7 +2657,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-40',
     title: 'Postgresql Lesson 40',
     description: 'Learn postgresql programming - Part 40',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Postgresql Lesson 40
@@ -2725,7 +2725,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-41',
     title: 'Postgresql Lesson 41',
     description: 'Learn postgresql programming - Part 41',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Postgresql Lesson 41
@@ -2793,7 +2793,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-42',
     title: 'Postgresql Lesson 42',
     description: 'Learn postgresql programming - Part 42',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Postgresql Lesson 42
@@ -2861,7 +2861,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-43',
     title: 'Postgresql Lesson 43',
     description: 'Learn postgresql programming - Part 43',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Postgresql Lesson 43
@@ -2929,7 +2929,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-44',
     title: 'Postgresql Lesson 44',
     description: 'Learn postgresql programming - Part 44',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Postgresql Lesson 44
@@ -2997,7 +2997,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-45',
     title: 'Postgresql Lesson 45',
     description: 'Learn postgresql programming - Part 45',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Postgresql Lesson 45
@@ -3065,7 +3065,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-46',
     title: 'Postgresql Lesson 46',
     description: 'Learn postgresql programming - Part 46',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Postgresql Lesson 46
@@ -3133,7 +3133,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-47',
     title: 'Postgresql Lesson 47',
     description: 'Learn postgresql programming - Part 47',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Postgresql Lesson 47
@@ -3201,7 +3201,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-48',
     title: 'Postgresql Lesson 48',
     description: 'Learn postgresql programming - Part 48',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Postgresql Lesson 48
@@ -3269,7 +3269,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-49',
     title: 'Postgresql Lesson 49',
     description: 'Learn postgresql programming - Part 49',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Postgresql Lesson 49
@@ -3337,7 +3337,7 @@ Complete the challenge below to demonstrate your understanding of postgresql les
     id: 'postgresql-50',
     title: 'Postgresql Lesson 50',
     description: 'Learn postgresql programming - Part 50',
-    language: 'postgresql' as const,
+    language: 'sql' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Postgresql Lesson 50

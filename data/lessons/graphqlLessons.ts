@@ -5,7 +5,7 @@ export const graphqlLessons: Lesson[] = [
     id: 'graphql-1',
     title: 'Graphql Lesson 1',
     description: 'Learn graphql programming - Part 1',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Graphql Lesson 1
@@ -73,7 +73,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-2',
     title: 'Graphql Lesson 2',
     description: 'Learn graphql programming - Part 2',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Graphql Lesson 2
@@ -141,7 +141,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-3',
     title: 'Graphql Lesson 3',
     description: 'Learn graphql programming - Part 3',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Graphql Lesson 3
@@ -209,7 +209,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-4',
     title: 'Graphql Lesson 4',
     description: 'Learn graphql programming - Part 4',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Graphql Lesson 4
@@ -277,7 +277,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-5',
     title: 'Graphql Lesson 5',
     description: 'Learn graphql programming - Part 5',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Graphql Lesson 5
@@ -345,7 +345,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-6',
     title: 'Graphql Lesson 6',
     description: 'Learn graphql programming - Part 6',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Graphql Lesson 6
@@ -413,7 +413,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-7',
     title: 'Graphql Lesson 7',
     description: 'Learn graphql programming - Part 7',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Graphql Lesson 7
@@ -481,7 +481,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-8',
     title: 'Graphql Lesson 8',
     description: 'Learn graphql programming - Part 8',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Graphql Lesson 8
@@ -549,7 +549,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-9',
     title: 'Graphql Lesson 9',
     description: 'Learn graphql programming - Part 9',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Graphql Lesson 9
@@ -617,7 +617,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-10',
     title: 'Graphql Lesson 10',
     description: 'Learn graphql programming - Part 10',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Graphql Lesson 10
@@ -685,7 +685,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-11',
     title: 'Graphql Lesson 11',
     description: 'Learn graphql programming - Part 11',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Graphql Lesson 11
@@ -753,7 +753,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-12',
     title: 'Graphql Lesson 12',
     description: 'Learn graphql programming - Part 12',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Graphql Lesson 12
@@ -821,7 +821,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-13',
     title: 'Graphql Lesson 13',
     description: 'Learn graphql programming - Part 13',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Graphql Lesson 13
@@ -889,7 +889,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-14',
     title: 'Graphql Lesson 14',
     description: 'Learn graphql programming - Part 14',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Graphql Lesson 14
@@ -957,7 +957,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-15',
     title: 'Graphql Lesson 15',
     description: 'Learn graphql programming - Part 15',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Graphql Lesson 15
@@ -1025,7 +1025,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-16',
     title: 'Graphql Lesson 16',
     description: 'Learn graphql programming - Part 16',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Graphql Lesson 16
@@ -1093,7 +1093,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-17',
     title: 'Graphql Lesson 17',
     description: 'Learn graphql programming - Part 17',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Graphql Lesson 17
@@ -1161,7 +1161,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-18',
     title: 'Graphql Lesson 18',
     description: 'Learn graphql programming - Part 18',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Graphql Lesson 18
@@ -1229,7 +1229,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-19',
     title: 'Graphql Lesson 19',
     description: 'Learn graphql programming - Part 19',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Graphql Lesson 19
@@ -1297,7 +1297,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-20',
     title: 'Graphql Lesson 20',
     description: 'Learn graphql programming - Part 20',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Graphql Lesson 20
@@ -1365,7 +1365,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-21',
     title: 'Graphql Lesson 21',
     description: 'Learn graphql programming - Part 21',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Graphql Lesson 21
@@ -1433,7 +1433,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-22',
     title: 'Graphql Lesson 22',
     description: 'Learn graphql programming - Part 22',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Graphql Lesson 22
@@ -1501,7 +1501,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-23',
     title: 'Graphql Lesson 23',
     description: 'Learn graphql programming - Part 23',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Graphql Lesson 23
@@ -1569,7 +1569,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-24',
     title: 'Graphql Lesson 24',
     description: 'Learn graphql programming - Part 24',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Graphql Lesson 24
@@ -1637,7 +1637,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-25',
     title: 'Graphql Lesson 25',
     description: 'Learn graphql programming - Part 25',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Graphql Lesson 25
@@ -1705,7 +1705,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-26',
     title: 'Graphql Lesson 26',
     description: 'Learn graphql programming - Part 26',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Graphql Lesson 26
@@ -1773,7 +1773,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-27',
     title: 'Graphql Lesson 27',
     description: 'Learn graphql programming - Part 27',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Graphql Lesson 27
@@ -1841,7 +1841,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-28',
     title: 'Graphql Lesson 28',
     description: 'Learn graphql programming - Part 28',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Graphql Lesson 28
@@ -1909,7 +1909,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-29',
     title: 'Graphql Lesson 29',
     description: 'Learn graphql programming - Part 29',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Graphql Lesson 29
@@ -1977,7 +1977,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-30',
     title: 'Graphql Lesson 30',
     description: 'Learn graphql programming - Part 30',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Graphql Lesson 30
@@ -2045,7 +2045,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-31',
     title: 'Graphql Lesson 31',
     description: 'Learn graphql programming - Part 31',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Graphql Lesson 31
@@ -2113,7 +2113,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-32',
     title: 'Graphql Lesson 32',
     description: 'Learn graphql programming - Part 32',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Graphql Lesson 32
@@ -2181,7 +2181,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-33',
     title: 'Graphql Lesson 33',
     description: 'Learn graphql programming - Part 33',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Graphql Lesson 33
@@ -2249,7 +2249,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-34',
     title: 'Graphql Lesson 34',
     description: 'Learn graphql programming - Part 34',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Graphql Lesson 34
@@ -2317,7 +2317,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-35',
     title: 'Graphql Lesson 35',
     description: 'Learn graphql programming - Part 35',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Graphql Lesson 35
@@ -2385,7 +2385,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-36',
     title: 'Graphql Lesson 36',
     description: 'Learn graphql programming - Part 36',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Graphql Lesson 36
@@ -2453,7 +2453,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-37',
     title: 'Graphql Lesson 37',
     description: 'Learn graphql programming - Part 37',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Graphql Lesson 37
@@ -2521,7 +2521,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-38',
     title: 'Graphql Lesson 38',
     description: 'Learn graphql programming - Part 38',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Graphql Lesson 38
@@ -2589,7 +2589,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-39',
     title: 'Graphql Lesson 39',
     description: 'Learn graphql programming - Part 39',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Graphql Lesson 39
@@ -2657,7 +2657,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-40',
     title: 'Graphql Lesson 40',
     description: 'Learn graphql programming - Part 40',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Graphql Lesson 40
@@ -2725,7 +2725,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-41',
     title: 'Graphql Lesson 41',
     description: 'Learn graphql programming - Part 41',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Graphql Lesson 41
@@ -2793,7 +2793,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-42',
     title: 'Graphql Lesson 42',
     description: 'Learn graphql programming - Part 42',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Graphql Lesson 42
@@ -2861,7 +2861,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-43',
     title: 'Graphql Lesson 43',
     description: 'Learn graphql programming - Part 43',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Graphql Lesson 43
@@ -2929,7 +2929,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-44',
     title: 'Graphql Lesson 44',
     description: 'Learn graphql programming - Part 44',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Graphql Lesson 44
@@ -2997,7 +2997,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-45',
     title: 'Graphql Lesson 45',
     description: 'Learn graphql programming - Part 45',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Graphql Lesson 45
@@ -3065,7 +3065,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-46',
     title: 'Graphql Lesson 46',
     description: 'Learn graphql programming - Part 46',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Graphql Lesson 46
@@ -3133,7 +3133,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-47',
     title: 'Graphql Lesson 47',
     description: 'Learn graphql programming - Part 47',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Graphql Lesson 47
@@ -3201,7 +3201,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-48',
     title: 'Graphql Lesson 48',
     description: 'Learn graphql programming - Part 48',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Graphql Lesson 48
@@ -3269,7 +3269,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-49',
     title: 'Graphql Lesson 49',
     description: 'Learn graphql programming - Part 49',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Graphql Lesson 49
@@ -3337,7 +3337,7 @@ Complete the challenge below to demonstrate your understanding of graphql lesson
     id: 'graphql-50',
     title: 'Graphql Lesson 50',
     description: 'Learn graphql programming - Part 50',
-    language: 'graphql' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Graphql Lesson 50

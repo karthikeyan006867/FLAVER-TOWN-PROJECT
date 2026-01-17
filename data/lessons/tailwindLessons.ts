@@ -5,7 +5,7 @@ export const tailwindLessons: Lesson[] = [
     id: 'tailwind-1',
     title: 'Tailwind Lesson 1',
     description: 'Learn tailwind programming - Part 1',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Tailwind Lesson 1
@@ -73,7 +73,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-2',
     title: 'Tailwind Lesson 2',
     description: 'Learn tailwind programming - Part 2',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Tailwind Lesson 2
@@ -141,7 +141,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-3',
     title: 'Tailwind Lesson 3',
     description: 'Learn tailwind programming - Part 3',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Tailwind Lesson 3
@@ -209,7 +209,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-4',
     title: 'Tailwind Lesson 4',
     description: 'Learn tailwind programming - Part 4',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Tailwind Lesson 4
@@ -277,7 +277,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-5',
     title: 'Tailwind Lesson 5',
     description: 'Learn tailwind programming - Part 5',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Tailwind Lesson 5
@@ -345,7 +345,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-6',
     title: 'Tailwind Lesson 6',
     description: 'Learn tailwind programming - Part 6',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Tailwind Lesson 6
@@ -413,7 +413,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-7',
     title: 'Tailwind Lesson 7',
     description: 'Learn tailwind programming - Part 7',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Tailwind Lesson 7
@@ -481,7 +481,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-8',
     title: 'Tailwind Lesson 8',
     description: 'Learn tailwind programming - Part 8',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Tailwind Lesson 8
@@ -549,7 +549,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-9',
     title: 'Tailwind Lesson 9',
     description: 'Learn tailwind programming - Part 9',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Tailwind Lesson 9
@@ -617,7 +617,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-10',
     title: 'Tailwind Lesson 10',
     description: 'Learn tailwind programming - Part 10',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Tailwind Lesson 10
@@ -685,7 +685,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-11',
     title: 'Tailwind Lesson 11',
     description: 'Learn tailwind programming - Part 11',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Tailwind Lesson 11
@@ -753,7 +753,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-12',
     title: 'Tailwind Lesson 12',
     description: 'Learn tailwind programming - Part 12',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Tailwind Lesson 12
@@ -821,7 +821,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-13',
     title: 'Tailwind Lesson 13',
     description: 'Learn tailwind programming - Part 13',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Tailwind Lesson 13
@@ -889,7 +889,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-14',
     title: 'Tailwind Lesson 14',
     description: 'Learn tailwind programming - Part 14',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Tailwind Lesson 14
@@ -957,7 +957,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-15',
     title: 'Tailwind Lesson 15',
     description: 'Learn tailwind programming - Part 15',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Tailwind Lesson 15
@@ -1025,7 +1025,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-16',
     title: 'Tailwind Lesson 16',
     description: 'Learn tailwind programming - Part 16',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Tailwind Lesson 16
@@ -1093,7 +1093,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-17',
     title: 'Tailwind Lesson 17',
     description: 'Learn tailwind programming - Part 17',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Tailwind Lesson 17
@@ -1161,7 +1161,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-18',
     title: 'Tailwind Lesson 18',
     description: 'Learn tailwind programming - Part 18',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Tailwind Lesson 18
@@ -1229,7 +1229,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-19',
     title: 'Tailwind Lesson 19',
     description: 'Learn tailwind programming - Part 19',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Tailwind Lesson 19
@@ -1297,7 +1297,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-20',
     title: 'Tailwind Lesson 20',
     description: 'Learn tailwind programming - Part 20',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Tailwind Lesson 20
@@ -1365,7 +1365,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-21',
     title: 'Tailwind Lesson 21',
     description: 'Learn tailwind programming - Part 21',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Tailwind Lesson 21
@@ -1433,7 +1433,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-22',
     title: 'Tailwind Lesson 22',
     description: 'Learn tailwind programming - Part 22',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Tailwind Lesson 22
@@ -1501,7 +1501,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-23',
     title: 'Tailwind Lesson 23',
     description: 'Learn tailwind programming - Part 23',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Tailwind Lesson 23
@@ -1569,7 +1569,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-24',
     title: 'Tailwind Lesson 24',
     description: 'Learn tailwind programming - Part 24',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Tailwind Lesson 24
@@ -1637,7 +1637,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-25',
     title: 'Tailwind Lesson 25',
     description: 'Learn tailwind programming - Part 25',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Tailwind Lesson 25
@@ -1705,7 +1705,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-26',
     title: 'Tailwind Lesson 26',
     description: 'Learn tailwind programming - Part 26',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Tailwind Lesson 26
@@ -1773,7 +1773,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-27',
     title: 'Tailwind Lesson 27',
     description: 'Learn tailwind programming - Part 27',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Tailwind Lesson 27
@@ -1841,7 +1841,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-28',
     title: 'Tailwind Lesson 28',
     description: 'Learn tailwind programming - Part 28',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Tailwind Lesson 28
@@ -1909,7 +1909,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-29',
     title: 'Tailwind Lesson 29',
     description: 'Learn tailwind programming - Part 29',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Tailwind Lesson 29
@@ -1977,7 +1977,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-30',
     title: 'Tailwind Lesson 30',
     description: 'Learn tailwind programming - Part 30',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Tailwind Lesson 30
@@ -2045,7 +2045,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-31',
     title: 'Tailwind Lesson 31',
     description: 'Learn tailwind programming - Part 31',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Tailwind Lesson 31
@@ -2113,7 +2113,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-32',
     title: 'Tailwind Lesson 32',
     description: 'Learn tailwind programming - Part 32',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Tailwind Lesson 32
@@ -2181,7 +2181,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-33',
     title: 'Tailwind Lesson 33',
     description: 'Learn tailwind programming - Part 33',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Tailwind Lesson 33
@@ -2249,7 +2249,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-34',
     title: 'Tailwind Lesson 34',
     description: 'Learn tailwind programming - Part 34',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Tailwind Lesson 34
@@ -2317,7 +2317,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-35',
     title: 'Tailwind Lesson 35',
     description: 'Learn tailwind programming - Part 35',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Tailwind Lesson 35
@@ -2385,7 +2385,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-36',
     title: 'Tailwind Lesson 36',
     description: 'Learn tailwind programming - Part 36',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Tailwind Lesson 36
@@ -2453,7 +2453,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-37',
     title: 'Tailwind Lesson 37',
     description: 'Learn tailwind programming - Part 37',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Tailwind Lesson 37
@@ -2521,7 +2521,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-38',
     title: 'Tailwind Lesson 38',
     description: 'Learn tailwind programming - Part 38',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Tailwind Lesson 38
@@ -2589,7 +2589,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-39',
     title: 'Tailwind Lesson 39',
     description: 'Learn tailwind programming - Part 39',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Tailwind Lesson 39
@@ -2657,7 +2657,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-40',
     title: 'Tailwind Lesson 40',
     description: 'Learn tailwind programming - Part 40',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Tailwind Lesson 40
@@ -2725,7 +2725,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-41',
     title: 'Tailwind Lesson 41',
     description: 'Learn tailwind programming - Part 41',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Tailwind Lesson 41
@@ -2793,7 +2793,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-42',
     title: 'Tailwind Lesson 42',
     description: 'Learn tailwind programming - Part 42',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Tailwind Lesson 42
@@ -2861,7 +2861,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-43',
     title: 'Tailwind Lesson 43',
     description: 'Learn tailwind programming - Part 43',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Tailwind Lesson 43
@@ -2929,7 +2929,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-44',
     title: 'Tailwind Lesson 44',
     description: 'Learn tailwind programming - Part 44',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Tailwind Lesson 44
@@ -2997,7 +2997,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-45',
     title: 'Tailwind Lesson 45',
     description: 'Learn tailwind programming - Part 45',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Tailwind Lesson 45
@@ -3065,7 +3065,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-46',
     title: 'Tailwind Lesson 46',
     description: 'Learn tailwind programming - Part 46',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Tailwind Lesson 46
@@ -3133,7 +3133,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-47',
     title: 'Tailwind Lesson 47',
     description: 'Learn tailwind programming - Part 47',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Tailwind Lesson 47
@@ -3201,7 +3201,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-48',
     title: 'Tailwind Lesson 48',
     description: 'Learn tailwind programming - Part 48',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Tailwind Lesson 48
@@ -3269,7 +3269,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-49',
     title: 'Tailwind Lesson 49',
     description: 'Learn tailwind programming - Part 49',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Tailwind Lesson 49
@@ -3337,7 +3337,7 @@ Complete the challenge below to demonstrate your understanding of tailwind lesso
     id: 'tailwind-50',
     title: 'Tailwind Lesson 50',
     description: 'Learn tailwind programming - Part 50',
-    language: 'tailwind' as const,
+    language: 'css' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Tailwind Lesson 50

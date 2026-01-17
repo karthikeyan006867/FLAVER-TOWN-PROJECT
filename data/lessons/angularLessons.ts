@@ -25,26 +25,26 @@ export const angularLessons: Lesson[] = Array.from({ length: 50 }, (_, i) => {
   const topic = topics[i]
   
   return {
-    id: \`angular-\${i + 1}\`,
-    title: \`Angular - \${topic}\`,
-    description: \`Master \${topic} in Angular\`,
+    id: `angular-${i + 1}`,
+    title: `Angular - ${topic}`,
+    description: `Master ${topic} in Angular`,
     language: 'typescript' as const,
     difficulty,
     estimatedTime: 30 + (i % 20),
-    content: \`# \${topic}
+    content: `# ${topic}
 
 ## Overview
-Learn about \${topic} in Angular framework.
+Learn about ${topic} in Angular framework.
 
 ## Key Concepts
-- Understanding \${topic}
+- Understanding ${topic}
 - Practical implementation
 - Best practices
 - Common patterns
 
 ## Example
-\\\`\\\`\\\`typescript
-// \${topic} example
+\`\`\`typescript
+// ${topic} example
 import { Component } from '@angular/core';
 
 @Component({
@@ -52,14 +52,14 @@ import { Component } from '@angular/core';
   template: '<h1>{{ title }}</h1>'
 })
 export class ExampleComponent {
-  title = '\${topic}';
+  title = '${topic}';
 }
-\\\`\\\`\\\`
+\`\`\`
 
 ## Practice
-Implement \${topic} in your Angular application.
-\`,
-    initialCode: \`import { Component } from '@angular/core';
+Implement ${topic} in your Angular application.
+`,
+    initialCode: `import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-example',
@@ -67,8 +67,8 @@ Implement \${topic} in your Angular application.
 })
 export class ExampleComponent {
   // Your code here
-}\`,
-    solution: \`import { Component } from '@angular/core';
+}`,
+    solution: `import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-example',
@@ -76,9 +76,9 @@ export class ExampleComponent {
 })
 export class ExampleComponent {
   message = 'Hello Angular!';
-}\`,
+}`,
     hints: [
-      \`Focus on \${topic}\`,
+      `Focus on ${topic}`,
       'Use Angular CLI for scaffolding',
       'Test your implementation',
       'Follow Angular style guide'

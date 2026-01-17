@@ -5,7 +5,7 @@ export const flaskLessons: Lesson[] = [
     id: 'flask-1',
     title: 'Flask Lesson 1',
     description: 'Learn flask programming - Part 1',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Flask Lesson 1
@@ -73,7 +73,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 1
     id: 'flask-2',
     title: 'Flask Lesson 2',
     description: 'Learn flask programming - Part 2',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Flask Lesson 2
@@ -141,7 +141,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 2
     id: 'flask-3',
     title: 'Flask Lesson 3',
     description: 'Learn flask programming - Part 3',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Flask Lesson 3
@@ -209,7 +209,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 3
     id: 'flask-4',
     title: 'Flask Lesson 4',
     description: 'Learn flask programming - Part 4',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Flask Lesson 4
@@ -277,7 +277,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 4
     id: 'flask-5',
     title: 'Flask Lesson 5',
     description: 'Learn flask programming - Part 5',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Flask Lesson 5
@@ -345,7 +345,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 5
     id: 'flask-6',
     title: 'Flask Lesson 6',
     description: 'Learn flask programming - Part 6',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Flask Lesson 6
@@ -413,7 +413,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 6
     id: 'flask-7',
     title: 'Flask Lesson 7',
     description: 'Learn flask programming - Part 7',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Flask Lesson 7
@@ -481,7 +481,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 7
     id: 'flask-8',
     title: 'Flask Lesson 8',
     description: 'Learn flask programming - Part 8',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Flask Lesson 8
@@ -549,7 +549,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 8
     id: 'flask-9',
     title: 'Flask Lesson 9',
     description: 'Learn flask programming - Part 9',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Flask Lesson 9
@@ -617,7 +617,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 9
     id: 'flask-10',
     title: 'Flask Lesson 10',
     description: 'Learn flask programming - Part 10',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Flask Lesson 10
@@ -685,7 +685,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 1
     id: 'flask-11',
     title: 'Flask Lesson 11',
     description: 'Learn flask programming - Part 11',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Flask Lesson 11
@@ -753,7 +753,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 1
     id: 'flask-12',
     title: 'Flask Lesson 12',
     description: 'Learn flask programming - Part 12',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Flask Lesson 12
@@ -821,7 +821,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 1
     id: 'flask-13',
     title: 'Flask Lesson 13',
     description: 'Learn flask programming - Part 13',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Flask Lesson 13
@@ -889,7 +889,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 1
     id: 'flask-14',
     title: 'Flask Lesson 14',
     description: 'Learn flask programming - Part 14',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Flask Lesson 14
@@ -957,7 +957,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 1
     id: 'flask-15',
     title: 'Flask Lesson 15',
     description: 'Learn flask programming - Part 15',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Flask Lesson 15
@@ -1025,7 +1025,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 1
     id: 'flask-16',
     title: 'Flask Lesson 16',
     description: 'Learn flask programming - Part 16',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Flask Lesson 16
@@ -1093,7 +1093,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 1
     id: 'flask-17',
     title: 'Flask Lesson 17',
     description: 'Learn flask programming - Part 17',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Flask Lesson 17
@@ -1161,7 +1161,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 1
     id: 'flask-18',
     title: 'Flask Lesson 18',
     description: 'Learn flask programming - Part 18',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Flask Lesson 18
@@ -1229,7 +1229,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 1
     id: 'flask-19',
     title: 'Flask Lesson 19',
     description: 'Learn flask programming - Part 19',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Flask Lesson 19
@@ -1297,7 +1297,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 1
     id: 'flask-20',
     title: 'Flask Lesson 20',
     description: 'Learn flask programming - Part 20',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Flask Lesson 20
@@ -1365,7 +1365,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 2
     id: 'flask-21',
     title: 'Flask Lesson 21',
     description: 'Learn flask programming - Part 21',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Flask Lesson 21
@@ -1433,7 +1433,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 2
     id: 'flask-22',
     title: 'Flask Lesson 22',
     description: 'Learn flask programming - Part 22',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Flask Lesson 22
@@ -1501,7 +1501,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 2
     id: 'flask-23',
     title: 'Flask Lesson 23',
     description: 'Learn flask programming - Part 23',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Flask Lesson 23
@@ -1569,7 +1569,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 2
     id: 'flask-24',
     title: 'Flask Lesson 24',
     description: 'Learn flask programming - Part 24',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Flask Lesson 24
@@ -1637,7 +1637,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 2
     id: 'flask-25',
     title: 'Flask Lesson 25',
     description: 'Learn flask programming - Part 25',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Flask Lesson 25
@@ -1705,7 +1705,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 2
     id: 'flask-26',
     title: 'Flask Lesson 26',
     description: 'Learn flask programming - Part 26',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Flask Lesson 26
@@ -1773,7 +1773,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 2
     id: 'flask-27',
     title: 'Flask Lesson 27',
     description: 'Learn flask programming - Part 27',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Flask Lesson 27
@@ -1841,7 +1841,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 2
     id: 'flask-28',
     title: 'Flask Lesson 28',
     description: 'Learn flask programming - Part 28',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Flask Lesson 28
@@ -1909,7 +1909,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 2
     id: 'flask-29',
     title: 'Flask Lesson 29',
     description: 'Learn flask programming - Part 29',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Flask Lesson 29
@@ -1977,7 +1977,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 2
     id: 'flask-30',
     title: 'Flask Lesson 30',
     description: 'Learn flask programming - Part 30',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Flask Lesson 30
@@ -2045,7 +2045,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 3
     id: 'flask-31',
     title: 'Flask Lesson 31',
     description: 'Learn flask programming - Part 31',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Flask Lesson 31
@@ -2113,7 +2113,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 3
     id: 'flask-32',
     title: 'Flask Lesson 32',
     description: 'Learn flask programming - Part 32',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Flask Lesson 32
@@ -2181,7 +2181,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 3
     id: 'flask-33',
     title: 'Flask Lesson 33',
     description: 'Learn flask programming - Part 33',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Flask Lesson 33
@@ -2249,7 +2249,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 3
     id: 'flask-34',
     title: 'Flask Lesson 34',
     description: 'Learn flask programming - Part 34',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Flask Lesson 34
@@ -2317,7 +2317,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 3
     id: 'flask-35',
     title: 'Flask Lesson 35',
     description: 'Learn flask programming - Part 35',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Flask Lesson 35
@@ -2385,7 +2385,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 3
     id: 'flask-36',
     title: 'Flask Lesson 36',
     description: 'Learn flask programming - Part 36',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Flask Lesson 36
@@ -2453,7 +2453,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 3
     id: 'flask-37',
     title: 'Flask Lesson 37',
     description: 'Learn flask programming - Part 37',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Flask Lesson 37
@@ -2521,7 +2521,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 3
     id: 'flask-38',
     title: 'Flask Lesson 38',
     description: 'Learn flask programming - Part 38',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Flask Lesson 38
@@ -2589,7 +2589,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 3
     id: 'flask-39',
     title: 'Flask Lesson 39',
     description: 'Learn flask programming - Part 39',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Flask Lesson 39
@@ -2657,7 +2657,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 3
     id: 'flask-40',
     title: 'Flask Lesson 40',
     description: 'Learn flask programming - Part 40',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Flask Lesson 40
@@ -2725,7 +2725,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 4
     id: 'flask-41',
     title: 'Flask Lesson 41',
     description: 'Learn flask programming - Part 41',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Flask Lesson 41
@@ -2793,7 +2793,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 4
     id: 'flask-42',
     title: 'Flask Lesson 42',
     description: 'Learn flask programming - Part 42',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Flask Lesson 42
@@ -2861,7 +2861,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 4
     id: 'flask-43',
     title: 'Flask Lesson 43',
     description: 'Learn flask programming - Part 43',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Flask Lesson 43
@@ -2929,7 +2929,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 4
     id: 'flask-44',
     title: 'Flask Lesson 44',
     description: 'Learn flask programming - Part 44',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Flask Lesson 44
@@ -2997,7 +2997,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 4
     id: 'flask-45',
     title: 'Flask Lesson 45',
     description: 'Learn flask programming - Part 45',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Flask Lesson 45
@@ -3065,7 +3065,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 4
     id: 'flask-46',
     title: 'Flask Lesson 46',
     description: 'Learn flask programming - Part 46',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Flask Lesson 46
@@ -3133,7 +3133,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 4
     id: 'flask-47',
     title: 'Flask Lesson 47',
     description: 'Learn flask programming - Part 47',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Flask Lesson 47
@@ -3201,7 +3201,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 4
     id: 'flask-48',
     title: 'Flask Lesson 48',
     description: 'Learn flask programming - Part 48',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Flask Lesson 48
@@ -3269,7 +3269,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 4
     id: 'flask-49',
     title: 'Flask Lesson 49',
     description: 'Learn flask programming - Part 49',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Flask Lesson 49
@@ -3337,7 +3337,7 @@ Complete the challenge below to demonstrate your understanding of flask lesson 4
     id: 'flask-50',
     title: 'Flask Lesson 50',
     description: 'Learn flask programming - Part 50',
-    language: 'flask' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Flask Lesson 50

@@ -5,7 +5,7 @@ export const mlLessons: Lesson[] = [
     id: 'ml-1',
     title: 'Ml Lesson 1',
     description: 'Learn ml programming - Part 1',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Ml Lesson 1
@@ -73,7 +73,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 1.
     id: 'ml-2',
     title: 'Ml Lesson 2',
     description: 'Learn ml programming - Part 2',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Ml Lesson 2
@@ -141,7 +141,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 2.
     id: 'ml-3',
     title: 'Ml Lesson 3',
     description: 'Learn ml programming - Part 3',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Ml Lesson 3
@@ -209,7 +209,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 3.
     id: 'ml-4',
     title: 'Ml Lesson 4',
     description: 'Learn ml programming - Part 4',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Ml Lesson 4
@@ -277,7 +277,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 4.
     id: 'ml-5',
     title: 'Ml Lesson 5',
     description: 'Learn ml programming - Part 5',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Ml Lesson 5
@@ -345,7 +345,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 5.
     id: 'ml-6',
     title: 'Ml Lesson 6',
     description: 'Learn ml programming - Part 6',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Ml Lesson 6
@@ -413,7 +413,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 6.
     id: 'ml-7',
     title: 'Ml Lesson 7',
     description: 'Learn ml programming - Part 7',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Ml Lesson 7
@@ -481,7 +481,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 7.
     id: 'ml-8',
     title: 'Ml Lesson 8',
     description: 'Learn ml programming - Part 8',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Ml Lesson 8
@@ -549,7 +549,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 8.
     id: 'ml-9',
     title: 'Ml Lesson 9',
     description: 'Learn ml programming - Part 9',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Ml Lesson 9
@@ -617,7 +617,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 9.
     id: 'ml-10',
     title: 'Ml Lesson 10',
     description: 'Learn ml programming - Part 10',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Ml Lesson 10
@@ -685,7 +685,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 10.
     id: 'ml-11',
     title: 'Ml Lesson 11',
     description: 'Learn ml programming - Part 11',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Ml Lesson 11
@@ -753,7 +753,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 11.
     id: 'ml-12',
     title: 'Ml Lesson 12',
     description: 'Learn ml programming - Part 12',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Ml Lesson 12
@@ -821,7 +821,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 12.
     id: 'ml-13',
     title: 'Ml Lesson 13',
     description: 'Learn ml programming - Part 13',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Ml Lesson 13
@@ -889,7 +889,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 13.
     id: 'ml-14',
     title: 'Ml Lesson 14',
     description: 'Learn ml programming - Part 14',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Ml Lesson 14
@@ -957,7 +957,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 14.
     id: 'ml-15',
     title: 'Ml Lesson 15',
     description: 'Learn ml programming - Part 15',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Ml Lesson 15
@@ -1025,7 +1025,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 15.
     id: 'ml-16',
     title: 'Ml Lesson 16',
     description: 'Learn ml programming - Part 16',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Ml Lesson 16
@@ -1093,7 +1093,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 16.
     id: 'ml-17',
     title: 'Ml Lesson 17',
     description: 'Learn ml programming - Part 17',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Ml Lesson 17
@@ -1161,7 +1161,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 17.
     id: 'ml-18',
     title: 'Ml Lesson 18',
     description: 'Learn ml programming - Part 18',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Ml Lesson 18
@@ -1229,7 +1229,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 18.
     id: 'ml-19',
     title: 'Ml Lesson 19',
     description: 'Learn ml programming - Part 19',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Ml Lesson 19
@@ -1297,7 +1297,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 19.
     id: 'ml-20',
     title: 'Ml Lesson 20',
     description: 'Learn ml programming - Part 20',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Ml Lesson 20
@@ -1365,7 +1365,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 20.
     id: 'ml-21',
     title: 'Ml Lesson 21',
     description: 'Learn ml programming - Part 21',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Ml Lesson 21
@@ -1433,7 +1433,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 21.
     id: 'ml-22',
     title: 'Ml Lesson 22',
     description: 'Learn ml programming - Part 22',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Ml Lesson 22
@@ -1501,7 +1501,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 22.
     id: 'ml-23',
     title: 'Ml Lesson 23',
     description: 'Learn ml programming - Part 23',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Ml Lesson 23
@@ -1569,7 +1569,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 23.
     id: 'ml-24',
     title: 'Ml Lesson 24',
     description: 'Learn ml programming - Part 24',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Ml Lesson 24
@@ -1637,7 +1637,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 24.
     id: 'ml-25',
     title: 'Ml Lesson 25',
     description: 'Learn ml programming - Part 25',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Ml Lesson 25
@@ -1705,7 +1705,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 25.
     id: 'ml-26',
     title: 'Ml Lesson 26',
     description: 'Learn ml programming - Part 26',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Ml Lesson 26
@@ -1773,7 +1773,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 26.
     id: 'ml-27',
     title: 'Ml Lesson 27',
     description: 'Learn ml programming - Part 27',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Ml Lesson 27
@@ -1841,7 +1841,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 27.
     id: 'ml-28',
     title: 'Ml Lesson 28',
     description: 'Learn ml programming - Part 28',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Ml Lesson 28
@@ -1909,7 +1909,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 28.
     id: 'ml-29',
     title: 'Ml Lesson 29',
     description: 'Learn ml programming - Part 29',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Ml Lesson 29
@@ -1977,7 +1977,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 29.
     id: 'ml-30',
     title: 'Ml Lesson 30',
     description: 'Learn ml programming - Part 30',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Ml Lesson 30
@@ -2045,7 +2045,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 30.
     id: 'ml-31',
     title: 'Ml Lesson 31',
     description: 'Learn ml programming - Part 31',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Ml Lesson 31
@@ -2113,7 +2113,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 31.
     id: 'ml-32',
     title: 'Ml Lesson 32',
     description: 'Learn ml programming - Part 32',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Ml Lesson 32
@@ -2181,7 +2181,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 32.
     id: 'ml-33',
     title: 'Ml Lesson 33',
     description: 'Learn ml programming - Part 33',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Ml Lesson 33
@@ -2249,7 +2249,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 33.
     id: 'ml-34',
     title: 'Ml Lesson 34',
     description: 'Learn ml programming - Part 34',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Ml Lesson 34
@@ -2317,7 +2317,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 34.
     id: 'ml-35',
     title: 'Ml Lesson 35',
     description: 'Learn ml programming - Part 35',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Ml Lesson 35
@@ -2385,7 +2385,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 35.
     id: 'ml-36',
     title: 'Ml Lesson 36',
     description: 'Learn ml programming - Part 36',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Ml Lesson 36
@@ -2453,7 +2453,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 36.
     id: 'ml-37',
     title: 'Ml Lesson 37',
     description: 'Learn ml programming - Part 37',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Ml Lesson 37
@@ -2521,7 +2521,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 37.
     id: 'ml-38',
     title: 'Ml Lesson 38',
     description: 'Learn ml programming - Part 38',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Ml Lesson 38
@@ -2589,7 +2589,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 38.
     id: 'ml-39',
     title: 'Ml Lesson 39',
     description: 'Learn ml programming - Part 39',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Ml Lesson 39
@@ -2657,7 +2657,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 39.
     id: 'ml-40',
     title: 'Ml Lesson 40',
     description: 'Learn ml programming - Part 40',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Ml Lesson 40
@@ -2725,7 +2725,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 40.
     id: 'ml-41',
     title: 'Ml Lesson 41',
     description: 'Learn ml programming - Part 41',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Ml Lesson 41
@@ -2793,7 +2793,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 41.
     id: 'ml-42',
     title: 'Ml Lesson 42',
     description: 'Learn ml programming - Part 42',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Ml Lesson 42
@@ -2861,7 +2861,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 42.
     id: 'ml-43',
     title: 'Ml Lesson 43',
     description: 'Learn ml programming - Part 43',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Ml Lesson 43
@@ -2929,7 +2929,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 43.
     id: 'ml-44',
     title: 'Ml Lesson 44',
     description: 'Learn ml programming - Part 44',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Ml Lesson 44
@@ -2997,7 +2997,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 44.
     id: 'ml-45',
     title: 'Ml Lesson 45',
     description: 'Learn ml programming - Part 45',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Ml Lesson 45
@@ -3065,7 +3065,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 45.
     id: 'ml-46',
     title: 'Ml Lesson 46',
     description: 'Learn ml programming - Part 46',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Ml Lesson 46
@@ -3133,7 +3133,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 46.
     id: 'ml-47',
     title: 'Ml Lesson 47',
     description: 'Learn ml programming - Part 47',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Ml Lesson 47
@@ -3201,7 +3201,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 47.
     id: 'ml-48',
     title: 'Ml Lesson 48',
     description: 'Learn ml programming - Part 48',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Ml Lesson 48
@@ -3269,7 +3269,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 48.
     id: 'ml-49',
     title: 'Ml Lesson 49',
     description: 'Learn ml programming - Part 49',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Ml Lesson 49
@@ -3337,7 +3337,7 @@ Complete the challenge below to demonstrate your understanding of ml lesson 49.
     id: 'ml-50',
     title: 'Ml Lesson 50',
     description: 'Learn ml programming - Part 50',
-    language: 'ml' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Ml Lesson 50

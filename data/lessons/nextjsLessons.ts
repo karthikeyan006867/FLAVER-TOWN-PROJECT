@@ -5,7 +5,7 @@ export const nextjsLessons: Lesson[] = [
     id: 'nextjs-1',
     title: 'Nextjs Lesson 1',
     description: 'Learn nextjs programming - Part 1',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Nextjs Lesson 1
@@ -73,7 +73,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-2',
     title: 'Nextjs Lesson 2',
     description: 'Learn nextjs programming - Part 2',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Nextjs Lesson 2
@@ -141,7 +141,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-3',
     title: 'Nextjs Lesson 3',
     description: 'Learn nextjs programming - Part 3',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Nextjs Lesson 3
@@ -209,7 +209,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-4',
     title: 'Nextjs Lesson 4',
     description: 'Learn nextjs programming - Part 4',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Nextjs Lesson 4
@@ -277,7 +277,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-5',
     title: 'Nextjs Lesson 5',
     description: 'Learn nextjs programming - Part 5',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Nextjs Lesson 5
@@ -345,7 +345,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-6',
     title: 'Nextjs Lesson 6',
     description: 'Learn nextjs programming - Part 6',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Nextjs Lesson 6
@@ -413,7 +413,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-7',
     title: 'Nextjs Lesson 7',
     description: 'Learn nextjs programming - Part 7',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Nextjs Lesson 7
@@ -481,7 +481,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-8',
     title: 'Nextjs Lesson 8',
     description: 'Learn nextjs programming - Part 8',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Nextjs Lesson 8
@@ -549,7 +549,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-9',
     title: 'Nextjs Lesson 9',
     description: 'Learn nextjs programming - Part 9',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Nextjs Lesson 9
@@ -617,7 +617,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-10',
     title: 'Nextjs Lesson 10',
     description: 'Learn nextjs programming - Part 10',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Nextjs Lesson 10
@@ -685,7 +685,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-11',
     title: 'Nextjs Lesson 11',
     description: 'Learn nextjs programming - Part 11',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Nextjs Lesson 11
@@ -753,7 +753,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-12',
     title: 'Nextjs Lesson 12',
     description: 'Learn nextjs programming - Part 12',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Nextjs Lesson 12
@@ -821,7 +821,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-13',
     title: 'Nextjs Lesson 13',
     description: 'Learn nextjs programming - Part 13',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Nextjs Lesson 13
@@ -889,7 +889,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-14',
     title: 'Nextjs Lesson 14',
     description: 'Learn nextjs programming - Part 14',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Nextjs Lesson 14
@@ -957,7 +957,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-15',
     title: 'Nextjs Lesson 15',
     description: 'Learn nextjs programming - Part 15',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Nextjs Lesson 15
@@ -1025,7 +1025,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-16',
     title: 'Nextjs Lesson 16',
     description: 'Learn nextjs programming - Part 16',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Nextjs Lesson 16
@@ -1093,7 +1093,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-17',
     title: 'Nextjs Lesson 17',
     description: 'Learn nextjs programming - Part 17',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Nextjs Lesson 17
@@ -1161,7 +1161,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-18',
     title: 'Nextjs Lesson 18',
     description: 'Learn nextjs programming - Part 18',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Nextjs Lesson 18
@@ -1229,7 +1229,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-19',
     title: 'Nextjs Lesson 19',
     description: 'Learn nextjs programming - Part 19',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Nextjs Lesson 19
@@ -1297,7 +1297,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-20',
     title: 'Nextjs Lesson 20',
     description: 'Learn nextjs programming - Part 20',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Nextjs Lesson 20
@@ -1365,7 +1365,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-21',
     title: 'Nextjs Lesson 21',
     description: 'Learn nextjs programming - Part 21',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Nextjs Lesson 21
@@ -1433,7 +1433,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-22',
     title: 'Nextjs Lesson 22',
     description: 'Learn nextjs programming - Part 22',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Nextjs Lesson 22
@@ -1501,7 +1501,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-23',
     title: 'Nextjs Lesson 23',
     description: 'Learn nextjs programming - Part 23',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Nextjs Lesson 23
@@ -1569,7 +1569,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-24',
     title: 'Nextjs Lesson 24',
     description: 'Learn nextjs programming - Part 24',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Nextjs Lesson 24
@@ -1637,7 +1637,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-25',
     title: 'Nextjs Lesson 25',
     description: 'Learn nextjs programming - Part 25',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Nextjs Lesson 25
@@ -1705,7 +1705,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-26',
     title: 'Nextjs Lesson 26',
     description: 'Learn nextjs programming - Part 26',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Nextjs Lesson 26
@@ -1773,7 +1773,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-27',
     title: 'Nextjs Lesson 27',
     description: 'Learn nextjs programming - Part 27',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Nextjs Lesson 27
@@ -1841,7 +1841,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-28',
     title: 'Nextjs Lesson 28',
     description: 'Learn nextjs programming - Part 28',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Nextjs Lesson 28
@@ -1909,7 +1909,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-29',
     title: 'Nextjs Lesson 29',
     description: 'Learn nextjs programming - Part 29',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Nextjs Lesson 29
@@ -1977,7 +1977,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-30',
     title: 'Nextjs Lesson 30',
     description: 'Learn nextjs programming - Part 30',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Nextjs Lesson 30
@@ -2045,7 +2045,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-31',
     title: 'Nextjs Lesson 31',
     description: 'Learn nextjs programming - Part 31',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Nextjs Lesson 31
@@ -2113,7 +2113,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-32',
     title: 'Nextjs Lesson 32',
     description: 'Learn nextjs programming - Part 32',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Nextjs Lesson 32
@@ -2181,7 +2181,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-33',
     title: 'Nextjs Lesson 33',
     description: 'Learn nextjs programming - Part 33',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Nextjs Lesson 33
@@ -2249,7 +2249,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-34',
     title: 'Nextjs Lesson 34',
     description: 'Learn nextjs programming - Part 34',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Nextjs Lesson 34
@@ -2317,7 +2317,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-35',
     title: 'Nextjs Lesson 35',
     description: 'Learn nextjs programming - Part 35',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Nextjs Lesson 35
@@ -2385,7 +2385,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-36',
     title: 'Nextjs Lesson 36',
     description: 'Learn nextjs programming - Part 36',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Nextjs Lesson 36
@@ -2453,7 +2453,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-37',
     title: 'Nextjs Lesson 37',
     description: 'Learn nextjs programming - Part 37',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Nextjs Lesson 37
@@ -2521,7 +2521,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-38',
     title: 'Nextjs Lesson 38',
     description: 'Learn nextjs programming - Part 38',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Nextjs Lesson 38
@@ -2589,7 +2589,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-39',
     title: 'Nextjs Lesson 39',
     description: 'Learn nextjs programming - Part 39',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Nextjs Lesson 39
@@ -2657,7 +2657,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-40',
     title: 'Nextjs Lesson 40',
     description: 'Learn nextjs programming - Part 40',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Nextjs Lesson 40
@@ -2725,7 +2725,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-41',
     title: 'Nextjs Lesson 41',
     description: 'Learn nextjs programming - Part 41',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Nextjs Lesson 41
@@ -2793,7 +2793,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-42',
     title: 'Nextjs Lesson 42',
     description: 'Learn nextjs programming - Part 42',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Nextjs Lesson 42
@@ -2861,7 +2861,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-43',
     title: 'Nextjs Lesson 43',
     description: 'Learn nextjs programming - Part 43',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Nextjs Lesson 43
@@ -2929,7 +2929,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-44',
     title: 'Nextjs Lesson 44',
     description: 'Learn nextjs programming - Part 44',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Nextjs Lesson 44
@@ -2997,7 +2997,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-45',
     title: 'Nextjs Lesson 45',
     description: 'Learn nextjs programming - Part 45',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Nextjs Lesson 45
@@ -3065,7 +3065,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-46',
     title: 'Nextjs Lesson 46',
     description: 'Learn nextjs programming - Part 46',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Nextjs Lesson 46
@@ -3133,7 +3133,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-47',
     title: 'Nextjs Lesson 47',
     description: 'Learn nextjs programming - Part 47',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Nextjs Lesson 47
@@ -3201,7 +3201,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-48',
     title: 'Nextjs Lesson 48',
     description: 'Learn nextjs programming - Part 48',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Nextjs Lesson 48
@@ -3269,7 +3269,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-49',
     title: 'Nextjs Lesson 49',
     description: 'Learn nextjs programming - Part 49',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Nextjs Lesson 49
@@ -3337,7 +3337,7 @@ Complete the challenge below to demonstrate your understanding of nextjs lesson 
     id: 'nextjs-50',
     title: 'Nextjs Lesson 50',
     description: 'Learn nextjs programming - Part 50',
-    language: 'nextjs' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Nextjs Lesson 50

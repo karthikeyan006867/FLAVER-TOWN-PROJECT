@@ -5,7 +5,7 @@ export const kubernetesLessons: Lesson[] = [
     id: 'kubernetes-1',
     title: 'Kubernetes Lesson 1',
     description: 'Learn kubernetes programming - Part 1',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 1
@@ -73,7 +73,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-2',
     title: 'Kubernetes Lesson 2',
     description: 'Learn kubernetes programming - Part 2',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 2
@@ -141,7 +141,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-3',
     title: 'Kubernetes Lesson 3',
     description: 'Learn kubernetes programming - Part 3',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Kubernetes Lesson 3
@@ -209,7 +209,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-4',
     title: 'Kubernetes Lesson 4',
     description: 'Learn kubernetes programming - Part 4',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Kubernetes Lesson 4
@@ -277,7 +277,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-5',
     title: 'Kubernetes Lesson 5',
     description: 'Learn kubernetes programming - Part 5',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 5
@@ -345,7 +345,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-6',
     title: 'Kubernetes Lesson 6',
     description: 'Learn kubernetes programming - Part 6',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 6
@@ -413,7 +413,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-7',
     title: 'Kubernetes Lesson 7',
     description: 'Learn kubernetes programming - Part 7',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Kubernetes Lesson 7
@@ -481,7 +481,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-8',
     title: 'Kubernetes Lesson 8',
     description: 'Learn kubernetes programming - Part 8',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Kubernetes Lesson 8
@@ -549,7 +549,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-9',
     title: 'Kubernetes Lesson 9',
     description: 'Learn kubernetes programming - Part 9',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 9
@@ -617,7 +617,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-10',
     title: 'Kubernetes Lesson 10',
     description: 'Learn kubernetes programming - Part 10',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 10
@@ -685,7 +685,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-11',
     title: 'Kubernetes Lesson 11',
     description: 'Learn kubernetes programming - Part 11',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Kubernetes Lesson 11
@@ -753,7 +753,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-12',
     title: 'Kubernetes Lesson 12',
     description: 'Learn kubernetes programming - Part 12',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Kubernetes Lesson 12
@@ -821,7 +821,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-13',
     title: 'Kubernetes Lesson 13',
     description: 'Learn kubernetes programming - Part 13',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 13
@@ -889,7 +889,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-14',
     title: 'Kubernetes Lesson 14',
     description: 'Learn kubernetes programming - Part 14',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 14
@@ -957,7 +957,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-15',
     title: 'Kubernetes Lesson 15',
     description: 'Learn kubernetes programming - Part 15',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Kubernetes Lesson 15
@@ -1025,7 +1025,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-16',
     title: 'Kubernetes Lesson 16',
     description: 'Learn kubernetes programming - Part 16',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Kubernetes Lesson 16
@@ -1093,7 +1093,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-17',
     title: 'Kubernetes Lesson 17',
     description: 'Learn kubernetes programming - Part 17',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 17
@@ -1161,7 +1161,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-18',
     title: 'Kubernetes Lesson 18',
     description: 'Learn kubernetes programming - Part 18',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 18
@@ -1229,7 +1229,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-19',
     title: 'Kubernetes Lesson 19',
     description: 'Learn kubernetes programming - Part 19',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Kubernetes Lesson 19
@@ -1297,7 +1297,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-20',
     title: 'Kubernetes Lesson 20',
     description: 'Learn kubernetes programming - Part 20',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Kubernetes Lesson 20
@@ -1365,7 +1365,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-21',
     title: 'Kubernetes Lesson 21',
     description: 'Learn kubernetes programming - Part 21',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 21
@@ -1433,7 +1433,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-22',
     title: 'Kubernetes Lesson 22',
     description: 'Learn kubernetes programming - Part 22',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 22
@@ -1501,7 +1501,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-23',
     title: 'Kubernetes Lesson 23',
     description: 'Learn kubernetes programming - Part 23',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Kubernetes Lesson 23
@@ -1569,7 +1569,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-24',
     title: 'Kubernetes Lesson 24',
     description: 'Learn kubernetes programming - Part 24',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Kubernetes Lesson 24
@@ -1637,7 +1637,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-25',
     title: 'Kubernetes Lesson 25',
     description: 'Learn kubernetes programming - Part 25',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 25
@@ -1705,7 +1705,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-26',
     title: 'Kubernetes Lesson 26',
     description: 'Learn kubernetes programming - Part 26',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 26
@@ -1773,7 +1773,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-27',
     title: 'Kubernetes Lesson 27',
     description: 'Learn kubernetes programming - Part 27',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Kubernetes Lesson 27
@@ -1841,7 +1841,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-28',
     title: 'Kubernetes Lesson 28',
     description: 'Learn kubernetes programming - Part 28',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Kubernetes Lesson 28
@@ -1909,7 +1909,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-29',
     title: 'Kubernetes Lesson 29',
     description: 'Learn kubernetes programming - Part 29',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 29
@@ -1977,7 +1977,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-30',
     title: 'Kubernetes Lesson 30',
     description: 'Learn kubernetes programming - Part 30',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 30
@@ -2045,7 +2045,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-31',
     title: 'Kubernetes Lesson 31',
     description: 'Learn kubernetes programming - Part 31',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Kubernetes Lesson 31
@@ -2113,7 +2113,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-32',
     title: 'Kubernetes Lesson 32',
     description: 'Learn kubernetes programming - Part 32',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Kubernetes Lesson 32
@@ -2181,7 +2181,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-33',
     title: 'Kubernetes Lesson 33',
     description: 'Learn kubernetes programming - Part 33',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 33
@@ -2249,7 +2249,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-34',
     title: 'Kubernetes Lesson 34',
     description: 'Learn kubernetes programming - Part 34',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 34
@@ -2317,7 +2317,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-35',
     title: 'Kubernetes Lesson 35',
     description: 'Learn kubernetes programming - Part 35',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Kubernetes Lesson 35
@@ -2385,7 +2385,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-36',
     title: 'Kubernetes Lesson 36',
     description: 'Learn kubernetes programming - Part 36',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Kubernetes Lesson 36
@@ -2453,7 +2453,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-37',
     title: 'Kubernetes Lesson 37',
     description: 'Learn kubernetes programming - Part 37',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 37
@@ -2521,7 +2521,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-38',
     title: 'Kubernetes Lesson 38',
     description: 'Learn kubernetes programming - Part 38',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 38
@@ -2589,7 +2589,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-39',
     title: 'Kubernetes Lesson 39',
     description: 'Learn kubernetes programming - Part 39',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Kubernetes Lesson 39
@@ -2657,7 +2657,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-40',
     title: 'Kubernetes Lesson 40',
     description: 'Learn kubernetes programming - Part 40',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Kubernetes Lesson 40
@@ -2725,7 +2725,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-41',
     title: 'Kubernetes Lesson 41',
     description: 'Learn kubernetes programming - Part 41',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 41
@@ -2793,7 +2793,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-42',
     title: 'Kubernetes Lesson 42',
     description: 'Learn kubernetes programming - Part 42',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 42
@@ -2861,7 +2861,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-43',
     title: 'Kubernetes Lesson 43',
     description: 'Learn kubernetes programming - Part 43',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Kubernetes Lesson 43
@@ -2929,7 +2929,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-44',
     title: 'Kubernetes Lesson 44',
     description: 'Learn kubernetes programming - Part 44',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Kubernetes Lesson 44
@@ -2997,7 +2997,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-45',
     title: 'Kubernetes Lesson 45',
     description: 'Learn kubernetes programming - Part 45',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 45
@@ -3065,7 +3065,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-46',
     title: 'Kubernetes Lesson 46',
     description: 'Learn kubernetes programming - Part 46',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 46
@@ -3133,7 +3133,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-47',
     title: 'Kubernetes Lesson 47',
     description: 'Learn kubernetes programming - Part 47',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Kubernetes Lesson 47
@@ -3201,7 +3201,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-48',
     title: 'Kubernetes Lesson 48',
     description: 'Learn kubernetes programming - Part 48',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Kubernetes Lesson 48
@@ -3269,7 +3269,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-49',
     title: 'Kubernetes Lesson 49',
     description: 'Learn kubernetes programming - Part 49',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Kubernetes Lesson 49
@@ -3337,7 +3337,7 @@ Complete the challenge below to demonstrate your understanding of kubernetes les
     id: 'kubernetes-50',
     title: 'Kubernetes Lesson 50',
     description: 'Learn kubernetes programming - Part 50',
-    language: 'kubernetes' as const,
+    language: 'javascript' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Kubernetes Lesson 50

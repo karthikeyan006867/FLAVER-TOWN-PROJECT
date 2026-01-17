@@ -5,7 +5,7 @@ export const cybersecurityLessons: Lesson[] = [
     id: 'cybersecurity-1',
     title: 'Cybersecurity Lesson 1',
     description: 'Learn cybersecurity programming - Part 1',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 1
@@ -73,7 +73,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-2',
     title: 'Cybersecurity Lesson 2',
     description: 'Learn cybersecurity programming - Part 2',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 2
@@ -141,7 +141,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-3',
     title: 'Cybersecurity Lesson 3',
     description: 'Learn cybersecurity programming - Part 3',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Cybersecurity Lesson 3
@@ -209,7 +209,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-4',
     title: 'Cybersecurity Lesson 4',
     description: 'Learn cybersecurity programming - Part 4',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Cybersecurity Lesson 4
@@ -277,7 +277,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-5',
     title: 'Cybersecurity Lesson 5',
     description: 'Learn cybersecurity programming - Part 5',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 5
@@ -345,7 +345,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-6',
     title: 'Cybersecurity Lesson 6',
     description: 'Learn cybersecurity programming - Part 6',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 6
@@ -413,7 +413,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-7',
     title: 'Cybersecurity Lesson 7',
     description: 'Learn cybersecurity programming - Part 7',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Cybersecurity Lesson 7
@@ -481,7 +481,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-8',
     title: 'Cybersecurity Lesson 8',
     description: 'Learn cybersecurity programming - Part 8',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Cybersecurity Lesson 8
@@ -549,7 +549,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-9',
     title: 'Cybersecurity Lesson 9',
     description: 'Learn cybersecurity programming - Part 9',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 9
@@ -617,7 +617,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-10',
     title: 'Cybersecurity Lesson 10',
     description: 'Learn cybersecurity programming - Part 10',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 10
@@ -685,7 +685,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-11',
     title: 'Cybersecurity Lesson 11',
     description: 'Learn cybersecurity programming - Part 11',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Cybersecurity Lesson 11
@@ -753,7 +753,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-12',
     title: 'Cybersecurity Lesson 12',
     description: 'Learn cybersecurity programming - Part 12',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Cybersecurity Lesson 12
@@ -821,7 +821,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-13',
     title: 'Cybersecurity Lesson 13',
     description: 'Learn cybersecurity programming - Part 13',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 13
@@ -889,7 +889,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-14',
     title: 'Cybersecurity Lesson 14',
     description: 'Learn cybersecurity programming - Part 14',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 14
@@ -957,7 +957,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-15',
     title: 'Cybersecurity Lesson 15',
     description: 'Learn cybersecurity programming - Part 15',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 40,
     content: `# Cybersecurity Lesson 15
@@ -1025,7 +1025,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-16',
     title: 'Cybersecurity Lesson 16',
     description: 'Learn cybersecurity programming - Part 16',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 50,
     content: `# Cybersecurity Lesson 16
@@ -1093,7 +1093,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-17',
     title: 'Cybersecurity Lesson 17',
     description: 'Learn cybersecurity programming - Part 17',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Beginner',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 17
@@ -1161,7 +1161,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-18',
     title: 'Cybersecurity Lesson 18',
     description: 'Learn cybersecurity programming - Part 18',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 18
@@ -1229,7 +1229,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-19',
     title: 'Cybersecurity Lesson 19',
     description: 'Learn cybersecurity programming - Part 19',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Cybersecurity Lesson 19
@@ -1297,7 +1297,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-20',
     title: 'Cybersecurity Lesson 20',
     description: 'Learn cybersecurity programming - Part 20',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Cybersecurity Lesson 20
@@ -1365,7 +1365,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-21',
     title: 'Cybersecurity Lesson 21',
     description: 'Learn cybersecurity programming - Part 21',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 21
@@ -1433,7 +1433,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-22',
     title: 'Cybersecurity Lesson 22',
     description: 'Learn cybersecurity programming - Part 22',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 22
@@ -1501,7 +1501,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-23',
     title: 'Cybersecurity Lesson 23',
     description: 'Learn cybersecurity programming - Part 23',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Cybersecurity Lesson 23
@@ -1569,7 +1569,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-24',
     title: 'Cybersecurity Lesson 24',
     description: 'Learn cybersecurity programming - Part 24',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Cybersecurity Lesson 24
@@ -1637,7 +1637,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-25',
     title: 'Cybersecurity Lesson 25',
     description: 'Learn cybersecurity programming - Part 25',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 25
@@ -1705,7 +1705,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-26',
     title: 'Cybersecurity Lesson 26',
     description: 'Learn cybersecurity programming - Part 26',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 26
@@ -1773,7 +1773,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-27',
     title: 'Cybersecurity Lesson 27',
     description: 'Learn cybersecurity programming - Part 27',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Cybersecurity Lesson 27
@@ -1841,7 +1841,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-28',
     title: 'Cybersecurity Lesson 28',
     description: 'Learn cybersecurity programming - Part 28',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Cybersecurity Lesson 28
@@ -1909,7 +1909,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-29',
     title: 'Cybersecurity Lesson 29',
     description: 'Learn cybersecurity programming - Part 29',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 29
@@ -1977,7 +1977,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-30',
     title: 'Cybersecurity Lesson 30',
     description: 'Learn cybersecurity programming - Part 30',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 30
@@ -2045,7 +2045,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-31',
     title: 'Cybersecurity Lesson 31',
     description: 'Learn cybersecurity programming - Part 31',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 40,
     content: `# Cybersecurity Lesson 31
@@ -2113,7 +2113,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-32',
     title: 'Cybersecurity Lesson 32',
     description: 'Learn cybersecurity programming - Part 32',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 50,
     content: `# Cybersecurity Lesson 32
@@ -2181,7 +2181,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-33',
     title: 'Cybersecurity Lesson 33',
     description: 'Learn cybersecurity programming - Part 33',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 33
@@ -2249,7 +2249,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-34',
     title: 'Cybersecurity Lesson 34',
     description: 'Learn cybersecurity programming - Part 34',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Intermediate',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 34
@@ -2317,7 +2317,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-35',
     title: 'Cybersecurity Lesson 35',
     description: 'Learn cybersecurity programming - Part 35',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Cybersecurity Lesson 35
@@ -2385,7 +2385,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-36',
     title: 'Cybersecurity Lesson 36',
     description: 'Learn cybersecurity programming - Part 36',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Cybersecurity Lesson 36
@@ -2453,7 +2453,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-37',
     title: 'Cybersecurity Lesson 37',
     description: 'Learn cybersecurity programming - Part 37',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 37
@@ -2521,7 +2521,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-38',
     title: 'Cybersecurity Lesson 38',
     description: 'Learn cybersecurity programming - Part 38',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 38
@@ -2589,7 +2589,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-39',
     title: 'Cybersecurity Lesson 39',
     description: 'Learn cybersecurity programming - Part 39',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Cybersecurity Lesson 39
@@ -2657,7 +2657,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-40',
     title: 'Cybersecurity Lesson 40',
     description: 'Learn cybersecurity programming - Part 40',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Cybersecurity Lesson 40
@@ -2725,7 +2725,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-41',
     title: 'Cybersecurity Lesson 41',
     description: 'Learn cybersecurity programming - Part 41',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 41
@@ -2793,7 +2793,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-42',
     title: 'Cybersecurity Lesson 42',
     description: 'Learn cybersecurity programming - Part 42',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 42
@@ -2861,7 +2861,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-43',
     title: 'Cybersecurity Lesson 43',
     description: 'Learn cybersecurity programming - Part 43',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Cybersecurity Lesson 43
@@ -2929,7 +2929,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-44',
     title: 'Cybersecurity Lesson 44',
     description: 'Learn cybersecurity programming - Part 44',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Cybersecurity Lesson 44
@@ -2997,7 +2997,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-45',
     title: 'Cybersecurity Lesson 45',
     description: 'Learn cybersecurity programming - Part 45',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 45
@@ -3065,7 +3065,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-46',
     title: 'Cybersecurity Lesson 46',
     description: 'Learn cybersecurity programming - Part 46',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 46
@@ -3133,7 +3133,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-47',
     title: 'Cybersecurity Lesson 47',
     description: 'Learn cybersecurity programming - Part 47',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 40,
     content: `# Cybersecurity Lesson 47
@@ -3201,7 +3201,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-48',
     title: 'Cybersecurity Lesson 48',
     description: 'Learn cybersecurity programming - Part 48',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 50,
     content: `# Cybersecurity Lesson 48
@@ -3269,7 +3269,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-49',
     title: 'Cybersecurity Lesson 49',
     description: 'Learn cybersecurity programming - Part 49',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 20,
     content: `# Cybersecurity Lesson 49
@@ -3337,7 +3337,7 @@ Complete the challenge below to demonstrate your understanding of cybersecurity 
     id: 'cybersecurity-50',
     title: 'Cybersecurity Lesson 50',
     description: 'Learn cybersecurity programming - Part 50',
-    language: 'cybersecurity' as const,
+    language: 'python' as const,
     difficulty: 'Advanced',
     estimatedTime: 30,
     content: `# Cybersecurity Lesson 50
