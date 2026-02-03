@@ -244,7 +244,23 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
-Built with modern web technologies and best practices to provide the smoothest learning experience possible. Special thanks to all contributors who have helped shape this platform into a valuable resource for aspiring developers worldwide.
+Built with modern web technologies and best practices to provide the smoothest learning experience possible. Special thanks to all contributors who have helped shape this platform into a valuable resource for aspiring developers worldwide.Thanks 
+
+## Ai usages
+
+Tasks done by AI 
+      Debugging and fixing build errors
+     Getting informations and datas about the languages like rust , it's etc...
+     Correcting type errors and autondication errors.
+     Correcting clerk errors
+
+
+##Percentage of Contribution
+
+80 - Creater
+10 - Ai
+10 - Other Libraries and sources
+
 
 ---
 
