@@ -124,7 +124,7 @@ export default function CodeEditor({
     // Use setTimeout to prevent UI blocking, but ensure it completes
     const executeWithTimeout = () => {
       return new Promise<void>((resolve) => {
-        setTimeout(() => {
+        setTimeout(async () => {
           try {
             let result = ''
             
@@ -197,8 +197,27 @@ export default function CodeEditor({
                 setOutput(result)
               }
                 } else if (language.toLowerCase() === 'python' || language.toLowerCase() === 'py') {
-              // Enhanced Python interpreter with proper output execution
+              // Prefer real Python execution via API, then fallback to local interpreter.
               try {
+                const response = await fetch('/api/execute/python', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ code })
+                })
+
+                if (!response.ok) {
+                  throw new Error('Python execution API unavailable')
+                }
+
+                const data = await response.json()
+                result = typeof data?.output === 'string' && data.output.length > 0
+                  ? data.output
+                  : '✓ Code executed successfully (no output)'
+                setOutput(result)
+              } catch (serverExecutionError: any) {
+                try {
             const pythonOutput: string[] = []
             const lines = code.split('\n')
             const variables: { [key: string]: any } = {}
@@ -1430,9 +1449,10 @@ export default function CodeEditor({
               ? pythonOutput.join('\n') 
               : '✓ Code executed successfully (no print statements)'
             setOutput(result)
-          } catch (error: any) {
-            result = `Error: ${error.message}`
-                setOutput(result)
+                } catch (error: any) {
+                  result = `Error: ${error.message}`
+                  setOutput(result)
+                }
               }
             } else if (language.toLowerCase() === 'ruby' || language.toLowerCase() === 'rb') {
               // Simulate Ruby execution
