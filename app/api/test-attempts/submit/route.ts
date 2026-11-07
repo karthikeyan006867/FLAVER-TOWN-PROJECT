@@ -28,6 +28,24 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Test not found' }, { status: 404 })
       }
 
+      if (!Array.isArray(answers) || answers.length !== test.questions.length) {
+        return NextResponse.json(
+          { error: 'Submit one answer for every test question' },
+          { status: 400 },
+        )
+      }
+
+      const hasInvalidAnswer = answers.some(
+        (answer: unknown) =>
+          !Number.isInteger(answer) ||
+          (answer as number) < 0 ||
+          (answer as number) >= test.questions[0].options.length,
+      )
+
+      if (hasInvalidAnswer) {
+        return NextResponse.json({ error: 'Invalid test answers' }, { status: 400 })
+      }
+
       // Validate answers server-side
       let correct = 0
       test.questions.forEach((q, idx) => {

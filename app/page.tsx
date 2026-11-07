@@ -27,15 +27,15 @@ export default function HomePage() {
       title: 'JavaScript Pro',
       icon: '⚡',
       level: 'Beginner to Expert',
-      lessons: 50,
+      lessons: 62,
       color: 'from-yellow-500 to-orange-500'
     },
     {
       id: 'python',
-      title: 'Python Full Stack',
+      title: 'Python Full-Stack Mastery',
       icon: '🐍',
       level: 'All Levels',
-      lessons: 60,
+      lessons: 50,
       color: 'from-green-500 to-emerald-500'
     },
   ]

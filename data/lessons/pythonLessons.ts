@@ -10,6 +10,71 @@ type PythonTopic = {
   estimatedTime: number
 }
 
+const pythonStructuralSignals = [
+  'def ',
+  'class ',
+  'for ',
+  'while ',
+  'if ',
+  'try:',
+  'with open',
+  'import ',
+  'from ',
+  'return ',
+  'yield ',
+  'print(',
+  '=',
+]
+
+const buildPythonTestCases = (topic: PythonTopic) => {
+  const solutionSignals = pythonStructuralSignals.filter(signal => topic.solution.includes(signal))
+  const requiredSignals = solutionSignals.filter(signal => signal !== '=').slice(0, 3)
+
+  return [
+    {
+      name: 'Python executes successfully',
+      test: (code: string, output: string) =>
+        code.trim().length > 0 &&
+        !/^error\b/i.test(output.trim()) &&
+        !/traceback \(most recent call last\)/i.test(output),
+      errorMessage: 'Fix the Python error shown in the output, then run the lesson again.'
+    },
+    {
+      name: 'Solution is not a placeholder',
+      test: (code: string) => {
+        const meaningfulLines = code
+          .split('\n')
+          .map(line => line.trim())
+          .filter(line => line && !line.startsWith('#'))
+        return meaningfulLines.length >= 2 && !meaningfulLines.every(line => line === 'pass')
+      },
+      errorMessage: 'Replace the placeholder with at least two meaningful lines of Python.'
+    },
+    {
+      name: `Uses the ${topic.title.toLowerCase()} idea`,
+      test: (code: string) => {
+        if (requiredSignals.length === 0) return code.trim().length >= 20
+        const matches = requiredSignals.filter(signal => code.includes(signal)).length
+        return matches >= Math.max(1, Math.ceil(requiredSignals.length / 2))
+      },
+      errorMessage: `Use the main Python structure demonstrated in this lesson (for example: ${requiredSignals.join(', ')}).`
+    },
+    {
+      name: 'Produces a learning result',
+      test: (_code: string, output: string) => {
+        const cleanOutput = output.trim()
+        return cleanOutput.length > 0 && !/^✓ code executed successfully \(no output\)$/i.test(cleanOutput)
+      },
+      errorMessage: 'Print a result that demonstrates the task instead of leaving the program silent.'
+    },
+    {
+      name: 'Avoids unfinished placeholders',
+      test: (code: string) => !/\b(todo|your code here|implement here|completed)\b/i.test(code),
+      errorMessage: 'Replace the instructional placeholder with your own working solution.'
+    }
+  ]
+}
+
 const pythonTopics: PythonTopic[] = [
   {
     title: 'Python Intro and Setup',
@@ -590,14 +655,30 @@ ${topic.focus}
 
 ## What You Will Learn
 - ${topic.description}
-- How to apply this concept in real projects
-- Common mistakes to avoid
+- How to apply this concept in a real project
+- How to check your own work with the Python output
+
+## Guided Example
+\`\`\`python
+${topic.solution.trim()}
+\`\`\`
 
 ## Practice Task
 ${topic.miniTask}
 
+## How to Approach It
+1. Read the example and identify the input, the operation, and the output.
+2. Change the example to solve the practice task.
+3. Run the code and compare the output with what the task asks for.
+4. Fix one error at a time; Python error messages point near the problem.
+
+## Common Mistakes
+- Forgetting indentation after \`if\`, \`for\`, \`def\`, or \`class\`.
+- Mixing text and numbers without converting the input first.
+- Writing code that runs but never prints or returns the requested result.
+
 ## Success Tip
-Write small code, run often, and improve step by step.`,
+Write small code, run often, and improve step by step. The checks below validate execution, structure, and a visible result.`,
     initialCode: topic.starter,
     solution: topic.solution,
     hints: [
@@ -605,17 +686,6 @@ Write small code, run often, and improve step by step.`,
       'Run code after every small change to catch issues early.',
       'Use clear variable names so your logic is easy to read.'
     ],
-    testCases: [
-      {
-        name: 'Code is not empty',
-        test: (code) => code.trim().length > 0,
-        errorMessage: 'Please write some Python code before running tests.'
-      },
-      {
-        name: 'Code has meaningful length',
-        test: (code) => code.trim().length >= 20,
-        errorMessage: 'Add a little more logic so the solution is complete.'
-      }
-    ]
+    testCases: buildPythonTestCases(topic)
   }
 })

@@ -120,13 +120,13 @@ export const courses: Course[] = [
   },
   {
     id: 'python',
-    title: 'Python Programming',
-    description: 'Master Python from basics to OOP and prepare for backend development',
+    title: 'Python Full-Stack Mastery',
+    description: 'Learn Python from absolute beginner to full-stack developer: core syntax, testing, data, SQL, REST APIs, Flask, Django, packaging, and a production-ready capstone.',
     icon: '🐍',
     color: 'from-green-500 to-teal-500',
     difficulty: 'Beginner',
     category: 'Backend',
-    duration: '10 weeks',
+    duration: '16 weeks',
     lessons: pythonLessons
   },
   {
