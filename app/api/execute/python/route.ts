@@ -10,6 +10,9 @@ const EXEC_TIMEOUT_MS = 8000
 interface PythonExecutionResult {
   output: string
   success: boolean
+  errorLine?: number
+  errorType?: string
+  errorMessage?: string
 }
 
 function runPython(executable: string, code: string): Promise<PythonExecutionResult> {
@@ -53,9 +56,13 @@ function runPython(executable: string, code: string): Promise<PythonExecutionRes
       finished = true
 
       const mergedOutput = [stdout, stderr].filter(Boolean).join('').trim()
+      const tracebackMatch = stderr.match(/File "<stdin>", line (\d+), in [^\n]*\n\s*(.+)\n([A-Za-z_][\w.]*): (.+)/)
       resolve({
         output: mergedOutput,
         success: code === 0,
+        errorLine: tracebackMatch ? Number(tracebackMatch[1]) : undefined,
+        errorType: tracebackMatch ? tracebackMatch[3] : undefined,
+        errorMessage: tracebackMatch ? tracebackMatch[4] : undefined,
       })
     })
 
@@ -99,6 +106,9 @@ export async function POST(request: Request) {
     return NextResponse.json({
       output: result.output,
       success: result.success,
+      errorLine: result.errorLine,
+      errorType: result.errorType,
+      errorMessage: result.errorMessage,
     })
   } catch (error: any) {
     if (error?.code === 'ENOENT') {

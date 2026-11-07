@@ -27,7 +27,7 @@ export default function HomePage() {
       title: 'JavaScript Pro',
       icon: '⚡',
       level: 'Beginner to Expert',
-      lessons: 62,
+      lessons: 81,
       color: 'from-yellow-500 to-orange-500'
     },
     {

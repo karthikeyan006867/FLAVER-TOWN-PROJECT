@@ -212,9 +212,13 @@ export default function CodeEditor({
                 }
 
                 const data = await response.json()
-                result = typeof data?.output === 'string' && data.output.length > 0
+                const executionOutput = typeof data?.output === 'string' && data.output.length > 0
                   ? data.output
                   : '✓ Code executed successfully (no output)'
+                const diagnostic = data?.errorLine
+                  ? `\n\nLine ${data.errorLine}: ${data.errorType || 'PythonError'}: ${data.errorMessage || 'Check this line and its surrounding block.'}`
+                  : ''
+                result = `${executionOutput}${diagnostic}`
                 setOutput(result)
               } catch (serverExecutionError: any) {
                 try {

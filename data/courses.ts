@@ -126,7 +126,7 @@ export const courses: Course[] = [
     color: 'from-green-500 to-teal-500',
     difficulty: 'Beginner',
     category: 'Backend',
-    duration: '16 weeks',
+    duration: '20 weeks',
     lessons: pythonLessons
   },
   {

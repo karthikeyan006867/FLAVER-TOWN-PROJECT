@@ -117,8 +117,8 @@ const pythonTopics: PythonTopic[] = [
     description: 'Take user input and display meaningful output messages.',
     focus: 'input() always returns text, so convert when numeric values are needed.',
     miniTask: 'Ask for age and print what age the user will be next year.',
-    starter: 'name = input("Enter your name: ")\n# Ask for age and print result\n',
-    solution: 'name = input("Enter your name: ")\nage = int(input("Enter your age: "))\nprint(f"Hi {name}, next year you will be {age + 1}")\n',
+    starter: 'name = "Alex"\nage = 20\n# Replace these sample values with input() when running locally.\nprint(f"Hi {name}, next year you will be {age + 1}")\n',
+    solution: 'name = "Alex"\nage = 20\nprint(f"Hi {name}, next year you will be {age + 1}")\n',
     estimatedTime: 30
   },
   {
@@ -135,8 +135,8 @@ const pythonTopics: PythonTopic[] = [
     description: 'Convert values between string, int, float, and bool safely.',
     focus: 'Explicit conversion avoids unexpected bugs in calculations.',
     miniTask: 'Convert two text inputs into numbers and print their sum.',
-    starter: 'a = input("Number A: ")\nb = input("Number B: ")\n# Convert and add\n',
-    solution: 'a = input("Number A: ")\nb = input("Number B: ")\ntotal = int(a) + int(b)\nprint(total)\n',
+    starter: 'a = "12"\nb = "8"\n# Convert these text values and add them\n',
+    solution: 'a = "12"\nb = "8"\ntotal = int(a) + int(b)\nprint(total)\n',
     estimatedTime: 30
   },
   {
@@ -633,6 +633,177 @@ const pythonTopics: PythonTopic[] = [
     starter: 'tasks = []\n\ndef add_task(task):\n    # Add task\n    pass\n\ndef list_tasks():\n    # Print tasks\n    pass\n',
     solution: 'tasks = []\n\ndef add_task(task):\n    tasks.append(task)\n\ndef list_tasks():\n    for index, task in enumerate(tasks, start=1):\n        print(f"{index}. {task}")\n\nadd_task("Practice loops")\nadd_task("Read about OOP")\nlist_tasks()\n',
     estimatedTime: 45
+  },
+  {
+    title: 'Operators and Expression Design',
+    description: 'Combine arithmetic, comparison, identity, membership, and assignment operators.',
+    focus: 'Operators form expressions; readable expressions make business rules easier to verify.',
+    miniTask: 'Calculate a shopping total, apply a discount, and print whether the final price is affordable.',
+    starter: 'price = 1200\nquantity = 2\ndiscount = 0.10\n# Calculate and print the final price\n',
+    solution: 'price = 1200\nquantity = 2\ndiscount = 0.10\ngross_total = price * quantity\nfinal_price = gross_total * (1 - discount)\nprint(f"Final price: {final_price}")\nprint(f"Affordable: {final_price <= 2500}")\n',
+    estimatedTime: 30
+  },
+  {
+    title: 'Arrays with the Array Module',
+    description: 'Use Python arrays for compact, typed numeric sequences.',
+    focus: 'The array module is useful when every item should share one primitive type.',
+    miniTask: 'Store temperatures, append a reading, and print the average.',
+    starter: 'from array import array\n# Create and update a numeric array\n',
+    solution: 'from array import array\n\ntemperatures = array("f", [28.5, 29.0, 27.5])\ntemperatures.append(30.0)\nprint(round(sum(temperatures) / len(temperatures), 2))\n',
+    estimatedTime: 30
+  },
+  {
+    title: 'Collections Counter and Defaultdict',
+    description: 'Count values and build grouped data with specialized collection types.',
+    focus: 'Counter and defaultdict remove repetitive bookkeeping from common data tasks.',
+    miniTask: 'Count product names and group them by category.',
+    starter: 'from collections import Counter, defaultdict\n# Count and group sample data\n',
+    solution: 'from collections import Counter, defaultdict\n\nitems = ["pen", "book", "pen", "bag"]\ncounts = Counter(items)\ngroups = defaultdict(list)\ngroups["stationery"].extend(["pen", "book"])\nprint(counts["pen"])\nprint(groups["stationery"])\n',
+    estimatedTime: 35
+  },
+  {
+    title: 'Deque, Heapq, and Ordered Processing',
+    description: 'Choose efficient structures for queues, priority queues, and predictable processing.',
+    focus: 'A deque is fast at both ends, while heapq keeps the smallest priority ready.',
+    miniTask: 'Process a queue and print tasks in priority order.',
+    starter: 'from collections import deque\nimport heapq\n# Build a queue and a priority queue\n',
+    solution: 'from collections import deque\nimport heapq\n\nqueue = deque(["email", "backup"])\nqueue.append("report")\nprint(queue.popleft())\npriorities = [(2, "backup"), (1, "security update")]\nheapq.heapify(priorities)\nprint(heapq.heappop(priorities)[1])\n',
+    estimatedTime: 35
+  },
+  {
+    title: 'Copying Nested Data Safely',
+    description: 'Understand references, shallow copies, and deep copies for nested objects.',
+    focus: 'A shallow copy shares nested objects; deepcopy creates an independent structure.',
+    miniTask: 'Copy a nested profile, change the copy, and prove the original is unchanged.',
+    starter: 'from copy import deepcopy\nprofile = {"skills": ["Python"]}\n# Make an independent copy\n',
+    solution: 'from copy import deepcopy\n\nprofile = {"skills": ["Python"]}\nbackup = deepcopy(profile)\nbackup["skills"].append("SQL")\nprint(profile["skills"])\nprint(backup["skills"])\n',
+    estimatedTime: 30
+  },
+  {
+    title: 'Abstract Base Classes',
+    description: 'Define contracts that concrete classes must implement.',
+    focus: 'Abstract classes make interchangeable components safer to design.',
+    miniTask: 'Create a payment interface and implement a card payment.',
+    starter: 'from abc import ABC, abstractmethod\n# Define the payment contract\n',
+    solution: 'from abc import ABC, abstractmethod\n\nclass Payment(ABC):\n    @abstractmethod\n    def pay(self, amount):\n        pass\n\nclass CardPayment(Payment):\n    def pay(self, amount):\n        return f"Paid {amount} by card"\n\nprint(CardPayment().pay(500))\n',
+    estimatedTime: 40
+  },
+  {
+    title: 'Multiple Inheritance and Method Resolution',
+    description: 'Use multiple inheritance carefully and inspect Python method resolution order.',
+    focus: 'MRO determines which implementation Python selects when classes share methods.',
+    miniTask: 'Create two capability classes and combine them in a smart device.',
+    starter: '# Build two capability classes and inspect the MRO\n',
+    solution: 'class Camera:\n    def feature(self):\n        return "camera"\n\nclass Phone:\n    def call(self):\n        return "calling"\n\nclass SmartDevice(Camera, Phone):\n    pass\n\nphone = SmartDevice()\nprint(phone.feature(), phone.call())\nprint([cls.__name__ for cls in SmartDevice.__mro__])\n',
+    estimatedTime: 40
+  },
+  {
+    title: 'Context Managers and Resource Safety',
+    description: 'Create and use context managers that guarantee cleanup.',
+    focus: 'Context managers keep resources safe even when code raises an exception.',
+    miniTask: 'Write a context manager that announces opening and closing a resource.',
+    starter: 'from contextlib import contextmanager\n# Create a managed resource\n',
+    solution: 'from contextlib import contextmanager\n\n@contextmanager\ndef managed_resource(name):\n    print(f"open {name}")\n    try:\n        yield name\n    finally:\n        print(f"close {name}")\n\nwith managed_resource("report") as resource:\n    print(f"use {resource}")\n',
+    estimatedTime: 35
+  },
+  {
+    title: 'Logging for Real Applications',
+    description: 'Record useful application events with Python logging.',
+    focus: 'Logs provide durable diagnostic evidence without scattering debug prints everywhere.',
+    miniTask: 'Configure a logger and emit an informational event.',
+    starter: 'import logging\n# Configure a simple logger\n',
+    solution: 'import logging\n\nlogging.basicConfig(level=logging.INFO, format="%(levelname)s:%(message)s")\nlogger = logging.getLogger("study-tracker")\nlogger.info("lesson completed")\nprint("logging configured")\n',
+    estimatedTime: 30
+  },
+  {
+    title: 'Command-Line Interfaces with Argparse',
+    description: 'Design friendly command-line programs with typed arguments and help text.',
+    focus: 'argparse turns a script into a discoverable command users can operate safely.',
+    miniTask: 'Define a name argument and print a greeting; use a default for direct runs.',
+    starter: 'import argparse\n# Build a command-line parser\n',
+    solution: 'import argparse\n\nparser = argparse.ArgumentParser(description="Greet a learner")\nparser.add_argument("--name", default="Learner")\nargs = parser.parse_args([])\nprint(f"Hello, {args.name}!")\n',
+    estimatedTime: 35
+  },
+  {
+    title: 'Environment Configuration',
+    description: 'Read configuration from environment variables without hard-coding secrets.',
+    focus: 'Environment variables separate deploy-time configuration from source code.',
+    miniTask: 'Read an application mode with a safe default and print it.',
+    starter: 'import os\n# Read APP_MODE safely\n',
+    solution: 'import os\n\nmode = os.getenv("APP_MODE", "development")\nprint(f"Running in {mode} mode")\n',
+    estimatedTime: 25
+  },
+  {
+    title: 'Unit Testing with Unittest',
+    description: 'Create repeatable tests for small units of behavior.',
+    focus: 'A unit test should isolate one behavior and state the expected result clearly.',
+    miniTask: 'Test a function that converts Celsius to Fahrenheit.',
+    starter: 'import unittest\n# Write a conversion function and a test case\n',
+    solution: 'import unittest\n\ndef to_fahrenheit(celsius):\n    return celsius * 9 / 5 + 32\n\nclass TemperatureTests(unittest.TestCase):\n    def test_freezing_point(self):\n        self.assertEqual(to_fahrenheit(0), 32)\n\nsuite = unittest.TestLoader().loadTestsFromTestCase(TemperatureTests)\nresult = unittest.TextTestRunner(verbosity=0).run(suite)\nprint(f"tests passed: {result.wasSuccessful()}")\n',
+    estimatedTime: 40
+  },
+  {
+    title: 'Property-Based Thinking and Test Cases',
+    description: 'Design edge-case tables and invariants before writing a large feature.',
+    focus: 'Good test design checks boundaries, invalid input, and rules—not only the happy path.',
+    miniTask: 'Test a safe division function with normal, zero, and negative values.',
+    starter: '# Define safe_divide and test several cases\n',
+    solution: 'def safe_divide(a, b):\n    if b == 0:\n        raise ValueError("divisor cannot be zero")\n    return a / b\n\ncases = [(8, 2), (-8, 2), (0, 4)]\nfor a, b in cases:\n    print(safe_divide(a, b))\ntry:\n    safe_divide(1, 0)\nexcept ValueError as error:\n    print(error)\n',
+    estimatedTime: 35
+  },
+  {
+    title: 'MySQL and Database Driver Concepts',
+    description: 'Prepare secure relational database code with connections, parameters, and transactions.',
+    focus: 'Parameterized queries protect data access code from injection and quoting bugs.',
+    miniTask: 'Build a parameterized query string and explain the transaction steps in output.',
+    starter: '# Demonstrate a safe SQL command without requiring a database server\n',
+    solution: 'table = "users"\nquery = f"SELECT id, name FROM {table} WHERE email = %s"\nparams = ("learner@example.com",)\nprint(query)\nprint(params)\nprint("connect -> execute parameters -> commit or rollback -> close")\n',
+    estimatedTime: 35
+  },
+  {
+    title: 'MongoDB Document Modeling',
+    description: 'Represent flexible document data and choose fields for common queries.',
+    focus: 'Document databases store related data together when the access pattern supports it.',
+    miniTask: 'Model a learner document and print a nested progress value.',
+    starter: '# Create a document-shaped Python dictionary\n',
+    solution: 'learner = {\n    "name": "Maya",\n    "progress": {"python": 0.65, "sql": 0.4},\n    "skills": ["loops", "functions"]\n}\nprint(learner["progress"]["python"])\nprint(learner["skills"])\n',
+    estimatedTime: 30
+  },
+  {
+    title: 'REST API Client Design',
+    description: 'Design reliable API client behavior around status codes, JSON, and timeouts.',
+    focus: 'Production clients handle network failure, unexpected status codes, and malformed data.',
+    miniTask: 'Write a response validation helper using a fake response object.',
+    starter: '# Validate an API-like response without a network call\n',
+    solution: 'def read_response(response):\n    if response["status"] != 200:\n        raise RuntimeError(f"request failed: {response.get(\"status\")}")\n    return response["data"]\n\nfake_response = {"status": 200, "data": {"message": "ok"}}\nprint(read_response(fake_response))\n',
+    estimatedTime: 35
+  },
+  {
+    title: 'Project: Number Guessing Game',
+    description: 'Build a small interactive game using loops, conditions, and input validation.',
+    focus: 'Small projects turn isolated syntax into a complete user flow.',
+    miniTask: 'Compare guesses with a secret number and report the result.',
+    starter: 'secret = 7\nguess = 5\n# Compare the guess with the secret\n',
+    solution: 'secret = 7\nguess = 5\nif guess == secret:\n    print("Correct!")\nelif guess < secret:\n    print("Too low")\nelse:\n    print("Too high")\n',
+    estimatedTime: 45
+  },
+  {
+    title: 'Project: Rock Paper Scissors Rules',
+    description: 'Model game rules with sets and conditional logic.',
+    focus: 'Explicit rules are easier to test than deeply nested special cases.',
+    miniTask: 'Determine the winner for two fixed moves.',
+    starter: 'player = "rock"\ncomputer = "scissors"\n# Decide the winner\n',
+    solution: 'player = "rock"\ncomputer = "scissors"\nwinning_moves = {("rock", "scissors"), ("scissors", "paper"), ("paper", "rock")}\nif player == computer:\n    print("Draw")\nelif (player, computer) in winning_moves:\n    print("Player wins")\nelse:\n    print("Computer wins")\n',
+    estimatedTime: 45
+  },
+  {
+    title: 'Project: Banking Domain Model',
+    description: 'Combine classes, validation, exceptions, and transaction history in a small banking model.',
+    focus: 'Domain models protect business rules at the point where state changes.',
+    miniTask: 'Deposit money, withdraw safely, and print the account balance.',
+    starter: '# Create an Account class with deposit and withdraw methods\n',
+    solution: 'class Account:\n    def __init__(self, balance=0):\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount <= 0:\n            raise ValueError("deposit must be positive")\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if amount > self.balance:\n            raise ValueError("insufficient funds")\n        self.balance -= amount\n\naccount = Account(100)\naccount.deposit(50)\naccount.withdraw(30)\nprint(account.balance)\n',
+    estimatedTime: 50
   }
 ]
 
