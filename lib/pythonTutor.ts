@@ -24,6 +24,7 @@ export interface PythonTutorAnalysis {
   }>
   teacherMode: string
   modelCount: number
+  question?: string
 }
 
 type TrainingExample = {
@@ -171,6 +172,7 @@ export function analyzePythonRun({
   errorLine,
   errorType,
   errorMessage,
+  question,
 }: {
   code: string
   output: string
@@ -178,6 +180,7 @@ export function analyzePythonRun({
   errorLine?: number
   errorType?: string
   errorMessage?: string
+  question?: string
 }): PythonTutorAnalysis {
   const features = featuresFor(code, output, errorType)
   const ensembleScores = Array(LABELS.length).fill(0)
@@ -304,5 +307,6 @@ export function analyzePythonRun({
     })),
     teacherMode: 'Python Master Full-Stack Tutor · 200-agent local ANN ensemble',
     modelCount: tutorAgents.length,
+    question,
   }
 }

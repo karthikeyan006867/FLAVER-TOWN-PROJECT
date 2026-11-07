@@ -837,6 +837,13 @@ ${topic.solution.trim()}
 ## Practice Task
 ${topic.miniTask}
 
+## Teacher Walkthrough
+1. **Predict:** Say what values enter the program and what result you expect.
+2. **Build:** Change one small part of the starter code instead of writing everything at once.
+3. **Run:** Use **Run Step** to execute the next safe checkpoint and watch the output grow.
+4. **Inspect:** If a step fails, read the line number, error type, and tutor explanation before changing code.
+5. **Prove:** Use **Run** to execute the complete script, then complete every test shown below the output.
+
 ## How to Approach It
 1. Read the example and identify the input, the operation, and the output.
 2. Change the example to solve the practice task.
@@ -849,7 +856,7 @@ ${topic.miniTask}
 - Writing code that runs but never prints or returns the requested result.
 
 ## Success Tip
-Write small code, run often, and improve step by step. The checks below validate execution, structure, and a visible result.`,
+Write small code, run often, and improve step by step. The editor executes real Python, checks the lesson tests, and asks the local AI tutor to explain errors and suggest the next improvement.`,
     initialCode: topic.starter,
     solution: topic.solution,
     hints: [

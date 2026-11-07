@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react'
 import { Play, RotateCcw, Check, X, AlertCircle } from 'lucide-react'
 import { TestCase } from '@/data/courses'
 import { useSettingsStore } from '@/store/settingsStore'
-import { pythonKnowledgeSources } from '@/lib/pythonKnowledge'
 
 interface CodeEditorProps {
   language: string
@@ -30,8 +29,22 @@ interface TutorAnalysis {
   findings: TutorFinding[]
   outputMatchesExpected: boolean | null
   checkedLines: number
-  knowledgeSources: { name: string; url: string; description: string }[]
   teacherMode: string
+  modelCount: number
+  question?: string
+}
+
+interface LocalModelStatus {
+  configured: boolean
+  modelName: string
+  runtime: string
+  message: string
+}
+
+interface StepResult {
+  line: number
+  output: string
+  success: boolean
 }
 
 export default function CodeEditor({ 
@@ -49,6 +62,11 @@ export default function CodeEditor({
   const [testResults, setTestResults] = useState<{ name: string; passed: boolean; error?: string }[]>([])
   const [allTestsPassed, setAllTestsPassed] = useState(false)
   const [tutorAnalysis, setTutorAnalysis] = useState<TutorAnalysis | null>(null)
+  const [tutorQuestion, setTutorQuestion] = useState('')
+  const [stepResults, setStepResults] = useState<StepResult[]>([])
+  const [stepIndex, setStepIndex] = useState(0)
+  const [isStepping, setIsStepping] = useState(false)
+  const [localModel, setLocalModel] = useState<LocalModelStatus | null>(null)
 
   // Auto-save functionality
   useEffect(() => {
@@ -142,6 +160,9 @@ export default function CodeEditor({
     setTestResults([])
     setAllTestsPassed(false)
     setTutorAnalysis(null)
+    setLocalModel(null)
+    setStepResults([])
+    setStepIndex(0)
 
     // Use setTimeout to prevent UI blocking, but ensure it completes
     const executeWithTimeout = () => {
@@ -235,6 +256,7 @@ export default function CodeEditor({
 
                 const data = await response.json()
                 setTutorAnalysis(data?.tutorAnalysis || null)
+                setLocalModel(data?.localModel || null)
                 const executionOutput = typeof data?.output === 'string' && data.output.length > 0
                   ? data.output
                   : '✓ Code executed successfully (no output)'
@@ -1587,6 +1609,67 @@ export default function CodeEditor({
     setTestResults([])
     setAllTestsPassed(false)
     setTutorAnalysis(null)
+    setTutorQuestion('')
+    setStepResults([])
+    setStepIndex(0)
+  }
+
+  const pythonStepLines = code
+    .split('\n')
+    .map((line, index) => ({ line: line.trim(), index }))
+    .filter(({ line }) => line && !line.startsWith('#') && !line.endsWith(':'))
+
+  const runPythonStep = async (targetIndex: number) => {
+    const checkpoint = pythonStepLines[targetIndex]
+    if (!checkpoint || isStepping) return
+
+    setIsStepping(true)
+    try {
+      const stepCode = code.split('\n').slice(0, checkpoint.index + 1).join('\n')
+      const response = await fetch('/api/execute/python', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: stepCode, expectedOutput }),
+      })
+      const data = await response.json()
+      const stepOutput = data?.output || data?.errorMessage || 'No visible output yet'
+      setStepResults(previous => [
+        ...previous,
+        { line: checkpoint.index + 1, output: stepOutput, success: Boolean(data?.success) },
+      ])
+      setStepIndex(targetIndex + 1)
+      setTutorAnalysis(data?.tutorAnalysis || null)
+      setLocalModel(data?.localModel || null)
+    } finally {
+      setIsStepping(false)
+    }
+
+  }
+
+  const runAllPythonSteps = async () => {
+    if (isStepping) return
+    setStepResults([])
+    setStepIndex(0)
+    for (let index = 0; index < pythonStepLines.length; index += 1) {
+      await runPythonStep(index)
+    }
+  }
+
+  const askTutorAboutCode = async () => {
+    if (!tutorQuestion.trim() || isStepping) return
+    setIsStepping(true)
+    try {
+      const response = await fetch('/api/execute/python', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code, expectedOutput, question: tutorQuestion }),
+      })
+      const data = await response.json()
+      setTutorAnalysis(data?.tutorAnalysis || null)
+      setLocalModel(data?.localModel || null)
+    } finally {
+      setIsStepping(false)
+    }
   }
 
   return (
@@ -1618,6 +1701,24 @@ export default function CodeEditor({
               <Play className="h-4 w-4" />
               <span>{isRunning ? 'Running...' : 'Run'}</span>
             </button>
+            {language.toLowerCase() === 'python' && (
+              <>
+                <button
+                  onClick={() => runPythonStep(stepIndex)}
+                  disabled={isRunning || isStepping || stepIndex >= pythonStepLines.length}
+                  className="flex items-center gap-2 rounded bg-gray-700 px-3 py-1.5 text-sm text-gray-200 hover:bg-gray-600 disabled:opacity-50"
+                >
+                  {isStepping ? 'Checking...' : `Run Step ${Math.min(stepIndex + 1, pythonStepLines.length)}`}
+                </button>
+                <button
+                  onClick={runAllPythonSteps}
+                  disabled={isRunning || isStepping || pythonStepLines.length === 0}
+                  className="rounded bg-gray-700 px-3 py-1.5 text-sm text-gray-200 hover:bg-gray-600 disabled:opacity-50"
+                >
+                  Run All Steps
+                </button>
+              </>
+            )}
           </div>
         </div>
         
@@ -1716,6 +1817,25 @@ export default function CodeEditor({
         </div>
       )}
 
+      {language.toLowerCase() === 'python' && stepResults.length > 0 && (
+        <div className="border border-blue-500/30 rounded-lg overflow-hidden">
+          <div className="bg-gray-800 px-4 py-2 flex items-center justify-between">
+            <span className="text-sm font-semibold text-blue-300">Step-by-step execution</span>
+            <span className="text-xs text-gray-400">{stepResults.length} checkpoints run</span>
+          </div>
+          <div className="bg-gray-900 p-3 space-y-2">
+            {stepResults.map((step, index) => (
+              <div key={`${step.line}-${index}`} className="rounded border border-gray-700 p-3">
+                <div className={step.success ? 'text-green-300 text-sm' : 'text-red-300 text-sm'}>
+                  Line {step.line} · {step.success ? 'executed' : 'needs attention'}
+                </div>
+                <pre className="mt-1 whitespace-pre-wrap break-words text-xs text-gray-300">{step.output}</pre>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {tutorAnalysis && (
         <div className="border border-primary-500/30 rounded-lg overflow-hidden bg-primary-500/5">
           <div className="bg-gray-800 px-4 py-2 border-b border-primary-500/20 flex flex-wrap items-center justify-between gap-2">
@@ -1726,6 +1846,11 @@ export default function CodeEditor({
           </div>
           <div className="p-4 space-y-3">
             <p className="text-sm text-gray-300">{tutorAnalysis.summary}</p>
+            {tutorAnalysis.question && (
+              <p className="rounded bg-gray-900/60 p-2 text-sm text-primary-200">
+                You asked: {tutorAnalysis.question}
+              </p>
+            )}
             {tutorAnalysis.findings.map((finding, index) => (
               <div
                 key={`${finding.title}-${index}`}
@@ -1744,47 +1869,44 @@ export default function CodeEditor({
                 <p className="text-sm text-primary-200 mt-2"><strong>Suggestion:</strong> {finding.suggestion}</p>
               </div>
             ))}
-            <div className="border-t border-primary-500/20 pt-3">
-              <div className="text-xs uppercase tracking-wide text-gray-400 mb-2">
-                {tutorAnalysis.teacherMode} · linked knowledge sources
-              </div>
-              <div className="grid gap-2 sm:grid-cols-2">
-                {tutorAnalysis.knowledgeSources.map(source => (
-                  <a
-                    key={source.url}
-                    href={source.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded border border-gray-700 bg-gray-900/60 p-2 hover:border-primary-400 transition-colors"
-                  >
-                    <div className="text-sm font-medium text-primary-300">{source.name}</div>
-                    <div className="text-xs text-gray-400 mt-1">{source.description}</div>
-                  </a>
-                ))}
-              </div>
+            <div className="border-t border-primary-500/20 pt-3 text-xs text-gray-400">
+              {tutorAnalysis.teacherMode} · {tutorAnalysis.modelCount} local models · no external API
             </div>
+            {localModel && (
+              <div className="text-xs text-gray-400">
+                Model runtime: <span className="text-gray-200">{localModel.modelName}</span> ({localModel.runtime}) · {localModel.message}
+              </div>
+            )}
           </div>
         </div>
       )}
 
-      {language.toLowerCase() === 'python' && !tutorAnalysis && (
-        <div className="border border-gray-700 rounded-lg bg-gray-900/40 p-4">
-          <div className="text-sm font-semibold text-primary-300 mb-2">Python Master Knowledge Library</div>
-          <p className="text-xs text-gray-400 mb-3">
-            These references are available before and after every run. The tutor links out to the original documentation instead of copying it.
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {pythonKnowledgeSources.map(source => (
-              <a
-                key={source.url}
-                href={source.url}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-primary-300 border border-gray-700 rounded px-2 py-1 hover:border-primary-400"
-              >
-                {source.name}
-              </a>
-            ))}
+      {language.toLowerCase() === 'python' && (
+        <div className="border border-primary-500/30 rounded-lg bg-primary-500/5 p-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <div className="text-sm font-semibold text-primary-300">AI Python Tutor is ready</div>
+              <div className="text-xs text-gray-400">Run code for analysis, or ask a question about this exact program.</div>
+            </div>
+            <span className="text-xs text-green-300">200 local analysts</span>
+          </div>
+          <div className="mt-3 flex flex-col sm:flex-row gap-2">
+            <input
+              value={tutorQuestion}
+              onChange={event => setTutorQuestion(event.target.value)}
+              onKeyDown={event => {
+                if (event.key === 'Enter') askTutorAboutCode()
+              }}
+              placeholder="Ask: explain line 3 or why is the output wrong?"
+              className="min-w-0 flex-1 rounded border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white"
+            />
+            <button
+              onClick={askTutorAboutCode}
+              disabled={!tutorQuestion.trim() || isStepping}
+              className="rounded bg-primary-500 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+            >
+              Ask Tutor
+            </button>
           </div>
         </div>
       )}
