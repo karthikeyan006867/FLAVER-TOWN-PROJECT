@@ -192,6 +192,29 @@ body {
     )
     rgb(var(--background-start-rgb));
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@media (max-width: 767px) {
+  body {
+    font-size: 15px;
+  }
+
+  pre,
+  code {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .prose {
+    overflow-wrap: anywhere;
+  }
+
+  .mobile-safe-card {
+    min-width: 0;
+  }
 }
 
 @layer utilities {
@@ -1290,4 +1313,3 @@ body {
     height: -webkit-fill-available;
   }
 }
-

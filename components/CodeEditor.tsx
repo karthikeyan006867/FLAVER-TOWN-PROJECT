@@ -14,6 +14,23 @@ interface CodeEditorProps {
   onSuccess?: () => void
 }
 
+interface TutorFinding {
+  severity: 'error' | 'warning' | 'tip' | 'success'
+  title: string
+  explanation: string
+  suggestion: string
+  line?: number
+}
+
+interface TutorAnalysis {
+  predictedIssue: string
+  confidence: number
+  summary: string
+  findings: TutorFinding[]
+  outputMatchesExpected: boolean | null
+  checkedLines: number
+}
+
 export default function CodeEditor({ 
   language, 
   initialCode = '', 
@@ -28,6 +45,7 @@ export default function CodeEditor({
   const [testPassed, setTestPassed] = useState<boolean | null>(null)
   const [testResults, setTestResults] = useState<{ name: string; passed: boolean; error?: string }[]>([])
   const [allTestsPassed, setAllTestsPassed] = useState(false)
+  const [tutorAnalysis, setTutorAnalysis] = useState<TutorAnalysis | null>(null)
 
   // Auto-save functionality
   useEffect(() => {
@@ -120,6 +138,7 @@ export default function CodeEditor({
     setTestPassed(null)
     setTestResults([])
     setAllTestsPassed(false)
+    setTutorAnalysis(null)
 
     // Use setTimeout to prevent UI blocking, but ensure it completes
     const executeWithTimeout = () => {
@@ -204,7 +223,7 @@ export default function CodeEditor({
                   headers: {
                     'Content-Type': 'application/json'
                   },
-                  body: JSON.stringify({ code })
+                  body: JSON.stringify({ code, expectedOutput })
                 })
 
                 if (!response.ok) {
@@ -212,6 +231,7 @@ export default function CodeEditor({
                 }
 
                 const data = await response.json()
+                setTutorAnalysis(data?.tutorAnalysis || null)
                 const executionOutput = typeof data?.output === 'string' && data.output.length > 0
                   ? data.output
                   : '✓ Code executed successfully (no output)'
@@ -1563,12 +1583,13 @@ export default function CodeEditor({
     setTestPassed(null)
     setTestResults([])
     setAllTestsPassed(false)
+    setTutorAnalysis(null)
   }
 
   return (
     <div className="space-y-4">
       {/* Editor */}
-      <div className="border border-gray-700 rounded-lg overflow-hidden">
+      <div className="border border-gray-700 rounded-lg overflow-hidden min-w-0">
         <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
           <div className="flex items-center space-x-2">
             <div className="flex space-x-1.5">
@@ -1598,7 +1619,7 @@ export default function CodeEditor({
         </div>
         
         <Editor
-          height="400px"
+          height="clamp(280px, 48vh, 400px)"
           language={getLanguageMode()}
           value={code}
           onChange={(value) => setCode(value || '')}
@@ -1638,7 +1659,7 @@ export default function CodeEditor({
               </div>
             )}
           </div>
-        <div className="bg-gray-900 p-4">
+        <div className="bg-gray-900 p-3 sm:p-4 min-w-0">
           {isRunning ? (
             <div className="flex items-center justify-center min-h-[200px]">
               <div className="text-center">
@@ -1652,7 +1673,7 @@ export default function CodeEditor({
               dangerouslySetInnerHTML={{ __html: code }}
             />
           ) : (
-            <pre className="text-sm text-gray-300 whitespace-pre-wrap font-mono min-h-[100px]">
+            <pre className="text-sm text-gray-300 whitespace-pre-wrap break-words overflow-x-auto font-mono min-h-[100px]">
               {output || 'No output'}
             </pre>
           )}
@@ -1686,6 +1707,38 @@ export default function CodeEditor({
                     <div className="text-sm text-gray-400 mt-1">{result.error}</div>
                   )}
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {tutorAnalysis && (
+        <div className="border border-primary-500/30 rounded-lg overflow-hidden bg-primary-500/5">
+          <div className="bg-gray-800 px-4 py-2 border-b border-primary-500/20 flex flex-wrap items-center justify-between gap-2">
+            <span className="text-sm font-semibold text-primary-300">Python Tutor Analysis · Mini ANN</span>
+            <span className="text-xs text-gray-400">
+              {tutorAnalysis.checkedLines} lines checked · {Math.round(tutorAnalysis.confidence * 100)}% classifier confidence
+            </span>
+          </div>
+          <div className="p-4 space-y-3">
+            <p className="text-sm text-gray-300">{tutorAnalysis.summary}</p>
+            {tutorAnalysis.findings.map((finding, index) => (
+              <div
+                key={`${finding.title}-${index}`}
+                className={`rounded-lg border p-3 ${
+                  finding.severity === 'error'
+                    ? 'border-red-500/30 bg-red-500/10'
+                    : finding.severity === 'warning'
+                      ? 'border-yellow-500/30 bg-yellow-500/10'
+                      : finding.severity === 'success'
+                        ? 'border-green-500/30 bg-green-500/10'
+                        : 'border-blue-500/30 bg-blue-500/10'
+                }`}
+              >
+                <div className="font-semibold text-white">{finding.title}</div>
+                <p className="text-sm text-gray-300 mt-1">{finding.explanation}</p>
+                <p className="text-sm text-primary-200 mt-2"><strong>Suggestion:</strong> {finding.suggestion}</p>
               </div>
             ))}
           </div>

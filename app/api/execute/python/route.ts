@@ -1,6 +1,7 @@
 import { currentUser } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 import { spawn } from 'node:child_process'
+import { analyzePythonRun } from '@/lib/pythonTutor'
 
 export const runtime = 'nodejs'
 
@@ -92,6 +93,7 @@ export async function POST(request: Request) {
 
     const body = await request.json()
     const code = typeof body?.code === 'string' ? body.code : ''
+    const expectedOutput = typeof body?.expectedOutput === 'string' ? body.expectedOutput : undefined
 
     if (!code.trim()) {
       return NextResponse.json({ error: 'Code is required' }, { status: 400 })
@@ -102,6 +104,14 @@ export async function POST(request: Request) {
     }
 
     const result = await executePythonWithFallback(code)
+    const tutorAnalysis = analyzePythonRun({
+      code,
+      output: result.output,
+      expectedOutput,
+      errorLine: result.errorLine,
+      errorType: result.errorType,
+      errorMessage: result.errorMessage,
+    })
 
     return NextResponse.json({
       output: result.output,
@@ -109,6 +119,7 @@ export async function POST(request: Request) {
       errorLine: result.errorLine,
       errorType: result.errorType,
       errorMessage: result.errorMessage,
+      tutorAnalysis,
     })
   } catch (error: any) {
     if (error?.code === 'ENOENT') {

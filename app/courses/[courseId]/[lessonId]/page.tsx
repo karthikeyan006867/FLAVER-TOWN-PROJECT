@@ -131,9 +131,9 @@ export default function LessonPage({
           </div>
 
           {/* Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-8 min-w-0">
             {/* Lesson Content */}
-            <div className="space-y-6">
+            <div className="space-y-6 min-w-0">
               <div className="card-gradient p-6 rounded-xl border border-gray-700">
                 <div className="flex items-center gap-2 mb-4">
                   <BookOpen className="h-5 w-5 text-primary-400" />
@@ -186,7 +186,7 @@ export default function LessonPage({
             </div>
 
             {/* Code Editor */}
-            <div className="lg:sticky lg:top-24 self-start">
+            <div className="lg:sticky lg:top-24 self-start min-w-0">
               <div className="card-gradient p-4 rounded-xl border border-gray-700">
                 <CodeEditor
                   language={lesson.language}
