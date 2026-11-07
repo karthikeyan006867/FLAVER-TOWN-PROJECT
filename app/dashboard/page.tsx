@@ -9,6 +9,7 @@ import { Trophy, Flame, Target, Clock, BookOpen, Code, TrendingUp, Calendar } fr
 import { courses } from '@/data/courses'
 import { useProgressStore } from '@/store/progressStore'
 import { useSettingsStore } from '@/store/settingsStore'
+import PythonTutorChat from '@/components/PythonTutorChat'
 
 export default function DashboardPage() {
   const { user, isLoaded } = useUser()
@@ -148,10 +149,15 @@ export default function DashboardPage() {
                               style={{ width: `${courseProgress[course.id]?.percentage || 0}%` }}
                             ></div>
                           </div>
+
                         </div>
                       </div>
                     </Link>
                   ))}
+                </div>
+
+                <div className="mt-8">
+                  <PythonTutorChat />
                 </div>
               </div>
 

@@ -23,6 +23,7 @@ export interface PythonTutorAnalysis {
     description: string
   }>
   teacherMode: string
+  modelCount: number
 }
 
 type TrainingExample = {
@@ -65,12 +66,16 @@ class MiniPythonANN {
   private readonly hiddenBias: number[]
   private readonly outputBias: number[]
 
-  constructor(inputSize: number, hiddenSize: number, outputSize: number) {
+  constructor(inputSize: number, hiddenSize: number, outputSize: number, seed: number) {
     this.hiddenWeights = Array.from({ length: hiddenSize }, (_, row) =>
-      Array.from({ length: inputSize }, (_, column) => (((row + 1) * (column + 3)) % 11 - 5) / 20),
+      Array.from({ length: inputSize }, (_, column) =>
+        (((row + 1) * (column + 3) * (seed + 1)) % 17 - 8) / 24,
+      ),
     )
     this.outputWeights = Array.from({ length: outputSize }, (_, row) =>
-      Array.from({ length: hiddenSize }, (_, column) => (((row + 2) * (column + 1)) % 13 - 6) / 20),
+      Array.from({ length: hiddenSize }, (_, column) =>
+        (((row + 2) * (column + 1) * (seed + 3)) % 19 - 9) / 24,
+      ),
     )
     this.hiddenBias = Array(hiddenSize).fill(0)
     this.outputBias = Array(outputSize).fill(0)
@@ -148,14 +153,13 @@ const trainingExamples = trainingTexts.map(([code, output, errorType, label]) =>
   label,
 }))
 
-const tutorAgents = [
-  { name: 'Execution Analyst', model: new MiniPythonANN(10, 8, LABELS.length) },
-  { name: 'Teaching Analyst', model: new MiniPythonANN(10, 10, LABELS.length) },
-  { name: 'Code Quality Analyst', model: new MiniPythonANN(10, 7, LABELS.length) },
-]
+const tutorAgents = Array.from({ length: 200 }, (_, index) => ({
+  name: `Python Analyst ${index + 1}`,
+  model: new MiniPythonANN(10, 7 + (index % 6), LABELS.length, index + 1),
+}))
 
 tutorAgents.forEach(({ model }, index) => {
-  model.train(trainingExamples, 260 + index * 40, 0.3 + index * 0.03)
+  model.train(trainingExamples, 180 + (index % 5) * 20, 0.22 + (index % 4) * 0.03)
 })
 
 const normalizeOutput = (value: string) => value.trim().replace(/\r\n/g, '\n').replace(/[ \t]+/g, ' ')
@@ -176,9 +180,15 @@ export function analyzePythonRun({
   errorMessage?: string
 }): PythonTutorAnalysis {
   const features = featuresFor(code, output, errorType)
-  const ensembleScores = tutorAgents[0].model.predictScores(features).map((_, labelIndex) =>
-    tutorAgents.reduce((total, agent) => total + agent.model.predictScores(features)[labelIndex], 0) / tutorAgents.length,
-  )
+  const ensembleScores = Array(LABELS.length).fill(0)
+  tutorAgents.forEach(agent => {
+    agent.model.predictScores(features).forEach((score, labelIndex) => {
+      ensembleScores[labelIndex] += score
+    })
+  })
+  ensembleScores.forEach((_, labelIndex) => {
+    ensembleScores[labelIndex] /= tutorAgents.length
+  })
   const ensembleLabelIndex = ensembleScores.reduce(
     (best, value, index) => (value > ensembleScores[best] ? index : best),
     0,
@@ -292,6 +302,7 @@ export function analyzePythonRun({
       url: source.url,
       description: source.description,
     })),
-    teacherMode: 'Python Master Full-Stack Tutor · 3-agent local ANN ensemble',
+    teacherMode: 'Python Master Full-Stack Tutor · 200-agent local ANN ensemble',
+    modelCount: tutorAgents.length,
   }
 }

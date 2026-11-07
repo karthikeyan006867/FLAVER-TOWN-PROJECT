@@ -47,7 +47,8 @@ try {
     throw new Error('Correct output must produce a success finding')
   }
   if (
-    healthyRun.teacherMode !== 'Python Master Full-Stack Tutor · 3-agent local ANN ensemble' ||
+    healthyRun.teacherMode !== 'Python Master Full-Stack Tutor · 200-agent local ANN ensemble' ||
+    healthyRun.modelCount !== 200 ||
     healthyRun.knowledgeSources.length < 3
   ) {
     throw new Error('Tutor must expose ensemble mode and linked knowledge sources')
