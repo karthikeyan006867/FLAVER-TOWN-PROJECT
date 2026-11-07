@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { Play, RotateCcw, Check, X, AlertCircle } from 'lucide-react'
 import { TestCase } from '@/data/courses'
 import { useSettingsStore } from '@/store/settingsStore'
+import { pythonKnowledgeSources } from '@/lib/pythonKnowledge'
 
 interface CodeEditorProps {
   language: string
@@ -29,6 +30,8 @@ interface TutorAnalysis {
   findings: TutorFinding[]
   outputMatchesExpected: boolean | null
   checkedLines: number
+  knowledgeSources: { name: string; url: string; description: string }[]
+  teacherMode: string
 }
 
 export default function CodeEditor({ 
@@ -1716,7 +1719,7 @@ export default function CodeEditor({
       {tutorAnalysis && (
         <div className="border border-primary-500/30 rounded-lg overflow-hidden bg-primary-500/5">
           <div className="bg-gray-800 px-4 py-2 border-b border-primary-500/20 flex flex-wrap items-center justify-between gap-2">
-            <span className="text-sm font-semibold text-primary-300">Python Tutor Analysis · Mini ANN</span>
+            <span className="text-sm font-semibold text-primary-300">Python Tutor Analysis · ANN Ensemble</span>
             <span className="text-xs text-gray-400">
               {tutorAnalysis.checkedLines} lines checked · {Math.round(tutorAnalysis.confidence * 100)}% classifier confidence
             </span>
@@ -1740,6 +1743,47 @@ export default function CodeEditor({
                 <p className="text-sm text-gray-300 mt-1">{finding.explanation}</p>
                 <p className="text-sm text-primary-200 mt-2"><strong>Suggestion:</strong> {finding.suggestion}</p>
               </div>
+            ))}
+            <div className="border-t border-primary-500/20 pt-3">
+              <div className="text-xs uppercase tracking-wide text-gray-400 mb-2">
+                {tutorAnalysis.teacherMode} · linked knowledge sources
+              </div>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {tutorAnalysis.knowledgeSources.map(source => (
+                  <a
+                    key={source.url}
+                    href={source.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded border border-gray-700 bg-gray-900/60 p-2 hover:border-primary-400 transition-colors"
+                  >
+                    <div className="text-sm font-medium text-primary-300">{source.name}</div>
+                    <div className="text-xs text-gray-400 mt-1">{source.description}</div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {language.toLowerCase() === 'python' && !tutorAnalysis && (
+        <div className="border border-gray-700 rounded-lg bg-gray-900/40 p-4">
+          <div className="text-sm font-semibold text-primary-300 mb-2">Python Master Knowledge Library</div>
+          <p className="text-xs text-gray-400 mb-3">
+            These references are available before and after every run. The tutor links out to the original documentation instead of copying it.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {pythonKnowledgeSources.map(source => (
+              <a
+                key={source.url}
+                href={source.url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs text-primary-300 border border-gray-700 rounded px-2 py-1 hover:border-primary-400"
+              >
+                {source.name}
+              </a>
             ))}
           </div>
         </div>

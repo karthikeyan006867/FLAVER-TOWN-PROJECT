@@ -1,3 +1,5 @@
+import { getPythonKnowledgeSources } from './pythonKnowledge'
+
 export type PythonTutorSeverity = 'error' | 'warning' | 'tip' | 'success'
 
 export interface PythonTutorFinding {
@@ -15,6 +17,12 @@ export interface PythonTutorAnalysis {
   findings: PythonTutorFinding[]
   outputMatchesExpected: boolean | null
   checkedLines: number
+  knowledgeSources: Array<{
+    name: string
+    url: string
+    description: string
+  }>
+  teacherMode: string
 }
 
 type TrainingExample = {
@@ -118,6 +126,10 @@ class MiniPythonANN {
     )
     return { label: LABELS[labelIndex], confidence: Math.round(probabilities[labelIndex] * 100) / 100 }
   }
+
+  predictScores(features: number[]) {
+    return this.forward(features).output
+  }
 }
 
 const trainingTexts: Array<[string, string, string | undefined, number]> = [
@@ -131,13 +143,20 @@ const trainingTexts: Array<[string, string, string | undefined, number]> = [
   ['print("Hello")', 'Hello', undefined, 4],
 ]
 
-const ann = new MiniPythonANN(10, 8, LABELS.length)
-ann.train(
-  trainingTexts.map(([code, output, errorType, label]) => ({
-    features: featuresFor(code, output, errorType),
-    label,
-  })),
-)
+const trainingExamples = trainingTexts.map(([code, output, errorType, label]) => ({
+  features: featuresFor(code, output, errorType),
+  label,
+}))
+
+const tutorAgents = [
+  { name: 'Execution Analyst', model: new MiniPythonANN(10, 8, LABELS.length) },
+  { name: 'Teaching Analyst', model: new MiniPythonANN(10, 10, LABELS.length) },
+  { name: 'Code Quality Analyst', model: new MiniPythonANN(10, 7, LABELS.length) },
+]
+
+tutorAgents.forEach(({ model }, index) => {
+  model.train(trainingExamples, 260 + index * 40, 0.3 + index * 0.03)
+})
 
 const normalizeOutput = (value: string) => value.trim().replace(/\r\n/g, '\n').replace(/[ \t]+/g, ' ')
 
@@ -156,7 +175,18 @@ export function analyzePythonRun({
   errorType?: string
   errorMessage?: string
 }): PythonTutorAnalysis {
-  const prediction = ann.predict(featuresFor(code, output, errorType))
+  const features = featuresFor(code, output, errorType)
+  const ensembleScores = tutorAgents[0].model.predictScores(features).map((_, labelIndex) =>
+    tutorAgents.reduce((total, agent) => total + agent.model.predictScores(features)[labelIndex], 0) / tutorAgents.length,
+  )
+  const ensembleLabelIndex = ensembleScores.reduce(
+    (best, value, index) => (value > ensembleScores[best] ? index : best),
+    0,
+  )
+  const prediction = {
+    label: LABELS[ensembleLabelIndex],
+    confidence: Math.round(ensembleScores[ensembleLabelIndex] * 100) / 100,
+  }
   const findings: PythonTutorFinding[] = []
   const normalizedOutput = normalizeOutput(output)
   const normalizedExpected = expectedOutput ? normalizeOutput(expectedOutput) : ''
@@ -257,5 +287,11 @@ export function analyzePythonRun({
     findings,
     outputMatchesExpected,
     checkedLines,
+    knowledgeSources: getPythonKnowledgeSources(code, errorType).map(source => ({
+      name: source.name,
+      url: source.url,
+      description: source.description,
+    })),
+    teacherMode: 'Python Master Full-Stack Tutor · 3-agent local ANN ensemble',
   }
 }
